@@ -9,6 +9,7 @@ import Footer from './components/Footer';
 import HourlyLesson from './pages/HourlyLesson';
 import CarRental from './pages/CarRental';
 import Testimonials from './pages/Testimonials';
+import PackagesAndServices from './pages/PackagesAndServices';
 
 function ScrollToTop() {
   const location = useLocation();
@@ -24,6 +25,7 @@ function MainPage() {
   return (
     <>
       <Home />
+      <PackagesAndServices />
       <Services />
       <Testimonials />
     </>

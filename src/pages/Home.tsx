@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
-import { Award, GraduationCap, Calendar, Target, CarFront, ShieldCheck,Search,  CheckCircle2 } from 'lucide-react';
+import { Award,Target, CarFront, ShieldCheck,Search,  CheckCircle2, ChevronRight,Laptop, Users, History, Clock} from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const TESTIMONIALS = [
   {
@@ -211,19 +212,23 @@ const Home = () => {
       </div>
 
       {/* Search Section */}
-      <div className="relative max-w-7xl mx-auto px-4">
+      <div className="relative max-w-7xl mx-auto px-4 -mt-8">
         <div className="max-w-5xl mx-auto">
           <div className="flex flex-col md:flex-row gap-4">
-            <div className="flex flex-1 group/search hover:-translate-y-1 hover:scale-[1.02] transition-all duration-300 ease-out shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07)] hover:shadow-[0_10px_40px_-15px_rgba(44,49,73,0.25)] rounded-full bg-white">
-              <div className="flex-grow">
+            <div className="flex flex-1 group/search hover:-translate-y-1 hover:scale-[1.02] transition-all duration-300 ease-out 
+              shadow-[0_8px_30px_-4px_rgba(44,49,73,0.2)] hover:shadow-[0_20px_50px_-20px_rgba(44,49,73,0.3)] 
+              rounded-full bg-gradient-to-r from-white via-gray-50 to-white backdrop-blur-sm">
+              <div className="flex-grow relative">
+                <div className="absolute inset-0 bg-gradient-to-r from-[#2c3149]/5 via-transparent to-[#2c3149]/5 rounded-l-full opacity-50"></div>
                 <input
                   type="text"
                   placeholder="Find your nearest Driving Instructor"
-                  className="w-full px-4 sm:px-8 py-3 sm:py-4 rounded-l-full border-0 focus:outline-none focus:ring-0 text-base sm:text-lg transition-all placeholder-gray-400 bg-white"
+                  className="w-full px-4 sm:px-8 py-3 sm:py-4 rounded-l-full border-0 focus:outline-none focus:ring-0 text-base sm:text-lg transition-all placeholder-gray-500 bg-transparent relative z-10"
                 />
               </div>
-              <div className="border-l border-gray-200 px-1 sm:px-2">
-                <select className="h-full px-2 sm:px-4 py-3 sm:py-4 text-gray-500 bg-white border-0 focus:outline-none focus:ring-0 rounded-full text-base sm:text-lg appearance-none cursor-pointer">
+              <div className="border-l border-gray-200/50 px-1 sm:px-2 relative">
+                <div className="absolute inset-0 bg-gradient-to-r from-[#2c3149]/5 via-transparent to-[#2c3149]/5 opacity-50"></div>
+                <select className="h-full px-2 sm:px-4 py-3 sm:py-4 text-gray-600 bg-transparent border-0 focus:outline-none focus:ring-0 rounded-full text-base sm:text-lg appearance-none cursor-pointer relative z-10">
                   <option value="">Your Postal Code</option>
                   <option value="scarborough">Scarborough</option>
                   <option value="northYork">North York</option>
@@ -231,7 +236,7 @@ const Home = () => {
                   <option value="richmond">Richmond Hill</option>
                 </select>
               </div>
-              <button className="px-4 sm:px-8 py-3 sm:py-4 bg-[#2c3149] text-white rounded-full hover:opacity-90 transition-all flex items-center gap-2 text-base sm:text-lg font-medium m-1">
+              <button className="px-4 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-[#2c3149] to-[#2c3149]/90 text-white rounded-full hover:opacity-90 transition-all flex items-center gap-2 text-base sm:text-lg font-medium m-1 hover:shadow-lg">
                 <Search className="w-4 h-4 sm:w-5 sm:h-5" />
                 <span className="hidden sm:inline">Search</span>
               </button>
@@ -240,167 +245,170 @@ const Home = () => {
         </div>
       </div>
 
-      {/* Features Section */}
+      {/* Why Choose Us Section */}
       <div className="relative max-w-7xl mx-auto px-4 py-20">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <h2 className="text-3xl lg:text-4xl font-bold mb-4 bg-gradient-to-r from-[#2c3149] to-[#2c3149] bg-clip-text text-transparent">
-            Why Choose GraysJays?
+
+        {/* Section Header */}
+        <div className="text-center max-w-3xl mx-auto mb-20">
+          <div className="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-[#2c3149]/5 text-[#2c3149] text-sm font-medium mb-4">
+            <CarFront className="w-4 h-4" />
+            Why Choose GrayJays
+          </div>
+          <h2 className="text-4xl lg:text-5xl font-bold mb-6 text-[#2c3149]">
+            Your Journey to <br />Confident Driving
           </h2>
           <p className="text-lg text-gray-600">
-            Experience excellence in driving education with our comprehensive programs and expert instructors
+            Join thousands of successful drivers who started their journey with us
           </p>
         </div>
-        
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {/* MTO Approved */}
-          <div className="group relative">
-            <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/5 to-yellow-500/5 rounded-2xl transform transition-all duration-300 group-hover:scale-[0.98]" />
-            <div className="bg-white rounded-2xl p-8 relative z-10 transition-all duration-300 border border-gray-100 shadow-[0_2px_20px_-10px_rgba(0,0,0,0.1)] hover:shadow-[0_8px_30px_-12px_rgba(234,179,8,0.25)] group-hover:border-yellow-500/20">
-              <div className="relative">
-                <div className="inline-flex p-3 rounded-xl bg-gradient-to-br from-[#2c3149]/5 to-[#2c3149]/10 group-hover:scale-110 transform transition-all duration-300">
-                  <Award className="w-8 h-8 text-yellow-500" />
-                </div>
-                <div className="mt-6">
-                  <h3 className="text-xl font-bold text-gray-900 mb-4 group-hover:text-[#2c3149] transition-colors duration-300">
-                    MTO Approved
-                  </h3>
-                  <p className="text-gray-600 leading-relaxed">
-                    Government-certified curriculum delivered by licensed instructors ensuring highest quality education.
-                  </p>
-                </div>
-                <div className="absolute -top-2 -right-2 opacity-0 group-hover:opacity-100 transition-all duration-300">
-                  <div className="text-yellow-500/20">
-                    <img src="/icons/mto.png" alt="MTO Approved" className="w-24 h-24 transform rotate-12" />
+
+        {/* Features Grid */}
+        <div className="grid lg:grid-cols-3 gap-8">
+          {/* Card 1 - Modern Learning */}
+          <div className="group">
+            <div className="relative h-full bg-white rounded-[2rem] p-8 border-2 border-[#2c3149]/10 hover:border-[#2c3149] transition-all duration-500">
+              <div className="absolute -top-6 right-8 w-20 h-20 bg-[#2c3149] rounded-2xl flex items-center justify-center transform rotate-12 group-hover:rotate-0 transition-all duration-500">
+                <Laptop className="w-10 h-10 text-white transform -rotate-12 group-hover:rotate-0 transition-all duration-500" />
+              </div>
+              <div className="pt-12">
+                <h3 className="text-2xl font-bold text-[#2c3149] mb-4">Modern Learning</h3>
+                <p className="text-gray-600 mb-8">Interactive digital curriculum with real-time progress tracking and virtual simulations for enhanced learning experience.</p>
+                <div className="space-y-4">
+                  <div className="flex items-center gap-4">
+                    <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-[#2c3149]/5 flex items-center justify-center">
+                      <CheckCircle2 className="w-6 h-6 text-[#2c3149]" />
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-[#2c3149]">Virtual Simulations</h4>
+                      <p className="text-sm text-gray-500">Practice in a safe environment</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-4">
+                    <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-[#2c3149]/5 flex items-center justify-center">
+                      <Target className="w-6 h-6 text-[#2c3149]" />
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-[#2c3149]">Progress Tracking</h4>
+                      <p className="text-sm text-gray-500">Monitor your improvement</p>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Flexible Schedule */}
-          <div className="group relative">
-            <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/5 to-yellow-500/5 rounded-2xl transform transition-all duration-300 group-hover:scale-[0.98]" />
-            <div className="bg-white rounded-2xl p-8 relative z-10 transition-all duration-300 border border-gray-100 shadow-[0_2px_20px_-10px_rgba(0,0,0,0.1)] hover:shadow-[0_8px_30px_-12px_rgba(234,179,8,0.25)] group-hover:border-yellow-500/20">
-              <div className="relative">
-                <div className="inline-flex p-3 rounded-xl bg-gradient-to-br from-[#2c3149]/5 to-[#2c3149]/10 group-hover:scale-110 transform transition-all duration-300">
-                  <Calendar className="w-8 h-8 text-yellow-500" />
-                </div>
-                <div className="mt-6">
-                  <h3 className="text-xl font-bold text-gray-900 mb-4 group-hover:text-[#2c3149] transition-colors duration-300">
-                    Flexible Schedule
-                  </h3>
-                  <p className="text-gray-600 leading-relaxed">
-                    Choose lesson times that work for you with our convenient online booking system.
-                  </p>
-                </div>
-                <div className="absolute -top-2 -right-2 opacity-0 group-hover:opacity-100 transition-all duration-300">
-                  <div className="text-yellow-500/20">
-                    <img src="/icons/schedule.png" alt="Flexible Schedule" className="w-24 h-24 transform rotate-12" />
+          {/* Card 2 - Expert Instructors */}
+          <div className="group">
+            <div className="relative h-full bg-white rounded-[2rem] p-8 border-2 border-[#2c3149]/10 hover:border-[#2c3149] transition-all duration-500">
+              <div className="absolute -top-6 right-8 w-20 h-20 bg-yellow-500 rounded-2xl flex items-center justify-center transform rotate-12 group-hover:rotate-0 transition-all duration-500">
+                <Users className="w-10 h-10 text-white transform -rotate-12 group-hover:rotate-0 transition-all duration-500" />
+              </div>
+              <div className="pt-12">
+                <h3 className="text-2xl font-bold text-[#2c3149] mb-4">Expert Instructors</h3>
+                <p className="text-gray-600 mb-8">Learn from certified professionals with decades of experience and a passion for creating confident drivers.</p>
+                <div className="space-y-4">
+                  <div className="flex items-center gap-4">
+                    <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-[#2c3149]/5 flex items-center justify-center">
+                      <Award className="w-6 h-6 text-[#2c3149]" />
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-[#2c3149]">Certified Trainers</h4>
+                      <p className="text-sm text-gray-500">MTO approved instructors</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-4">
+                    <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-[#2c3149]/5 flex items-center justify-center">
+                      <Users className="w-6 h-6 text-[#2c3149]" />
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-[#2c3149]">Personalized Coaching</h4>
+                      <p className="text-sm text-gray-500">One-on-one attention</p>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* High Success Rate */}
-          <div className="group relative">
-            <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/5 to-yellow-500/5 rounded-2xl transform transition-all duration-300 group-hover:scale-[0.98]" />
-            <div className="bg-white rounded-2xl p-8 relative z-10 transition-all duration-300 border border-gray-100 shadow-[0_2px_20px_-10px_rgba(0,0,0,0.1)] hover:shadow-[0_8px_30px_-12px_rgba(234,179,8,0.25)] group-hover:border-yellow-500/20">
-              <div className="relative">
-                <div className="inline-flex p-3 rounded-xl bg-gradient-to-br from-[#2c3149]/5 to-[#2c3149]/10 group-hover:scale-110 transform transition-all duration-300">
-                  <Target className="w-8 h-8 text-yellow-500" />
-                </div>
-                <div className="mt-6">
-                  <h3 className="text-xl font-bold text-gray-900 mb-4 group-hover:text-[#2c3149] transition-colors duration-300">
-                    High Success Rate
-                  </h3>
-                  <p className="text-gray-600 leading-relaxed">
-                    98% first-attempt pass rate with our proven teaching methods and expert guidance.
-                  </p>
-                </div>
-                <div className="absolute -top-2 -right-2 opacity-0 group-hover:opacity-100 transition-all duration-300">
-                  <div className="text-yellow-500/20">
-                    <img src="/icons/success.png" alt="High Success Rate" className="w-24 h-24 transform rotate-12" />
+          {/* Card 3 - Personalized Approach */}
+          <div className="group">
+            <div className="relative h-full bg-white rounded-[2rem] p-8 border-2 border-[#2c3149]/10 hover:border-[#2c3149] transition-all duration-500">
+              <div className="absolute -top-6 right-8 w-20 h-20 bg-[#2c3149] rounded-2xl flex items-center justify-center transform rotate-12 group-hover:rotate-0 transition-all duration-500">
+                <Target className="w-10 h-10 text-white transform -rotate-12 group-hover:rotate-0 transition-all duration-500" />
+              </div>
+              <div className="pt-12">
+                <h3 className="text-2xl font-bold text-[#2c3149] mb-4">Personalized Approach</h3>
+                <p className="text-gray-600 mb-8">Customized learning paths adapted to your pace and style, ensuring optimal progress and confidence building.</p>
+                <div className="space-y-4">
+                  <div className="flex items-center gap-4">
+                    <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-[#2c3149]/5 flex items-center justify-center">
+                      <Target className="w-6 h-6 text-[#2c3149]" />
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-[#2c3149]">Custom Learning Paths</h4>
+                      <p className="text-sm text-gray-500">Tailored to your needs</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-4">
+                    <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-[#2c3149]/5 flex items-center justify-center">
+                      <Clock className="w-6 h-6 text-[#2c3149]" />
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-[#2c3149]">Flexible Schedule</h4>
+                      <p className="text-sm text-gray-500">Learn at your convenience</p>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+        </div>
 
-          {/* Expert Instructors */}
-          <div className="group relative">
-            <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/5 to-yellow-500/5 rounded-2xl transform transition-all duration-300 group-hover:scale-[0.98]" />
-            <div className="bg-white rounded-2xl p-8 relative z-10 transition-all duration-300 border border-gray-100 shadow-[0_2px_20px_-10px_rgba(0,0,0,0.1)] hover:shadow-[0_8px_30px_-12px_rgba(234,179,8,0.25)] group-hover:border-yellow-500/20">
-              <div className="relative">
-                <div className="inline-flex p-3 rounded-xl bg-gradient-to-br from-[#2c3149]/5 to-[#2c3149]/10 group-hover:scale-110 transform transition-all duration-300">
-                  <GraduationCap className="w-8 h-8 text-yellow-500" />
+        {/* Stats Section */}
+        <div className="mt-20">
+          <div className="bg-[#2c3149] rounded-[2rem] p-12">
+            <div className="grid md:grid-cols-4 gap-8">
+              <div className="text-center">
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-xl bg-white/10 mb-4">
+                  <ShieldCheck className="w-8 h-8 text-white" />
                 </div>
-                <div className="mt-6">
-                  <h3 className="text-xl font-bold text-gray-900 mb-4 group-hover:text-[#2c3149] transition-colors duration-300">
-                    Expert Instructors
-                  </h3>
-                  <p className="text-gray-600 leading-relaxed">
-                    Learn from experienced, patient instructors dedicated to your driving success.
-                  </p>
+                <div className="text-4xl font-bold text-white mb-2">98%</div>
+                <div className="text-sm text-white/80">Pass Rate</div>
+              </div>
+              <div className="text-center">
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-xl bg-white/10 mb-4">
+                  <History className="w-8 h-8 text-white" />
                 </div>
-                <div className="absolute -top-2 -right-2 opacity-0 group-hover:opacity-100 transition-all duration-300">
-                  <div className="text-yellow-500/20">
-                    <img src="/icons/instructor.png" alt="Expert Instructors" className="w-24 h-24 transform rotate-12" />
-                  </div>
+                <div className="text-4xl font-bold text-white mb-2">15+</div>
+                <div className="text-sm text-white/80">Years Experience</div>
+              </div>
+              <div className="text-center">
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-xl bg-white/10 mb-4">
+                  <Users className="w-8 h-8 text-white" />
                 </div>
+                <div className="text-4xl font-bold text-white mb-2">29K+</div>
+                <div className="text-sm text-white/80">Students Trained</div>
+              </div>
+              <div className="text-center">
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-xl bg-white/10 mb-4">
+                  <Award className="w-8 h-8 text-white" />
+                </div>
+                <div className="text-4xl font-bold text-white mb-2">4.9</div>
+                <div className="text-sm text-white/80">Average Rating</div>
               </div>
             </div>
           </div>
+        </div>
 
-          {/* Modern Fleet */}
-          <div className="group relative">
-            <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/5 to-yellow-500/5 rounded-2xl transform transition-all duration-300 group-hover:scale-[0.98]" />
-            <div className="bg-white rounded-2xl p-8 relative z-10 transition-all duration-300 border border-gray-100 shadow-[0_2px_20px_-10px_rgba(0,0,0,0.1)] hover:shadow-[0_8px_30px_-12px_rgba(234,179,8,0.25)] group-hover:border-yellow-500/20">
-              <div className="relative">
-                <div className="inline-flex p-3 rounded-xl bg-gradient-to-br from-[#2c3149]/5 to-[#2c3149]/10 group-hover:scale-110 transform transition-all duration-300">
-                  <CarFront className="w-8 h-8 text-yellow-500" />
-                </div>
-                <div className="mt-6">
-                  <h3 className="text-xl font-bold text-gray-900 mb-4 group-hover:text-[#2c3149] transition-colors duration-300">
-                    Modern Fleet
-                  </h3>
-                  <p className="text-gray-600 leading-relaxed">
-                    Practice in well-maintained, dual-control vehicles equipped with latest safety features.
-                  </p>
-                </div>
-                <div className="absolute -top-2 -right-2 opacity-0 group-hover:opacity-100 transition-all duration-300">
-                  <div className="text-yellow-500/20">
-                    <img src="/icons/car.png" alt="Modern Fleet" className="w-24 h-24 transform rotate-12" />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Complete Training */}
-          <div className="group relative">
-            <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/5 to-yellow-500/5 rounded-2xl transform transition-all duration-300 group-hover:scale-[0.98]" />
-            <div className="bg-white rounded-2xl p-8 relative z-10 transition-all duration-300 border border-gray-100 shadow-[0_2px_20px_-10px_rgba(0,0,0,0.1)] hover:shadow-[0_8px_30px_-12px_rgba(234,179,8,0.25)] group-hover:border-yellow-500/20">
-              <div className="relative">
-                <div className="inline-flex p-3 rounded-xl bg-gradient-to-br from-[#2c3149]/5 to-[#2c3149]/10 group-hover:scale-110 transform transition-all duration-300">
-                  <ShieldCheck className="w-8 h-8 text-yellow-500" />
-                </div>
-                <div className="mt-6">
-                  <h3 className="text-xl font-bold text-gray-900 mb-4 group-hover:text-[#2c3149] transition-colors duration-300">
-                    Complete Training
-                  </h3>
-                  <p className="text-gray-600 leading-relaxed">
-                    Thorough curriculum covering both practical skills and theoretical knowledge.
-                  </p>
-                </div>
-                <div className="absolute -top-2 -right-2 opacity-0 group-hover:opacity-100 transition-all duration-300">
-                  <div className="text-yellow-500/20">
-                    <img src="/icons/training.png" alt="Complete Training" className="w-24 h-24 transform rotate-12" />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+        {/* CTA Section */}
+        <div className="mt-20 text-center">
+          <Link
+            to="/contact"
+            className="inline-flex items-center gap-3 px-8 py-4 bg-[#2c3149] text-white rounded-full hover:bg-[#2c3149]/90 transition-all duration-300 text-lg font-medium group"
+          >
+            Start Your Journey Today
+            <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+          </Link>
         </div>
       </div>
     </div>

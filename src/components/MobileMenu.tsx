@@ -9,8 +9,9 @@ interface MenuItem {
 }
 
 interface MenuItems {
+  learnToDrive: MenuItem[];
   services: MenuItem[];
-  pricing: MenuItem[];
+  pricing?: MenuItem[];
 }
 
 interface MobileMenuProps {

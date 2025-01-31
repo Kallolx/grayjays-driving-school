@@ -2,63 +2,57 @@ import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import MobileMenu from './MobileMenu';
 import ReactCountryFlag from "react-country-flag";
-import { 
-  Clock, 
-  Car, 
-  Map, 
-  ClipboardList, 
-  CircleDollarSign, 
-  Star, 
-  Crown, 
-  Shield, 
+import {  
   ChevronDown,
   UserCircle2,
-  CalendarCheck
+  CalendarCheck,
+  GraduationCap,
+  Clock3,
+  Package,
+  BookOpen,
+  Route,
+  FileSpreadsheet
 } from 'lucide-react';
 
 const MENU_ITEMS = {
-  services: [
+  learnToDrive: [
     { 
-      name: 'Hourly Lessons', 
-      href: '/services/hourly-lessons',
-      icon: <Clock className="w-5 h-5" />
+      name: "Beginners Driver Education(BDE) Course", 
+      href: '/learn-to-drive/bde',
+      icon: <GraduationCap className="w-5 h-5" />,
+      description: "Complete MTO-approved beginner driver education program"
     },
     { 
-      name: 'Car Rental', 
-      href: '/services/car-rental',
-      icon: <Car className="w-5 h-5" />
+      name: "Hourly Lesson", 
+      href: '/learn-to-drive/hourly',
+      icon: <Clock3 className="w-5 h-5" />,
+      description: "Flexible hourly driving lessons with expert instructors"
+    },
+    { 
+      name: "Specialty Packages", 
+      href: '/learn-to-drive/packages',
+      icon: <Package className="w-5 h-5" />,
+      description: "Customized packages for specific driving needs"
+    }
+  ],
+  services: [
+    { 
+      name: 'G1 Practices', 
+      href: '/services/g1-practices',
+      icon: <BookOpen className="w-5 h-5" />,
+      description: "Practice tests and study materials for G1"
     },
     { 
       name: 'GPS Routes', 
       href: '/services/gps-routes',
-      icon: <Map className="w-5 h-5" />
+      icon: <Route className="w-5 h-5" />,
+      description: "Common test routes and navigation practice"
     },
     { 
-      name: 'Score Sheet Practice', 
+      name: 'Score Sheet', 
       href: '/services/score-sheet',
-      icon: <ClipboardList className="w-5 h-5" />
-    }
-  ],
-  pricing: [
-    { 
-      name: 'Standard Package', 
-      href: '/pricing/standard',
-      icon: <CircleDollarSign className="w-5 h-5" />
-    },
-    { 
-      name: 'Premium Package', 
-      href: '/pricing/premium',
-      icon: <Star className="w-5 h-5" />
-    },
-    { 
-      name: 'Premium Plus Package', 
-      href: '/pricing/premium-plus',
-      icon: <Crown className="w-5 h-5" />
-    },
-    { 
-      name: 'Ultimate Package', 
-      href: '/pricing/ultimate',
-      icon: <Shield className="w-5 h-5" />
+      icon: <FileSpreadsheet className="w-5 h-5" />,
+      description: "Detailed scoring criteria and evaluation guides"
     }
   ]
 };
@@ -75,11 +69,11 @@ const Navbar = () => {
   const location = useLocation();
 
   const navLinks: NavLink[] = [
-    { name: 'Home', path: '/' },
+    { name: 'Learn to Drive', path: '/learn-to-drive', hasDropdown: true },
+    { name: 'Rental Car', path: '/rental-car' },
     { name: 'Services', path: '/services', hasDropdown: true },
-    { name: 'Pricing', path: '/pricing', hasDropdown: true },
-    { name: 'About', path: '/about' },
-    { name: 'Contact', path: '/contact' },
+    { name: 'Blog', path: '/services/blog', hasDropdown: true },
+    { name: 'Contact Us', path: '/contact' },
   ];
 
   const isActive = (path: string) => {
@@ -182,7 +176,7 @@ const Navbar = () => {
                         group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto`}
                     >
                       <div className="py-2 bg-[#2c3149] rounded-xl shadow-lg ring-1 ring-black ring-opacity-5">
-                        {MENU_ITEMS[link.name.toLowerCase() as keyof typeof MENU_ITEMS]?.map((item) => (
+                        {MENU_ITEMS[link.name === 'Learn to Drive' ? 'learnToDrive' : 'services'].map((item) => (
                           <Link
                             key={item.href}
                             to={item.href}
@@ -191,7 +185,10 @@ const Navbar = () => {
                             <span className="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-lg bg-white/10 text-white group-hover/item:bg-white/20 transition-colors">
                               {item.icon}
                             </span>
-                            <span className="ml-3">{item.name}</span>
+                            <div className="ml-3">
+                              <div className="font-medium">{item.name}</div>
+                              <div className="text-xs text-gray-400">{item.description}</div>
+                            </div>
                           </Link>
                         ))}
                       </div>
