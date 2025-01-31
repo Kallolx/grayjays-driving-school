@@ -24,8 +24,12 @@ const Footer = () => {
           {/* Company Info */}
           <div className="space-y-6">
             <div className="flex items-center gap-3">
-              <Car className="w-8 h-8 text-yellow-500" />
-              <span className="text-2xl font-bold text-white">Kruzee</span>
+              <img 
+                src="/icons/svg-image-1.svg" 
+                alt="GrayJays Logo" 
+                className="w-10 h-10 object-contain"
+              />
+              <span className="text-2xl font-bold text-white">Grayjays</span>
             </div>
             <p className="text-gray-300 text-sm">
               Your trusted partner in driver education. We're committed to creating safe and confident drivers through comprehensive training and support.
