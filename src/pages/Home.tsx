@@ -212,32 +212,32 @@ const Home = () => {
       </div>
 
       {/* Search Section */}
-      <div className="relative max-w-7xl mx-auto px-4 -mt-8">
+      <div className="relative max-w-7xl mx-auto px-4 -mt-4">
         <div className="max-w-5xl mx-auto">
           <div className="flex flex-col md:flex-row gap-4">
             <div className="flex flex-1 group/search hover:-translate-y-1 hover:scale-[1.02] transition-all duration-300 ease-out 
               shadow-[0_8px_30px_-4px_rgba(44,49,73,0.2)] hover:shadow-[0_20px_50px_-20px_rgba(44,49,73,0.3)] 
-              rounded-full bg-gradient-to-r from-white via-gray-50 to-white backdrop-blur-sm">
+              rounded-full bg-gradient-to-r from-[#2c3149] via-[#2c3149] to-[#2c3149] backdrop-blur-sm">
               <div className="flex-grow relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-[#2c3149]/5 via-transparent to-[#2c3149]/5 rounded-l-full opacity-50"></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-white/5 via-transparent to-white/5 rounded-l-full opacity-50"></div>
                 <input
                   type="text"
                   placeholder="Find your nearest Driving Instructor"
-                  className="w-full px-4 sm:px-8 py-3 sm:py-4 rounded-l-full border-0 focus:outline-none focus:ring-0 text-base sm:text-lg transition-all placeholder-gray-500 bg-transparent relative z-10"
+                  className="w-full px-4 sm:px-8 py-3 sm:py-4 rounded-l-full border-0 focus:outline-none focus:ring-0 text-base sm:text-lg transition-all placeholder-gray-300 text-white bg-transparent relative z-10"
                 />
               </div>
-              <div className="border-l border-gray-200/50 px-1 sm:px-2 relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-[#2c3149]/5 via-transparent to-[#2c3149]/5 opacity-50"></div>
-                <select className="h-full px-2 sm:px-4 py-3 sm:py-4 text-gray-600 bg-transparent border-0 focus:outline-none focus:ring-0 rounded-full text-base sm:text-lg appearance-none cursor-pointer relative z-10">
-                  <option value="">Your Postal Code</option>
-                  <option value="scarborough">Scarborough</option>
-                  <option value="northYork">North York</option>
-                  <option value="markham">Markham</option>
-                  <option value="richmond">Richmond Hill</option>
+              <div className="border-l border-white/10 px-1 sm:px-2 relative">
+                <div className="absolute inset-0 bg-gradient-to-r from-white/5 via-transparent to-white/5 opacity-50"></div>
+                <select className="h-full px-2 sm:px-4 py-3 sm:py-4 text-white bg-transparent border-0 focus:outline-none focus:ring-0 rounded-full text-base sm:text-lg appearance-none cursor-pointer relative z-10">
+                  <option value="" className="text-gray-900">Your Postal Code</option>
+                  <option value="scarborough" className="text-gray-900">Scarborough</option>
+                  <option value="northYork" className="text-gray-900">North York</option>
+                  <option value="markham" className="text-gray-900">Markham</option>
+                  <option value="richmond" className="text-gray-900">Richmond Hill</option>
                 </select>
               </div>
-              <button className="px-4 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-[#2c3149] to-[#2c3149]/90 text-white rounded-full hover:opacity-90 transition-all flex items-center gap-2 text-base sm:text-lg font-medium m-1 hover:shadow-lg">
-                <Search className="w-4 h-4 sm:w-5 sm:h-5" />
+              <button className="px-4 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-yellow-500 to-yellow-500/90 text-gray-900 rounded-full hover:opacity-90 transition-all flex items-center gap-2 text-base sm:text-lg font-medium m-1 hover:shadow-lg">
+                <Search className="w-4 h-4 sm:w-5 sm:h-5 text-gray-900" />
                 <span className="hidden sm:inline">Search</span>
               </button>
             </div>
@@ -247,17 +247,20 @@ const Home = () => {
 
       {/* Why Choose Us Section */}
       <div className="relative max-w-7xl mx-auto px-4 py-20">
-
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-20">
-          <div className="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-[#2c3149]/5 text-[#2c3149] text-sm font-medium mb-4">
-            <CarFront className="w-4 h-4" />
-            Why Choose GrayJays
+          <div className="inline-flex items-center justify-center mb-4">
+            <div className="w-12 h-12 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-xl flex items-center justify-center shadow-lg transform -rotate-6">
+              <CarFront className="w-6 h-6 text-white" />
+            </div>
+            <div className="w-12 h-12 bg-gradient-to-br from-[#2c3149] to-[#1a1f33] rounded-xl flex items-center justify-center shadow-lg -ml-4 transform rotate-6">
+              <Award className="w-6 h-6 text-white" />
+            </div>
           </div>
-          <h2 className="text-4xl lg:text-5xl font-bold mb-6 text-[#2c3149]">
-            Your Journey to <br />Confident Driving
+          <h2 className="text-4xl lg:text-5xl font-bold text-[#2c3149] mb-4">
+            Why choose <span className="text-yellow-500">Grayjays</span>
           </h2>
-          <p className="text-lg text-gray-600">
+          <p className="text-base text-gray-600 mb-6">
             Join thousands of successful drivers who started their journey with us
           </p>
         </div>
