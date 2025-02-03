@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import CallToAction from '../pages/CallToAction';
+import { Link } from 'react-router-dom';
 
 const faqs = [
   {
@@ -86,7 +88,26 @@ const FAQSection = () => {
             </div>
           ))}
         </div>
+
+        {/* View All Questions Button */}
+        <div className="mt-16 text-center">
+          <div className="inline-block relative group">
+            <div className="absolute -inset-0.5 bg-gradient-to-r from-yellow-500 to-[#2c3149] rounded-full blur opacity-30 group-hover:opacity-100 transition duration-500"></div>
+            <Link
+              to="/faq"
+              className="relative inline-flex items-center gap-2 px-8 py-4 bg-white hover:bg-gray-50 border-2 border-[#2c3149] rounded-full text-[#2c3149] font-semibold transition-all duration-300 hover:shadow-lg group"
+            >
+              <span>View All Questions</span>
+              <div className="w-6 h-6 rounded-full bg-yellow-500 flex items-center justify-center transform group-hover:translate-x-1 transition-transform duration-300">
+                <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </div>
+            </Link>
+          </div>
+        </div>
       </div>
+      <CallToAction />
     </div>
   );
 };

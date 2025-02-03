@@ -3,7 +3,7 @@ import { GraduationCap, Clock3, CarFront, CheckCircle2, ChevronRight, Car, Minus
 import { useState, useLayoutEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import CallToAction from './CallToAction';
+
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -30,6 +30,7 @@ const Services = () => {
   const hourlyCardRef = useRef<HTMLDivElement>(null);
   const bdeCardRef = useRef<HTMLDivElement>(null);
   const rentalCardRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
@@ -60,7 +61,67 @@ const Services = () => {
         duration: 0.3,
       }, "-=0.3");
 
-    }, cardsContainerRef);
+      // Set initial state for cards
+      gsap.set(".service-card", { 
+        opacity: 0, 
+        y: 50,
+        scale: 0.95
+      });
+
+      // Create stagger effect for cards
+      ScrollTrigger.batch(".service-card", {
+        start: "top 85%",
+        onEnter: (elements) => {
+          gsap.to(elements, {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            stagger: { 
+              each: 0.2,
+              ease: "power2.out"
+            },
+            duration: 0.8,
+            ease: "back.out(1.7)"
+          });
+        },
+        onLeave: (elements) => {
+          gsap.to(elements, {
+            opacity: 0,
+            y: -50,
+            scale: 0.95,
+            stagger: { 
+              each: 0.1,
+              ease: "power2.in"
+            },
+            duration: 0.5
+          });
+        },
+        onEnterBack: (elements) => {
+          gsap.to(elements, {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            stagger: { 
+              each: 0.1,
+              ease: "power2.out"
+            },
+            duration: 0.5
+          });
+        },
+        onLeaveBack: (elements) => {
+          gsap.to(elements, {
+            opacity: 0,
+            y: 50,
+            scale: 0.95,
+            stagger: { 
+              each: 0.1,
+              ease: "power2.in"
+            },
+            duration: 0.5
+          });
+        }
+      });
+    }, containerRef);
 
     return () => ctx.revert();
   }, []);
@@ -70,7 +131,7 @@ const Services = () => {
   };
 
   return (
-    <div className="font-poppins">
+    <div ref={containerRef} className="font-poppins">
       {/* Title Section */}
       <div className="relative py-12 overflow-hidden">
         {/* Decorative Elements */}
@@ -401,8 +462,6 @@ const Services = () => {
         </div>
       </div>
 
-      {/* Call to Action Banner */}
-      <CallToAction />
     </div>
   );
 };
