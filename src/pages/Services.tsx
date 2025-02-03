@@ -93,7 +93,7 @@ const Services = () => {
             </div>
 
             <h1 className="text-4xl lg:text-5xl font-bold text-[#2c3149] mb-4">
-              Your Journey to <span className="text-yellow-500">Driving Excellence</span>
+            Our Packages & <span className="text-yellow-500">Services</span>
             </h1>
             <p className="text-base text-gray-600 mb-6">
               Choose from our comprehensive range of driving services tailored to your needs
@@ -154,7 +154,7 @@ const Services = () => {
                   <div className="space-y-4 mb-8 flex-grow">
                     <div className="text-center">
                       <div className="text-3xl font-bold text-[#2c3149]">
-                        $60
+                        $50+HST
                       </div>
                       <div className="text-sm text-gray-500 mt-1">per hour</div>
                     </div>
@@ -347,7 +347,7 @@ const Services = () => {
                   <div className="space-y-4 mb-8 flex-grow">
                     <div className="text-center">
                       <div className="text-3xl font-bold text-[#2c3149]">
-                        $120
+                        $149.45
                       </div>
                       <div className="text-sm text-gray-500 mt-1">per test</div>
                       <div className="text-sm text-yellow-500 font-medium mt-1">Includes 1-hour warm-up</div>
