@@ -48,6 +48,54 @@ const TESTIMONIALS = [
   }
 ];
 
+// Second set of testimonials with different people
+const TESTIMONIALS_ROW_TWO = [
+  {
+    id: 5,
+    name: "Jessica Lee",
+    role: "Student Driver",
+    rating: 5,
+    date: "February 2024",
+    location: "Markham",
+    avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop",
+    comment: "Excellent teaching methods and very patient instructors. Made learning to drive enjoyable!",
+    verified: true
+  },
+  {
+    id: 6,
+    name: "Alex Thompson",
+    role: "Student Driver",
+    rating: 5,
+    date: "January 2024",
+    location: "North York",
+    avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150&h=150&fit=crop",
+    comment: "Clear instructions and great attention to detail. Helped me become a confident driver.",
+    verified: true
+  },
+  {
+    id: 7,
+    name: "Sophia Rodriguez",
+    role: "Student Driver",
+    rating: 5,
+    date: "December 2023",
+    location: "Scarborough",
+    avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&h=150&fit=crop",
+    comment: "The best driving school in the area! Professional and friendly instructors.",
+    verified: true
+  },
+  {
+    id: 8,
+    name: "William Park",
+    role: "Student Driver",
+    rating: 5,
+    date: "February 2024",
+    location: "Richmond Hill",
+    avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop",
+    comment: "Fantastic experience from start to finish. Highly recommend to anyone learning to drive.",
+    verified: true
+  }
+];
+
 const TestimonialCard = ({ testimonial }: { testimonial: typeof TESTIMONIALS[0] }) => (
   <motion.div
     className="flex-shrink-0 w-[400px]"
@@ -115,7 +163,7 @@ const Testimonials = () => {
           </p>
         </motion.div>
 
-        {/* Testimonials Slider */}
+        {/* First Row - Left to Right */}
         <div className="relative mt-16">
           <motion.div 
             className="flex gap-6 py-4"
@@ -138,6 +186,34 @@ const Testimonials = () => {
             
             {/* Duplicate set for seamless loop */}
             {TESTIMONIALS.map((testimonial) => (
+              <TestimonialCard key={`duplicate-${testimonial.id}`} testimonial={testimonial} />
+            ))}
+          </motion.div>
+        </div>
+
+        {/* Second Row - Right to Left */}
+        <div className="relative mt-8">
+          <motion.div 
+            className="flex gap-6 py-4"
+            animate={{
+              x: [-2000, 0],
+              transition: {
+                x: {
+                  repeat: Infinity,
+                  repeatType: "loop",
+                  duration: 35,
+                  ease: "linear",
+                },
+              },
+            }}
+          >
+            {/* First set of cards */}
+            {TESTIMONIALS_ROW_TWO.map((testimonial) => (
+              <TestimonialCard key={testimonial.id} testimonial={testimonial} />
+            ))}
+            
+            {/* Duplicate set for seamless loop */}
+            {TESTIMONIALS_ROW_TWO.map((testimonial) => (
               <TestimonialCard key={`duplicate-${testimonial.id}`} testimonial={testimonial} />
             ))}
           </motion.div>

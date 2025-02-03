@@ -9,6 +9,8 @@ import Footer from './components/Footer';
 import HourlyLesson from './pages/HourlyLesson';
 import CarRental from './pages/CarRental';
 import Testimonials from './pages/Testimonials';
+import ChatButton from "./components/ChatButton";
+import FAQSection from './components/FAQSection';
 
 function ScrollToTop() {
   const location = useLocation();
@@ -26,6 +28,7 @@ function MainPage() {
       <Home />
       <Services />
       <Testimonials />
+      <FAQSection />
     </>
   );
 }
@@ -48,6 +51,7 @@ function App() {
           </Routes>
         </main>
         <Footer />
+        <ChatButton />
       </div>
     </Router>
   );

@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
-import { Award,Target, CarFront, ShieldCheck,Search,  CheckCircle2, ChevronRight,Laptop, Users, History, Clock} from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Search,  CheckCircle2} from 'lucide-react';
+import ServicesGrid from '../components/ServicesGrid';
+import RoadmapSection from '../components/RoadmapSection';
+
 
 const TESTIMONIALS = [
   {
@@ -65,38 +67,6 @@ const TESTIMONIALS = [
   }
 ];
 
-const STATS = [
-  {
-    id: 1,
-    number: "29,700+",
-    label: "Students",
-    icon: (
-      <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-      </svg>
-    )
-  },
-  {
-    id: 2,
-    number: "98%",
-    label: "Passing Rate",
-    icon: (
-      <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-      </svg>
-    )
-  },
-  {
-    id: 3,
-    number: "29,106+",
-    label: "Happy Customers",
-    icon: (
-      <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-      </svg>
-    )
-  }
-];
 
 const Home = () => {
   useEffect(() => {
@@ -190,20 +160,51 @@ const Home = () => {
             {/* Stats Card */}
             <div className="absolute top-6 right-6">
               <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-4 shadow-xl border border-white/20 hover:shadow-2xl transition-all duration-300">
-                <div className="grid grid-cols-3 gap-4">
-                  {STATS.map((stat) => (
-                    <div key={stat.id} className="text-center group">
-                      <div className="relative">
-                        <div className="text-xl font-bold bg-gradient-to-r from-[#2c3149] to-[#2c3149] bg-clip-text text-transparent group-hover:scale-105 transform transition-all duration-300">
-                          {stat.number}
-                        </div>
-                        <div className="absolute -top-1 -right-1 w-1.5 h-1.5 bg-[#2c3149] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                  <div className="text-center group">
+                    <div className="relative">
+                      <div className="text-xl font-bold bg-gradient-to-r from-[#2c3149] to-[#2c3149] bg-clip-text text-transparent group-hover:scale-105 transform transition-all duration-300">
+                        98%
                       </div>
-                      <div className="mt-0.5 text-xs font-medium text-gray-600 group-hover:text-[#2c3149] transition-colors duration-300">
-                        {stat.label}
-                      </div>
+                      <div className="absolute -top-1 -right-1 w-1.5 h-1.5 bg-[#2c3149] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     </div>
-                  ))}
+                    <div className="mt-0.5 text-xs font-medium text-gray-600 group-hover:text-[#2c3149] transition-colors duration-300">
+                      Pass Rate
+                    </div>
+                  </div>
+                  <div className="text-center group">
+                    <div className="relative">
+                      <div className="text-xl font-bold bg-gradient-to-r from-[#2c3149] to-[#2c3149] bg-clip-text text-transparent group-hover:scale-105 transform transition-all duration-300">
+                        15+
+                      </div>
+                      <div className="absolute -top-1 -right-1 w-1.5 h-1.5 bg-[#2c3149] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </div>
+                    <div className="mt-0.5 text-xs font-medium text-gray-600 group-hover:text-[#2c3149] transition-colors duration-300">
+                      Years Experience
+                    </div>
+                  </div>
+                  <div className="text-center group">
+                    <div className="relative">
+                      <div className="text-xl font-bold bg-gradient-to-r from-[#2c3149] to-[#2c3149] bg-clip-text text-transparent group-hover:scale-105 transform transition-all duration-300">
+                        29K+
+                      </div>
+                      <div className="absolute -top-1 -right-1 w-1.5 h-1.5 bg-[#2c3149] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </div>
+                    <div className="mt-0.5 text-xs font-medium text-gray-600 group-hover:text-[#2c3149] transition-colors duration-300">
+                      Students Trained
+                    </div>
+                  </div>
+                  <div className="text-center group">
+                    <div className="relative">
+                      <div className="text-xl font-bold bg-gradient-to-r from-[#2c3149] to-[#2c3149] bg-clip-text text-transparent group-hover:scale-105 transform transition-all duration-300">
+                        4.9
+                      </div>
+                      <div className="absolute -top-1 -right-1 w-1.5 h-1.5 bg-[#2c3149] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </div>
+                    <div className="mt-0.5 text-xs font-medium text-gray-600 group-hover:text-[#2c3149] transition-colors duration-300">
+                      Average Rating
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -246,174 +247,12 @@ const Home = () => {
       </div>
 
       {/* Why Choose Us Section */}
-      <div className="relative max-w-7xl mx-auto px-4 py-20">
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-20">
-          <div className="inline-flex items-center justify-center mb-4">
-            <div className="w-12 h-12 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-xl flex items-center justify-center shadow-lg transform -rotate-6">
-              <CarFront className="w-6 h-6 text-white" />
-            </div>
-            <div className="w-12 h-12 bg-gradient-to-br from-[#2c3149] to-[#1a1f33] rounded-xl flex items-center justify-center shadow-lg -ml-4 transform rotate-6">
-              <Award className="w-6 h-6 text-white" />
-            </div>
-          </div>
-          <h2 className="text-4xl lg:text-5xl font-bold text-[#2c3149] mb-4">
-            Why choose <span className="text-yellow-500">Grayjays</span>
-          </h2>
-          <p className="text-base text-gray-600 mb-6">
-            Join thousands of successful drivers who started their journey with us
-          </p>
-        </div>
-
-        {/* Features Grid */}
-        <div className="grid lg:grid-cols-3 gap-8">
-          {/* Card 1 - Modern Learning */}
-          <div className="group">
-            <div className="relative h-full bg-white rounded-[2rem] p-8 border-2 border-[#2c3149]/10 hover:border-[#2c3149] transition-all duration-500">
-              <div className="absolute -top-6 right-8 w-20 h-20 bg-[#2c3149] rounded-2xl flex items-center justify-center transform rotate-12 group-hover:rotate-0 transition-all duration-500">
-                <Laptop className="w-10 h-10 text-white transform -rotate-12 group-hover:rotate-0 transition-all duration-500" />
-              </div>
-              <div className="pt-12">
-                <h3 className="text-2xl font-bold text-[#2c3149] mb-4">Modern Learning</h3>
-                <p className="text-gray-600 mb-8">Interactive digital curriculum with real-time progress tracking and virtual simulations for enhanced learning experience.</p>
-                <div className="space-y-4">
-                  <div className="flex items-center gap-4">
-                    <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-[#2c3149]/5 flex items-center justify-center">
-                      <CheckCircle2 className="w-6 h-6 text-[#2c3149]" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-[#2c3149]">Virtual Simulations</h4>
-                      <p className="text-sm text-gray-500">Practice in a safe environment</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-4">
-                    <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-[#2c3149]/5 flex items-center justify-center">
-                      <Target className="w-6 h-6 text-[#2c3149]" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-[#2c3149]">Progress Tracking</h4>
-                      <p className="text-sm text-gray-500">Monitor your improvement</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Card 2 - Expert Instructors */}
-          <div className="group">
-            <div className="relative h-full bg-white rounded-[2rem] p-8 border-2 border-[#2c3149]/10 hover:border-[#2c3149] transition-all duration-500">
-              <div className="absolute -top-6 right-8 w-20 h-20 bg-yellow-500 rounded-2xl flex items-center justify-center transform rotate-12 group-hover:rotate-0 transition-all duration-500">
-                <Users className="w-10 h-10 text-white transform -rotate-12 group-hover:rotate-0 transition-all duration-500" />
-              </div>
-              <div className="pt-12">
-                <h3 className="text-2xl font-bold text-[#2c3149] mb-4">Expert Instructors</h3>
-                <p className="text-gray-600 mb-8">Learn from certified professionals with decades of experience and a passion for creating confident drivers.</p>
-                <div className="space-y-4">
-                  <div className="flex items-center gap-4">
-                    <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-[#2c3149]/5 flex items-center justify-center">
-                      <Award className="w-6 h-6 text-[#2c3149]" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-[#2c3149]">Certified Trainers</h4>
-                      <p className="text-sm text-gray-500">MTO approved instructors</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-4">
-                    <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-[#2c3149]/5 flex items-center justify-center">
-                      <Users className="w-6 h-6 text-[#2c3149]" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-[#2c3149]">Personalized Coaching</h4>
-                      <p className="text-sm text-gray-500">One-on-one attention</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Card 3 - Personalized Approach */}
-          <div className="group">
-            <div className="relative h-full bg-white rounded-[2rem] p-8 border-2 border-[#2c3149]/10 hover:border-[#2c3149] transition-all duration-500">
-              <div className="absolute -top-6 right-8 w-20 h-20 bg-[#2c3149] rounded-2xl flex items-center justify-center transform rotate-12 group-hover:rotate-0 transition-all duration-500">
-                <Target className="w-10 h-10 text-white transform -rotate-12 group-hover:rotate-0 transition-all duration-500" />
-              </div>
-              <div className="pt-12">
-                <h3 className="text-2xl font-bold text-[#2c3149] mb-4">Personalized Approach</h3>
-                <p className="text-gray-600 mb-8">Customized learning paths adapted to your pace and style, ensuring optimal progress and confidence building.</p>
-                <div className="space-y-4">
-                  <div className="flex items-center gap-4">
-                    <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-[#2c3149]/5 flex items-center justify-center">
-                      <Target className="w-6 h-6 text-[#2c3149]" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-[#2c3149]">Custom Learning Paths</h4>
-                      <p className="text-sm text-gray-500">Tailored to your needs</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-4">
-                    <div className="flex-shrink-0 w-12 h-12 rounded-xl bg-[#2c3149]/5 flex items-center justify-center">
-                      <Clock className="w-6 h-6 text-[#2c3149]" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-[#2c3149]">Flexible Schedule</h4>
-                      <p className="text-sm text-gray-500">Learn at your convenience</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Stats Section */}
-        <div className="mt-20">
-          <div className="bg-[#2c3149] rounded-[2rem] p-12">
-            <div className="grid md:grid-cols-4 gap-8">
-              <div className="text-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 rounded-xl bg-white/10 mb-4">
-                  <ShieldCheck className="w-8 h-8 text-white" />
-                </div>
-                <div className="text-4xl font-bold text-white mb-2">98%</div>
-                <div className="text-sm text-white/80">Pass Rate</div>
-              </div>
-              <div className="text-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 rounded-xl bg-white/10 mb-4">
-                  <History className="w-8 h-8 text-white" />
-                </div>
-                <div className="text-4xl font-bold text-white mb-2">15+</div>
-                <div className="text-sm text-white/80">Years Experience</div>
-              </div>
-              <div className="text-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 rounded-xl bg-white/10 mb-4">
-                  <Users className="w-8 h-8 text-white" />
-                </div>
-                <div className="text-4xl font-bold text-white mb-2">29K+</div>
-                <div className="text-sm text-white/80">Students Trained</div>
-              </div>
-              <div className="text-center">
-                <div className="inline-flex items-center justify-center w-16 h-16 rounded-xl bg-white/10 mb-4">
-                  <Award className="w-8 h-8 text-white" />
-                </div>
-                <div className="text-4xl font-bold text-white mb-2">4.9</div>
-                <div className="text-sm text-white/80">Average Rating</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* CTA Section */}
-        <div className="mt-20 text-center">
-          <Link
-            to="/contact"
-            className="inline-flex items-center gap-3 px-8 py-4 bg-[#2c3149] text-white rounded-full hover:bg-[#2c3149]/90 transition-all duration-300 text-lg font-medium group"
-          >
-            Start Your Journey Today
-            <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-          </Link>
-        </div>
+      <div className="relative max-w-7xl mx-auto px-4">
+        <ServicesGrid />
       </div>
+
+      {/* Learning Roadmap Section */}
+      <RoadmapSection />
     </div>
   );
 };
