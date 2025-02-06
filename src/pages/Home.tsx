@@ -89,9 +89,6 @@ const Home = () => {
                 <div className="inline-flex items-center gap-1.5 px-5 py-2 rounded-full bg-gradient-to-r from-yellow-500/10 via-yellow-500/5 to-yellow-500/10 border border-yellow-500/20 w-[90%] sm:w-auto justify-center sm:justify-start">
                   <span className="text-yellow-500 text-xs sm:text-base">★</span>
                   <span className="font-bold text-[#2c3149] text-xs sm:text-base whitespace-nowrap">#1 Rated Driving School</span>
-                  <span className="text-xs sm:text-base whitespace-nowrap">in</span>
-                  <span className="font-medium text-[#2c3149] text-xs sm:text-base whitespace-nowrap">Scarborough</span>
-                  <span className="text-base sm:text-lg">🍁</span>
                 </div>
               </div>
 

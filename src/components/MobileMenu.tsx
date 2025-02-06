@@ -45,16 +45,16 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, navLinks, menu
 
       {/* Menu Panel */}
       <div
-        className={`fixed top-0 right-0 bottom-0 w-[300px] bg-white shadow-2xl z-50 transition-transform duration-300 ease-in-out transform ${
+        className={`fixed top-0 right-0 bottom-0 w-[300px] bg-[#2c3149] shadow-2xl z-50 transition-transform duration-300 ease-in-out transform ${
           isOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-6 right-6 p-2 rounded-full hover:bg-gray-100"
+          className="absolute top-6 right-6 p-2 rounded-full hover:bg-white/10 text-white"
         >
-          <X className="w-6 h-6 text-gray-600" />
+          <X className="w-6 h-6" />
         </button>
 
         {/* Menu Content */}
@@ -70,8 +70,8 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, navLinks, menu
                         onClick={() => toggleSection(link.name.toLowerCase())}
                         className={`w-full flex items-center justify-between px-4 py-3 rounded-xl text-sm font-medium transition-all ${
                           isActive(link.path)
-                            ? 'text-blue-600'
-                            : 'text-gray-700 hover:text-blue-600'
+                            ? 'text-yellow-500 bg-white/10'
+                            : 'text-white hover:bg-white/10'
                         }`}
                       >
                         <span>{link.name}</span>
@@ -93,10 +93,10 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, navLinks, menu
                           <Link
                             key={item.href}
                             to={item.href}
-                            className="flex items-center px-4 py-3 text-sm text-gray-600 hover:bg-blue-50 hover:text-blue-600 rounded-lg group"
+                            className="flex items-center px-4 py-3 text-sm text-gray-300 hover:bg-white/10 hover:text-white rounded-lg group"
                             onClick={onClose}
                           >
-                            <span className="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-lg bg-blue-50/50 text-blue-600 group-hover:bg-blue-100 transition-colors">
+                            <span className="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-lg bg-white/5 text-yellow-500 group-hover:bg-white/10 transition-colors">
                               {item.icon}
                             </span>
                             <span className="ml-3">{item.name}</span>
@@ -109,8 +109,8 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, navLinks, menu
                       to={link.path}
                       className={`block px-4 py-3 rounded-xl text-sm font-medium transition-all ${
                         isActive(link.path)
-                          ? 'text-blue-600'
-                          : 'text-gray-700 hover:text-blue-600'
+                          ? 'text-yellow-500 bg-white/10'
+                          : 'text-white hover:bg-white/10'
                       }`}
                       onClick={onClose}
                     >
@@ -123,10 +123,10 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, navLinks, menu
           </div>
 
           {/* Auth Buttons */}
-          <div className="space-y-4 pt-6 border-t">
+          <div className="space-y-4 pt-6 border-t border-white/10">
             <Link
               to="/login"
-              className="flex items-center justify-center space-x-2 w-full px-4 py-3 text-sm font-medium text-gray-700 hover:bg-gray-50 rounded-xl transition-colors"
+              className="flex items-center justify-center space-x-2 w-full px-4 py-3 text-sm font-medium text-white hover:bg-white/10 rounded-xl transition-colors"
               onClick={onClose}
             >
               <UserCircle2 className="w-5 h-5" />
@@ -134,7 +134,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ isOpen, onClose, navLinks, menu
             </Link>
             <Link
               to="/book"
-              className="flex items-center justify-center space-x-2 w-full px-4 py-3 bg-blue-600 text-white rounded-xl text-sm font-medium hover:bg-blue-700 transition-colors"
+              className="flex items-center justify-center space-x-2 w-full px-4 py-3 bg-white text-[#2c3149] rounded-xl text-sm font-medium hover:bg-white/90 transition-colors"
               onClick={onClose}
             >
               <CalendarCheck className="w-5 h-5" />
