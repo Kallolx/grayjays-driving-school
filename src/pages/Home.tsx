@@ -79,14 +79,24 @@ const Home = () => {
         <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
       </div>
       {/* Hero Section */}
-      <div className="relative max-w-7xl mx-auto px-4 pt-[100px] sm:pt-[160px] pb-8 sm:pb-16 lg:min-h-[80vh] lg:flex lg:items-center">
-        <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-16">
+      <div className="relative max-w-7xl mx-auto px-4 pt-[60px] sm:pt-[100px] pb-8 sm:pb-16 lg:min-h-[80vh] lg:flex lg:items-center">
+        {/* Mobile Background Image */}
+        <div className="absolute inset-0 lg:hidden">
+          <div className="absolute inset-0 bg-gradient-to-b from-white via-white/95 to-white/90"></div>
+          <img
+            src="/icons/hero.png"
+            alt=""
+            className="w-full h-full object-cover opacity-10"
+          />
+        </div>
+
+        <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-16 relative">
           {/* Left Column - Content */}
-          <div className="flex flex-col justify-center space-y-6 sm:space-y-8 min-h-[400px] sm:min-h-[500px]">
+          <div className="flex flex-col justify-center space-y-6 sm:space-y-8 min-h-[300px] sm:min-h-[400px]">
             <div className="space-y-6 sm:space-y-8">
               {/* Tag */}
               <div className="flex justify-center lg:justify-start">
-                <div className="inline-flex items-center gap-1.5 px-5 py-2 rounded-full bg-gradient-to-r from-yellow-500/10 via-yellow-500/5 to-yellow-500/10 border border-yellow-500/20 w-[90%] sm:w-auto justify-center sm:justify-start">
+                <div className="inline-flex items-center gap-1.5 px-5 py-2 rounded-full bg-gradient-to-r from-yellow-500/10 via-yellow-500/5 to-yellow-500/10 border border-yellow-500/20 w-[90%] sm:w-auto justify-center sm:justify-start backdrop-blur-sm">
                   <span className="text-yellow-500 text-xs sm:text-base">★</span>
                   <span className="font-bold text-[#2c3149] text-xs sm:text-base whitespace-nowrap">#1 Rated Driving School</span>
                 </div>
@@ -147,63 +157,16 @@ const Home = () => {
           </div>
 
           {/* Right Column - Image */}
-          <div className="relative h-[450px] lg:h-[500px]">
-            <div className="absolute inset-0 bg-[#2c3149]/10 rounded-3xl -rotate-6 transform"></div>
+          <div className="relative h-[350px] sm:h-[450px] lg:h-[500px] flex items-center hidden lg:flex">
             <img
-              src="https://cdn.create.vista.com/api/media/medium/403053348/stock-photo-woman-driving-license-driving-school-young-beautiful-woman-successfully-passed?token="
+              src="/icons/hero.png"
               alt="Driving Lesson"
-              className="relative rounded-3xl w-full h-full object-cover shadow-xl"
+              className="relative w-full h-full object-contain z-10"
             />
-            {/* Stats Card */}
-            <div className="absolute top-6 right-6">
-              <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-4 shadow-xl border border-white/20 hover:shadow-2xl transition-all duration-300">
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                  <div className="text-center group">
-                    <div className="relative">
-                      <div className="text-xl font-bold bg-gradient-to-r from-[#2c3149] to-[#2c3149] bg-clip-text text-transparent group-hover:scale-105 transform transition-all duration-300">
-                        98%
-                      </div>
-                      <div className="absolute -top-1 -right-1 w-1.5 h-1.5 bg-[#2c3149] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    </div>
-                    <div className="mt-0.5 text-xs font-medium text-gray-600 group-hover:text-[#2c3149] transition-colors duration-300">
-                      Pass Rate
-                    </div>
-                  </div>
-                  <div className="text-center group">
-                    <div className="relative">
-                      <div className="text-xl font-bold bg-gradient-to-r from-[#2c3149] to-[#2c3149] bg-clip-text text-transparent group-hover:scale-105 transform transition-all duration-300">
-                        15+
-                      </div>
-                      <div className="absolute -top-1 -right-1 w-1.5 h-1.5 bg-[#2c3149] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    </div>
-                    <div className="mt-0.5 text-xs font-medium text-gray-600 group-hover:text-[#2c3149] transition-colors duration-300">
-                      Years Experience
-                    </div>
-                  </div>
-                  <div className="text-center group">
-                    <div className="relative">
-                      <div className="text-xl font-bold bg-gradient-to-r from-[#2c3149] to-[#2c3149] bg-clip-text text-transparent group-hover:scale-105 transform transition-all duration-300">
-                        29K+
-                      </div>
-                      <div className="absolute -top-1 -right-1 w-1.5 h-1.5 bg-[#2c3149] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    </div>
-                    <div className="mt-0.5 text-xs font-medium text-gray-600 group-hover:text-[#2c3149] transition-colors duration-300">
-                      Students Trained
-                    </div>
-                  </div>
-                  <div className="text-center group">
-                    <div className="relative">
-                      <div className="text-xl font-bold bg-gradient-to-r from-[#2c3149] to-[#2c3149] bg-clip-text text-transparent group-hover:scale-105 transform transition-all duration-300">
-                        4.9
-                      </div>
-                      <div className="absolute -top-1 -right-1 w-1.5 h-1.5 bg-[#2c3149] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    </div>
-                    <div className="mt-0.5 text-xs font-medium text-gray-600 group-hover:text-[#2c3149] transition-colors duration-300">
-                      Average Rating
-                    </div>
-                  </div>
-                </div>
-              </div>
+
+            {/* Decorative Elements */}
+            <div className="absolute inset-0 -z-10">
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-yellow-500/10 to-[#2c3149]/10 rounded-full blur-3xl opacity-30"></div>
             </div>
           </div>
         </div>

@@ -7,28 +7,24 @@ gsap.registerPlugin(ScrollTrigger);
 
 const steps = [
   {
-    icon: <BookOpen className="w-8 h-8" />,
     title: "Classroom Training",
     description: "20 hours of comprehensive theory lessons covering traffic rules, road safety, and defensive driving techniques.",
     color: "from-[#2c3149] to-[#1a1f33]",
     dotColor: "bg-[#2c3149]"
   },
   {
-    icon: <Car className="w-8 h-8" />,
     title: "In-Car Training",
     description: "10 hours of hands-on driving practice with certified instructors in dual-control vehicles.",
     color: "from-yellow-500 to-yellow-600",
     dotColor: "bg-yellow-500"
   },
   {
-    icon: <GraduationCap className="w-8 h-8" />,
     title: "Road Test Prep",
     description: "Specialized preparation for your G2 road test, including mock tests and examiner insights.",
     color: "from-green-500 to-green-600",
     dotColor: "bg-green-500"
   },
   {
-    icon: <Award className="w-8 h-8" />,
     title: "Certification",
     description: "Receive your BDE certification and insurance discount upon successful completion.",
     color: "from-red-500 to-red-600",
@@ -173,7 +169,9 @@ const RoadmapSection = () => {
             <div className="main-connector-line absolute left-[39px] top-[20px] h-[900px] w-[3px] bg-gradient-to-b from-[#2c3149] via-yellow-500 to-red-500" />
             
             {/* Car Indicator */}
-            <div className="car-indicator absolute w-[45px] h-[45px] -translate-x-1/2 -translate-y-1/2 z-30" style={{ left: '40.5px' }}>
+            <div className="car-indicator absolute w-[35px] sm:w-[45px] h-[35px] sm:h-[45px] -translate-x-1/2 -translate-y-1/2 z-30" 
+              style={{ left: '40.5px' }}
+            >
               <img 
                 src="/icons/car.png" 
                 alt="Car indicator" 
@@ -181,15 +179,14 @@ const RoadmapSection = () => {
               />
             </div>
 
-            <div className="relative space-y-24"> {/* Increased spacing between steps */}
+            <div className="relative space-y-12 sm:space-y-24">
               {steps.map((step, index) => (
                 <div key={index} className="roadmap-step relative">
                   <div className="group">
                     {/* Card Container */}
-                    <div className="flex items-start gap-8 relative">
+                    <div className="flex items-start gap-4 sm:gap-8 relative">
                       {/* Connector Dot */}
-                      <div className={`connector-dot absolute left-[34.5px] top-[38px] w-[12px] h-[12px] rounded-full ${step.dotColor} z-20 shadow-lg
-                        ring-4 ring-white`} />
+                      <div className={`connector-dot absolute left-[34.5px] top-[38px] w-[12px] h-[12px] rounded-full ${step.dotColor} z-20 shadow-lg ring-4 ring-white`} />
                       
                       {/* Icon Container */}
                       <div className={`icon-container flex-shrink-0 w-20 h-20 rounded-2xl bg-gradient-to-br ${step.color} 
@@ -199,11 +196,14 @@ const RoadmapSection = () => {
                         before:transition-opacity before:duration-500 group-hover:before:opacity-100
                         after:absolute after:inset-[-2px] after:rounded-2xl after:bg-gradient-to-br after:${step.color} after:opacity-20 after:blur-md`}
                       >
+                        <div className="w-8 h-8 sm:w-10 sm:h-10 text-white">
+                          {step.icon}
+                        </div>
                       </div>
 
                       {/* Content Card */}
                       <div className="roadmap-content flex-grow transform transition-all duration-500 group-hover:translate-x-2">
-                        <div className="bg-white rounded-2xl p-8 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.1)] 
+                        <div className="bg-white rounded-2xl p-4 sm:p-8 shadow-[0_4px_20px_-4px_rgba(0,0,0,0.1)] 
                           hover:shadow-[0_8px_30px_-4px_rgba(0,0,0,0.2)] transition-all duration-500
                           border border-gray-100/50 relative overflow-hidden"
                         >
@@ -212,23 +212,23 @@ const RoadmapSection = () => {
 
                           {/* Step Number Badge */}
                           <div className="absolute -top-2 -left-3">
-                            <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${step.color} flex items-center justify-center transform -rotate-12 shadow-lg`}>
-                              <span className="text-white font-bold text-lg">{index + 1}</span>
+                            <div className={`w-8 h-8 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br ${step.color} flex items-center justify-center transform -rotate-12 shadow-lg`}>
+                              <span className="text-white font-bold text-sm sm:text-lg">{index + 1}</span>
                             </div>
                           </div>
 
                           {/* Content */}
-                          <div className="relative">
-                            <div className="flex justify-between items-start mb-4">
-                              <h3 className="text-2xl font-bold text-[#2c3149]">
+                          <div className="relative pl-4 sm:pl-8">
+                            <div className="flex justify-between items-start mb-2 sm:mb-4">
+                              <h3 className="text-lg sm:text-2xl font-bold text-[#2c3149]">
                                 {step.title}
                               </h3>
-                              <div className={`px-3 py-1 rounded-full text-sm font-medium bg-${step.dotColor}/10 text-${step.dotColor}`}>
+                              <div className={`hidden sm:block px-3 py-1 rounded-full text-sm font-medium bg-${step.dotColor}/10 text-${step.dotColor}`}>
                                 Phase {index + 1}
                               </div>
                             </div>
 
-                            <p className="text-gray-600 text-lg leading-relaxed mb-6">
+                            <p className="text-sm sm:text-base text-gray-600 leading-relaxed mb-4 sm:mb-6">
                               {step.description}
                             </p>
 
@@ -298,36 +298,6 @@ const RoadmapSection = () => {
                                   </div>
                                 </>
                               )}
-                            </div>
-
-                            {/* Progress Indicator with decorative elements */}
-                            <div className="absolute bottom-0 right-0 -mb-2 -mr-2">
-                              <div className={`w-16 h-16 rounded-full bg-gradient-to-br ${step.color} opacity-10 relative overflow-hidden
-                                before:content-[''] before:absolute before:inset-0 before:bg-[radial-gradient(circle_at_70%_70%,rgba(255,255,255,0.2)_0%,transparent_50%)]
-                                after:content-[''] after:absolute after:inset-0 after:bg-[radial-gradient(circle_at_30%_30%,rgba(255,255,255,0.2)_0%,transparent_50%)]`}>
-                                <div className="absolute inset-0 flex items-center justify-center">
-                                  {index === 0 && (
-                                    <svg className="w-6 h-6 text-current opacity-30" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                                    </svg>
-                                  )}
-                                  {index === 1 && (
-                                    <svg className="w-6 h-6 text-current opacity-30" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                                    </svg>
-                                  )}
-                                  {index === 2 && (
-                                    <svg className="w-6 h-6 text-current opacity-30" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                    </svg>
-                                  )}
-                                  {index === 3 && (
-                                    <svg className="w-6 h-6 text-current opacity-30" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
-                                    </svg>
-                                  )}
-                                </div>
-                              </div>
                             </div>
                           </div>
                         </div>

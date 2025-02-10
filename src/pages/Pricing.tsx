@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
-import { Check, Car, Clock, Calendar, AlertCircle } from 'lucide-react';
-import { motion } from 'framer-react';
+import { Check, Car, Clock, AlertCircle } from 'lucide-react';
 
 interface Package {
   id: number;
@@ -199,7 +198,7 @@ const Pricing = () => {
             <div className="p-8">
               <div className="flex justify-between items-start mb-6">
                 <div>
-                  <h3 className="text-2xl font-bold text-[#2c3149]">BDE Course</h3>
+                  <h3 className="text-3xl font-bold text-[#2c3149]">BDE Course</h3>
                   <p className="text-gray-600 mt-2">Complete Driver Education</p>
                 </div>
                 <span className="bg-yellow-500/10 text-yellow-600 px-3 py-1 rounded-full text-sm font-medium">

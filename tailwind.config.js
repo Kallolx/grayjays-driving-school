@@ -28,6 +28,16 @@ export default {
         rotateIn: {
           '0%': { transform: 'rotate(0deg) scale(0)' },
           '100%': { transform: 'rotate(360deg) scale(1)' },
+        },
+        'gradient-xy': {
+          '0%, 100%': {
+            'background-size': '400% 400%',
+            'background-position': 'left center'
+          },
+          '50%': {
+            'background-size': '200% 200%',
+            'background-position': 'right center'
+          }
         }
       },
       animation: {
@@ -35,6 +45,7 @@ export default {
         slideUp: 'slideUp 0.3s ease-out forwards',
         float: 'float 3s ease-in-out infinite',
         rotateIn: 'rotateIn 0.6s ease-out forwards',
+        'gradient-xy': 'gradient-xy 6s ease infinite'
       },
       perspective: {
         '1000': '1000px',

@@ -1,11 +1,7 @@
 import { useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { EffectCards } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/effect-cards";
-import { Shield, Clock, Hand, Signal, Wifi, Battery } from "lucide-react";
+import { ChevronDown, CheckCircle2 } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -15,10 +11,7 @@ const SERVICES = [
     description:
       "Certified by the Ministry of Transportation, ensuring top-quality driver training.",
     icon: "/icons/1.png",
-    bannerImage:
-      "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&q=80",
-    color: "from-blue-400/90 to-indigo-500/90",
-    mobileColor: "from-blue-100 to-indigo-100",
+    color: "bg-gradient-to-br from-blue-400 to-indigo-500",
     features: ["MTO Certified", "Professional Training", "Quality Assurance"],
   },
   {
@@ -26,10 +19,7 @@ const SERVICES = [
     description:
       "Only at GrayJays! Our updated syllabus focuses on exactly what examiners look for.",
     icon: "/icons/2.png",
-    bannerImage:
-      "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&q=80",
-    color: "from-amber-400/90 to-yellow-500/90",
-    mobileColor: "from-amber-100 to-yellow-100",
+    color: "bg-gradient-to-br from-amber-400 to-yellow-500",
     features: ["Personalized Learning", "Updated Content", "Examiner Insights"],
   },
   {
@@ -37,25 +27,15 @@ const SERVICES = [
     description:
       "Learn from highly trained professionals who undergo rigorous background checks.",
     icon: "/icons/3.png",
-    bannerImage:
-      "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80",
-    color: "from-green-500 to-green-600",
-    mobileColor: "from-green-100 to-emerald-100",
-    features: [
-      "Expert Instructors",
-      "Background Verified",
-      "Continuous Training",
-    ],
+    color: "bg-gradient-to-br from-green-400 to-emerald-500",
+    features: ["Expert Instructors", "Background Verified", "Continuous Training"],
   },
   {
     title: "Transparent Pricing",
     description:
       "No hidden fees—clear and upfront costs for complete peace of mind.",
     icon: "/icons/4.png",
-    bannerImage:
-      "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&q=80",
-    color: "from-red-500 to-red-600",
-    mobileColor: "from-rose-100 to-red-100",
+    color: "bg-gradient-to-br from-rose-400 to-red-500",
     features: ["Clear Pricing", "No Hidden Fees", "Flexible Payment"],
   },
   {
@@ -63,10 +43,7 @@ const SERVICES = [
     description:
       "Master advanced techniques to stay safe and confident on the road.",
     icon: "/icons/5.png",
-    bannerImage:
-      "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&q=80",
-    color: "from-[#2c3149] to-[#1a1f33]",
-    mobileColor: "from-slate-100 to-gray-100",
+    color: "bg-gradient-to-br from-[#2c3149] to-[#1a1f33]",
     features: ["Advanced Techniques", "Safety First", "Road Confidence"],
   },
   {
@@ -74,21 +51,15 @@ const SERVICES = [
     description:
       "Proven methods to help you pass your road test on the first attempt.",
     icon: "/icons/6.png",
-    bannerImage:
-      "https://images.unsplash.com/photo-1605152276897-4f618f831968?auto=format&fit=crop&q=80",
-    color: "from-yellow-500 to-yellow-600",
-    mobileColor: "from-yellow-100 to-amber-100",
+    color: "bg-gradient-to-br from-yellow-400 to-orange-500",
     features: ["High Success Rate", "Test Preparation", "Expert Guidance"],
   },
   {
-    title: "Flexible Payment Options",
+    title: "Flexible Payment",
     description:
       "Interest-free financing and affordable payment plans to suit your budget.",
     icon: "/icons/7.png",
-    bannerImage:
-      "https://images.unsplash.com/photo-1554224155-1696413565d3?auto=format&fit=crop&q=80",
-    color: "from-green-500 to-green-600",
-    mobileColor: "from-emerald-100 to-green-100",
+    color: "bg-gradient-to-br from-teal-400 to-emerald-500",
     features: ["Easy Payments", "0% Interest", "Flexible Plans"],
   },
   {
@@ -96,170 +67,30 @@ const SERVICES = [
     description:
       "Your satisfaction is guaranteed—or your money back, no questions asked.",
     icon: "/icons/8.png",
-    bannerImage:
-      "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&q=80",
-    color: "from-red-500 to-red-600",
-    mobileColor: "from-red-100 to-rose-100",
+    color: "bg-gradient-to-br from-purple-400 to-indigo-500",
     features: ["100% Guarantee", "No Questions Asked", "Full Refund"],
   },
 ];
 
-const Card = ({
-  service,
-  isFlipped,
-  onFlip,
-}: {
-  service: (typeof SERVICES)[0];
-  index: number;
-  isFlipped: boolean;
-  onFlip: () => void;
-}) => {
-  return (
-    <div
-      className="relative w-full h-[400px] sm:h-[450px] [perspective:1000px] cursor-pointer group"
-      onClick={onFlip}
-    >
-      <div
-        className={`w-full h-full transition-all duration-700 [transform-style:preserve-3d] ${
-          isFlipped ? "[transform:rotateY(180deg)]" : ""
-        }`}
-      >
-        {/* Front of card */}
-        <div className="absolute inset-0 w-full h-full [backface-visibility:hidden]">
-          <div className="relative h-full rounded-[28px] overflow-hidden bg-blue-500 shadow-xl">
-            {/* iPhone Status Bar */}
-            <div className="absolute top-0 inset-x-0 h-5 bg-transparent z-20 flex items-center justify-between px-5 pt-1">
-              <div className="text-[10px] font-medium text-white">9:41</div>
-              <div className="flex items-center gap-1">
-                <Signal className="w-3 h-3 text-white" />
-                <Wifi className="w-3 h-3 text-white" />
-                <Battery className="w-4 h-4 text-white" />
-              </div>
-            </div>
-
-            {/* Main Content */}
-            <div className="h-full pt-12 pb-8 flex flex-col items-center">
-              {/* Tap Instruction */}
-              <div className="flex items-center justify-center gap-1.5 mb-4">
-                <Hand className="w-4 h-4 text-white/80 animate-bounce" />
-                <span className="text-xs text-white/80">Tap</span>
-              </div>
-
-              {/* Icon Container */}
-              <div className="flex-1 flex items-center justify-center max-h-[200px]">
-                <div className="w-32 h-32 sm:w-40 sm:h-40 transform transition-all duration-300 group-hover:scale-105 -rotate-6">
-                  <img
-                    src={service.icon}
-                    alt={service.title}
-                    className="w-full h-full object-contain drop-shadow-lg"
-                  />
-                </div>
-              </div>
-
-              {/* Title */}
-              <div className="px-6">
-                <h3 className="text-lg sm:text-xl font-bold text-white text-center">
-                  {service.title}
-                </h3>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Back of card - keep the same but adjust padding */}
-        <div className="absolute inset-0 w-full h-full [backface-visibility:hidden] [transform:rotateY(180deg)]">
-          <div className="relative h-full rounded-[28px] overflow-hidden bg-blue-500 shadow-xl">
-            {/* iPhone Status Bar */}
-            <div className="absolute top-0 inset-x-0 h-5 bg-transparent z-20 flex items-center justify-between px-5 pt-1">
-              <div className="text-[10px] font-medium text-white">9:41</div>
-              <div className="flex items-center gap-1">
-                <Signal className="w-3 h-3 text-white" />
-                <Wifi className="w-3 h-3 text-white" />
-                <Battery className="w-4 h-4 text-white" />
-              </div>
-            </div>
-
-            {/* Main Content */}
-            <div className="h-full pt-12 pb-8 flex flex-col">
-              {/* Logo */}
-              <div className="px-8">
-                <img
-                  src="/icons/svg-image-1.svg"
-                  alt="GrayJays"
-                  className="w-6 h-6 object-contain"
-                />
-              </div>
-
-              {/* Content */}
-              <div className="flex-1 px-8 py-8">
-                <div className="space-y-6">
-                  <p className="text-white/90 text-sm sm:text-base leading-relaxed">
-                    {service.description}
-                  </p>
-
-                  {/* Features with Icons */}
-                  <div className="space-y-3">
-                    {service.features.map((feature, idx) => (
-                      <div key={idx} className="flex items-center gap-2">
-                        <div className="w-1 h-1 rounded-full bg-white/50" />
-                        <span className="text-xs sm:text-sm text-white/90">
-                          {feature}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Back Button */}
-                <div className="absolute bottom-8 left-8 flex items-center gap-1">
-                  <div className="w-1 h-1 rounded-full bg-white/50" />
-                  <span className="text-xs text-white/80">
-                    Tap to flip back
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
 const ServicesGrid = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const titleRef = useRef<HTMLDivElement>(null);
-  const [flippedIndex, setFlippedIndex] = useState<number | null>(null);
+  const [expandedCard, setExpandedCard] = useState<number | null>(null);
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
-      // Title reveal animation
-      gsap.from(titleRef.current, {
-        opacity: 0,
-        y: 50,
-        duration: 1,
-        scrollTrigger: {
-          trigger: titleRef.current,
-          start: "top 80%",
-          end: "top 50%",
-          toggleActions: "play none none reverse",
-          scrub: 1,
-        },
-      });
-
       const cards = gsap.utils.toArray<HTMLElement>(".service-card");
-      gsap.set(cards, { opacity: 0, y: 50 });
+      gsap.set(cards, { opacity: 0, y: 30 });
 
-      // Create scroll-triggered animations for cards
       cards.forEach((card, index) => {
         gsap.to(card, {
           opacity: 1,
           y: 0,
           duration: 0.6,
-          delay: index * 0.2,
+          delay: index * 0.1,
+          ease: "power2.out",
           scrollTrigger: {
             trigger: card,
-            start: "top bottom-=100",
+            start: "top bottom-=50",
             end: "bottom center",
             toggleActions: "play none none reverse",
           },
@@ -271,90 +102,186 @@ const ServicesGrid = () => {
   }, []);
 
   return (
-    <div ref={containerRef} className="relative py-32 w-full overflow-hidden">
-      <div className="max-w-[1400px] mx-auto px-4 sm:px-6">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Left Section - Content */}
-          <div className="space-y-8">
-            <div ref={titleRef}>
-              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#2c3149] mb-6">
-                What Makes <span className="text-yellow-500">GrayJays </span>
-                Different?
-              </h2>
-              <p className="text-gray-600 text-lg leading-relaxed">
-                Experience excellence in driver education with our comprehensive
-                services and dedicated approach.
-              </p>
-            </div>
+    <div ref={containerRef} className="relative py-16 lg:py-24 w-full overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 lg:gap-8">
+          {SERVICES.map((service, index) => (
+            <div key={index} className="service-card relative">
+              {/* Desktop Version - Flip Card */}
+              <div className="hidden lg:block h-[350px] [perspective:1200px]">
+                <div 
+                  className="relative h-full w-full transition-transform duration-700 ease-in-out [transform-style:preserve-3d] hover:[transform:rotateY(180deg)]"
+                  style={{ transformOrigin: 'center center' }}
+                >
+                  {/* Front */}
+                  <div className="absolute inset-0 flex flex-col rounded-2xl bg-white p-6 shadow-[0_8px_30px_rgb(0,0,0,0.12)] backdrop-blur-sm [backface-visibility:hidden] will-change-transform">
+                    {/* Number Badge */}
+                    <div className="absolute top-6 right-6">
+                      <div className={`w-12 h-12 ${service.color} rounded-xl flex items-center justify-center shadow-lg`}>
+                        <span className="text-xl font-bold text-white">
+                          {(index + 1).toString().padStart(2, '0')}
+                        </span>
+                      </div>
+                    </div>
 
-            {/* Features List */}
-            <div className="grid sm:grid-cols-2 gap-6">
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-xl bg-yellow-500/10 flex items-center justify-center flex-shrink-0">
-                  <Shield className="w-6 h-6 text-yellow-500" />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-[#2c3149] mb-2">
-                    MTO Certified
-                  </h3>
-                  <p className="text-gray-600 text-sm">
-                    Ministry approved curriculum and certified instructors.
-                  </p>
+                    {/* Card Pattern */}
+                    <div className="absolute inset-0 bg-[url('/patterns/texture-dots.png')] opacity-[0.03]" />
+
+                    {/* Content */}
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="text-center px-6">
+                        <div className="relative transform transition-transform duration-500 hover:scale-110 hover:-rotate-6">
+                          <div className={`absolute inset-0 ${service.color} rounded-full blur-2xl opacity-10 scale-150`} />
+                          <img
+                            src={service.icon}
+                            alt={service.title}
+                            className="relative h-24 w-24 object-contain drop-shadow-xl mx-auto"
+                          />
+                        </div>
+                        <h3 className="text-xl font-bold text-[#2c3149] mt-6 mb-4">
+                          {service.title}
+                        </h3>
+                        <div className="flex items-center justify-center gap-2 text-md text-gray-400">
+                          <span className="animate-pulse">Hover to learn more</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Back */}
+                  <div 
+                    className={`absolute inset-0 flex flex-col rounded-2xl ${service.color} p-6 text-white shadow-lg [transform:rotateY(180deg)] [backface-visibility:hidden] will-change-transform overflow-hidden`}
+                    style={{ transformOrigin: 'center center' }}
+                  >
+                    {/* Background Pattern */}
+                    <div className="absolute inset-0">
+                      {/* Gradient Overlay for better text readability */}
+                      <div className="absolute inset-0 bg-[#2c3149]/40"></div>
+                      {/* Top Right Corner Decoration */}
+                      <div className="absolute -top-20 -right-20 w-40 h-40 bg-white/10 rounded-full blur-2xl"></div>
+                      {/* Bottom Left Corner Decoration */}
+                      <div className="absolute -bottom-20 -left-20 w-40 h-40 bg-white/10 rounded-full blur-2xl"></div>
+                      {/* Subtle Grid Pattern */}
+                      <div className="absolute inset-0 bg-[url('/patterns/texture-dots.png')] opacity-[0.07]"></div>
+                    </div>
+
+                    {/* Content */}
+                    <div className="relative flex flex-col h-full">
+                      {/* Header with Icon */}
+                      <div className="mb-4 flex items-start justify-between">
+                        <div>
+                          <h3 className="text-lg font-bold mb-2">{service.title}</h3>
+                          <div className="w-8 h-0.5 bg-white/30 rounded-full"></div>
+                        </div>
+                        <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center">
+                          <img
+                            src={service.icon}
+                            alt=""
+                            className="w-6 h-6 invert opacity-90"
+                          />
+                        </div>
+                      </div>
+
+                      {/* Description */}
+                      <p className="text-sm leading-relaxed text-white/90 mb-4">
+                        {service.description}
+                      </p>
+
+                      {/* Features */}
+                      <div className="mt-auto">
+                        <div className="text-[11px] font-medium text-white/80 uppercase tracking-wider mb-3">
+                          Key Features
+                        </div>
+                        <ul className="space-y-2">
+                          {service.features.map((feature, idx) => (
+                            <li key={idx} className="flex items-center text-sm text-white/90">
+                              <div className="w-5 h-5 rounded-full bg-white/10 flex items-center justify-center mr-2">
+                                <CheckCircle2 className="w-3 h-3 text-white/90" />
+                              </div>
+                              {feature}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      {/* Number Badge - Small Version */}
+                      <div className="absolute bottom-1 right-1 w-8 h-8 flex items-center justify-center opacity-20">
+                        <span className="text-sm font-bold">
+                          {(index + 1).toString().padStart(2, '0')}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-xl bg-blue-500/10 flex items-center justify-center flex-shrink-0">
-                  <Clock className="w-6 h-6 text-blue-500" />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-[#2c3149] mb-2">
-                    Flexible Schedule
-                  </h3>
-                  <p className="text-gray-600 text-sm">
-                    Book lessons at your convenience, 7 days a week.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
 
-          {/* Right Section - Swiper */}
-          <div className="relative">
-            <div className="pt-4 pb-16">
-              <Swiper
-                effect={"cards"}
-                grabCursor={true}
-                modules={[EffectCards]}
-                className="h-[400px] sm:h-[450px] w-[240px] sm:w-[280px] mx-auto"
+              {/* Mobile Version - Single Column Expandable Card */}
+              <div 
+                className="lg:hidden"
+                onClick={() => setExpandedCard(expandedCard === index ? null : index)}
               >
-                {SERVICES.map((service, index) => (
-                  <SwiperSlide key={index} className="!bg-transparent">
-                    <Card
-                      service={service}
-                      index={index}
-                      isFlipped={flippedIndex === index}
-                      onFlip={() =>
-                        setFlippedIndex(flippedIndex === index ? null : index)
-                      }
-                    />
-                  </SwiperSlide>
-                ))}
-              </Swiper>
+                <div className={`relative overflow-hidden rounded-xl transition-all duration-300 border border-gray-100 shadow-sm hover:shadow-md ${
+                  expandedCard === index ? 'bg-gradient-to-br ' + service.color + ' border-transparent' : 'bg-white'
+                }`}>
+                  {/* Card Pattern */}
+                  <div className="absolute inset-0 bg-[url('/patterns/texture-dots.png')] opacity-[0.03]" />
 
-              {/* Swipe Instruction - moved outside card with more spacing */}
-              <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-1.5 whitespace-nowrap">
-                <img
-                  src="/icons/swipe.gif"
-                  alt="Swipe GIF"
-                  className="w-4 h-4"
-                />{" "}
-                {/* Adjust width and height as needed */}
-                <span className="text-xs text-gray-500">
-                  Swipe to explore services
-                </span>
+                  <div className="relative flex items-center gap-4 p-5">
+                    <div className="relative">
+                      <div className={`absolute inset-0 ${service.color} rounded-xl blur-lg opacity-20`} />
+                      <img
+                        src={service.icon}
+                        alt={service.title}
+                        className={`w-12 h-12 object-contain relative transition-transform duration-300 ${
+                          expandedCard === index ? 'scale-110 brightness-0 invert' : ''
+                        }`}
+                      />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-3">
+                        <h3 className={`text-lg font-bold transition-colors ${
+                          expandedCard === index ? 'text-white' : 'text-[#2c3149]'
+                        }`}>
+                          {service.title}
+                        </h3>
+                        <div className={`text-xs px-2 py-1 rounded-full ${
+                          expandedCard === index ? 'bg-white/20 text-white' : 'bg-gray-100 text-gray-500'
+                        }`}>
+                          {(index + 1).toString().padStart(2, '0')}
+                        </div>
+                      </div>
+                      <p className={`text-sm mt-0.5 transition-colors ${
+                        expandedCard === index ? 'text-white/80' : 'text-gray-500'
+                      }`}>
+                        {service.description}
+                      </p>
+                    </div>
+                    <ChevronDown className={`w-5 h-5 transition-all duration-300 ${
+                      expandedCard === index ? 'rotate-180 text-white' : 'text-gray-400'
+                    }`} />
+                  </div>
+
+                  {/* Expanded Content */}
+                  <div className={`overflow-hidden transition-all duration-300 ${
+                    expandedCard === index ? 'max-h-[300px] opacity-100' : 'max-h-0 opacity-0'
+                  }`}>
+                    <div className="relative p-5 pt-0 text-white">
+                      <div className="space-y-3">
+                        {service.features.map((feature, idx) => (
+                          <div key={idx} className="flex items-start gap-3">
+                            <div className="flex-shrink-0 w-5 h-5 rounded-full bg-white/20 flex items-center justify-center mt-0.5">
+                              <CheckCircle2 className="w-4 h-4 text-white" />
+                            </div>
+                            <p className="text-sm">{feature}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
+          ))}
         </div>
       </div>
     </div>

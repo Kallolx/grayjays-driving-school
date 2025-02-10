@@ -11,7 +11,6 @@ import CarRental from './pages/CarRental';
 import Testimonials from './pages/Testimonials';
 import ChatButton from "./components/ChatButton";
 import FAQSection from './components/FAQSection';
-import './styles/swiper.css';
 
 function ScrollToTop() {
   const location = useLocation();

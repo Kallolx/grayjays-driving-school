@@ -98,42 +98,42 @@ const TESTIMONIALS_ROW_TWO = [
 
 const TestimonialCard = ({ testimonial }: { testimonial: typeof TESTIMONIALS[0] }) => (
   <motion.div
-    className="flex-shrink-0 w-[400px]"
+    className="flex-shrink-0 w-[400px] sm:w-[400px] w-[280px]"
     initial={{ opacity: 0, y: 20 }}
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
     transition={{ duration: 0.5 }}
   >
-    <div className="h-full rounded-2xl bg-white p-6 shadow-md ring-1 ring-gray-900/5">
-      <div className="flex items-center gap-4">
+    <div className="h-full rounded-2xl bg-white p-4 sm:p-6 shadow-md ring-1 ring-gray-900/5">
+      <div className="flex items-center gap-3">
         <img
           src={testimonial.avatar}
           alt={testimonial.name}
-          className="h-12 w-12 rounded-full object-cover ring-2 ring-[#2c3149]/10"
+          className="h-10 w-10 sm:h-12 sm:w-12 rounded-full object-cover ring-2 ring-[#2c3149]/10"
         />
         <div>
           <div className="flex items-center gap-1">
-            <h3 className="text-base font-semibold text-gray-900">{testimonial.name}</h3>
+            <h3 className="text-sm sm:text-base font-semibold text-gray-900">{testimonial.name}</h3>
             {testimonial.verified && (
-              <BadgeCheck className="h-5 w-5 text-[#2c3149]" />
+              <BadgeCheck className="h-4 sm:h-5 w-4 sm:w-5 text-[#2c3149]" />
             )}
           </div>
-          <p className="text-sm text-gray-600">{testimonial.role}</p>
+          <p className="text-xs sm:text-sm text-gray-600">{testimonial.role}</p>
         </div>
       </div>
 
-      <div className="mt-4 flex items-center gap-1">
+      <div className="mt-3 sm:mt-4 flex items-center gap-1">
         {[...Array(testimonial.rating)].map((_, i) => (
-          <Star key={i} className="h-4 w-4 text-yellow-400 fill-yellow-400" />
+          <Star key={i} className="h-3 w-3 sm:h-4 sm:w-4 text-yellow-400 fill-yellow-400" />
         ))}
       </div>
 
-      <blockquote className="mt-4 text-sm text-gray-600 line-clamp-4">
+      <blockquote className="mt-3 sm:mt-4 text-xs sm:text-sm text-gray-600 line-clamp-4">
         "{testimonial.comment}"
       </blockquote>
 
-      <div className="mt-4 pt-4 border-t border-gray-100">
-        <div className="flex items-center justify-between text-xs text-gray-500">
+      <div className="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-gray-100">
+        <div className="flex items-center justify-between text-[10px] sm:text-xs text-gray-500">
           <span>📍 {testimonial.location}</span>
           <span>🗓 {testimonial.date}</span>
         </div>
@@ -144,11 +144,11 @@ const TestimonialCard = ({ testimonial }: { testimonial: typeof TESTIMONIALS[0] 
 
 const Testimonials = () => {
   return (
-    <section className="relative py-12 sm:py-16 bg-gradient-to-b from-white to-gray-50 overflow-hidden">
+    <section className="relative py-8 sm:py-16 bg-gradient-to-b from-white to-gray-50 overflow-hidden">
       <div className="relative container mx-auto px-4">
         {/* Section Header */}
         <motion.div 
-          className="text-center max-w-3xl mx-auto mb-12 sm:mb-16"
+          className="text-center max-w-3xl mx-auto mb-8 sm:mb-16"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -158,15 +158,15 @@ const Testimonials = () => {
           <p className="mt-2 text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-gray-900">
             What Our Students Say
           </p>
-          <p className="mt-4 sm:mt-6 text-base sm:text-lg leading-7 sm:leading-8 text-gray-600">
+          <p className="mt-4 sm:mt-6 text-sm sm:text-lg leading-7 sm:leading-8 text-gray-600">
             Read authentic reviews from our valued students across Greater Toronto Area
           </p>
         </motion.div>
 
         {/* First Row - Left to Right */}
-        <div className="relative mt-16">
+        <div className="relative mt-8 sm:mt-16">
           <motion.div 
-            className="flex gap-6 py-4"
+            className="flex gap-3 sm:gap-6 py-2 sm:py-4"
             animate={{
               x: [0, -2000],
               transition: {
@@ -192,9 +192,9 @@ const Testimonials = () => {
         </div>
 
         {/* Second Row - Right to Left */}
-        <div className="relative mt-8">
+        <div className="relative mt-3 sm:mt-8">
           <motion.div 
-            className="flex gap-6 py-4"
+            className="flex gap-3 sm:gap-6 py-2 sm:py-4"
             animate={{
               x: [-2000, 0],
               transition: {
