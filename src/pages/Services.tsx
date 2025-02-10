@@ -164,13 +164,13 @@ const Services = () => {
       </div>
 
       {/* Services Grid */}
-      <div className="relative overflow-hidden">
-        <div ref={cardsContainerRef} className="relative max-w-7xl mx-auto px-4">
+      <div className="relative overflow-hidden py-12 sm:py-16">
+        <div ref={cardsContainerRef} className="relative max-w-6xl mx-auto px-4">
           {/* Desktop Grid */}
-          <div className="hidden md:grid md:grid-cols-3 gap-6 items-stretch">
+          <div className="hidden md:grid md:grid-cols-3 gap-4 lg:gap-6 items-start max-w-[1100px] mx-auto">
             {/* Hourly Lesson Card */}
-            <div ref={hourlyCardRef} className="group transform hover:-translate-y-1 transition-all duration-500 md:mt-12">
-              <div className="h-full bg-white rounded-[1.5rem] p-6 border-2 border-[#2c3149] shadow-[0_8px_30px_rgba(0,0,0,0.08)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.12)] transition-all duration-500 flex flex-col relative overflow-hidden">
+            <div ref={hourlyCardRef} className="group transform hover:-translate-y-3 hover:scale-[1.02] transition-all duration-500 md:mt-12">
+              <div className="h-[520px] bg-white rounded-[1.5rem] p-4 lg:p-5 border-2 border-[#2c3149] shadow-[0_8px_30px_rgba(0,0,0,0.08)] group-hover:shadow-[0_15px_40px_rgba(0,0,0,0.12)] transition-all duration-500 flex flex-col relative overflow-hidden">
                 {/* Content */}
                 <div className="relative">
                   <div className="mb-4">
@@ -225,18 +225,6 @@ const Services = () => {
                         </div>
                         <p className="text-gray-600 text-sm">Full Hour of Dedicated Training</p>
                       </div>
-                      <div className="flex items-start gap-3">
-                        <div className="flex-shrink-0 w-5 h-5 rounded-full bg-yellow-50 flex items-center justify-center mt-0.5">
-                          <CheckCircle2 className="w-4 h-4 text-yellow-500" />
-                        </div>
-                        <p className="text-gray-600 text-sm">Satisfaction Guaranteed</p>
-                      </div>
-                      <div className="flex items-start gap-3">
-                        <div className="flex-shrink-0 w-5 h-5 rounded-full bg-yellow-50 flex items-center justify-center mt-0.5">
-                          <CheckCircle2 className="w-4 h-4 text-yellow-500" />
-                        </div>
-                        <p className="text-gray-600 text-sm">Free Pickup & Drop-Off</p>
-                      </div>
                     </div>
                   </div>
 
@@ -252,10 +240,10 @@ const Services = () => {
             </div>
 
             {/* BDE Service Card - Main Focus */}
-            <div ref={bdeCardRef} className="group transform hover:-translate-y-1 transition-all duration-500 md:-mt-8 md:scale-105 z-10">
+            <div ref={bdeCardRef} className="group transform hover:-translate-y-3 hover:scale-[1.02] transition-all duration-500 md:-mt-8">
               {/* Popular Badge - Above card */}
-              <div className="flex justify-center mb-2">
-                <div className="bg-gradient-to-r from-yellow-500 to-yellow-600 text-white px-4 py-1.5 rounded-xl text-sm font-medium shadow-lg flex items-center gap-2">
+              <div className="flex justify-center -mb-3 relative z-20">
+                <div className="bg-gradient-to-r from-yellow-500 to-yellow-600 text-white px-4 py-2 rounded-full text-sm font-medium shadow-lg flex items-center gap-2">
                   <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
                   </svg>
@@ -263,26 +251,26 @@ const Services = () => {
                 </div>
               </div>
 
-              <div className="h-full bg-gradient-to-br from-[#2c3149] to-[#1a1f33] rounded-[1.5rem] p-8 shadow-xl hover:shadow-2xl transition-all duration-500 flex flex-col relative overflow-hidden">
+              <div className="h-[600px] bg-gradient-to-br from-[#2c3149] to-[#1a1f33] rounded-[1.5rem] p-4 lg:p-5 shadow-xl group-hover:shadow-[0_20px_50px_rgba(0,0,0,0.25)] transition-all duration-500 flex flex-col relative overflow-hidden">
                 {/* Background Pattern */}
                 <div className="absolute inset-0 bg-[radial-gradient(#ffffff10_1px,transparent_1px)] [background-size:16px_16px] opacity-30"></div>
                 
                 {/* Content */}
-                <div className="relative">
+                <div className="relative flex flex-col h-full">
                   <div className="mb-4">
-                    <div className="w-12 h-12 bg-gradient-to-r from-yellow-500 to-yellow-600 rounded-xl flex items-center justify-center mb-4 transform group-hover:scale-110 transition-transform duration-500">
+                    <div className="w-12 h-12 bg-gradient-to-r from-yellow-500 to-yellow-600 rounded-xl flex items-center justify-center mb-4">
                       <GraduationCap className="w-6 h-6 text-white" />
                     </div>
                     <h3 className="text-xl font-bold text-white mb-2">
                       Beginners Driver Education (BDE)
                     </h3>
-                    <p className="text-gray-300 mb-4 text-sm">
+                    <p className="text-gray-300 text-sm">
                       Complete MTO-approved beginner driver education program.
                     </p>
                   </div>
 
                   {/* Toggle Switch */}
-                  <div className="mb-6">
+                  <div className="mb-4">
                     <div className="flex items-center justify-between p-2 bg-white/10 backdrop-blur-sm rounded-xl">
                       <button
                         onClick={() => setBdeWithCar(true)}
@@ -310,8 +298,8 @@ const Services = () => {
                   </div>
 
                   {/* Hours Selector */}
-                  <div className="mb-6">
-                    <div className="flex items-center justify-between bg-white/10 p-3 rounded-xl">
+                  <div className="mb-4">
+                    <div className="flex items-center justify-between bg-white/10 p-2 rounded-xl">
                       <button
                         onClick={() => setHours(Math.max(10, hours - 1))}
                         className={`p-2 transition-colors ${hours <= 10 ? 'text-gray-500 cursor-not-allowed' : 'text-gray-300 hover:text-white'}`}
@@ -329,30 +317,30 @@ const Services = () => {
                     </div>
                   </div>
 
-                  <div className="space-y-4 mb-8 flex-grow">
+                  <div className="space-y-3 flex-grow">
                     <div className="text-center">
-                      <div className="text-4xl font-bold text-white">
+                      <div className="text-3xl font-bold text-white">
                         ${calculatePrice(BASE_PRICES.bde[bdeWithCar ? 'withCar' : 'withoutCar'], hours)}
                       </div>
                       <div className="text-sm text-gray-300 mt-1">Total for {hours} hours</div>
                     </div>
-                    <div className="flex items-start gap-3">
-                      <CheckCircle2 className="w-5 h-5 text-yellow-500 mt-1" />
-                      <p className="text-gray-300">40 hours of comprehensive training</p>
+                    <div className="flex items-start gap-2">
+                      <CheckCircle2 className="w-4 h-4 text-yellow-500 mt-1 flex-shrink-0" />
+                      <p className="text-sm text-gray-300">40 hours of comprehensive training</p>
                     </div>
-                    <div className="flex items-start gap-3">
-                      <CheckCircle2 className="w-5 h-5 text-yellow-500 mt-1" />
-                      <p className="text-gray-300">10 hours in-car instruction</p>
+                    <div className="flex items-start gap-2">
+                      <CheckCircle2 className="w-4 h-4 text-yellow-500 mt-1 flex-shrink-0" />
+                      <p className="text-sm text-gray-300">10 hours in-car instruction</p>
                     </div>
-                    <div className="flex items-start gap-3">
-                      <CheckCircle2 className="w-5 h-5 text-yellow-500 mt-1" />
-                      <p className="text-gray-300">Insurance discount certificate</p>
+                    <div className="flex items-start gap-2">
+                      <CheckCircle2 className="w-4 h-4 text-yellow-500 mt-1 flex-shrink-0" />
+                      <p className="text-sm text-gray-300">Insurance discount certificate</p>
                     </div>
                   </div>
 
                   <Link
                     to="/learn-to-drive/bde"
-                    className="inline-flex items-center justify-center gap-2 w-full px-6 py-3 bg-yellow-500 text-white rounded-full hover:bg-yellow-600 transition-all group-hover:shadow-lg"
+                    className="mt-4 inline-flex items-center justify-center gap-2 w-full px-6 py-3 bg-yellow-500 text-white rounded-full hover:bg-yellow-600 transition-all group-hover:shadow-lg"
                   >
                     Get Started
                     <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -362,8 +350,8 @@ const Services = () => {
             </div>
 
             {/* Rental Car Service Card */}
-            <div ref={rentalCardRef} className="group transform hover:-translate-y-1 transition-all duration-500 md:mt-12">
-              <div className="h-full bg-white rounded-[1.5rem] p-6 border-2 border-[#2c3149] shadow-[0_8px_30px_rgba(0,0,0,0.08)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.12)] transition-all duration-500 flex flex-col relative overflow-hidden">
+            <div ref={rentalCardRef} className="group transform hover:-translate-y-3 hover:scale-[1.02] transition-all duration-500 md:mt-12">
+              <div className="h-[520px] bg-white rounded-[1.5rem] p-4 lg:p-5 border-2 border-[#2c3149] shadow-[0_8px_30px_rgba(0,0,0,0.08)] group-hover:shadow-[0_15px_40px_rgba(0,0,0,0.12)] transition-all duration-500 flex flex-col relative overflow-hidden">
                 {/* Content */}
                 <div className="relative">
                   <div className="mb-4">
@@ -478,7 +466,21 @@ const Services = () => {
                         </div>
                         <p className="text-gray-600 text-sm">One-on-One Instruction</p>
                       </div>
+                      <div className="flex items-start gap-3">
+                        <div className="flex-shrink-0 w-5 h-5 rounded-full bg-yellow-50 flex items-center justify-center mt-0.5">
+                          <CheckCircle2 className="w-4 h-4 text-yellow-500" />
+                        </div>
+                        <p className="text-gray-600 text-sm">Customizable Lessons</p>
+                      </div>
+                      <div className="flex items-start gap-3">
+                        <div className="flex-shrink-0 w-5 h-5 rounded-full bg-yellow-50 flex items-center justify-center mt-0.5">
+
+                          <CheckCircle2 className="w-4 h-4 text-yellow-500" />
+                        </div>
+                        <p className="text-gray-600 text-sm">Full Hour of Dedicated Training</p>
+                      </div>
                     </div>
+                    
                   </div>
 
                   <Link

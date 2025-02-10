@@ -1,5 +1,5 @@
-import { Link } from 'react-router-dom';
-import { ChevronRight } from 'lucide-react';
+import { Link } from "react-router-dom";
+import { ChevronRight } from "lucide-react";
 
 const CallToAction = () => {
   return (
@@ -18,9 +18,9 @@ const CallToAction = () => {
             <div className="absolute inset-0 overflow-hidden">
               <div className="absolute inset-0 bg-[#2c3149]/80 mix-blend-multiply"></div>
               <div className="absolute inset-0 bg-gradient-to-t from-[#2c3149] via-transparent to-transparent"></div>
-              <img 
-                src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&q=80" 
-                alt="Background" 
+              <img
+                src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&q=80"
+                alt="Background"
                 className="w-full h-full object-cover opacity-50"
               />
             </div>
@@ -34,44 +34,30 @@ const CallToAction = () => {
                     <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6 leading-tight">
                       Ready to Master <br className="hidden sm:block" />
                       <span className="relative">
-                        <span className="relative z-10 text-yellow-500">the Road?</span>
+                        <span className="relative z-10 text-yellow-500">
+                          the Road?
+                        </span>
                         <span className="absolute bottom-2 left-0 w-full h-3 bg-yellow-500/20 -skew-x-6"></span>
                       </span>
                     </h2>
                     <p className="text-xl text-gray-200 mb-8 leading-relaxed">
-                      Book lessons online and ace your road test with Grayjays. Start your journey to becoming a confident driver today.
+                      Book lessons online and ace your road test with Grayjays.
+                      Start your journey to becoming a confident driver today.
                     </p>
-                    
+
                     {/* Animated Button */}
-                    <div className="relative group">
-                      {/* Gradient Border Animation */}
-                      <div className="absolute -inset-[3px] bg-gradient-to-r from-yellow-500 via-yellow-200 to-yellow-500 rounded-xl opacity-70 group-hover:opacity-100 blur-lg transition duration-1000 group-hover:duration-200 animate-gradient-xy"></div>
-                      
+                    <div className="relative group">                     
                       {/* Button */}
                       <Link
-      to="/contact"
-      className="group relative inline-flex items-center justify-center px-8 py-4 bg-yellow-500 text-[#2c3149] rounded-xl text-lg font-medium overflow-hidden transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0"
-    >
-      {/* Animated border effect */}
-      <div className="absolute inset-0 rounded-xl">
-        <div className="absolute inset-0 rounded-xl border-2 border-yellow-400 opacity-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-300" />
-        <div className="absolute inset-0 rounded-xl border-2 border-yellow-400 opacity-0 group-hover:opacity-50 group-hover:scale-110 transition-all duration-500" />
-      </div>
-
-      {/* Hover overlay */}
-      <div className="absolute inset-0 bg-yellow-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-      
-      {/* Button content */}
-      <div className="relative z-10 flex items-center gap-2">
-        <span>Get Started Today</span>
-        <ChevronRight 
-          className="w-5 h-5 transition-all duration-300 group-hover:translate-x-1" 
-        />
-      </div>
-
-      {/* Click ripple */}
-      <div className="absolute inset-0 bg-yellow-600/20 opacity-0 group-active:opacity-100 transition-opacity duration-75" />
-    </Link>
+                        to="/contact"
+                        className="group relative inline-flex items-center justify-center px-8 py-4 bg-yellow-500 text-[#2c3149] rounded-xl text-lg font-medium overflow-hidden transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0"
+                      >
+                        {/* Button content */}
+                        <div className="relative z-10 flex items-center gap-2">
+                          <span>Get Started Today</span>
+                          <ChevronRight className="w-5 h-5 transition-all duration-300 group-hover:translate-x-1" />
+                        </div>     
+                      </Link>
                     </div>
                   </div>
 
@@ -79,20 +65,34 @@ const CallToAction = () => {
                   <div className="flex-shrink-0 bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
                     <div className="grid grid-cols-2 gap-8">
                       <div className="text-center">
-                        <div className="text-3xl font-bold text-yellow-500 mb-2">98%</div>
+                        <div className="text-3xl font-bold text-yellow-500 mb-2">
+                          98%
+                        </div>
                         <div className="text-sm text-gray-300">Pass Rate</div>
                       </div>
                       <div className="text-center">
-                        <div className="text-3xl font-bold text-yellow-500 mb-2">15+</div>
-                        <div className="text-sm text-gray-300">Years Experience</div>
+                        <div className="text-3xl font-bold text-yellow-500 mb-2">
+                          15+
+                        </div>
+                        <div className="text-sm text-gray-300">
+                          Years Experience
+                        </div>
                       </div>
                       <div className="text-center">
-                        <div className="text-3xl font-bold text-yellow-500 mb-2">29K+</div>
-                        <div className="text-sm text-gray-300">Students Trained</div>
+                        <div className="text-3xl font-bold text-yellow-500 mb-2">
+                          29K+
+                        </div>
+                        <div className="text-sm text-gray-300">
+                          Students Trained
+                        </div>
                       </div>
                       <div className="text-center">
-                        <div className="text-3xl font-bold text-yellow-500 mb-2">4.9</div>
-                        <div className="text-sm text-gray-300">Average Rating</div>
+                        <div className="text-3xl font-bold text-yellow-500 mb-2">
+                          4.9
+                        </div>
+                        <div className="text-sm text-gray-300">
+                          Average Rating
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -109,4 +109,4 @@ const CallToAction = () => {
   );
 };
 
-export default CallToAction; 
+export default CallToAction;

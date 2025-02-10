@@ -26,7 +26,6 @@ function MainPage() {
   return (
     <>
       <Home />
-      <Services />
       <Testimonials />
       <FAQSection />
     </>

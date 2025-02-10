@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { Search, CheckCircle2 } from "lucide-react";
 import ServicesGrid from "../components/ServicesGrid";
 import RoadmapSection from "../components/RoadmapSection";
-
+import Services from "./Services";
 const TESTIMONIALS = [
   {
     id: 1,
@@ -178,65 +178,61 @@ const Home = () => {
                 students
               </div>
             </div>
+
+            {/* Search Section */}
+            <div className="w-full max-w-2xl">
+              <div
+                className="flex flex-1 group/search hover:-translate-y-1 hover:scale-[1.02] transition-all duration-300 ease-out 
+                shadow-[0_8px_30px_-4px_rgba(44,49,73,0.2)] hover:shadow-[0_20px_50px_-20px_rgba(44,49,73,0.3)] 
+                rounded-full bg-gradient-to-r from-[#2c3149] via-[#2c3149] to-[#2c3149] backdrop-blur-sm"
+              >
+                <div className="flex-grow relative">
+                  <div className="absolute inset-0 bg-gradient-to-r from-white/5 via-transparent to-white/5 rounded-l-full opacity-50"></div>
+                  <input
+                    type="text"
+                    placeholder="Find your nearest Driving Instructor"
+                    className="w-full px-6 sm:px-8 py-4 sm:py-5 rounded-l-full border-0 focus:outline-none focus:ring-0 text-base sm:text-lg transition-all placeholder-gray-300 text-white bg-transparent relative z-10"
+                  />
+                </div>
+                <div className="border-l border-white/10 px-2 sm:px-3 relative">
+                  <div className="absolute inset-0 bg-gradient-to-r from-white/5 via-transparent to-white/5 opacity-50"></div>
+                  <select className="h-full px-3 sm:px-4 py-4 sm:py-5 text-white bg-transparent border-0 focus:outline-none focus:ring-0 rounded-full text-base sm:text-lg appearance-none cursor-pointer relative z-10">
+                    <option value="" className="text-gray-900">
+                      Your Postal Code
+                    </option>
+                    <option value="scarborough" className="text-gray-900">
+                      Scarborough
+                    </option>
+                    <option value="northYork" className="text-gray-900">
+                      North York
+                    </option>
+                    <option value="markham" className="text-gray-900">
+                      Markham
+                    </option>
+                    <option value="richmond" className="text-gray-900">
+                      Richmond Hill
+                    </option>
+                  </select>
+                </div>
+                <button className="px-6 sm:px-8 py-4 sm:py-5 bg-gradient-to-r from-yellow-500 to-yellow-500/90 text-gray-900 rounded-full hover:opacity-90 transition-all flex items-center gap-2 text-base sm:text-lg font-medium m-1 hover:shadow-lg">
+                  <Search className="w-5 h-5 sm:w-6 sm:h-6 text-gray-900" />
+                  <span className="hidden sm:inline">Search</span>
+                </button>
+              </div>
+            </div>
           </div>
 
           {/* Right Column - Image */}
-          <div className="relative h-[350px] sm:h-[450px] lg:h-[500px] flex items-center hidden lg:flex">
+          <div className="relative h-[400px] sm:h-[500px] lg:h-[600px] flex items-center hidden lg:flex">
             <img
               src="/icons/hero.png"
               alt="Driving Lesson"
-              className="relative w-full h-full object-contain z-10"
+              className="relative w-full h-full object-contain z-10 scale-110"
             />
 
             {/* Decorative Elements */}
             <div className="absolute inset-0 -z-10">
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-yellow-500/10 to-[#2c3149]/10 rounded-full blur-3xl opacity-30"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Search Section */}
-      <div className="relative max-w-7xl mx-auto px-4 -mt-4">
-        <div className="max-w-5xl mx-auto">
-          <div className="flex flex-col md:flex-row gap-4">
-            <div
-              className="flex flex-1 group/search hover:-translate-y-1 hover:scale-[1.02] transition-all duration-300 ease-out 
-              shadow-[0_8px_30px_-4px_rgba(44,49,73,0.2)] hover:shadow-[0_20px_50px_-20px_rgba(44,49,73,0.3)] 
-              rounded-full bg-gradient-to-r from-[#2c3149] via-[#2c3149] to-[#2c3149] backdrop-blur-sm"
-            >
-              <div className="flex-grow relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-white/5 via-transparent to-white/5 rounded-l-full opacity-50"></div>
-                <input
-                  type="text"
-                  placeholder="Find your nearest Driving Instructor"
-                  className="w-full px-4 sm:px-8 py-3 sm:py-4 rounded-l-full border-0 focus:outline-none focus:ring-0 text-base sm:text-lg transition-all placeholder-gray-300 text-white bg-transparent relative z-10"
-                />
-              </div>
-              <div className="border-l border-white/10 px-1 sm:px-2 relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-white/5 via-transparent to-white/5 opacity-50"></div>
-                <select className="h-full px-2 sm:px-4 py-3 sm:py-4 text-white bg-transparent border-0 focus:outline-none focus:ring-0 rounded-full text-base sm:text-lg appearance-none cursor-pointer relative z-10">
-                  <option value="" className="text-gray-900">
-                    Your Postal Code
-                  </option>
-                  <option value="scarborough" className="text-gray-900">
-                    Scarborough
-                  </option>
-                  <option value="northYork" className="text-gray-900">
-                    North York
-                  </option>
-                  <option value="markham" className="text-gray-900">
-                    Markham
-                  </option>
-                  <option value="richmond" className="text-gray-900">
-                    Richmond Hill
-                  </option>
-                </select>
-              </div>
-              <button className="px-4 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-yellow-500 to-yellow-500/90 text-gray-900 rounded-full hover:opacity-90 transition-all flex items-center gap-2 text-base sm:text-lg font-medium m-1 hover:shadow-lg">
-                <Search className="w-4 h-4 sm:w-5 sm:h-5 text-gray-900" />
-                <span className="hidden sm:inline">Search</span>
-              </button>
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-gradient-to-r from-yellow-500/10 to-[#2c3149]/10 rounded-full blur-3xl opacity-30"></div>
             </div>
           </div>
         </div>
@@ -244,6 +240,8 @@ const Home = () => {
 
       {/* Learning Roadmap Section */}
       <RoadmapSection />
+
+      <Services />
 
       {/* Why Choose Us Section */}
       <div className="relative max-w-7xl mx-auto px-4">
@@ -254,3 +252,4 @@ const Home = () => {
 };
 
 export default Home;
+

@@ -1,7 +1,6 @@
 import { useLayoutEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { BookOpen, Car, GraduationCap, Award } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -196,9 +195,6 @@ const RoadmapSection = () => {
                         before:transition-opacity before:duration-500 group-hover:before:opacity-100
                         after:absolute after:inset-[-2px] after:rounded-2xl after:bg-gradient-to-br after:${step.color} after:opacity-20 after:blur-md`}
                       >
-                        <div className="w-8 h-8 sm:w-10 sm:h-10 text-white">
-                          {step.icon}
-                        </div>
                       </div>
 
                       {/* Content Card */}
