@@ -9,7 +9,7 @@ const ChatButton = () => {
     <>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-6 right-6 z-50 group"
+        className="fixed bottom-4 sm:bottom-6 right-4 sm:right-6 z-50 group"
         aria-label="Chat with us"
       >
         <div className="relative">
@@ -18,12 +18,12 @@ const ChatButton = () => {
           {/* Ripple effect */}
           <div className="absolute inset-0 rounded-full bg-yellow-500 animate-ping opacity-25 duration-700"></div>
           {/* Button background with hover effect */}
-          <div className="relative flex items-center justify-center w-14 h-14 bg-gradient-to-r from-yellow-500 to-yellow-400 hover:from-yellow-400 hover:to-yellow-500 rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300">
+          <div className="relative flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-r from-yellow-500 to-yellow-400 hover:from-yellow-400 hover:to-yellow-500 rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300">
             <div className="relative">
               {isOpen ? (
-                <X className="w-7 h-7 text-[#2c3149]" />
+                <X className="w-6 h-6 sm:w-7 sm:h-7 text-[#2c3149]" />
               ) : (
-                <MessageCircle className="w-7 h-7 text-[#2c3149]" />
+                <MessageCircle className="w-6 h-6 sm:w-7 sm:h-7 text-[#2c3149]" />
               )}
             </div>
           </div>
