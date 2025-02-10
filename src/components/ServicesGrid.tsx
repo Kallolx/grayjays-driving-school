@@ -175,9 +175,9 @@ const ServicesGrid = () => {
                         </div>
                         <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center">
                           <img
-                            src={service.icon}
-                            alt=""
-                            className="w-6 h-6 invert opacity-90"
+                            src="/icons/svg-image-1.svg"
+                            alt="GrayJays"
+                            className="w-6 h-6"
                           />
                         </div>
                       </div>

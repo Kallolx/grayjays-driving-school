@@ -1,72 +1,85 @@
-import { useEffect } from 'react';
-import { Search,  CheckCircle2} from 'lucide-react';
-import ServicesGrid from '../components/ServicesGrid';
-import RoadmapSection from '../components/RoadmapSection';
-
+import { useEffect } from "react";
+import { Search, CheckCircle2 } from "lucide-react";
+import ServicesGrid from "../components/ServicesGrid";
+import RoadmapSection from "../components/RoadmapSection";
 
 const TESTIMONIALS = [
   {
     id: 1,
     name: "Sarah Johnson",
     role: "Student",
-    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop",
-    quote: "Best driving school! Passed my test on first attempt. They were very helpful and patient.",
+    avatar:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop",
+    quote:
+      "Best driving school! Passed my test on first attempt. They were very helpful and patient.",
     rating: 5,
     verified: true,
-    comment: "Best driving school! Passed my test on first attempt. They were very helpful and patient.",
+    comment:
+      "Best driving school! Passed my test on first attempt. They were very helpful and patient.",
     location: "Scarborough, ON",
-    date: "June 2023"
+    date: "June 2023",
   },
   {
     id: 2,
     name: "Michael Chen",
     role: "Student",
-    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop",
-    quote: "Professional instructors who really care about your success. Highly recommended!",
+    avatar:
+      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop",
+    quote:
+      "Professional instructors who really care about your success. Highly recommended!",
     rating: 5,
     verified: true,
-    comment: "Professional instructors who really care about your success. Highly recommended!",
+    comment:
+      "Professional instructors who really care about your success. Highly recommended!",
     location: "Scarborough, ON",
-    date: "June 2023"
+    date: "June 2023",
   },
   {
     id: 3,
     name: "Emily Davis",
     role: "Student",
-    avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop",
-    quote: "Flexible scheduling and great learning experience. The instructors are very patient.",
+    avatar:
+      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop",
+    quote:
+      "Flexible scheduling and great learning experience. The instructors are very patient.",
     rating: 4.5,
     verified: true,
-    comment: "Flexible scheduling and great learning experience. The instructors are very patient.",
+    comment:
+      "Flexible scheduling and great learning experience. The instructors are very patient.",
     location: "Scarborough, ON",
-    date: "June 2023"
+    date: "June 2023",
   },
   {
     id: 4,
     name: "David Kim",
     role: "Student",
-    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop",
-    quote: "Amazing experience! The structured learning approach helped me gain confidence.",
+    avatar:
+      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop",
+    quote:
+      "Amazing experience! The structured learning approach helped me gain confidence.",
     rating: 5,
     verified: true,
-    comment: "Amazing experience! The structured learning approach helped me gain confidence.",
+    comment:
+      "Amazing experience! The structured learning approach helped me gain confidence.",
     location: "Scarborough, ON",
-    date: "June 2023"
+    date: "June 2023",
   },
   {
     id: 5,
     name: "Rachel Martinez",
     role: "Student",
-    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop",
-    quote: "From nervous beginner to confident driver. Thank you for the great support!",
+    avatar:
+      "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop",
+    quote:
+      "From nervous beginner to confident driver. Thank you for the great support!",
     rating: 4.5,
     verified: true,
-    comment: "From nervous beginner to confident driver. Thank you for the great support!",
+    comment:
+      "From nervous beginner to confident driver. Thank you for the great support!",
     location: "Scarborough, ON",
-    date: "June 2023"
-  }
+    date: "June 2023",
+  },
 ];
-
 
 const Home = () => {
   useEffect(() => {
@@ -97,18 +110,24 @@ const Home = () => {
               {/* Tag */}
               <div className="flex justify-center lg:justify-start">
                 <div className="inline-flex items-center gap-1.5 px-5 py-2 rounded-full bg-gradient-to-r from-yellow-500/10 via-yellow-500/5 to-yellow-500/10 border border-yellow-500/20 w-[90%] sm:w-auto justify-center sm:justify-start backdrop-blur-sm">
-                  <span className="text-yellow-500 text-xs sm:text-base">★</span>
-                  <span className="font-bold text-[#2c3149] text-xs sm:text-base whitespace-nowrap">#1 Rated Driving School</span>
+                  <span className="text-yellow-500 text-xs sm:text-base">
+                    ★
+                  </span>
+                  <span className="font-bold text-[#2c3149] text-xs sm:text-base whitespace-nowrap">
+                    #1 Rated Driving School
+                  </span>
                 </div>
               </div>
 
               {/* Title */}
               <div className="text-center lg:text-left">
                 <h1 className="text-[28px] leading-tight sm:text-4xl lg:text-5xl font-bold text-gray-900">
-                  Drive with Confidence,<br className="hidden sm:block" /> Learn with <span className="text-yellow-500">GrayJays</span>
+                  Drive with Confidence,
+                  <br className="hidden sm:block" /> Learn with{" "}
+                  <span className="text-yellow-500">GrayJays</span>
                 </h1>
               </div>
-              
+
               {/* Benefits List */}
               <div className="space-y-3 sm:space-y-4 text-left">
                 <div className="flex items-start gap-3">
@@ -117,7 +136,9 @@ const Home = () => {
                       <CheckCircle2 className="w-2.5 h-2.5 sm:w-4 sm:h-4 text-[#2c3149] fill-[#2c3149]" />
                     </div>
                   </div>
-                  <p className="text-sm sm:text-lg text-gray-700">100% online, hassle-free scheduling</p>
+                  <p className="text-sm sm:text-lg text-gray-700">
+                    100% online, hassle-free scheduling
+                  </p>
                 </div>
                 <div className="flex items-start gap-3">
                   <div className="flex-shrink-0 mt-1">
@@ -125,7 +146,9 @@ const Home = () => {
                       <CheckCircle2 className="w-2.5 h-2.5 sm:w-4 sm:h-4 text-[#2c3149] fill-[#2c3149]" />
                     </div>
                   </div>
-                  <p className="text-sm sm:text-lg text-gray-700">Top-rated instructors that care about your success</p>
+                  <p className="text-sm sm:text-lg text-gray-700">
+                    Top-rated instructors that care about your success
+                  </p>
                 </div>
                 <div className="flex items-start gap-3">
                   <div className="flex-shrink-0 mt-1">
@@ -133,7 +156,10 @@ const Home = () => {
                       <CheckCircle2 className="w-2.5 h-2.5 sm:w-4 sm:h-4 text-[#2c3149] fill-[#2c3149]" />
                     </div>
                   </div>
-                  <p className="text-sm sm:text-lg text-gray-700">Up to 20% discount on your auto insurance with our Beginner Driver Education course</p>
+                  <p className="text-sm sm:text-lg text-gray-700">
+                    Up to 20% discount on your auto insurance with our Beginner
+                    Driver Education course
+                  </p>
                 </div>
               </div>
             </div>
@@ -151,7 +177,9 @@ const Home = () => {
                 ))}
               </div>
               <div className="text-sm text-gray-600">
-                Trusted by <span className="font-semibold text-gray-900">29,700+</span> students
+                Trusted by{" "}
+                <span className="font-semibold text-gray-900">29,700+</span>{" "}
+                students
               </div>
             </div>
           </div>
@@ -176,9 +204,11 @@ const Home = () => {
       <div className="relative max-w-7xl mx-auto px-4 -mt-4">
         <div className="max-w-5xl mx-auto">
           <div className="flex flex-col md:flex-row gap-4">
-            <div className="flex flex-1 group/search hover:-translate-y-1 hover:scale-[1.02] transition-all duration-300 ease-out 
+            <div
+              className="flex flex-1 group/search hover:-translate-y-1 hover:scale-[1.02] transition-all duration-300 ease-out 
               shadow-[0_8px_30px_-4px_rgba(44,49,73,0.2)] hover:shadow-[0_20px_50px_-20px_rgba(44,49,73,0.3)] 
-              rounded-full bg-gradient-to-r from-[#2c3149] via-[#2c3149] to-[#2c3149] backdrop-blur-sm">
+              rounded-full bg-gradient-to-r from-[#2c3149] via-[#2c3149] to-[#2c3149] backdrop-blur-sm"
+            >
               <div className="flex-grow relative">
                 <div className="absolute inset-0 bg-gradient-to-r from-white/5 via-transparent to-white/5 rounded-l-full opacity-50"></div>
                 <input
@@ -190,11 +220,21 @@ const Home = () => {
               <div className="border-l border-white/10 px-1 sm:px-2 relative">
                 <div className="absolute inset-0 bg-gradient-to-r from-white/5 via-transparent to-white/5 opacity-50"></div>
                 <select className="h-full px-2 sm:px-4 py-3 sm:py-4 text-white bg-transparent border-0 focus:outline-none focus:ring-0 rounded-full text-base sm:text-lg appearance-none cursor-pointer relative z-10">
-                  <option value="" className="text-gray-900">Your Postal Code</option>
-                  <option value="scarborough" className="text-gray-900">Scarborough</option>
-                  <option value="northYork" className="text-gray-900">North York</option>
-                  <option value="markham" className="text-gray-900">Markham</option>
-                  <option value="richmond" className="text-gray-900">Richmond Hill</option>
+                  <option value="" className="text-gray-900">
+                    Your Postal Code
+                  </option>
+                  <option value="scarborough" className="text-gray-900">
+                    Scarborough
+                  </option>
+                  <option value="northYork" className="text-gray-900">
+                    North York
+                  </option>
+                  <option value="markham" className="text-gray-900">
+                    Markham
+                  </option>
+                  <option value="richmond" className="text-gray-900">
+                    Richmond Hill
+                  </option>
                 </select>
               </div>
               <button className="px-4 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-yellow-500 to-yellow-500/90 text-gray-900 rounded-full hover:opacity-90 transition-all flex items-center gap-2 text-base sm:text-lg font-medium m-1 hover:shadow-lg">
@@ -206,13 +246,13 @@ const Home = () => {
         </div>
       </div>
 
+      {/* Learning Roadmap Section */}
+      <RoadmapSection />
+
       {/* Why Choose Us Section */}
       <div className="relative max-w-7xl mx-auto px-4">
         <ServicesGrid />
       </div>
-
-      {/* Learning Roadmap Section */}
-      <RoadmapSection />
     </div>
   );
 };
