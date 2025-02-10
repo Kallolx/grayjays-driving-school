@@ -88,48 +88,44 @@ const Home = () => {
 
   return (
     <div className="font-poppins">
+      {/* Background Pattern */}
       <div className="absolute inset-0 bg-[#fafafa] opacity-50">
         <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
       </div>
+
       {/* Hero Section */}
-      <div className="relative max-w-7xl mx-auto px-4 pt-[60px] sm:pt-[100px] pb-8 sm:pb-16 lg:min-h-[80vh] lg:flex lg:items-center">
-        {/* Mobile Background Image */}
+      <div className="relative max-w-7xl mx-auto px-4 pt-[100px] sm:pt-[120px] pb-8 sm:pb-16 lg:min-h-[80vh] lg:flex lg:items-center">
+        {/* Mobile Background Image with better blend */}
         <div className="absolute inset-0 lg:hidden">
-          <div className="absolute inset-0 bg-gradient-to-b from-white via-white/95 to-white/90"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-white via-white/98 to-white/95"></div>
           <img
             src="/icons/hero.png"
             alt=""
-            className="w-full h-full object-cover opacity-10"
+            className="w-full h-full object-cover opacity-5"
           />
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-16 relative">
-          {/* Left Column - Content */}
-          <div className="flex flex-col justify-center space-y-6 sm:space-y-8 min-h-[300px] sm:min-h-[400px]">
-            <div className="space-y-6 sm:space-y-8">
-              {/* Tag */}
+        <div className="grid lg:grid-cols-2 gap-8 sm:gap-8 lg:gap-16 relative">
+          {/* Left Column - Content with better mobile spacing */}
+          <div className="flex flex-col justify-center space-y-8 sm:space-y-8 min-h-[300px] sm:min-h-[400px] pt-4 sm:pt-0">
+            <div className="space-y-8 sm:space-y-8">
+              {/* Tag with better mobile visibility */}
               <div className="flex justify-center lg:justify-start">
-                <div className="inline-flex items-center gap-1.5 px-5 py-2 rounded-full bg-gradient-to-r from-yellow-500/10 via-yellow-500/5 to-yellow-500/10 border border-yellow-500/20 w-[90%] sm:w-auto justify-center sm:justify-start backdrop-blur-sm">
-                  <span className="text-yellow-500 text-xs sm:text-base">
-                    ★
-                  </span>
-                  <span className="font-bold text-[#2c3149] text-xs sm:text-base whitespace-nowrap">
-                    #1 Rated Driving School
-                  </span>
+                <div className="inline-flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-gradient-to-r from-yellow-500/15 via-yellow-500/10 to-yellow-500/15 border border-yellow-500/20 w-[90%] sm:w-auto justify-center sm:justify-start backdrop-blur-sm">
+                  <span className="text-yellow-500 text-sm sm:text-base">★</span>
+                  <span className="font-bold text-[#2c3149] text-sm sm:text-base whitespace-nowrap">#1 Rated Driving School</span>
                 </div>
               </div>
 
-              {/* Title */}
+              {/* Title with better mobile readability */}
               <div className="text-center lg:text-left">
-                <h1 className="text-[28px] leading-tight sm:text-4xl lg:text-5xl font-bold text-gray-900">
-                  Drive with Confidence,
-                  <br className="hidden sm:block" /> Learn with{" "}
-                  <span className="text-yellow-500">GrayJays</span>
+                <h1 className="text-[32px] leading-tight sm:text-4xl lg:text-5xl font-bold text-gray-900">
+                  Drive with Confidence,<br className="hidden sm:block" /> Learn with <span className="text-yellow-500">GrayJays</span>
                 </h1>
               </div>
 
-              {/* Benefits List */}
-              <div className="space-y-3 sm:space-y-4 text-left">
+              {/* Benefits List with better spacing */}
+              <div className="space-y-4 sm:space-y-4 text-left">
                 <div className="flex items-start gap-3">
                   <div className="flex-shrink-0 mt-1">
                     <div className="w-4 h-4 sm:w-6 sm:h-6 rounded-full bg-[#2c3149]/10 flex items-center justify-center">
