@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { ChevronRight } from "lucide-react";
+import SpotlightButton from "../components/SpotlightButton";
 
 const CallToAction = () => {
   return (
@@ -45,20 +46,10 @@ const CallToAction = () => {
                       Start your journey to becoming a confident driver today.
                     </p>
 
-                    {/* Animated Button */}
-                    <div className="relative group">                     
-                      {/* Button */}
-                      <Link
-                        to="/contact"
-                        className="group relative inline-flex items-center justify-center px-8 py-4 bg-yellow-500 text-[#2c3149] rounded-xl text-lg font-medium overflow-hidden transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0"
-                      >
-                        {/* Button content */}
-                        <div className="relative z-10 flex items-center gap-2">
-                          <span>Get Started Today</span>
-                          <ChevronRight className="w-5 h-5 transition-all duration-300 group-hover:translate-x-1" />
-                        </div>     
-                      </Link>
-                    </div>
+                    {/* Spotlight Button */}
+                    <Link to="/contact">
+                      <SpotlightButton className="max-w-none w-auto" />
+                    </Link>
                   </div>
 
                   {/* Stats Section */}

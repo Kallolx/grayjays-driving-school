@@ -3,6 +3,9 @@ import { Search, CheckCircle2 } from "lucide-react";
 import ServicesGrid from "../components/ServicesGrid";
 import RoadmapSection from "../components/RoadmapSection";
 import Services from "./Services";
+import { TypeAnimation } from 'react-type-animation';
+
+
 const TESTIMONIALS = [
   {
     id: 1,
@@ -120,7 +123,27 @@ const Home = () => {
               {/* Title with better mobile readability */}
               <div className="text-center lg:text-left">
                 <h1 className="text-[32px] leading-tight sm:text-4xl lg:text-5xl font-bold text-gray-900">
-                  Drive with Confidence,<br className="hidden sm:block" /> Learn with <span className="text-yellow-500">GrayJays</span>
+                  Drive with{" "}
+                  <span className="inline-block min-w-[280px]">
+                    <TypeAnimation
+                      sequence={[
+                        'Confidence', 1500,
+                        'Excellence', 1500,
+                        'Success', 1500,
+                        'Mastery', 1500,
+                        'Expertise', 1500,
+                      ]}
+                      wrapper="span"
+                      speed={50}
+                      repeat={Infinity}
+                      className="text-yellow-500"
+                      cursor={true}
+                      style={{ display: 'inline-block' }}
+                      deletionSpeed={65}
+                    />
+                  </span>
+                  <br className="hidden sm:block" /> 
+                  Learn with <span className="text-yellow-500">GrayJays</span>
                 </h1>
               </div>
 

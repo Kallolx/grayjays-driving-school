@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Services from './pages/Services';
@@ -10,7 +10,20 @@ import HourlyLesson from './pages/HourlyLesson';
 import CarRental from './pages/CarRental';
 import Testimonials from './pages/Testimonials';
 import ChatButton from "./components/ChatButton";
+import CartButton from "./components/CartButton";
 import FAQSection from './components/FAQSection';
+import SpecialPackages from './pages/SpecialPackages';
+
+// Add CartItem interface
+interface CartItem {
+  id: string;
+  name: string;
+  price: number;
+  location?: string;
+  licenseType?: string;
+  hours?: number;
+  requiresLocation: boolean;
+}
 
 function ScrollToTop() {
   const location = useLocation();
@@ -33,6 +46,8 @@ function MainPage() {
 }
 
 function App() {
+  const [cart, setCart] = useState<CartItem[]>([]);
+
   return (
     <Router>
       <div className="min-h-screen bg-gray-50 font-poppins antialiased text-gray-900 selection:bg-[#FFD7C9] selection:text-gray-900">
@@ -47,9 +62,14 @@ function App() {
             <Route path="/pricing" element={<Pricing />} />
             <Route path="/services/hourly-lessons" element={<HourlyLesson />} />
             <Route path="/services/car-rental" element={<CarRental />} />
+            <Route 
+              path="/learn-to-drive/special-packages" 
+              element={<SpecialPackages cart={cart} setCart={setCart} />} 
+            />
           </Routes>
         </main>
         <Footer />
+        <CartButton cart={cart} setCart={setCart} />
         <ChatButton />
       </div>
     </Router>

@@ -38,6 +38,10 @@ export default {
             'background-size': '200% 200%',
             'background-position': 'right center'
           }
+        },
+        blink: {
+          '0%, 100%': { opacity: '1' },
+          '50%': { opacity: '0' }
         }
       },
       animation: {
@@ -45,7 +49,8 @@ export default {
         slideUp: 'slideUp 0.3s ease-out forwards',
         float: 'float 3s ease-in-out infinite',
         rotateIn: 'rotateIn 0.6s ease-out forwards',
-        'gradient-xy': 'gradient-xy 6s ease infinite'
+        'gradient-xy': 'gradient-xy 6s ease infinite',
+        blink: 'blink 1s step-end infinite'
       },
       perspective: {
         '1000': '1000px',

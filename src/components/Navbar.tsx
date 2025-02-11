@@ -30,7 +30,7 @@ const MENU_ITEMS = {
     },
     { 
       name: "Specialty Packages", 
-      href: '/learn-to-drive/packages',
+      href: '/learn-to-drive/special-packages',
       icon: <Package className="w-5 h-5" />,
       description: "Customized packages for specific driving needs"
     }

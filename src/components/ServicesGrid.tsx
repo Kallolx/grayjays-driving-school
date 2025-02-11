@@ -126,22 +126,15 @@ const ServicesGrid = () => {
           {SERVICES.map((service, index) => (
             <div key={index} className="service-card relative">
               {/* Desktop Version - Flip Card */}
-              <div className="hidden lg:block h-[350px] [perspective:1200px]">
+              <div className="hidden lg:block h-[350px] [perspective:1200px] group">
                 <div
-                  className="relative h-full w-full transition-transform duration-700 ease-in-out [transform-style:preserve-3d] hover:[transform:rotateY(180deg)]"
+                  className="relative h-full w-full transition-all duration-500 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]"
                   style={{ transformOrigin: "center center" }}
                 >
                   {/* Front */}
                   <div className="absolute inset-0 flex flex-col rounded-2xl bg-white p-6 shadow-[0_8px_30px_rgb(0,0,0,0.12)] backdrop-blur-sm [backface-visibility:hidden] will-change-transform">
                     {/* Number Badge */}
                     <div className="absolute top-6 right-6">
-                      <div
-                        className={`w-12 h-12 ${service.color} rounded-xl flex items-center justify-center shadow-lg`}
-                      >
-                        <span className="text-xl font-bold text-white">
-                          {(index + 1).toString().padStart(2, "0")}
-                        </span>
-                      </div>
                     </div>
 
                     {/* Card Pattern */}
@@ -150,7 +143,7 @@ const ServicesGrid = () => {
                     {/* Content */}
                     <div className="absolute inset-0 flex items-center justify-center">
                       <div className="text-center px-6">
-                        <div className="relative transform transition-transform duration-500 hover:scale-110 hover:-rotate-6">
+                        <div className="relative transform transition-transform duration-300">
                           <div
                             className={`absolute inset-0 ${service.color} rounded-full blur-2xl opacity-10 scale-150`}
                           />
@@ -163,8 +156,8 @@ const ServicesGrid = () => {
                         <h3 className="text-xl font-bold text-[#2c3149] mt-6 mb-4">
                           {service.title}
                         </h3>
-                        <div className="flex items-center justify-center gap-2 text-md text-gray-400">
-                          <span className="animate-pulse">
+                        <div className="flex items-center justify-center gap-2 text-sm text-gray-400">
+                          <span>
                             Hover to learn more
                           </span>
                         </div>
@@ -174,8 +167,7 @@ const ServicesGrid = () => {
 
                   {/* Back */}
                   <div
-                    className={`absolute inset-0 flex flex-col rounded-2xl ${service.color} p-6 text-white shadow-lg [transform:rotateY(180deg)] [backface-visibility:hidden] will-change-transform overflow-hidden`}
-                    style={{ transformOrigin: "center center" }}
+                    className={`absolute inset-0 flex flex-col rounded-2xl bg-gradient-to-br from-[#2c3149] to-[#1a1f33] p-8 text-white shadow-lg [transform:rotateY(180deg)] [backface-visibility:hidden] will-change-transform overflow-hidden`}
                   >
                     {/* Background Pattern */}
                     <div className="absolute inset-0">
@@ -192,50 +184,30 @@ const ServicesGrid = () => {
                     {/* Content */}
                     <div className="relative flex flex-col h-full">
                       {/* Header with Icon */}
-                      <div className="mb-4 flex items-start justify-between">
+                      <div className="mb-6 flex items-start justify-between">
                         <div>
-                          <h3 className="text-lg font-bold mb-2">
+                          <h3 className="text-2xl font-bold mb-2">
                             {service.title}
                           </h3>
-                          <div className="w-8 h-0.5 bg-white/30 rounded-full"></div>
+                          <div className="w-12 h-0.5 bg-white/30 rounded-full"></div>
                         </div>
-                        <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center">
+                        <div className="w-12 h-12  flex items-center justify-center">
                           <img
                             src="/icons/svg-image-1.svg"
                             alt="GrayJays"
-                            className="w-6 h-6"
+                            className="w-7 h-7"
                           />
                         </div>
                       </div>
 
                       {/* Description */}
-                      <p className="text-sm leading-relaxed text-white/90 mb-4">
+                      <p className="text-lg leading-relaxed text-white/90">
                         {service.description}
                       </p>
 
-                      {/* Features */}
-                      <div className="mt-auto">
-                        <div className="text-[11px] font-medium text-white/80 uppercase tracking-wider mb-3">
-                          Key Features
-                        </div>
-                        <ul className="space-y-2">
-                          {service.features.map((feature, idx) => (
-                            <li
-                              key={idx}
-                              className="flex items-center text-sm text-white/90"
-                            >
-                              <div className="w-5 h-5 rounded-full bg-white/10 flex items-center justify-center mr-2">
-                                <CheckCircle2 className="w-3 h-3 text-white/90" />
-                              </div>
-                              {feature}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-
                       {/* Number Badge - Small Version */}
-                      <div className="absolute bottom-1 right-1 w-8 h-8 flex items-center justify-center opacity-20">
-                        <span className="text-sm font-bold">
+                      <div className="absolute bottom-2 right-2 w-10 h-10 flex items-center justify-center opacity-20">
+                        <span className="text-base font-bold">
                           {(index + 1).toString().padStart(2, "0")}
                         </span>
                       </div>
