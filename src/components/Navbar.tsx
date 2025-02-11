@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import MobileMenu from './MobileMenu';
 import ReactCountryFlag from "react-country-flag";
 import {  
   ChevronDown,
@@ -11,8 +10,10 @@ import {
   Package,
   BookOpen,
   Route,
-  FileSpreadsheet
+  FileSpreadsheet,
+  Menu
 } from 'lucide-react';
+import MobileSidebar from './MobileSidebar';
 
 const MENU_ITEMS = {
   learnToDrive: [
@@ -20,19 +21,19 @@ const MENU_ITEMS = {
       name: "Beginners Driver Education(BDE) Course", 
       href: '/learn-to-drive/bde',
       icon: <GraduationCap className="w-5 h-5" />,
-      description: "Complete MTO-approved beginner driver education program"
+      description: "Complete MTO-approved"
     },
     { 
       name: "Hourly Lesson", 
-      href: '/learn-to-drive/hourly',
+      href: '/services/hourly-lessons',
       icon: <Clock3 className="w-5 h-5" />,
-      description: "Flexible hourly driving lessons with expert instructors"
+      description: "Flexible hourly driving lessons"
     },
     { 
       name: "Specialty Packages", 
       href: '/learn-to-drive/special-packages',
       icon: <Package className="w-5 h-5" />,
-      description: "Customized packages for specific driving needs"
+      description: "Customized packages"
     }
   ],
   services: [
@@ -70,9 +71,9 @@ const Navbar = () => {
 
   const navLinks: NavLink[] = [
     { name: 'Learn to Drive', path: '/learn-to-drive', hasDropdown: true },
-    { name: 'Rental Car', path: '/rental-car' },
+    { name: 'Rental Car', path: '/services/car-rental' },
     { name: 'Services', path: '/services', hasDropdown: true },
-    { name: 'Blog', path: '/services/blog', hasDropdown: true },
+    { name: 'Blog', path: '/blog' },
     { name: 'Contact Us', path: '/contact' },
   ];
 
@@ -82,9 +83,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav 
-        className={`fixed top-0 left-0 right-0 z-50 bg-[#2c3149] shadow-lg`}
-      >
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#2c3149] shadow-lg">
         <div className="max-w-[1920px] mx-auto px-4 sm:px-6">
           <div className="flex items-center justify-between h-16 md:h-20">
             {/* Logo and Location - Desktop */}
@@ -150,47 +149,6 @@ const Navbar = () => {
                   GraysJays
                 </span>
               </Link>
-
-              {/* Location Dropdown - Mobile */}
-              <div className="relative group">
-                <button className="flex items-center space-x-2 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 transition-colors">
-                  <ReactCountryFlag
-                    countryCode="CA"
-                    svg
-                    style={{
-                      width: '1.2em',
-                      height: '1.2em',
-                    }}
-                    title="Canada"
-                  />
-                  <span className="text-sm font-medium text-white">Ontario</span>
-                  <ChevronDown className="w-4 h-4 text-white" />
-                </button>
-
-                <div className="absolute top-full left-0 pt-2 w-48 opacity-0 translate-y-1 pointer-events-none transition-all duration-200 group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto">
-                  <div className="py-2 bg-[#2c3149] rounded-xl shadow-lg ring-1 ring-black ring-opacity-5">
-                    <div className="px-4 py-2 text-sm text-gray-300">
-                      Available Locations
-                    </div>
-                    <div className="flex items-center px-4 py-2 text-sm text-white bg-white/10">
-                      <ReactCountryFlag
-                        countryCode="CA"
-                        svg
-                        style={{
-                          width: '1.2em',
-                          height: '1.2em',
-                          marginRight: '8px'
-                        }}
-                        title="Canada"
-                      />
-                      Ontario
-                    </div>
-                    <div className="px-4 py-2 text-xs text-gray-400">
-                      More locations coming soon
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
 
             {/* Desktop Navigation - Centered */}
@@ -277,34 +235,17 @@ const Navbar = () => {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMobileMenuOpen(true)}
-              className="md:hidden ml-auto p-2 rounded-lg text-gray-300 hover:bg-white/10 hover:text-white"
+              className="md:hidden p-2 rounded-lg text-gray-300 hover:bg-white/10 hover:text-white"
               aria-label="Open menu"
             >
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              </svg>
+              <Menu className="w-6 h-6" />
             </button>
           </div>
         </div>
       </nav>
 
-      {/* Mobile Menu */}
-      <MobileMenu
-        isOpen={isMobileMenuOpen}
-        onClose={() => setIsMobileMenuOpen(false)}
-        navLinks={navLinks}
-        menuItems={MENU_ITEMS}
-      />
+      {/* Mobile Sidebar */}
+      <MobileSidebar isOpen={isMobileMenuOpen} onClose={() => setIsMobileMenuOpen(false)} />
     </>
   );
 };

@@ -1,8 +1,9 @@
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { X, CheckCircle2, Clock, DollarSign, Info, Car, FileCheck, AlertCircle } from 'lucide-react';
 import { Player } from '@lottiefiles/react-lottie-player';
 import SpotlightButton from './SpotlightButton';
 import { useState } from 'react';
+import toast from 'react-hot-toast';
 
 interface PackageDetailsSidebarProps {
   selectedPackage: string | null;
@@ -36,12 +37,19 @@ const PackageDetailsSidebar = ({
   selectedLicenseType
 }: PackageDetailsSidebarProps) => {
   const selectedPkg = packages.find(p => p.id === selectedPackage);
-  const [showError, setShowError] = useState(false);
 
   const handleAddToCart = () => {
     if (selectedPkg?.requiresLocation && (!selectedLocation || !selectedLicenseType)) {
-      setShowError(true);
-      setTimeout(() => setShowError(false), 3000);
+      toast.error('Please select your location and license type first', {
+        style: {
+          background: '#2c3149',
+          color: '#fff',
+          borderRadius: '12px',
+        },
+        icon: '📍',
+        position: 'bottom-left',
+        duration: 3000,
+      });
       return;
     }
     onAddToCart({
@@ -271,130 +279,55 @@ const PackageDetailsSidebar = ({
         </div>
       </div>
 
-      {/* Package Header */}
-      <div className="flex items-center gap-6 mb-8 pb-6 border-b-4 border-yellow-500/20">
-        <div className="w-20 h-20 flex items-center justify-center">
-          {selectedPkg?.icon}
-        </div>
-        <div>
-          <h2 className="text-2xl font-bold text-[#2c3149]">
-            {selectedPkg?.title}
-          </h2>
-          <p className="text-gray-500 mt-1">
-            {selectedPkg?.description}
-          </p>
-          <div className="mt-3 inline-block px-4 py-1.5 bg-yellow-500/10 rounded-full">
-            <span className="text-sm font-semibold text-yellow-500">
-              From ${selectedPkg?.basePrice}
-            </span>
-          </div>
-        </div>
-      </div>
-
-      {/* Content Sections */}
-      <div className="border-b-4 border-yellow-500/20 pb-6">
-        <Player
-          autoplay
-          loop
-          src="/animations/test.json"
-          style={{ height: '200px' }}
-        />
-        <div className="mt-6">
-          {MOCK_TEST_FEATURES.map((section, index) => (
-            <div key={index} className="mb-8">
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-12 h-12 rounded-xl bg-yellow-500/10 flex items-center justify-center">
-                  {index === 0 ? (
-                    <Car className="w-6 h-6 text-yellow-500" />
-                  ) : index === 1 ? (
-                    <FileCheck className="w-6 h-6 text-yellow-500" />
-                  ) : (
-                    <Clock className="w-6 h-6 text-yellow-500" />
-                  )}
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold text-[#2c3149]">{section.title}</h3>
-                  <p className="text-sm text-gray-500">{section.description}</p>
-                </div>
+      {/* What's Included Section */}
+      <div className="space-y-4">
+        <h3 className="text-lg font-semibold text-[#2c3149]">What's Included</h3>
+        <div className="grid gap-4">
+          <div className="p-4 bg-gray-50 rounded-xl">
+            <div className="flex items-center gap-3 mb-2">
+              <div className="w-8 h-8 rounded-lg bg-yellow-500/10 flex items-center justify-center">
+                <Clock className="w-4 h-4 text-yellow-500" />
               </div>
-              
-              <div className="space-y-3 ml-4">
-                {section.features.map((feature, featureIndex) => (
-                  <div key={featureIndex} className="flex items-start gap-3 p-4 bg-gray-50 rounded-xl">
-                    <CheckCircle2 className="w-5 h-5 text-yellow-500 flex-shrink-0 mt-1" />
-                    <div>
-                      <p className="text-gray-600">{feature}</p>
-                    </div>
-                  </div>
-                ))}
+              <h4 className="font-medium text-[#2c3149]">Pre-Test Briefing (30 mins)</h4>
+            </div>
+            <p className="text-sm text-gray-600 ml-11">Comprehensive overview of test requirements</p>
+          </div>
+
+          <div className="p-4 bg-gray-50 rounded-xl">
+            <div className="flex items-center gap-3 mb-2">
+              <div className="w-8 h-8 rounded-lg bg-yellow-500/10 flex items-center justify-center">
+                <Car className="w-4 h-4 text-yellow-500" />
               </div>
+              <h4 className="font-medium text-[#2c3149]">Mock Test (45 mins)</h4>
             </div>
-          ))}
-        </div>
-      </div>
+            <p className="text-sm text-gray-600 ml-11">Full simulation of actual road test conditions</p>
+          </div>
 
-      {/* What to Expect Section */}
-      <div className="border-b-4 border-yellow-500/20 pb-6">
-        <h3 className="text-lg font-semibold text-[#2c3149] mb-4">What to Expect</h3>
-        <div className="space-y-4">
-          <div className="flex items-start gap-3 p-4 bg-gray-50 rounded-xl">
-            <div className="w-8 h-8 rounded-full bg-yellow-500/10 flex items-center justify-center flex-shrink-0">
-              <Clock className="w-4 h-4 text-yellow-500" />
+          <div className="p-4 bg-gray-50 rounded-xl">
+            <div className="flex items-center gap-3 mb-2">
+              <div className="w-8 h-8 rounded-lg bg-yellow-500/10 flex items-center justify-center">
+                <FileCheck className="w-4 h-4 text-yellow-500" />
+              </div>
+              <h4 className="font-medium text-[#2c3149]">Detailed Review (45 mins)</h4>
             </div>
-            <div>
-              <h4 className="font-medium text-[#2c3149] mb-1">Pre-Test Briefing (30 mins)</h4>
-              <p className="text-sm text-gray-500">Comprehensive overview of test requirements and procedures</p>
-            </div>
-          </div>
-          <div className="flex items-start gap-3 p-4 bg-gray-50 rounded-xl">
-            <div className="w-8 h-8 rounded-full bg-yellow-500/10 flex items-center justify-center flex-shrink-0">
-              <Car className="w-4 h-4 text-yellow-500" />
-            </div>
-            <div>
-              <h4 className="font-medium text-[#2c3149] mb-1">Mock Test (45 mins)</h4>
-              <p className="text-sm text-gray-500">Full simulation of actual road test conditions</p>
-            </div>
-          </div>
-          <div className="flex items-start gap-3 p-4 bg-gray-50 rounded-xl">
-            <div className="w-8 h-8 rounded-full bg-yellow-500/10 flex items-center justify-center flex-shrink-0">
-              <FileCheck className="w-4 h-4 text-yellow-500" />
-            </div>
-            <div>
-              <h4 className="font-medium text-[#2c3149] mb-1">Detailed Review (45 mins)</h4>
-              <p className="text-sm text-gray-500">Comprehensive feedback and improvement strategies</p>
-            </div>
+            <p className="text-sm text-gray-600 ml-11">Comprehensive feedback and improvement strategies</p>
           </div>
         </div>
       </div>
 
-      {/* Benefits Section */}
-      <div className="pb-6">
-        <h3 className="text-lg font-semibold text-[#2c3149] mb-4">Key Benefits</h3>
-        <div className="grid grid-cols-2 gap-4">
-          <div className="p-4 bg-gray-50 rounded-xl text-center">
-            <div className="w-10 h-10 rounded-full bg-yellow-500/10 flex items-center justify-center mx-auto mb-3">
-              <CheckCircle2 className="w-5 h-5 text-yellow-500" />
-            </div>
-            <h4 className="font-medium text-[#2c3149] text-sm">Boost Confidence</h4>
+      {/* Key Benefits */}
+      <div className="grid grid-cols-2 gap-4">
+        <div className="p-4 bg-gray-50 rounded-xl text-center">
+          <div className="w-10 h-10 rounded-full bg-yellow-500/10 flex items-center justify-center mx-auto mb-2">
+            <CheckCircle2 className="w-5 h-5 text-yellow-500" />
           </div>
-          <div className="p-4 bg-gray-50 rounded-xl text-center">
-            <div className="w-10 h-10 rounded-full bg-yellow-500/10 flex items-center justify-center mx-auto mb-3">
-              <CheckCircle2 className="w-5 h-5 text-yellow-500" />
-            </div>
-            <h4 className="font-medium text-[#2c3149] text-sm">Reduce Anxiety</h4>
+          <p className="text-sm font-medium text-[#2c3149]">Boost Confidence</p>
+        </div>
+        <div className="p-4 bg-gray-50 rounded-xl text-center">
+          <div className="w-10 h-10 rounded-full bg-yellow-500/10 flex items-center justify-center mx-auto mb-2">
+            <CheckCircle2 className="w-5 h-5 text-yellow-500" />
           </div>
-          <div className="p-4 bg-gray-50 rounded-xl text-center">
-            <div className="w-10 h-10 rounded-full bg-yellow-500/10 flex items-center justify-center mx-auto mb-3">
-              <CheckCircle2 className="w-5 h-5 text-yellow-500" />
-            </div>
-            <h4 className="font-medium text-[#2c3149] text-sm">Expert Feedback</h4>
-          </div>
-          <div className="p-4 bg-gray-50 rounded-xl text-center">
-            <div className="w-10 h-10 rounded-full bg-yellow-500/10 flex items-center justify-center mx-auto mb-3">
-              <CheckCircle2 className="w-5 h-5 text-yellow-500" />
-            </div>
-            <h4 className="font-medium text-[#2c3149] text-sm">Test Readiness</h4>
-          </div>
+          <p className="text-sm font-medium text-[#2c3149]">Expert Feedback</p>
         </div>
       </div>
     </div>
@@ -412,12 +345,12 @@ const PackageDetailsSidebar = ({
       />
 
       {/* Error Popup */}
-      {showError && (
+      {/* {showError && (
         <div className="fixed bottom-4 left-4 z-[60] bg-red-50 text-red-500 px-6 py-4 rounded-xl shadow-lg border border-red-100 flex items-center gap-3">
           <AlertCircle className="w-5 h-5" />
           <p>Please select your location and license type first</p>
         </div>
-      )}
+      )} */}
 
       {/* Sidebar */}
       <motion.div

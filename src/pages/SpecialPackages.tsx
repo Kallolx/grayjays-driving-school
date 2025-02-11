@@ -6,11 +6,11 @@ import {
   ChevronDown,
   MapPin,
   FileCheck,
-  AlertCircle,
 } 
 from 'lucide-react';
 import SpotlightButton from '../components/SpotlightButton';
 import PackageDetailsSidebar from '../components/PackageDetailsSidebar';
+import { toast } from 'react-hot-toast';
 
 // Constants
 const LOCATIONS = [
@@ -152,16 +152,19 @@ const SpecialPackages = ({ cart, setCart }: { cart: CartItem[]; setCart: (cart: 
   const [selectedCrashCourse, setSelectedCrashCourse] = useState<string | null>(null);
   const [showSidebar, setShowSidebar] = useState(false);
   const [selectedPackage, setSelectedPackage] = useState<string | null>(null);
-  const [cartItems, setCartItems] = useState<number>(0);
-  const [showCartNotification, setShowCartNotification] = useState(false);
-  const [showWarning, setShowWarning] = useState(false);
-  const [warningMessage, setWarningMessage] = useState('');
 
   const addToCart = (item: CartItem) => {
-    if (!selectedLocation || !selectedLicenseType) {
-      setWarningMessage('Please select your location and license type first');
-      setShowWarning(true);
-      setTimeout(() => setShowWarning(false), 3000);
+    if (item.requiresLocation && (!selectedLocation || !selectedLicenseType)) {
+      toast.error('Please select your location and license type first', {
+        style: {
+          background: '#2c3149',
+          color: '#fff',
+          borderRadius: '12px',
+        },
+        icon: '📍',
+        position: 'bottom-left',
+        duration: 3000,
+      });
       return;
     }
     setCart([...cart, {
@@ -169,6 +172,16 @@ const SpecialPackages = ({ cart, setCart }: { cart: CartItem[]; setCart: (cart: 
       location: selectedLocation,
       licenseType: selectedLicenseType
     }]);
+    toast.success('Item added to cart successfully!', {
+      style: {
+        background: '#2c3149',
+        color: '#fff',
+        borderRadius: '12px',
+      },
+      icon: '🛒',
+      position: 'bottom-left',
+      duration: 2000,
+    });
   };
 
   const removeFromCart = (itemId: string) => {
@@ -190,7 +203,7 @@ const SpecialPackages = ({ cart, setCart }: { cart: CartItem[]; setCart: (cart: 
       title: 'Parking Made Easy',
       description: 'Master all types of parking with our comprehensive course.',
       icon: <img src="/icons/parking.png" alt="Custom icon" className="w-22 h-22" />,
-      requiresLocation: false,
+      requiresLocation: true,
       basePrice: 99
     },
     {
@@ -198,7 +211,7 @@ const SpecialPackages = ({ cart, setCart }: { cart: CartItem[]; setCart: (cart: 
       title: 'Mock Test',
       description: 'Get real test experience with detailed feedback.',
       icon: <img src="/icons/mock.png" alt="Custom icon" className="w-20 h-20" />,
-      requiresLocation: false,
+      requiresLocation: true,
       basePrice: 99
     },
     {
@@ -206,7 +219,7 @@ const SpecialPackages = ({ cart, setCart }: { cart: CartItem[]; setCart: (cart: 
       title: 'Guaranteed Pass',
       description: 'Comprehensive program with unlimited lessons until you pass.',
       icon: <img src="/icons/guarantee.png" alt="Custom icon" className="w-22 h-22" />,
-      requiresLocation: false,
+      requiresLocation: true,
       basePrice: 1999,
       originalPrice: 3000,
       isOnSale: true
@@ -216,7 +229,7 @@ const SpecialPackages = ({ cart, setCart }: { cart: CartItem[]; setCart: (cart: 
       title: 'Refresher Course',
       description: 'Update your skills and rebuild confidence.',
       icon: <img src="/icons/reload.png" alt="Custom icon" className="w-20 h-20" />,
-      requiresLocation: false,
+      requiresLocation: true,
       basePrice: 249
     }
   ];

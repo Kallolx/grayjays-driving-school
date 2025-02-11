@@ -1,42 +1,64 @@
-import React, { useEffect, useState } from 'react';
-import { MapPin, Phone, Mail, Clock, Send, ChevronDown, Facebook, Instagram, Twitter, Linkedin } from 'lucide-react';
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+import { MapPin, Phone, Mail, Clock, Send, Facebook, Instagram, Twitter, Linkedin } from 'lucide-react';
+import toast from 'react-hot-toast';
 
-const FAQ_ITEMS = [
+interface ContactFormData {
+  fullName: string;
+  email: string;
+  phone: string;
+  licenseType: string;
+  preferredSchedule: string;
+  courseInterest: string;
+  message: string;
+}
+
+interface ContactFormErrors {
+  fullName: string;
+  email: string;
+  phone: string;
+  licenseType: string;
+  preferredSchedule: string;
+  courseInterest: string;
+  message: string;
+}
+
+const CONTACT_INFO = [
   {
-    question: "What documents do I need to start driving lessons?",
-    answer: "You'll need a valid Ontario G1 license, proof of identity (photo ID), and if you're under 18, parental consent. For international students, you'll also need to provide your study permit."
+    icon: MapPin,
+    title: 'Visit Us',
+    details: ['123 Driving School Ave', 'Toronto, ON M5V 2T6'],
+    color: 'text-blue-600'
   },
   {
-    question: "How long does it take to complete the driving course?",
-    answer: "Our BDE course includes 20 hours of classroom training and 10 hours of in-car instruction, typically completed within 4-8 weeks depending on your schedule and availability."
+    icon: Phone,
+    title: 'Call Us',
+    details: ['+1 (647) 555-0123', '+1 (416) 555-0124'],
+    color: 'text-green-600'
   },
   {
-    question: "Do you provide a car for the road test?",
-    answer: "Yes! We provide a well-maintained, driver-certified car for both your G2 and G road tests. The car rental is included in our Premium and Ultimate packages."
+    icon: Mail,
+    title: 'Email Us',
+    details: ['info@drivingschool.com', 'support@drivingschool.com'],
+    color: 'text-purple-600'
   },
   {
-    question: "What is your cancellation policy?",
-    answer: "We require 24 hours notice for lesson cancellations. Late cancellations or no-shows may result in a charge of 50% of the lesson fee to cover instructor time."
-  },
-  {
-    question: "Do you offer weekend lessons?",
-    answer: "Yes, we offer both weekend and weekday lessons to accommodate different schedules. Weekend slots are popular, so we recommend booking in advance."
+    icon: Clock,
+    title: 'Working Hours',
+    details: ['Mon-Fri: 8:00 AM - 8:00 PM', 'Sat-Sun: 9:00 AM - 6:00 PM'],
+    color: 'text-orange-600'
   }
 ];
 
-const Contact = () => {
-  const [formData, setFormData] = useState({
-    fullName: '',
-    email: '',
-    phone: '',
-    licenseType: 'G1',
-    preferredSchedule: '',
-    courseInterest: '',
-    message: ''
-  });
+const SOCIAL_LINKS = [
+  { icon: Facebook, href: '#', color: 'hover:text-blue-600' },
+  { icon: Instagram, href: '#', color: 'hover:text-pink-600' },
+  { icon: Twitter, href: '#', color: 'hover:text-blue-400' },
+  { icon: Linkedin, href: '#', color: 'hover:text-blue-700' }
+];
 
-  const [expandedFAQ, setExpandedFAQ] = useState<number | null>(null);
-  const [errors, setErrors] = useState({
+const Contact = () => {
+  const [formData, setFormData] = useState<ContactFormData>({
     fullName: '',
     email: '',
     phone: '',
@@ -46,9 +68,15 @@ const Contact = () => {
     message: ''
   });
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+  const [errors, setErrors] = useState<ContactFormErrors>({
+    fullName: '',
+    email: '',
+    phone: '',
+    licenseType: '',
+    preferredSchedule: '',
+    courseInterest: '',
+    message: ''
+  });
 
   const validateForm = () => {
     let isValid = true;
@@ -80,23 +108,8 @@ const Contact = () => {
       isValid = false;
     }
 
-    if (!formData.licenseType) {
-      newErrors.licenseType = 'Please select your license type';
-      isValid = false;
-    }
-
-    if (!formData.preferredSchedule) {
-      newErrors.preferredSchedule = 'Please select your preferred schedule';
-      isValid = false;
-    }
-
-    if (!formData.courseInterest) {
-      newErrors.courseInterest = "Please select a course you're interested in";
-      isValid = false;
-    }
-
     if (!formData.message.trim()) {
-      newErrors.message = 'Please provide additional details';
+      newErrors.message = 'Message is required';
       isValid = false;
     }
 
@@ -104,11 +117,18 @@ const Contact = () => {
     return isValid;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (validateForm()) {
-      // Handle form submission
-      console.log('Form submitted:', formData);
+      // Simulate form submission
+      toast.promise(
+        new Promise((resolve) => setTimeout(resolve, 2000)),
+        {
+          loading: 'Sending your message...',
+          success: 'Message sent successfully! Well get back to you soon.',
+          error: 'Failed to send message. Please try again.',
+        }
+      );
     }
   };
 
@@ -118,8 +138,7 @@ const Contact = () => {
       ...prev,
       [name]: value
     }));
-    // Clear error when user starts typing
-    if (errors[name as keyof typeof errors]) {
+    if (errors[name as keyof ContactFormErrors]) {
       setErrors(prev => ({
         ...prev,
         [name]: ''
@@ -128,23 +147,81 @@ const Contact = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 font-poppins">
-      {/* Header Section */}
-      <div className="relative overflow-hidden bg-white">
-        <div className="max-w-7xl mx-auto px-4 py-16 lg:py-20">
-          <div className="text-center mb-16">
-            <h1 className="text-4xl lg:text-5xl font-bold mb-6 bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-              Let's Start Your Journey
-            </h1>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              Have questions about our driving courses? We're here to help you become a confident and safe driver. Reach out to us today.
-            </p>
-          </div>
+    <div className="min-h-screen bg-gray-50">
+      {/* Hero Section */}
+      <div className="relative pt-28 pb-20 bg-[#2c3149] overflow-hidden">
+        <div className="absolute inset-0">
+          <div className="absolute inset-0 bg-[url('/patterns/texture-dots.png')] opacity-[0.03]" />
+          <div className="absolute inset-0 bg-gradient-to-br from-[#2c3149] via-[#2c3149] to-[#1a1f33]" />
+        </div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-6"
+            >
+              <Mail className="w-5 h-5 text-yellow-500" />
+              <span className="text-white font-medium">Contact Us</span>
+            </motion.div>
 
-          <div className="grid lg:grid-cols-2 gap-12 items-start">
-            {/* Contact Form */}
-            <div className="bg-white rounded-3xl p-8 shadow-lg border border-gray-100">
-              <form onSubmit={handleSubmit} className="space-y-6">
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+              className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6"
+            >
+              Get in <span className="text-yellow-500">Touch</span>
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="text-lg sm:text-xl text-gray-300 mb-8"
+            >
+              Have questions about our driving courses? We're here to help you become a confident and safe driver.
+            </motion.p>
+          </div>
+        </div>
+      </div>
+
+      {/* Contact Information Cards */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-16 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {CONTACT_INFO.map((item, index) => (
+            <motion.div
+              key={item.title}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.1 }}
+              className="bg-white rounded-2xl shadow-sm p-6 border border-gray-100"
+            >
+              <div className="inline-block p-3 rounded-xl bg-yellow-500/10">
+                <item.icon className="h-6 w-6 text-yellow-500" />
+              </div>
+              <h3 className="mt-4 font-semibold text-[#2c3149]">{item.title}</h3>
+              <div className="mt-2 space-y-1">
+                {item.details.map((detail, i) => (
+                  <p key={i} className="text-gray-600">{detail}</p>
+                ))}
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+          {/* Contact Form */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            className="bg-white rounded-2xl shadow-sm p-8 border border-gray-100"
+          >
+            <h2 className="text-2xl font-semibold text-[#2c3149] mb-6">Send us a Message</h2>
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label htmlFor="fullName" className="block text-sm font-medium text-gray-700 mb-1">
                     Full Name
@@ -157,291 +234,136 @@ const Contact = () => {
                     onChange={handleChange}
                     className={`w-full px-4 py-3 rounded-xl border ${
                       errors.fullName ? 'border-red-500' : 'border-gray-200'
-                    } focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors`}
-                    placeholder="Enter your full name as it appears on your license"
+                    } focus:outline-none focus:ring-2 focus:ring-yellow-500/20 focus:border-yellow-500 transition-colors`}
+                    placeholder="John Doe"
                   />
                   {errors.fullName && <p className="mt-1 text-sm text-red-500">{errors.fullName}</p>}
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                      Email Address
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      className={`w-full px-4 py-3 rounded-xl border ${
-                        errors.email ? 'border-red-500' : 'border-gray-200'
-                      } focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors`}
-                      placeholder="your@email.com"
-                    />
-                    {errors.email && <p className="mt-1 text-sm text-red-500">{errors.email}</p>}
-                  </div>
-
-                  <div>
-                    <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
-                      Phone Number
-                    </label>
-                    <input
-                      type="tel"
-                      id="phone"
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleChange}
-                      className={`w-full px-4 py-3 rounded-xl border ${
-                        errors.phone ? 'border-red-500' : 'border-gray-200'
-                      } focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors`}
-                      placeholder="(647) 555-0123"
-                    />
-                    {errors.phone && <p className="mt-1 text-sm text-red-500">{errors.phone}</p>}
-                  </div>
+                <div>
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                    Email Address
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    className={`w-full px-4 py-3 rounded-xl border ${
+                      errors.email ? 'border-red-500' : 'border-gray-200'
+                    } focus:outline-none focus:ring-2 focus:ring-yellow-500/20 focus:border-yellow-500 transition-colors`}
+                    placeholder="john@example.com"
+                  />
+                  {errors.email && <p className="mt-1 text-sm text-red-500">{errors.email}</p>}
                 </div>
+              </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label htmlFor="licenseType" className="block text-sm font-medium text-gray-700 mb-1">
-                      License Type
-                    </label>
-                    <select
-                      id="licenseType"
-                      name="licenseType"
-                      value={formData.licenseType}
-                      onChange={handleChange}
-                      className={`w-full px-4 py-3 rounded-xl border ${
-                        errors.licenseType ? 'border-red-500' : 'border-gray-200'
-                      } focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors`}
-                    >
-                      <option value="G1">G1 License</option>
-                      <option value="G2">G2 License</option>
-                      <option value="G">G License</option>
-                      <option value="International">International License</option>
-                    </select>
-                    {errors.licenseType && <p className="mt-1 text-sm text-red-500">{errors.licenseType}</p>}
-                  </div>
-
-                  <div>
-                    <label htmlFor="preferredSchedule" className="block text-sm font-medium text-gray-700 mb-1">
-                      Preferred Schedule
-                    </label>
-                    <select
-                      id="preferredSchedule"
-                      name="preferredSchedule"
-                      value={formData.preferredSchedule}
-                      onChange={handleChange}
-                      className={`w-full px-4 py-3 rounded-xl border ${
-                        errors.preferredSchedule ? 'border-red-500' : 'border-gray-200'
-                      } focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors`}
-                    >
-                      <option value="">Select schedule</option>
-                      <option value="Weekday Morning">Weekday Morning</option>
-                      <option value="Weekday Afternoon">Weekday Afternoon</option>
-                      <option value="Weekday Evening">Weekday Evening</option>
-                      <option value="Weekend">Weekend</option>
-                    </select>
-                    {errors.preferredSchedule && <p className="mt-1 text-sm text-red-500">{errors.preferredSchedule}</p>}
-                  </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
+                    Phone Number
+                  </label>
+                  <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    className={`w-full px-4 py-3 rounded-xl border ${
+                      errors.phone ? 'border-red-500' : 'border-gray-200'
+                    } focus:outline-none focus:ring-2 focus:ring-yellow-500/20 focus:border-yellow-500 transition-colors`}
+                    placeholder="(647) 555-0123"
+                  />
+                  {errors.phone && <p className="mt-1 text-sm text-red-500">{errors.phone}</p>}
                 </div>
 
                 <div>
-                  <label htmlFor="courseInterest" className="block text-sm font-medium text-gray-700 mb-1">
-                    Interested In
+                  <label htmlFor="licenseType" className="block text-sm font-medium text-gray-700 mb-1">
+                    License Type
                   </label>
                   <select
-                    id="courseInterest"
-                    name="courseInterest"
-                    value={formData.courseInterest}
+                    id="licenseType"
+                    name="licenseType"
+                    value={formData.licenseType}
                     onChange={handleChange}
-                    className={`w-full px-4 py-3 rounded-xl border ${
-                      errors.courseInterest ? 'border-red-500' : 'border-gray-200'
-                    } focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors`}
+                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-yellow-500/20 focus:border-yellow-500 transition-colors"
                   >
-                    <option value="">Select a course</option>
-                    <option value="Basic Package">Basic Package - $699</option>
-                    <option value="Premium Package">Premium Package - $899</option>
-                    <option value="Ultimate Package">Ultimate Package - $1,199</option>
-                    <option value="G2 Test Package">G2 Test Package</option>
-                    <option value="G Test Package">G Test Package</option>
+                    <option value="">Select license type</option>
+                    <option value="G1">G1 License</option>
+                    <option value="G2">G2 License</option>
+                    <option value="G">G License</option>
+                    <option value="International">International License</option>
                   </select>
-                  {errors.courseInterest && <p className="mt-1 text-sm text-red-500">{errors.courseInterest}</p>}
                 </div>
+              </div>
 
-                <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
-                    Additional Details
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    rows={4}
-                    className={`w-full px-4 py-3 rounded-xl border ${
-                      errors.message ? 'border-red-500' : 'border-gray-200'
-                    } focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-colors`}
-                    placeholder="Tell us about your driving experience and any specific requirements"
-                  />
-                  {errors.message && <p className="mt-1 text-sm text-red-500">{errors.message}</p>}
-                </div>
-
-                <button
-                  type="submit"
-                  className="w-full inline-flex items-center justify-center px-6 py-3.5 rounded-xl text-base font-semibold bg-blue-600 text-white hover:bg-blue-700 transition-colors duration-300"
-                >
-                  Send Message
-                  <Send className="w-5 h-5 ml-2" />
-                </button>
-              </form>
-            </div>
-
-            {/* Contact Information */}
-            <div className="space-y-8">
-              {/* Map */}
-              <div className="bg-white rounded-3xl p-1 shadow-lg border border-gray-100 overflow-hidden">
-                <iframe
-                  title="Location Map"
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2880.9261774472837!2d-79.2317227!3d43.7758138!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89d4d11f752d5847%3A0x6e6d59e3d0d8c91e!2sMarkham%20Rd%2C%20Toronto%2C%20ON!5e0!3m2!1sen!2sca!4v1647889483767!5m2!1sen!2sca"
-                  width="100%"
-                  height="300"
-                  style={{ border: 0 }}
-                  allowFullScreen
-                  loading="lazy"
-                  className="rounded-[1.4rem]"
+              <div>
+                <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
+                  Message
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  rows={4}
+                  value={formData.message}
+                  onChange={handleChange}
+                  className={`w-full px-4 py-3 rounded-xl border ${
+                    errors.message ? 'border-red-500' : 'border-gray-200'
+                  } focus:outline-none focus:ring-2 focus:ring-yellow-500/20 focus:border-yellow-500 transition-colors`}
+                  placeholder="How can we help you?"
                 />
+                {errors.message && <p className="mt-1 text-sm text-red-500">{errors.message}</p>}
               </div>
 
-              {/* Contact Cards */}
-              <div className="grid gap-6">
-                {/* Location */}
-                <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-lg hover:shadow-xl transition-shadow duration-300">
-                  <div className="flex items-start gap-4">
-                    <div className="p-3 rounded-xl bg-blue-50">
-                      <MapPin className="w-6 h-6 text-blue-600" />
-                    </div>
-                    <div>
-                      <h3 className="text-lg font-semibold text-gray-900 mb-1">Our Location</h3>
-                      <p className="text-gray-600">1234 Markham Road, Unit 5</p>
-                      <p className="text-gray-600">Scarborough, ON M1H 2Y3</p>
-                    </div>
-                  </div>
-                </div>
+              <button
+                type="submit"
+                className="w-full bg-[#2c3149] text-white py-3 px-6 rounded-xl hover:bg-[#2c3149]/90 transition-colors flex items-center justify-center gap-2"
+              >
+                <Send className="h-5 w-5" />
+                Send Message
+              </button>
+            </form>
+          </motion.div>
 
-                {/* Contact */}
-                <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-lg hover:shadow-xl transition-shadow duration-300">
-                  <div className="flex items-start gap-4">
-                    <div className="p-3 rounded-xl bg-blue-50">
-                      <Phone className="w-6 h-6 text-blue-600" />
-                    </div>
-                    <div>
-                      <h3 className="text-lg font-semibold text-gray-900 mb-1">Contact Info</h3>
-                      <div className="flex items-center gap-3">
-                        <Mail className="w-5 h-5 text-blue-600" />
-                        <p className="text-gray-600">Email: contact@grayjaysdrivingschool.ca</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+          {/* Map and Social Links */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            className="space-y-8"
+          >
+            {/* Map */}
+            <div className="bg-white rounded-2xl shadow-sm p-2 border border-gray-100 h-[400px] overflow-hidden">
+              <iframe
+                title="location"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2887.2685163373!2d-79.3871!3d43.6426!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDPCsDM4JzMzLjQiTiA3OcKwMjMnMTMuNiJX!5e0!3m2!1sen!2sca!4v1635787269123!5m2!1sen!2sca"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                loading="lazy"
+                className="rounded-xl"
+              />
+            </div>
 
-                {/* Hours */}
-                <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-lg hover:shadow-xl transition-shadow duration-300">
-                  <div className="flex items-start gap-4">
-                    <div className="p-3 rounded-xl bg-blue-50">
-                      <Clock className="w-6 h-6 text-blue-600" />
-                    </div>
-                    <div>
-                      <h3 className="text-lg font-semibold text-gray-900 mb-1">Business Hours</h3>
-                      <p className="text-gray-600">Monday - Friday: 9:00 AM - 8:00 PM</p>
-                      <p className="text-gray-600">Saturday - Sunday: 10:00 AM - 6:00 PM</p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Social Media */}
-                <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-lg hover:shadow-xl transition-shadow duration-300">
-                  <h3 className="text-lg font-semibold text-gray-900 mb-4">Connect With Us</h3>
-                  <div className="flex items-center gap-4">
-                    <a
-                      href="https://facebook.com"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="p-3 rounded-xl bg-blue-50 hover:bg-blue-100 transition-colors"
-                    >
-                      <Facebook className="w-6 h-6 text-blue-600" />
-                    </a>
-                    <a
-                      href="https://instagram.com"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="p-3 rounded-xl bg-blue-50 hover:bg-blue-100 transition-colors"
-                    >
-                      <Instagram className="w-6 h-6 text-blue-600" />
-                    </a>
-                    <a
-                      href="https://twitter.com"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="p-3 rounded-xl bg-blue-50 hover:bg-blue-100 transition-colors"
-                    >
-                      <Twitter className="w-6 h-6 text-blue-600" />
-                    </a>
-                    <a
-                      href="https://linkedin.com"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="p-3 rounded-xl bg-blue-50 hover:bg-blue-100 transition-colors"
-                    >
-                      <Linkedin className="w-6 h-6 text-blue-600" />
-                    </a>
-                  </div>
-                </div>
+            {/* Social Links */}
+            <div className="bg-white rounded-2xl shadow-sm p-8 border border-gray-100">
+              <h3 className="text-xl font-semibold text-[#2c3149] mb-4">Follow Us</h3>
+              <p className="text-gray-600 mb-6">
+                Stay connected with us on social media for the latest updates, driving tips, and special offers.
+              </p>
+              <div className="flex gap-4">
+                {SOCIAL_LINKS.map((social, index) => (
+                  <a
+                    key={index}
+                    href={social.href}
+                    className={`p-3 rounded-xl bg-gray-50 text-gray-600 transition-colors ${social.color} hover:bg-yellow-500/10`}
+                  >
+                    <social.icon className="h-6 w-6" />
+                  </a>
+                ))}
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-
-      {/* FAQ Section */}
-      <div className="bg-white">
-        <div className="max-w-7xl mx-auto px-4 py-20">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-              Frequently Asked Questions
-            </h2>
-            <p className="text-lg text-gray-600">
-              Find answers to common questions about our driving courses and services
-            </p>
-          </div>
-
-          <div className="max-w-3xl mx-auto space-y-4">
-            {FAQ_ITEMS.map((item, index) => (
-              <div
-                key={index}
-                className="bg-white rounded-2xl border border-gray-200 overflow-hidden transition-all duration-300"
-              >
-                <button
-                  onClick={() => setExpandedFAQ(expandedFAQ === index ? null : index)}
-                  className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50"
-                >
-                  <span className="font-medium text-gray-900">{item.question}</span>
-                  <ChevronDown
-                    className={`w-5 h-5 text-gray-500 transition-transform duration-300 ${
-                      expandedFAQ === index ? 'rotate-180' : ''
-                    }`}
-                  />
-                </button>
-                <div
-                  className={`px-6 transition-all duration-300 ${
-                    expandedFAQ === index ? 'py-4' : 'max-h-0 overflow-hidden'
-                  }`}
-                >
-                  <p className="text-gray-600">{item.answer}</p>
-                </div>
-              </div>
-            ))}
-          </div>
+          </motion.div>
         </div>
       </div>
     </div>

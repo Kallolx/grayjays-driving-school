@@ -283,7 +283,7 @@ const Pricing = () => {
               <button className="w-full py-4 bg-yellow-500 text-gray-900 rounded-xl hover:bg-yellow-400 transition-colors duration-300 font-semibold">
                 Get Started
               </button>
-            </div>
+          </div>
           </div>
 
           {/* Hourly Lessons Card */}
@@ -292,15 +292,15 @@ const Pricing = () => {
               <div className="mb-6">
                 <h3 className="text-2xl font-bold text-[#2c3149]">Hourly Lessons</h3>
                 <p className="text-gray-600 mt-2">Flexible Training Sessions</p>
-              </div>
+        </div>
 
               {/* Price Display */}
               <div className="mb-6">
                 <div className="flex items-baseline">
                   <span className="text-4xl font-bold text-[#2c3149]">$60</span>
                   <span className="text-gray-500 ml-2">/hour</span>
-                </div>
-              </div>
+        </div>
+      </div>
 
               {/* Features */}
               <ul className="space-y-3 mb-8">

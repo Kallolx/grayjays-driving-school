@@ -1,7 +1,8 @@
-import { X, ShoppingCart, AlertCircle } from "lucide-react";
-import { useState, useEffect, useCallback } from "react";
+import { X, ShoppingCart } from "lucide-react";
+import { useState } from "react";
 import { motion, AnimatePresence } from 'framer-motion';
 import SpotlightButton from "./SpotlightButton";
+import toast from 'react-hot-toast';
 
 interface CartItem {
   id: string;
@@ -20,62 +21,26 @@ interface CartButtonProps {
 
 const CartButton = ({ cart, setCart }: CartButtonProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [showWarning, setShowWarning] = useState(false);
-  const [warningMessage, setWarningMessage] = useState('');
-  const [warningTimeout, setWarningTimeout] = useState<null>(null);
-
-  const showWarningMessage = useCallback((message: string) => {
-    // Clear any existing timeout
-    if (warningTimeout) {
-      clearTimeout(warningTimeout);
-    }
-
-    setWarningMessage(message);
-    setShowWarning(true);
-
-    // Set new timeout
-    const timeout = setTimeout(() => {
-      setShowWarning(false);
-      setWarningMessage('');
-    }, 3000);
-
-    setWarningTimeout(timeout);
-  }, [warningTimeout]);
-
-  // Cleanup timeout on unmount
-  useEffect(() => {
-    return () => {
-      if (warningTimeout) {
-        clearTimeout(warningTimeout);
-      }
-    };
-  }, [warningTimeout]);
 
   const removeFromCart = (itemId: string, e: React.MouseEvent) => {
     e.stopPropagation(); // Prevent modal from closing
     setCart(cart.filter(item => item.id !== itemId));
-    showWarningMessage('Item removed from cart');
+    toast.success('Item removed from cart', {
+      style: {
+        background: '#2c3149',
+        color: '#fff',
+        borderRadius: '12px',
+      },
+      icon: '🛒',
+      position: 'bottom-left',
+      duration: 2000,
+    });
   };
 
   if (cart.length === 0) return null;
 
   return (
     <>
-      {/* Warning Message */}
-      <AnimatePresence>
-        {showWarning && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 20 }}
-            className="fixed bottom-4 left-4 z-[60] bg-yellow-50 text-yellow-600 px-4 py-3 sm:px-6 sm:py-4 rounded-xl shadow-lg border border-yellow-100 flex items-center gap-2 sm:gap-3 max-w-[90vw] sm:max-w-md"
-          >
-            <AlertCircle className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
-            <p className="text-sm sm:text-base">{warningMessage}</p>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
       {/* Cart Button */}
       <motion.button
         onClick={() => setIsOpen(!isOpen)}
