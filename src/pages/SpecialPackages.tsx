@@ -3,9 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { 
   ShoppingCart, 
   X,
-  ChevronDown,
   MapPin,
-  FileCheck,
 } 
 from 'lucide-react';
 import SpotlightButton from '../components/SpotlightButton';
@@ -148,7 +146,7 @@ const SpecialPackages = ({ cart, setCart }: { cart: CartItem[]; setCart: (cart: 
       title: 'Crash Courses',
       description: 'Intensive driving courses designed to quickly prepare you for your test.',
       price: CRASH_COURSES[0].price,
-      icon: '/icons/crash.png',
+      icon: 'https://cdn-icons-png.flaticon.com/512/2436/2436855.png',
       image: '/images/crash-course.jpg',
       requiresLocation: true
     },
@@ -197,7 +195,7 @@ const SpecialPackages = ({ cart, setCart }: { cart: CartItem[]; setCart: (cart: 
   return (
     <div className="relative min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <div className="relative pt-28 pb-20 bg-[#2c3149]">
+      <div className="relative pt-28 pb-10 bg-[#2c3149]">
         <div className="absolute inset-0">
           <div className="absolute inset-0 bg-[url('/patterns/texture-dots.png')] opacity-[0.03]" />
         </div>
@@ -224,8 +222,8 @@ const SpecialPackages = ({ cart, setCart }: { cart: CartItem[]; setCart: (cart: 
       </div>
 
       {/* Packages Grid */}
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 max-w-lg sm:max-w-none mx-auto">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-4 max-w-lg sm:max-w-none mx-auto">
           {packages.map((pkg) => (
             <motion.div
               key={pkg.id}
@@ -240,7 +238,7 @@ const SpecialPackages = ({ cart, setCart }: { cart: CartItem[]; setCart: (cart: 
                   setSelectedPackage(pkg.id);
                   setShowSidebar(true);
                 }}
-                className={`relative w-full h-[400px] rounded-2xl cursor-pointer transition-all duration-500 ${
+                className={`relative w-full h-[320px] rounded-xl cursor-pointer transition-all duration-500 ${
                   expandedCard === pkg.id ? 'bg-[#2c3149]' : 'bg-white'
                 }`}
                 style={{
@@ -250,100 +248,67 @@ const SpecialPackages = ({ cart, setCart }: { cart: CartItem[]; setCart: (cart: 
                 }}
               >
                 {/* Background Pattern */}
-                <div className="absolute inset-0 bg-[url('/patterns/texture-dots.png')] opacity-[0.03] rounded-2xl" />
+                <div className="absolute inset-0 bg-[url('/patterns/texture-dots.png')] opacity-[0.03] rounded-xl" />
                 
                 {/* Glass Effect Overlay */}
-                <div className={`absolute inset-0 rounded-2xl transition-colors duration-500 ${
+                <div className={`absolute inset-0 rounded-xl transition-colors duration-500 ${
                   expandedCard === pkg.id 
                     ? 'bg-gradient-to-br from-white/10 to-transparent backdrop-blur-sm'
                     : 'bg-white/80 backdrop-blur-sm'
                 }`} />
 
                 {/* Content Container */}
-                <div className="relative h-full p-6 flex flex-col">
-                  <motion.div
-                    layout
-                    className="flex-1 flex flex-col items-center justify-center gap-6"
-                  >
-                    {/* Icon Container */}
-                    <motion.div
-                      layout="position"
-                      className="relative mt-12"
-                    >
-                      <div className="absolute inset-0 bg-gradient-to-br from-yellow-500 to-yellow-400 rounded-full blur-2xl opacity-20" />
-                      <div className={`w-28 h-28 flex items-center justify-center transition-all duration-500 ${
-                        expandedCard === pkg.id 
-                          ? 'bg-transparent'
-                          : 'bg-transparent'
+                <div className="relative h-full p-4 flex flex-col">
+                  {/* Icon and Title Section */}
+                  <div className="text-center mb-4">
+                    <div className="relative w-12 h-12 mx-auto mb-3">
+                      <div className="absolute inset-0 bg-gradient-to-br from-yellow-500 to-yellow-400 rounded-lg blur-lg opacity-20" />
+                      <div className={`relative w-full h-full rounded-lg flex items-center justify-center ${
+                        expandedCard === pkg.id ? 'bg-white/10' : 'bg-gray-50'
                       }`}>
-                        <div className={`transform transition-all duration-500 ${
-                          expandedCard === pkg.id ? 'scale-110 text-white' : 'scale-150 text-yellow-500'
-                        }`}>
-                          <img src={pkg.icon} alt={pkg.title} className="w-25 h-25" />
-                        </div>
-                      </div>
-                    </motion.div>
-
-                    {/* Title and Description */}
-                    <motion.div
-                      layout="position"
-                      className="text-center mt-4"
-                    >
-                      <motion.h3 
-                        layout="position"
-                        className={`text-xl font-bold mb-2 transition-colors duration-500 ${
-                          expandedCard === pkg.id ? 'text-white' : 'text-[#2c3149] group-hover:text-yellow-500'
-                        }`}
-                      >
-                        {pkg.title}
-                      </motion.h3>
-                      <motion.p 
-                        layout="position"
-                        className={`text-sm max-w-[200px] mx-auto transition-colors duration-500 ${
-                          expandedCard === pkg.id ? 'text-white/80' : 'text-gray-500'
-                        }`}
-                      >
-                        {pkg.description}
-                      </motion.p>
-                    </motion.div>
-
-                    {/* Price Tag */}
-                    <div className="absolute top-4 right-4">
-                      <div className={`px-4 py-2 rounded-full ${
-                        expandedCard === pkg.id 
-                          ? 'bg-white/20 text-white'
-                          : 'bg-yellow-500/10 text-yellow-500'
-                      } font-semibold text-sm`}>
-                        From ${pkg.price}
+                        <img 
+                          src={pkg.icon} 
+                          alt={pkg.title} 
+                          className={`w-7 h-7 transition-all duration-500 ${
+                            expandedCard === pkg.id ? 'brightness-0 invert' : ''
+                          }`} 
+                        />
                       </div>
                     </div>
+                    <h3 className={`text-base font-bold transition-colors duration-500 mb-2 ${
+                      expandedCard === pkg.id ? 'text-white' : 'text-[#2c3149]'
+                    }`}>
+                      {pkg.title}
+                    </h3>
+                    <div className={`text-xs font-medium px-3 py-1.5 rounded-full inline-block ${
+                      expandedCard === pkg.id 
+                        ? 'bg-white/20 text-white'
+                        : 'bg-[#2c3149] text-white'
+                    }`}>
+                      From ${pkg.price}
+                    </div>
+                  </div>
 
-                    {/* License Type Badge */}
-                    {pkg.requiresLocation && (
-                      <div className="absolute top-4 left-4">
-                        <div className={`px-3 py-1.5 rounded-full ${
-                          expandedCard === pkg.id 
-                            ? 'bg-white/20 text-white'
-                            : 'bg-[#2c3149]/10 text-[#2c3149]'
-                        } text-xs font-medium flex items-center gap-1.5`}>
-                          <FileCheck className="w-3.5 h-3.5" />
-                          License Required
-                        </div>
-                      </div>
-                    )}
+                  {/* Description */}
+                  <p className={`text-sm transition-colors duration-500 mb-4 text-center ${
+                    expandedCard === pkg.id ? 'text-white/80' : 'text-gray-600'
+                  }`}>
+                    {pkg.description}
+                  </p>
 
-                    {/* Expand Button */}
-                    <motion.div
-                      layout="position"
-                      className={`mt-auto transition-all duration-500 ${
-                        expandedCard === pkg.id ? 'opacity-0' : 'opacity-100'
-                      }`}
-                    >
-                      <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center group-hover:bg-yellow-500/10 transition-colors">
-                        <ChevronDown className="w-5 h-5 text-gray-400 group-hover:text-yellow-500 transition-colors" />
-                      </div>
-                    </motion.div>
-                  </motion.div>
+                  {/* Spacer to push button to bottom */}
+                  <div className="flex-1"></div>
+
+                  {/* View Details Button */}
+                  <button
+                    className={`w-full py-2.5 rounded-lg text-sm font-medium transition-all duration-300 ${
+                      expandedCard === pkg.id
+                        ? 'bg-white text-[#2c3149] hover:bg-white/90'
+                        : 'bg-[#2c3149] text-white hover:bg-[#2c3149]/90'
+                    }`}
+                  >
+                    View Details
+                  </button>
                 </div>
               </motion.div>
             </motion.div>

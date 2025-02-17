@@ -71,9 +71,9 @@ const Navbar = () => {
   const location = useLocation();
 
   const navLinks: NavLink[] = [
-    { name: 'Learn to Drive', path: '/learn-to-drive', hasDropdown: true },
+    { name: 'Learn to Drive', path: '/services', hasDropdown: true },
     { name: 'Rental Car', path: '/services/car-rental' },
-    { name: 'Services', path: '/services', hasDropdown: true },
+    { name: 'Services', path: '#', hasDropdown: true },
     { name: 'Blog', path: '/blog' },
     { name: 'Contact Us', path: '/contact' },
   ];

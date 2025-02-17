@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { GraduationCap, Clock3, CarFront, CheckCircle2, ChevronRight, Car, MinusCircle, PlusCircle} from 'lucide-react';
+import { GraduationCap, Clock3, CarFront, CheckCircle2, ChevronRight, Car, MinusCircle, PlusCircle, Paperclip} from 'lucide-react';
 import { useState, useLayoutEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -14,8 +14,8 @@ const BASE_PRICES = {
     withoutCar: 60
   },
   hourlyLesson: {
-    withCar: 50,
-    withoutCar: 35
+    G2: 50,
+    G: 60
   },
   rentalCar: {
     withCar: 45,
@@ -26,6 +26,7 @@ const BASE_PRICES = {
 const Services = () => {
   const [bdeWithCar, setBdeWithCar] = useState(true);
   const [hours, setHours] = useState(10);
+  const [licenseType, setLicenseType] = useState<'G2' | 'G'>('G2');
 
   const cardsContainerRef = useRef<HTMLDivElement>(null);
   const hourlyCardRef = useRef<HTMLDivElement>(null);
@@ -219,14 +220,38 @@ const Services = () => {
                   </div>
 
                   <div className="space-y-4 mb-8 flex-grow">
-                    <div className="text-center">
+                    <div className="flex items-center justify-between p-2 bg-gray-50 backdrop-blur-sm rounded-xl">
+                      <button
+                        onClick={() => setLicenseType('G2')}
+                        className={`flex items-center gap-2 flex-1 py-2 px-4 rounded-lg text-sm font-medium transition-all ${
+                          licenseType === 'G2'
+                            ? 'bg-[#2c3149] text-white'
+                            : 'text-gray-600 hover:bg-gray-100'
+                        }`}
+                      >
+                        <Paperclip className={`w-4 h-4 ${licenseType === 'G2' ? 'text-white' : 'text-gray-400'}`} />
+                        G2 License
+                      </button>
+                      <button
+                        onClick={() => setLicenseType('G')}
+                        className={`flex items-center gap-2 flex-1 py-2 px-4 rounded-lg text-sm font-medium transition-all ${
+                          licenseType === 'G'
+                            ? 'bg-[#2c3149] text-white'
+                            : 'text-gray-600 hover:bg-gray-100'
+                        }`}
+                      >
+                        <Paperclip className={`w-4 h-4 ${licenseType === 'G' ? 'text-white' : 'text-gray-400'}`} />
+                        G License
+                      </button>
+                    </div>
+
+                    <div className="text-center mb-6">
                       <div className="text-3xl font-bold text-[#2c3149]">
-                        $50+HST
+                        ${BASE_PRICES.hourlyLesson[licenseType]}
                       </div>
                       <div className="text-sm text-gray-500 mt-1">per hour</div>
                     </div>
 
-                    {/* Features List */}
                     <div className="space-y-3">
                       <div className="flex items-start gap-3">
                         <div className="flex-shrink-0 w-5 h-5 rounded-full bg-yellow-50 flex items-center justify-center mt-0.5">
@@ -245,18 +270,6 @@ const Services = () => {
                           <CheckCircle2 className="w-4 h-4 text-yellow-500" />
                         </div>
                         <p className="text-gray-600 text-sm">One-on-One Instruction</p>
-                      </div>
-                      <div className="flex items-start gap-3">
-                        <div className="flex-shrink-0 w-5 h-5 rounded-full bg-yellow-50 flex items-center justify-center mt-0.5">
-                          <CheckCircle2 className="w-4 h-4 text-yellow-500" />
-                        </div>
-                        <p className="text-gray-600 text-sm">Customizable Lessons</p>
-                      </div>
-                      <div className="flex items-start gap-3">
-                        <div className="flex-shrink-0 w-5 h-5 rounded-full bg-yellow-50 flex items-center justify-center mt-0.5">
-                          <CheckCircle2 className="w-4 h-4 text-yellow-500" />
-                        </div>
-                        <p className="text-gray-600 text-sm">Full Hour of Dedicated Training</p>
                       </div>
                     </div>
                   </div>
@@ -457,7 +470,7 @@ const Services = () => {
           {/* Mobile Cards */}
           <div className="md:hidden">
             <div className="flex overflow-x-auto gap-4 pb-8 -mx-4 px-4 snap-x snap-mandatory scrollbar-hide">
-              {/* Hourly Lesson Card */}
+              {/* Mobile Hourly Lesson Card */}
               <div className="flex-none w-[85vw] max-w-[320px] snap-center transform-gpu transition-transform duration-300 hover:scale-[0.98]">
                 <div className="h-full bg-white rounded-[1.5rem] p-6 border-2 border-[#2c3149] shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-all duration-300">
                   <div className="mb-4">
@@ -473,9 +486,34 @@ const Services = () => {
                   </div>
 
                   <div className="space-y-4 mb-8">
-                    <div className="text-center">
+                    <div className="flex items-center justify-between p-2 bg-gray-50 backdrop-blur-sm rounded-xl">
+                      <button
+                        onClick={() => setLicenseType('G2')}
+                        className={`flex items-center gap-2 flex-1 py-2 px-4 rounded-lg text-sm font-medium transition-all ${
+                          licenseType === 'G2'
+                            ? 'bg-[#2c3149] text-white'
+                            : 'text-gray-600 hover:bg-gray-100'
+                        }`}
+                      >
+                        <Car className={`w-4 h-4 ${licenseType === 'G2' ? 'text-white' : 'text-gray-400'}`} />
+                        G2 License
+                      </button>
+                      <button
+                        onClick={() => setLicenseType('G')}
+                        className={`flex items-center gap-2 flex-1 py-2 px-4 rounded-lg text-sm font-medium transition-all ${
+                          licenseType === 'G'
+                            ? 'bg-[#2c3149] text-white'
+                            : 'text-gray-600 hover:bg-gray-100'
+                        }`}
+                      >
+                        <Car className={`w-4 h-4 ${licenseType === 'G' ? 'text-white' : 'text-gray-400'}`} />
+                        G License
+                      </button>
+                    </div>
+
+                    <div className="text-center mb-6">
                       <div className="text-3xl font-bold text-[#2c3149]">
-                        $50+HST
+                        ${BASE_PRICES.hourlyLesson[licenseType]}
                       </div>
                       <div className="text-sm text-gray-500 mt-1">per hour</div>
                     </div>
@@ -507,13 +545,11 @@ const Services = () => {
                       </div>
                       <div className="flex items-start gap-3">
                         <div className="flex-shrink-0 w-5 h-5 rounded-full bg-yellow-50 flex items-center justify-center mt-0.5">
-
                           <CheckCircle2 className="w-4 h-4 text-yellow-500" />
                         </div>
                         <p className="text-gray-600 text-sm">Full Hour of Dedicated Training</p>
                       </div>
                     </div>
-                    
                   </div>
 
                   <Link

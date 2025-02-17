@@ -8,6 +8,8 @@ import {
   Info,
   ChevronLeft,
   ChevronRight,
+  Car,
+  X,
 } from "lucide-react";
 import toast from "react-hot-toast";
 import { ROUTE_PRODUCTS, LOCATIONS, RouteProduct } from "../data/routeProducts";
@@ -158,32 +160,40 @@ const GPSRoutes = ({ cart, setCart }: GPSRoutesProps) => {
       </div>
 
       {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div className="max-w-7xl mx-auto px-6 sm:px-6 lg:px-8 py-16">
         {/* Search and Filter Section */}
-        <div className="max-w-7xl mx-auto px- sm:px-6 lg:px-8 -mt-8 relative z-10">
-          <div className="bg-white rounded-2xl shadow-sm px-8 py-4 border border-gray-100">
-            <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-8 relative z-10">
+          <div className="bg-white rounded-2xl shadow-sm p-6 border border-gray-100">
+            <div className="flex flex-col lg:flex-row gap-6">
               {/* Search Input */}
-              <div className="relative w-full md:w-96">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
-                <input
-                  type="text"
-                  placeholder="Search routes..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-yellow-500/20 focus:border-yellow-500"
-                />
+              <div className="relative flex-1">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Search Routes
+                </label>
+                <div className="relative">
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
+                  <input
+                    type="text"
+                    placeholder="Search by route name or location..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="w-full pl-10 pr-4 h-12 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-yellow-500/20 focus:border-yellow-500 text-gray-600"
+                  />
+                </div>
               </div>
 
               {/* Location Filter */}
-              <div className="relative" ref={locationMenuRef}>
+              <div className="relative flex-1" ref={locationMenuRef}>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Test Center Location
+                </label>
                 <button
                   onClick={() => setShowLocationMenu(!showLocationMenu)}
-                  className="w-full flex items-center justify-between px-4 py-3 rounded-xl border-2 border-gray-200 hover:border-yellow-500 transition-all"
+                  className="w-full flex items-center justify-between h-12 px-4 rounded-xl border-2 border-gray-200 hover:border-yellow-500 transition-all text-gray-600"
                 >
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-2">
                     <MapPin className="w-5 h-5 text-yellow-500" />
-                    <span>{selectedLocation || "Filter by location"}</span>
+                    <span>{selectedLocation || "All locations"}</span>
                   </div>
                   <ChevronDown className={`w-5 h-5 transition-transform duration-200 ${showLocationMenu ? 'rotate-180' : ''}`} />
                 </button>
@@ -195,7 +205,7 @@ const GPSRoutes = ({ cart, setCart }: GPSRoutesProps) => {
                         setSelectedLocation("");
                         setShowLocationMenu(false);
                       }}
-                      className="w-full px-4 py-2 text-left hover:bg-gray-50 text-sm text-gray-600"
+                      className="w-full px-4 py-2.5 text-left hover:bg-gray-50 text-sm text-gray-600"
                     >
                       All Locations
                     </button>
@@ -206,8 +216,8 @@ const GPSRoutes = ({ cart, setCart }: GPSRoutesProps) => {
                           setSelectedLocation(location);
                           setShowLocationMenu(false);
                         }}
-                        className={`w-full px-4 py-2 text-left hover:bg-gray-50 text-sm ${
-                          selectedLocation === location ? 'text-yellow-500 font-medium' : 'text-gray-600'
+                        className={`w-full px-4 py-2.5 text-left hover:bg-gray-50 text-sm ${
+                          selectedLocation === location ? 'text-yellow-500 font-medium bg-yellow-50' : 'text-gray-600'
                         }`}
                       >
                         {location}
@@ -218,29 +228,81 @@ const GPSRoutes = ({ cart, setCart }: GPSRoutesProps) => {
               </div>
 
               {/* Test Type Filter */}
-              <div className="flex gap-2">
-                <button
-                  onClick={() => setSelectedType(selectedType === "G2" ? "" : "G2")}
-                  className={`flex-1 py-3 px-4 rounded-xl border-2 transition-all ${
-                    selectedType === "G2"
-                      ? "border-yellow-500 bg-yellow-50 text-yellow-500"
-                      : "border-gray-200 hover:border-yellow-500/50"
-                  }`}
-                >
-                  G2 Test
-                </button>
-                <button
-                  onClick={() => setSelectedType(selectedType === "G" ? "" : "G")}
-                  className={`flex-1 py-3 px-4 rounded-xl border-2 transition-all ${
-                    selectedType === "G"
-                      ? "border-yellow-500 bg-yellow-50 text-yellow-500"
-                      : "border-gray-200 hover:border-yellow-500/50"
-                  }`}
-                >
-                  G Test
-                </button>
+              <div className="flex-1">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  License Type
+                </label>
+                <div className="grid grid-cols-2 gap-2 h-12">
+                  <button
+                    onClick={() => setSelectedType(selectedType === "G2" ? "" : "G2")}
+                    className={`flex items-center justify-center gap-2 rounded-xl border-2 transition-all ${
+                      selectedType === "G2"
+                        ? 'border-yellow-500 bg-yellow-50 text-yellow-500 font-medium'
+                        : 'border-gray-200 text-gray-600 hover:border-yellow-500/50'
+                    }`}
+                  >
+                    <Car className="w-4 h-4" />
+                    G2 Test
+                  </button>
+                  <button
+                    onClick={() => setSelectedType(selectedType === "G" ? "" : "G")}
+                    className={`flex items-center justify-center gap-2 rounded-xl border-2 transition-all ${
+                      selectedType === "G"
+                        ? 'border-yellow-500 bg-yellow-50 text-yellow-500 font-medium'
+                        : 'border-gray-200 text-gray-600 hover:border-yellow-500/50'
+                    }`}
+                  >
+                    <Car className="w-4 h-4" />
+                    G Test
+                  </button>
+                </div>
               </div>
             </div>
+
+            {/* Active Filters Display */}
+            {(selectedLocation || selectedType || searchQuery) && (
+              <div className="flex items-center gap-2 mt-4 pt-4 border-t border-gray-100">
+                <span className="text-sm text-gray-500">Active filters:</span>
+                <div className="flex flex-wrap gap-2">
+                  {selectedLocation && (
+                    <span className="inline-flex items-center gap-1 px-3 py-1 bg-yellow-50 text-yellow-500 rounded-full text-sm">
+                      <MapPin className="w-4 h-4" />
+                      {selectedLocation}
+                      <button 
+                        onClick={() => setSelectedLocation("")}
+                        className="hover:text-yellow-600"
+                      >
+                        <X className="w-4 h-4" />
+                      </button>
+                    </span>
+                  )}
+                  {selectedType && (
+                    <span className="inline-flex items-center gap-1 px-3 py-1 bg-yellow-50 text-yellow-500 rounded-full text-sm">
+                      <Car className="w-4 h-4" />
+                      {selectedType} Test
+                      <button 
+                        onClick={() => setSelectedType("")}
+                        className="hover:text-yellow-600"
+                      >
+                        <X className="w-4 h-4" />
+                      </button>
+                    </span>
+                  )}
+                  {searchQuery && (
+                    <span className="inline-flex items-center gap-1 px-3 py-1 bg-yellow-50 text-yellow-500 rounded-full text-sm">
+                      <Search className="w-4 h-4" />
+                      "{searchQuery}"
+                      <button 
+                        onClick={() => setSearchQuery("")}
+                        className="hover:text-yellow-600"
+                      >
+                        <X className="w-4 h-4" />
+                      </button>
+                    </span>
+                  )}
+                </div>
+              </div>
+            )}
           </div>
         </div>
 

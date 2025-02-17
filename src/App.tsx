@@ -19,7 +19,6 @@ import GPSRoutes from './pages/GPSRoutes';
 import Blog from './pages/Blog';
 import ScoreSheet from './pages/ScoreSheet';
 import G1Practice from './pages/G1Practice';
-import LearnToDrive from './pages/LearnToDrive';
 import MouseTrail from './components/ui/mouse-trail';
 
 
@@ -71,7 +70,6 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/pricing" element={<Pricing />} />
             <Route path="/blog" element={<Blog />} />
-            <Route path="/learn-to-drive" element={<LearnToDrive />} />
             <Route path="/services/hourly-lessons" element={<HourlyLesson cart={cart} setCart={setCart} />} />
             <Route path="/services/car-rental" element={<CarRental cart={cart} setCart={setCart} />} />
             <Route path="/learn-to-drive/special-packages" element={<SpecialPackages cart={cart} setCart={setCart} />} />

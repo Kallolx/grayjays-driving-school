@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { ChevronRight } from "lucide-react";
 import SpotlightButton from "../components/SpotlightButton";
 
 const CallToAction = () => {
@@ -47,7 +46,7 @@ const CallToAction = () => {
                     </p>
 
                     {/* Spotlight Button */}
-                    <Link to="/contact">
+                    <Link to="/services">
                       <SpotlightButton className="max-w-none w-auto" />
                     </Link>
                   </div>
