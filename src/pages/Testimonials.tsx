@@ -152,7 +152,7 @@ const Testimonials = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.5 }}
         >
           <h2 className="text-sm sm:text-base font-semibold leading-7 text-[#2c3149]">Testimonials</h2>
           <p className="mt-2 text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-gray-900">

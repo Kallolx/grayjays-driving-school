@@ -1,7 +1,12 @@
-import { useLayoutEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ChevronDown, CheckCircle2 } from "lucide-react";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination, Navigation } from 'swiper/modules';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import 'swiper/css';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -12,7 +17,6 @@ const SERVICES = [
       "Certified by the Ministry of Transportation, ensuring top-quality driver training.",
     icon: "/icons/1.png",
     color: "bg-gradient-to-br from-blue-400 to-indigo-500",
-    features: ["MTO Certified", "Professional Training", "Quality Assurance"],
   },
   {
     title: "Customized Curriculum",
@@ -20,7 +24,6 @@ const SERVICES = [
       "Only at GrayJays! Our updated syllabus focuses on exactly what examiners look for.",
     icon: "/icons/2.png",
     color: "bg-gradient-to-br from-amber-400 to-yellow-500",
-    features: ["Personalized Learning", "Updated Content", "Examiner Insights"],
   },
   {
     title: "Certified Instructors",
@@ -28,11 +31,6 @@ const SERVICES = [
       "Learn from highly trained professionals who undergo rigorous background checks.",
     icon: "/icons/3.png",
     color: "bg-gradient-to-br from-green-400 to-emerald-500",
-    features: [
-      "Expert Instructors",
-      "Background Verified",
-      "Continuous Training",
-    ],
   },
   {
     title: "Transparent Pricing",
@@ -40,7 +38,6 @@ const SERVICES = [
       "No hidden fees—clear and upfront costs for complete peace of mind.",
     icon: "/icons/4.png",
     color: "bg-gradient-to-br from-rose-400 to-red-500",
-    features: ["Clear Pricing", "No Hidden Fees", "Flexible Payment"],
   },
   {
     title: "Defensive Driving Skills",
@@ -48,7 +45,6 @@ const SERVICES = [
       "Master advanced techniques to stay safe and confident on the road.",
     icon: "/icons/5.png",
     color: "bg-gradient-to-br from-[#2c3149] to-[#1a1f33]",
-    features: ["Advanced Techniques", "Safety First", "Road Confidence"],
   },
   {
     title: "99% Passing Rate",
@@ -56,7 +52,6 @@ const SERVICES = [
       "Proven methods to help you pass your road test on the first attempt.",
     icon: "/icons/6.png",
     color: "bg-gradient-to-br from-yellow-400 to-orange-500",
-    features: ["High Success Rate", "Test Preparation", "Expert Guidance"],
   },
   {
     title: "Flexible Payment",
@@ -64,7 +59,6 @@ const SERVICES = [
       "Interest-free financing and affordable payment plans to suit your budget.",
     icon: "/icons/7.png",
     color: "bg-gradient-to-br from-teal-400 to-emerald-500",
-    features: ["Easy Payments", "0% Interest", "Flexible Plans"],
   },
   {
     title: "Money-Back Guarantee",
@@ -72,13 +66,23 @@ const SERVICES = [
       "Your satisfaction is guaranteed—or your money back, no questions asked.",
     icon: "/icons/8.png",
     color: "bg-gradient-to-br from-purple-400 to-indigo-500",
-    features: ["100% Guarantee", "No Questions Asked", "Full Refund"],
   },
 ];
 
 const ServicesGrid = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [expandedCard, setExpandedCard] = useState<number | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
@@ -105,217 +109,119 @@ const ServicesGrid = () => {
     return () => ctx.revert();
   }, []);
 
+  const renderCard = (service: typeof SERVICES[0], index: number) => (
+    <div className="service-card relative h-full">
+      <div className={`h-[300px] lg:h-[350px] [perspective:1200px] group ${isMobile ? 'bg-white/50 backdrop-blur-sm rounded-2xl p-3' : ''}`}>
+        <div
+          className="relative h-full w-full transition-all duration-500 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)] cursor-pointer"
+          style={{ transformOrigin: "center center" }}
+        >
+          {/* Front */}
+          <div className="absolute inset-0 flex flex-col rounded-2xl bg-white p-4 lg:p-6 shadow-[0_8px_30px_rgb(0,0,0,0.12)] backdrop-blur-sm [backface-visibility:hidden] will-change-transform">
+            <div className="absolute inset-0 bg-[url('/patterns/texture-dots.png')] opacity-[0.03] rounded-2xl" />
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="text-center px-4 lg:px-6">
+                <div className="relative transform transition-transform duration-300">
+                  <div className={`absolute inset-0 ${service.color} rounded-full blur-2xl opacity-10 scale-150`} />
+                  <img
+                    src={service.icon}
+                    alt={service.title}
+                    className="relative h-20 w-20 lg:h-24 lg:w-24 object-contain drop-shadow-xl mx-auto"
+                  />
+                </div>
+                <h3 className="text-xl lg:text-xl font-bold text-[#2c3149] mt-4 lg:mt-6 mb-2 lg:mb-4">
+                  {service.title}
+                </h3>
+                <div className="flex items-center justify-center gap-2 text-sm lg:text-sm text-gray-400">
+                  <span>{isMobile ? 'Tap to flip' : 'Hover to flip'}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Back */}
+          <div className={`absolute inset-0 flex flex-col rounded-2xl bg-gradient-to-br from-[#2c3149] to-[#1a1f33] p-4 lg:p-8 text-white shadow-lg [transform:rotateY(180deg)] [backface-visibility:hidden] will-change-transform overflow-hidden`}>
+            <div className="absolute inset-0">
+              <div className="absolute inset-0 bg-[#2c3149]/40"></div>
+              <div className="absolute -top-20 -right-20 w-40 h-40 bg-white/10 rounded-full blur-2xl"></div>
+              <div className="absolute -bottom-20 -left-20 w-40 h-40 bg-white/10 rounded-full blur-2xl"></div>
+              <div className="absolute inset-0 bg-[url('/patterns/texture-dots.png')] opacity-[0.07]"></div>
+            </div>
+
+            <div className="relative flex flex-col h-full">
+              <div className="mb-3 lg:mb-6 flex items-start justify-between">
+                <div>
+                  <h3 className="text-xl lg:text-2xl font-bold mb-2">{service.title}</h3>
+                  <div className="w-12 h-0.5 bg-white/30 rounded-full"></div>
+                </div>
+                <div className="w-8 h-8 lg:w-12 lg:h-12 flex items-center justify-center">
+                  <img src="/icons/svg-image-1.svg" alt="GrayJays" className="w-5 h-5 lg:w-7 lg:h-7" />
+                </div>
+              </div>
+
+              <p className="text-base lg:text-lg leading-relaxed text-white/90">{service.description}</p>
+
+              <div className="absolute bottom-2 right-2 w-8 h-8 lg:w-10 lg:h-10 flex items-center justify-center opacity-20">
+                <span className="text-sm lg:text-base font-bold">
+                  {(index + 1).toString().padStart(2, "0")}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
   return (
-    <div
-      ref={containerRef}
-      className="relative py-16 lg:py-24 w-full overflow-hidden"
-    >
-      {/* Title Section */}
-      <div className="text-center mb-32">
+    <div ref={containerRef} className={`relative py-16 lg:py-24 w-full overflow-hidden ${isMobile ? 'bg-gradient-to-b from-gray-50 to-white' : ''}`}>
+      <div className={`text-center ${isMobile ? 'mb-12' : 'mb-32'}`}>
         <h2 className="text-4xl lg:text-5xl font-bold text-[#2c3149] mb-6">
           Whats makes <span className="text-yellow-500">GrayJays</span> different?
         </h2>
         <p className="text-gray-600 max-w-2xl mx-auto text-lg">
           We are a team of experienced instructors who are dedicated to providing the best possible driving experience for our students.
-
-
         </p>
       </div>
       <div className="max-w-7xl mx-auto px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 lg:gap-8">
-          {SERVICES.map((service, index) => (
-            <div key={index} className="service-card relative">
-              {/* Desktop Version - Flip Card */}
-              <div className="hidden lg:block h-[350px] [perspective:1200px] group">
-                <div
-                  className="relative h-full w-full transition-all duration-500 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)]"
-                  style={{ transformOrigin: "center center" }}
-                >
-                  {/* Front */}
-                  <div className="absolute inset-0 flex flex-col rounded-2xl bg-white p-6 shadow-[0_8px_30px_rgb(0,0,0,0.12)] backdrop-blur-sm [backface-visibility:hidden] will-change-transform">
-                    {/* Number Badge */}
-                    <div className="absolute top-6 right-6">
-                    </div>
-
-                    {/* Card Pattern */}
-                    <div className="absolute inset-0 bg-[url('/patterns/texture-dots.png')] opacity-[0.03]" />
-
-                    {/* Content */}
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="text-center px-6">
-                        <div className="relative transform transition-transform duration-300">
-                          <div
-                            className={`absolute inset-0 ${service.color} rounded-full blur-2xl opacity-10 scale-150`}
-                          />
-                          <img
-                            src={service.icon}
-                            alt={service.title}
-                            className="relative h-24 w-24 object-contain drop-shadow-xl mx-auto"
-                          />
-                        </div>
-                        <h3 className="text-xl font-bold text-[#2c3149] mt-6 mb-4">
-                          {service.title}
-                        </h3>
-                        <div className="flex items-center justify-center gap-2 text-sm text-gray-400">
-                          <span>
-                            Hover to learn more
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Back */}
-                  <div
-                    className={`absolute inset-0 flex flex-col rounded-2xl bg-gradient-to-br from-[#2c3149] to-[#1a1f33] p-8 text-white shadow-lg [transform:rotateY(180deg)] [backface-visibility:hidden] will-change-transform overflow-hidden`}
-                  >
-                    {/* Background Pattern */}
-                    <div className="absolute inset-0">
-                      {/* Gradient Overlay for better text readability */}
-                      <div className="absolute inset-0 bg-[#2c3149]/40"></div>
-                      {/* Top Right Corner Decoration */}
-                      <div className="absolute -top-20 -right-20 w-40 h-40 bg-white/10 rounded-full blur-2xl"></div>
-                      {/* Bottom Left Corner Decoration */}
-                      <div className="absolute -bottom-20 -left-20 w-40 h-40 bg-white/10 rounded-full blur-2xl"></div>
-                      {/* Subtle Grid Pattern */}
-                      <div className="absolute inset-0 bg-[url('/patterns/texture-dots.png')] opacity-[0.07]"></div>
-                    </div>
-
-                    {/* Content */}
-                    <div className="relative flex flex-col h-full">
-                      {/* Header with Icon */}
-                      <div className="mb-6 flex items-start justify-between">
-                        <div>
-                          <h3 className="text-2xl font-bold mb-2">
-                            {service.title}
-                          </h3>
-                          <div className="w-12 h-0.5 bg-white/30 rounded-full"></div>
-                        </div>
-                        <div className="w-12 h-12  flex items-center justify-center">
-                          <img
-                            src="/icons/svg-image-1.svg"
-                            alt="GrayJays"
-                            className="w-7 h-7"
-                          />
-                        </div>
-                      </div>
-
-                      {/* Description */}
-                      <p className="text-lg leading-relaxed text-white/90">
-                        {service.description}
-                      </p>
-
-                      {/* Number Badge - Small Version */}
-                      <div className="absolute bottom-2 right-2 w-10 h-10 flex items-center justify-center opacity-20">
-                        <span className="text-base font-bold">
-                          {(index + 1).toString().padStart(2, "0")}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Mobile Version - Single Column Expandable Card */}
-              <div
-                className="lg:hidden"
-                onClick={() =>
-                  setExpandedCard(expandedCard === index ? null : index)
-                }
-              >
-                <div
-                  className={`relative overflow-hidden rounded-xl transition-all duration-300 border border-gray-100 shadow-sm hover:shadow-md ${
-                    expandedCard === index
-                      ? "bg-gradient-to-br " +
-                        service.color +
-                        " border-transparent"
-                      : "bg-white"
-                  }`}
-                >
-                  {/* Card Pattern */}
-                  <div className="absolute inset-0 bg-[url('/patterns/texture-dots.png')] opacity-[0.03]" />
-
-                  <div className="relative flex items-center gap-4 p-5">
-                    <div className="relative">
-                      <div
-                        className={`absolute inset-0 ${service.color} rounded-xl blur-lg opacity-20`}
-                      />
-                      <img
-                        src={service.icon}
-                        alt={service.title}
-                        className={`w-12 h-12 object-contain relative transition-transform duration-300 ${
-                          expandedCard === index
-                            ? "scale-110 brightness-0 invert"
-                            : ""
-                        }`}
-                      />
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-3">
-                        <h3
-                          className={`text-lg font-bold transition-colors ${
-                            expandedCard === index
-                              ? "text-white"
-                              : "text-[#2c3149]"
-                          }`}
-                        >
-                          {service.title}
-                        </h3>
-                        <div
-                          className={`text-xs px-2 py-1 rounded-full ${
-                            expandedCard === index
-                              ? "bg-white/20 text-white"
-                              : "bg-gray-100 text-gray-500"
-                          }`}
-                        >
-                          {(index + 1).toString().padStart(2, "0")}
-                        </div>
-                      </div>
-                      <p
-                        className={`text-sm mt-0.5 transition-colors ${
-                          expandedCard === index
-                            ? "text-white/80"
-                            : "text-gray-500"
-                        }`}
-                      >
-                        {service.description}
-                      </p>
-                    </div>
-                    <ChevronDown
-                      className={`w-5 h-5 transition-all duration-300 ${
-                        expandedCard === index
-                          ? "rotate-180 text-white"
-                          : "text-gray-400"
-                      }`}
-                    />
-                  </div>
-
-                  {/* Expanded Content */}
-                  <div
-                    className={`overflow-hidden transition-all duration-300 ${
-                      expandedCard === index
-                        ? "max-h-[300px] opacity-100"
-                        : "max-h-0 opacity-0"
-                    }`}
-                  >
-                    <div className="relative p-5 pt-0 text-white">
-                      <div className="space-y-3">
-                        {service.features.map((feature, idx) => (
-                          <div key={idx} className="flex items-start gap-3">
-                            <div className="flex-shrink-0 w-5 h-5 rounded-full bg-white/20 flex items-center justify-center mt-0.5">
-                              <CheckCircle2 className="w-4 h-4 text-white" />
-                            </div>
-                            <p className="text-sm">{feature}</p>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+        {isMobile ? (
+          <div className="relative [&_.swiper-pagination-bullet]:w-2.5 [&_.swiper-pagination-bullet]:h-2.5 [&_.swiper-pagination-bullet]:bg-[#2c3149] [&_.swiper-pagination-bullet]:opacity-30 [&_.swiper-pagination-bullet-active]:opacity-100">
+            <Swiper
+              modules={[Pagination, Navigation]}
+              spaceBetween={20}
+              slidesPerView={1}
+              pagination={{ 
+                clickable: true,
+                el: '.swiper-pagination'
+              }}
+              navigation={{
+                prevEl: '.swiper-button-prev',
+                nextEl: '.swiper-button-next',
+              }}
+              className="pb-20"
+            >
+              {SERVICES.map((service, index) => (
+                <SwiperSlide key={index} className="px-4">
+                  {renderCard(service, index)}
+                </SwiperSlide>
+              ))}
+            </Swiper>
+            <div className="absolute bottom-0 left-0 right-0 flex items-center justify-center gap-3">
+              <button className="swiper-button-prev !static !w-8 !h-8 !mt-0 !text-[#2c3149] after:!hidden rounded-full border border-gray-200 hover:border-gray-300 transition-colors flex items-center justify-center">
+                <ChevronLeft className="w-4 h-4" />
+              </button>
+              <button className="swiper-button-next !static !w-8 !h-8 !mt-0 !text-[#2c3149] after:!hidden rounded-full border border-gray-200 hover:border-gray-300 transition-colors flex items-center justify-center">
+                <ChevronRight className="w-4 h-4" />
+              </button>
             </div>
-          ))}
-        </div>
+          </div>
+        ) : (
+          <div className="grid grid-cols-4 gap-8">
+            {SERVICES.map((service, index) => (
+              <div key={index}>{renderCard(service, index)}</div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
