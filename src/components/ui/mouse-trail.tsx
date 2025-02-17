@@ -11,7 +11,7 @@ const MouseTrail = () => {
       outerAlpha={0.3}
       showSystemCursor={false}
       innerStyle={{
-        background: "radial-gradient(circle, #EAB308 0%, #EAB308 100%)",
+        background: "#fff",
         borderRadius: "50%",
         mixBlendMode: "exclusion",
         opacity: 0.9

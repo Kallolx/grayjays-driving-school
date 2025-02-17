@@ -158,9 +158,7 @@ const Testimonials = () => {
           <p className="mt-2 text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-gray-900">
             What Our Students Say
           </p>
-          <p className="mt-4 sm:mt-6 text-sm sm:text-lg leading-7 sm:leading-8 text-gray-600">
-            Read authentic reviews from our valued students across Greater Toronto Area
-          </p>
+
         </motion.div>
 
         {/* First Row - Left to Right */}
