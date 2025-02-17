@@ -19,7 +19,20 @@ import GPSRoutes from './pages/GPSRoutes';
 import Blog from './pages/Blog';
 import ScoreSheet from './pages/ScoreSheet';
 import G1Practice from './pages/G1Practice';
-import { CartItem } from './types/cart';
+import LearnToDrive from './pages/LearnToDrive';
+import MouseTrail from './components/ui/mouse-trail';
+
+
+// Add CartItem interface
+interface CartItem {
+  id: string;
+  name: string;
+  price: number;
+  location?: string;
+  licenseType?: string;
+  hours?: number;
+  requiresLocation: boolean;
+}
 
 function ScrollToTop() {
   const location = useLocation();
@@ -48,6 +61,7 @@ function App() {
     <Router>
       <div className="min-h-screen bg-gray-50 font-poppins antialiased text-gray-900 selection:bg-[#FFD7C9] selection:text-gray-900">
         <ScrollToTop />
+        <MouseTrail />
         <Navbar />
         <main>
           <Routes>
@@ -57,6 +71,7 @@ function App() {
             <Route path="/contact" element={<Contact />} />
             <Route path="/pricing" element={<Pricing />} />
             <Route path="/blog" element={<Blog />} />
+            <Route path="/learn-to-drive" element={<LearnToDrive />} />
             <Route path="/services/hourly-lessons" element={<HourlyLesson cart={cart} setCart={setCart} />} />
             <Route path="/services/car-rental" element={<CarRental cart={cart} setCart={setCart} />} />
             <Route path="/learn-to-drive/special-packages" element={<SpecialPackages cart={cart} setCart={setCart} />} />

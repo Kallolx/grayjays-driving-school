@@ -113,7 +113,7 @@ const ServicesGrid = () => {
       {/* Title Section */}
       <div className="text-center mb-32">
         <h2 className="text-4xl lg:text-5xl font-bold text-[#2c3149] mb-6">
-          Why Choose <span className="text-yellow-500">GrayJays</span>
+          Whats makes <span className="text-yellow-500">GrayJays</span> different?
         </h2>
         <p className="text-gray-600 max-w-2xl mx-auto text-lg">
           We are a team of experienced instructors who are dedicated to providing the best possible driving experience for our students.

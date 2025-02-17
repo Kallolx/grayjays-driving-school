@@ -98,7 +98,7 @@ const TESTIMONIALS_ROW_TWO = [
 
 const TestimonialCard = ({ testimonial }: { testimonial: typeof TESTIMONIALS[0] }) => (
   <motion.div
-    className="flex-shrink-0 w-[400px] sm:w-[400px] w-[280px]"
+    className="flex-shrink-0 w-[400px] sm:w-[400px]"
     initial={{ opacity: 0, y: 20 }}
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}

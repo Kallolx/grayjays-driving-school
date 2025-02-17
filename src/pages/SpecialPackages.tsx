@@ -10,35 +10,34 @@ import {
 from 'lucide-react';
 import SpotlightButton from '../components/SpotlightButton';
 import PackageDetailsSidebar from '../components/PackageDetailsSidebar';
-import { toast } from 'react-hot-toast';
+import { CartItem } from '../types';
 
-// Constants
-const LOCATIONS = [
-  'Belleville', 'Bancroft', 'Barrie', 'Barrys bay', 'Brampton', 'Brantford', 'Burlington',
-  'Clinton', 'Collingwood', 'Guelph', 'Haliburton', 'Hamilton', 'Huntsville', 'Kingston',
-  'Kitchener', 'Lindsay', 'London', 'Madoc', 'Mississauga', 'Newmarket', 'Oakville',
-  'Orangeville', 'Orilia', 'Oshawa', 'Owen Sound', 'Parry Sound', 'Peterborough',
-  'Port Hopes', 'Simcoe', 'St. Catherines', 'Stratford', 'Tillsonburg', 'Toronto Downsview',
-  'Toronto Etobicoke', 'Toronto Metro East', 'Toronto Port Union', 'Walkerton', 'Woodstock'
-].sort();
-
-const LICENSE_TYPES = ['G2', 'G'];
-
-interface CartItem {
-  id: string;
-  name: string;
-  price: number;
-  location?: string;
-  licenseType?: string;
-  hours?: number;
-  requiresLocation: boolean;
-}
 
 const CRASH_COURSES = [
-  { name: 'Test Day', hours: 1, basePrice: 99 },
-  { name: 'Brush Up', hours: 2, basePrice: 179 },
-  { name: 'Road Test Ready', hours: 3, basePrice: 249 },
-  { name: 'Driving Success', hours: 5, basePrice: 399 }
+  {
+    id: 'test-day',
+    title: 'Test Day',
+    description: 'Quick preparation for your upcoming test',
+    price: 99
+  },
+  {
+    id: 'brush-up',
+    title: 'Brush Up',
+    description: 'Refresh your skills with a 2-hour session',
+    price: 179
+  },
+  {
+    id: 'road-test-ready',
+    title: 'Road Test Ready',
+    description: 'Comprehensive 3-hour preparation',
+    price: 249
+  },
+  {
+    id: 'driving-success',
+    title: 'Driving Success',
+    description: 'Complete 5-hour preparation package',
+    price: 399
+  }
 ];
 
 const PARKING_FEATURES = [
@@ -73,6 +72,7 @@ const GUARANTEED_PASS_FEATURES = [
 const REFRESHER_SECTIONS = [
   {
     title: 'City and Suburban Driving',
+    description: 'Master urban and residential area driving skills',
     features: [
       'S-Turn Practice: Enhance precision and control in tight spaces',
       'Traffic Light Awareness: Improve reaction times',
@@ -88,6 +88,7 @@ const REFRESHER_SECTIONS = [
   },
   {
     title: 'Highway Safety and Merging Techniques',
+    description: 'Learn essential highway driving skills',
     features: [
       'Highway Merging: Confidently merge onto highways',
       'Highway Exiting: Safely exit highways with precision',
@@ -96,10 +97,12 @@ const REFRESHER_SECTIONS = [
   },
   {
     title: 'Precision Parking and Maneuvering',
+    description: 'Perfect your parking skills',
     features: PARKING_FEATURES
   },
   {
     title: 'Basic Vehicle Care and Troubleshooting',
+    description: 'Learn essential vehicle maintenance',
     features: [
       'Basic Maintenance Checks',
       'Emergency Procedures',
@@ -110,36 +113,18 @@ const REFRESHER_SECTIONS = [
 ];
 
 const MOCK_TEST_FEATURES = [
-  {
-    title: 'Realistic Test Environment',
-    description: 'Experience a simulated road test environment that mirrors the actual test conditions.',
-    features: [
-      'Authentic test routes used by examiners',
-      'Standard test duration and format',
-      'Professional evaluation criteria',
-      'Real-time feedback and scoring'
-    ]
-  },
-  {
-    title: 'Comprehensive Assessment',
-    description: 'Get detailed feedback on your driving skills and areas for improvement.',
-    features: [
-      'Point-by-point scoring system',
-      'Detailed performance analysis',
-      'Personalized improvement tips',
-      'Common mistakes identification'
-    ]
-  },
-  {
-    title: 'Test Preparation',
-    description: 'Prepare thoroughly with our structured mock test program.',
-    features: [
-      'Pre-test vehicle inspection',
-      'Documentation check practice',
-      'Examiner interaction simulation',
-      'Post-test review session'
-    ]
-  }
+  'Authentic test routes used by examiners',
+  'Standard test duration and format',
+  'Professional evaluation criteria',
+  'Real-time feedback and scoring',
+  'Point-by-point scoring system',
+  'Detailed performance analysis',
+  'Personalized improvement tips',
+  'Common mistakes identification',
+  'Pre-test vehicle inspection',
+  'Documentation check practice',
+  'Examiner interaction simulation',
+  'Post-test review session'
 ];
 
 const SpecialPackages = ({ cart, setCart }: { cart: CartItem[]; setCart: (cart: CartItem[]) => void }) => {
@@ -147,42 +132,10 @@ const SpecialPackages = ({ cart, setCart }: { cart: CartItem[]; setCart: (cart: 
   const [selectedLicenseType, setSelectedLicenseType] = useState<string>('');
   const [showCart, setShowCart] = useState(false);
   const [expandedCard, setExpandedCard] = useState<string | null>(null);
-  const [showLocationMenu, setShowLocationMenu] = useState(false);
-  const [showLicenseMenu, setShowLicenseMenu] = useState(false);
   const [selectedCrashCourse, setSelectedCrashCourse] = useState<string | null>(null);
   const [showSidebar, setShowSidebar] = useState(false);
   const [selectedPackage, setSelectedPackage] = useState<string | null>(null);
 
-  const addToCart = (item: CartItem) => {
-    if (item.requiresLocation && (!selectedLocation || !selectedLicenseType)) {
-      toast.error('Please select your location and license type first', {
-        style: {
-          background: '#2c3149',
-          color: '#fff',
-          borderRadius: '12px',
-        },
-        icon: '📍',
-        position: 'bottom-left',
-        duration: 3000,
-      });
-      return;
-    }
-    setCart([...cart, {
-      ...item,
-      location: selectedLocation,
-      licenseType: selectedLicenseType
-    }]);
-    toast.success('Item added to cart successfully!', {
-      style: {
-        background: '#2c3149',
-        color: '#fff',
-        borderRadius: '12px',
-      },
-      icon: '🛒',
-      position: 'bottom-left',
-      duration: 2000,
-    });
-  };
 
   const removeFromCart = (itemId: string) => {
     setCart(cart.filter(item => item.id !== itemId));
@@ -191,48 +144,55 @@ const SpecialPackages = ({ cart, setCart }: { cart: CartItem[]; setCart: (cart: 
 
   const packages = [
     {
-      id: 'crash-courses',
+      id: 'crash-course',
       title: 'Crash Courses',
       description: 'Intensive driving courses designed to quickly prepare you for your test.',
-      icon: <img src="/icons/crash.png" alt="Custom icon" className="w-25 h-25" />,
-      requiresLocation: true,
-      basePrice: CRASH_COURSES[0].basePrice
+      price: CRASH_COURSES[0].price,
+      icon: '/icons/crash.png',
+      image: '/images/crash-course.jpg',
+      requiresLocation: true
     },
     {
       id: 'parking',
       title: 'Parking Made Easy',
       description: 'Master all types of parking with our comprehensive course.',
-      icon: <img src="/icons/parking.png" alt="Custom icon" className="w-22 h-22" />,
-      requiresLocation: true,
-      basePrice: 99
+      price: 99,
+      icon: '/icons/parking.png',
+      image: '/images/parking.jpg',
+      requiresLocation: false
     },
     {
       id: 'mock-test',
       title: 'Mock Test',
       description: 'Get real test experience with detailed feedback.',
-      icon: <img src="/icons/mock.png" alt="Custom icon" className="w-20 h-20" />,
-      requiresLocation: true,
-      basePrice: 99
+      price: 99,
+      icon: '/icons/mock.png',
+      image: '/images/mock-test.jpg',
+      requiresLocation: false
     },
     {
       id: 'guaranteed-pass',
       title: 'Guaranteed Pass',
       description: 'Comprehensive program with unlimited lessons until you pass.',
-      icon: <img src="/icons/guarantee.png" alt="Custom icon" className="w-22 h-22" />,
-      requiresLocation: true,
-      basePrice: 1999,
-      originalPrice: 3000,
-      isOnSale: true
+      price: 1999,
+      icon: '/icons/guarantee.png',
+      image: '/images/guaranteed-pass.jpg',
+      requiresLocation: false
     },
     {
       id: 'refresher',
       title: 'Refresher Course',
       description: 'Update your skills and rebuild confidence.',
-      icon: <img src="/icons/reload.png" alt="Custom icon" className="w-20 h-20" />,
-      requiresLocation: true,
-      basePrice: 249
+      price: 249,
+      icon: '/icons/reload.png',
+      image: '/images/refresher.jpg',
+      requiresLocation: false
     }
   ];
+
+  function addToCart(_item: CartItem): void {
+    throw new Error('Function not implemented.');
+  }
 
   return (
     <div className="relative min-h-screen bg-gray-50">
@@ -259,96 +219,6 @@ const SpecialPackages = ({ cart, setCart }: { cart: CartItem[]; setCart: (cart: 
             >
               Choose from our tailored driving packages designed to meet your specific needs and goals.
             </motion.p>
-          </div>
-
-          {/* Location and License Selectors */}
-          <div className="max-w-lg mx-auto">
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="grid gap-4 sm:grid-cols-2"
-            >
-              {/* Location Dropdown */}
-              <div className="relative">
-                <button
-                  onClick={() => setShowLocationMenu(!showLocationMenu)}
-                  className="w-full flex items-center justify-between px-4 py-3 rounded-xl border-2 border-white/10 bg-white/5 text-white hover:bg-white/10 transition-colors"
-                >
-                  <div className="flex items-center gap-3">
-                    <MapPin className="w-5 h-5 text-yellow-500" />
-                    <span className="text-sm">{selectedLocation || 'Select Location'}</span>
-                  </div>
-                  <ChevronDown className={`w-5 h-5 transition-transform duration-200 ${showLocationMenu ? 'rotate-180' : ''}`} />
-                </button>
-                
-                <AnimatePresence>
-                  {showLocationMenu && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 10 }}
-                      className="absolute z-50 w-full mt-2 py-2 bg-white rounded-xl shadow-xl border border-gray-100 max-h-64 overflow-y-auto"
-                    >
-                      {LOCATIONS.map(location => (
-                        <button
-                          key={location}
-                          onClick={() => {
-                            setSelectedLocation(location);
-                            setShowLocationMenu(false);
-                          }}
-                          className={`w-full px-4 py-2 text-left hover:bg-gray-50 text-sm ${
-                            selectedLocation === location ? 'text-yellow-500 font-medium' : 'text-gray-600'
-                          }`}
-                        >
-                          {location}
-                        </button>
-                      ))}
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-
-              {/* License Type Dropdown */}
-              <div className="relative">
-                <button
-                  onClick={() => setShowLicenseMenu(!showLicenseMenu)}
-                  className="w-full flex items-center justify-between px-4 py-3 rounded-xl border-2 border-white/10 bg-white/5 text-white hover:bg-white/10 transition-colors"
-                >
-                  <div className="flex items-center gap-3">
-                    <FileCheck className="w-5 h-5 text-yellow-500" />
-                    <span className="text-sm">{selectedLicenseType || 'Select License Type'}</span>
-                  </div>
-                  <ChevronDown className={`w-5 h-5 transition-transform duration-200 ${showLicenseMenu ? 'rotate-180' : ''}`} />
-                </button>
-                
-                <AnimatePresence>
-                  {showLicenseMenu && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 10 }}
-                      className="absolute z-50 w-full mt-2 py-2 bg-white rounded-xl shadow-xl border border-gray-100"
-                    >
-                      {LICENSE_TYPES.map(type => (
-                        <button
-                          key={type}
-                          onClick={() => {
-                            setSelectedLicenseType(type);
-                            setShowLicenseMenu(false);
-                          }}
-                          className={`w-full px-4 py-2 text-left hover:bg-gray-50 text-sm ${
-                            selectedLicenseType === type ? 'text-yellow-500 font-medium' : 'text-gray-600'
-                          }`}
-                        >
-                          {type}
-                        </button>
-                      ))}
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-            </motion.div>
           </div>
         </div>
       </div>
@@ -409,7 +279,7 @@ const SpecialPackages = ({ cart, setCart }: { cart: CartItem[]; setCart: (cart: 
                         <div className={`transform transition-all duration-500 ${
                           expandedCard === pkg.id ? 'scale-110 text-white' : 'scale-150 text-yellow-500'
                         }`}>
-                          {pkg.icon}
+                          <img src={pkg.icon} alt={pkg.title} className="w-25 h-25" />
                         </div>
                       </div>
                     </motion.div>
@@ -437,18 +307,18 @@ const SpecialPackages = ({ cart, setCart }: { cart: CartItem[]; setCart: (cart: 
                       </motion.p>
                     </motion.div>
 
-                    {/* Price Tag - New Element at Top */}
+                    {/* Price Tag */}
                     <div className="absolute top-4 right-4">
                       <div className={`px-4 py-2 rounded-full ${
                         expandedCard === pkg.id 
                           ? 'bg-white/20 text-white'
                           : 'bg-yellow-500/10 text-yellow-500'
                       } font-semibold text-sm`}>
-                        From ${pkg.basePrice}
+                        From ${pkg.price}
                       </div>
                     </div>
 
-                    {/* License Type Badge - New Element at Top */}
+                    {/* License Type Badge */}
                     {pkg.requiresLocation && (
                       <div className="absolute top-4 left-4">
                         <div className={`px-3 py-1.5 rounded-full ${
@@ -498,6 +368,8 @@ const SpecialPackages = ({ cart, setCart }: { cart: CartItem[]; setCart: (cart: 
             MOCK_TEST_FEATURES={MOCK_TEST_FEATURES}
             selectedLocation={selectedLocation}
             selectedLicenseType={selectedLicenseType}
+            setSelectedLocation={setSelectedLocation}
+            setSelectedLicenseType={setSelectedLicenseType}
           />
         )}
       </AnimatePresence>

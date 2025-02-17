@@ -1,17 +1,18 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import ReactCountryFlag from "react-country-flag";
+import { motion } from 'framer-motion';
 import {  
   ChevronDown,
   UserCircle2,
-  CalendarCheck,
   GraduationCap,
   Clock3,
   Package,
   BookOpen,
   Route,
   FileSpreadsheet,
-  Menu
+  Menu,
+  CalendarCheck
 } from 'lucide-react';
 import MobileSidebar from './MobileSidebar';
 
@@ -83,11 +84,25 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-[#2c3149] shadow-lg">
+      <motion.nav 
+        className="fixed top-0 left-0 right-0 z-50 bg-[#2c3149] shadow-lg"
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ 
+          duration: 0.8, 
+          delay: 1.2, // Delay to wait for home content to appear
+          ease: [0.1, 0.25, 0.3, 1], // Custom ease curve for smooth slide
+        }}
+      >
         <div className="max-w-[1920px] mx-auto px-4 sm:px-6">
           <div className="flex items-center justify-between h-16 md:h-20">
             {/* Logo and Location - Desktop */}
-            <div className="hidden md:flex items-center space-x-8">
+            <motion.div 
+              className="hidden md:flex items-center space-x-8"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1.5, duration: 0.5 }}
+            >
               <Link to="/" className="flex items-center space-x-3">
                 <div className="w-10 h-10">
                   <img src="/icons/svg-image-1.svg" alt="Logo" className="w-full h-full object-contain" />
@@ -137,10 +152,15 @@ const Navbar = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
             {/* Logo and Location - Mobile Only */}
-            <div className="md:hidden flex items-center space-x-4">
+            <motion.div 
+              className="md:hidden flex items-center space-x-4"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1.5, duration: 0.5 }}
+            >
               <Link to="/" className="flex items-center space-x-2">
                 <div className="w-8 h-8">
                   <img src="/icons/svg-image-1.svg" alt="Logo" className="w-full h-full object-contain" />
@@ -149,10 +169,15 @@ const Navbar = () => {
                   GraysJays
                 </span>
               </Link>
-            </div>
+            </motion.div>
 
             {/* Desktop Navigation - Centered */}
-            <div className="hidden md:flex items-center justify-center flex-1">
+            <motion.div 
+              className="hidden md:flex items-center justify-center flex-1"
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.7, duration: 0.5 }}
+            >
               <div className="flex items-center space-x-6">
                 {navLinks.map((link) => (
                   <div
@@ -209,10 +234,15 @@ const Navbar = () => {
                   </div>
                 ))}
               </div>
-            </div>
+            </motion.div>
 
             {/* Auth Buttons - Right Side */}
-            <div className="hidden md:flex items-center space-x-3">
+            <motion.div 
+              className="hidden md:flex items-center space-x-3"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1.9, duration: 0.5 }}
+            >
               <Link
                 to="/login"
                 className="flex items-center space-x-2 px-3 py-2 text-sm font-medium text-gray-300 hover:text-white transition-colors group"
@@ -230,19 +260,22 @@ const Navbar = () => {
                 <CalendarCheck className="w-4 h-4" />
                 <span className="font-semibold">Book Now</span>
               </Link>
-            </div>
+            </motion.div>
 
             {/* Mobile Menu Button */}
-            <button
+            <motion.button
               onClick={() => setIsMobileMenuOpen(true)}
               className="md:hidden p-2 rounded-lg text-gray-300 hover:bg-white/10 hover:text-white"
               aria-label="Open menu"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1.5, duration: 0.5 }}
             >
               <Menu className="w-6 h-6" />
-            </button>
+            </motion.button>
           </div>
         </div>
-      </nav>
+      </motion.nav>
 
       {/* Mobile Sidebar */}
       <MobileSidebar isOpen={isMobileMenuOpen} onClose={() => setIsMobileMenuOpen(false)} />

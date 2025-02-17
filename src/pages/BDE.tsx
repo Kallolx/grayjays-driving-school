@@ -34,7 +34,9 @@ const BDE = ({ cart, setCart }: BDEProps) => {
   const addToCart = () => {
     const cartItem: CartItem = {
       id: `bde-${Date.now()}`,
-      name: `BDE Course - ${hours} Hours ${withCar ? 'with Car' : 'without Car'}`,
+      name: `BDE Course - ${hours} Hours ${
+        withCar ? "with Car" : "without Car"
+      }`,
       price: hours * basePrice,
       requiresLocation: false,
       hours,
@@ -55,13 +57,13 @@ const BDE = ({ cart, setCart }: BDEProps) => {
 
   const incrementHours = () => {
     if (hours < 50) {
-      setHours(prev => prev + 1);
+      setHours((prev) => prev + 1);
     }
   };
 
   const decrementHours = () => {
     if (hours > 10) {
-      setHours(prev => prev - 1);
+      setHours((prev) => prev - 1);
     }
   };
 
@@ -139,6 +141,130 @@ const BDE = ({ cart, setCart }: BDEProps) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid lg:grid-cols-3 gap-8">
           {/* Course Details - Left Column */}
+
+          {/* Booking Panel - Right Column */}
+          <div className="lg:col-span-1">
+            <div className="sticky top-24">
+              <div className="bg-white border border-gray-200 rounded-2xl shadow-lg p-6">
+                {/* Heading */}
+                <h2 className="text-xl font-bold text-[#2c3149] mb-5">
+                  Book Your Course
+                </h2>
+
+                {/* Hours Selector */}
+                <div className="mb-5">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Select Hours:
+                  </label>
+                  <div className="bg-gray-100 p-4 rounded-xl border border-gray-300">
+                    <div className="flex items-center justify-between mb-2">
+                      <div className="flex items-center gap-2">
+                        <Clock className="w-5 h-5 text-[#2c3149]" />
+                        <span className="text-sm font-medium text-[#2c3149]">
+                          Training Hours
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <button
+                          onClick={decrementHours}
+                          disabled={hours <= 10}
+                          className="w-9 h-9 rounded-md bg-gray-200 hover:bg-gray-300 flex items-center justify-center transition disabled:opacity-50 disabled:cursor-not-allowed"
+                        >
+                          <MinusCircle className="w-5 h-5 text-[#2c3149]" />
+                        </button>
+                        <span className="text-lg font-bold text-[#2c3149] min-w-[3ch] text-center">
+                          {hours}
+                        </span>
+                        <button
+                          onClick={incrementHours}
+                          disabled={hours >= 50}
+                          className="w-9 h-9 rounded-md bg-gray-200 hover:bg-gray-300 flex items-center justify-center transition disabled:opacity-50 disabled:cursor-not-allowed"
+                        >
+                          <PlusCircle className="w-5 h-5 text-[#2c3149]" />
+                        </button>
+                      </div>
+                    </div>
+                    <div className="text-xs text-gray-600 flex items-center gap-2">
+                      <AlertCircle className="w-4 h-4 text-yellow-500" />
+                      <span>Minimum 10 hours required</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Car Option Selector */}
+                <div className="mb-5">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">
+                    Do you need a car for the test?
+                  </label>
+                  <div className="p-1 rounded-xl bg-gray-100 border border-gray-300 flex items-center justify-between">
+                    <button
+                      onClick={() => setWithCar(true)}
+                      className={`w-1/2 py-3 rounded-md font-medium text-sm transition-all ${
+                        withCar
+                          ? "bg-[#2c3149] text-white shadow-md"
+                          : "text-gray-600 hover:bg-gray-200"
+                      }`}
+                    >
+                      Yes
+                    </button>
+                    <button
+                      onClick={() => setWithCar(false)}
+                      className={`w-1/2 py-3 rounded-md font-medium text-sm transition-all ${
+                        !withCar
+                          ? "bg-[#2c3149] text-white shadow-md"
+                          : "text-gray-600 hover:bg-gray-200"
+                      }`}
+                    >
+                      No
+                    </button>
+                  </div>
+                </div>
+
+                {/* Price Display */}
+                <div className="mb-5 p-4 bg-gray-100 rounded-xl border border-gray-300">
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-sm text-gray-600">
+                      Price per hour:
+                    </span>
+                    <span className="text-sm font-bold text-[#2c3149]">
+                      ${basePrice}
+                    </span>
+                  </div>
+                  <div className="flex items-center justify-between text-xs">
+                    <span className="text-gray-500">Total hours:</span>
+                    <span className="text-gray-500">{hours} hours</span>
+                  </div>
+                  <div className="h-px bg-gray-300 my-3" />
+                  <div className="flex items-center justify-between">
+                    <span className="text-sm font-semibold text-[#2c3149]">
+                      Total:
+                    </span>
+                    <span className="text-lg font-bold text-yellow-500">
+                      ${hours * basePrice}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Action Button */}
+                <button
+                  onClick={addToCart}
+                  className="w-full py-4 bg-[#2c3149] text-white text-sm font-bold rounded-xl hover:bg-[#1d2035] transition shadow-md transform hover:scale-[1.02]"
+                >
+                  Add to Cart
+                </button>
+
+                {/* Additional Info */}
+                <div className="mt-4 flex items-start gap-2 text-xs text-gray-600">
+                  <AlertCircle className="w-4 h-4 text-yellow-500 flex-shrink-0" />
+                  <p>
+                    By booking this course, you agree to our terms and
+                    conditions. Flexible payment plans available.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div className="lg:col-span-2 space-y-12">
             {/* Course Overview */}
             <section>
@@ -150,7 +276,7 @@ const BDE = ({ cart, setCart }: BDEProps) => {
                 <div className="group relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-br from-gray-50 to-white opacity-50" />
                   <div className="absolute inset-x-0 -bottom-1 h-1 bg-[#2c3149] transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
-                  
+
                   <div className="relative">
                     <div className="flex items-start gap-4">
                       <div className="w-16 h-16 rounded-2xl bg-gray-50 flex items-center justify-center group-hover:-rotate-6 transition-transform duration-300">
@@ -165,8 +291,8 @@ const BDE = ({ cart, setCart }: BDEProps) => {
                           20 Hours In-Class
                         </h3>
                         <p className="text-gray-600">
-                          Comprehensive classroom sessions covering traffic rules,
-                          road safety, and defensive driving techniques.
+                          Comprehensive classroom sessions covering traffic
+                          rules, road safety, and defensive driving techniques.
                         </p>
                       </div>
                     </div>
@@ -177,7 +303,7 @@ const BDE = ({ cart, setCart }: BDEProps) => {
                 <div className="group relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-br from-gray-50 to-white opacity-50" />
                   <div className="absolute inset-x-0 -bottom-1 h-1 bg-[#2c3149] transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
-                  
+
                   <div className="relative">
                     <div className="flex items-start gap-4">
                       <div className="w-16 h-16 rounded-2xl bg-gray-50 flex items-center justify-center group-hover:-rotate-6 transition-transform duration-300">
@@ -192,8 +318,8 @@ const BDE = ({ cart, setCart }: BDEProps) => {
                           10 Hours In-Car
                         </h3>
                         <p className="text-gray-600">
-                          One-on-one practical training with certified instructors in
-                          dual-brake vehicles.
+                          One-on-one practical training with certified
+                          instructors in dual-brake vehicles.
                         </p>
                       </div>
                     </div>
@@ -204,7 +330,7 @@ const BDE = ({ cart, setCart }: BDEProps) => {
                 <div className="group relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-br from-gray-50 to-white opacity-50" />
                   <div className="absolute inset-x-0 -bottom-1 h-1 bg-[#2c3149] transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
-                  
+
                   <div className="relative">
                     <div className="flex items-start gap-4">
                       <div className="w-16 h-16 rounded-2xl bg-gray-50 flex items-center justify-center group-hover:-rotate-6 transition-transform duration-300">
@@ -219,8 +345,8 @@ const BDE = ({ cart, setCart }: BDEProps) => {
                           10 Hours Home Study
                         </h3>
                         <p className="text-gray-600">
-                          Interactive online modules and materials for self-paced
-                          learning and practice.
+                          Interactive online modules and materials for
+                          self-paced learning and practice.
                         </p>
                       </div>
                     </div>
@@ -231,7 +357,7 @@ const BDE = ({ cart, setCart }: BDEProps) => {
                 <div className="group relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-br from-gray-50 to-white opacity-50" />
                   <div className="absolute inset-x-0 -bottom-1 h-1 bg-[#2c3149] transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
-                  
+
                   <div className="relative">
                     <div className="flex items-start gap-4">
                       <div className="w-16 h-16 rounded-2xl bg-gray-50 flex items-center justify-center group-hover:-rotate-6 transition-transform duration-300">
@@ -246,8 +372,8 @@ const BDE = ({ cart, setCart }: BDEProps) => {
                           Insurance Benefits
                         </h3>
                         <p className="text-gray-600">
-                          Qualify for up to 20% insurance discount upon successful
-                          completion.
+                          Qualify for up to 20% insurance discount upon
+                          successful completion.
                         </p>
                       </div>
                     </div>
@@ -282,9 +408,24 @@ const BDE = ({ cart, setCart }: BDEProps) => {
                   <div className="max-w-3xl mx-auto">
                     <div className="flex items-start gap-4">
                       <div className="flex-shrink-0 w-12 h-12 rounded-full bg-[#2c3149]/10 flex items-center justify-center">
-                        <svg className="w-6 h-6 text-[#2c3149]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        <svg
+                          className="w-6 h-6 text-[#2c3149]"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"
+                          />
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                          />
                         </svg>
                       </div>
                       <div>
@@ -292,18 +433,24 @@ const BDE = ({ cart, setCart }: BDEProps) => {
                           Watch Our Course Introduction
                         </h3>
                         <p className="text-gray-600">
-                          Get a comprehensive overview of our BDE program, teaching methods, and what to expect during your learning journey.
+                          Get a comprehensive overview of our BDE program,
+                          teaching methods, and what to expect during your
+                          learning journey.
                         </p>
-                        
+
                         {/* Video Features */}
                         <div className="mt-4 grid grid-cols-2 sm:grid-cols-3 gap-4">
                           <div className="flex items-center gap-2">
                             <div className="w-2 h-2 rounded-full bg-[#2c3149]" />
-                            <span className="text-sm text-gray-600">Full Course Overview</span>
+                            <span className="text-sm text-gray-600">
+                              Full Course Overview
+                            </span>
                           </div>
                           <div className="flex items-center gap-2">
                             <div className="w-2 h-2 rounded-full bg-[#2c3149]" />
-                            <span className="text-sm text-gray-600">Teaching Methods</span>
+                            <span className="text-sm text-gray-600">
+                              Teaching Methods
+                            </span>
                           </div>
                         </div>
                       </div>
@@ -391,121 +538,6 @@ const BDE = ({ cart, setCart }: BDEProps) => {
                 </div>
               </div>
             </section>
-          </div>
-
-          {/* Booking Panel - Right Column */}
-          <div className="lg:col-span-1">
-            <div className="sticky top-24">
-              <div className="bg-white rounded-2xl shadow-xl p-6 border border-gray-100">
-                <h2 className="text-2xl font-bold text-[#2c3149] mb-6">
-                  Book Your Course
-                </h2>
-
-                {/* Hours Selector */}
-                <div className="mb-6">
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Select Hours:
-                  </label>
-                  <div className="bg-gray-50 p-4 rounded-xl">
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="flex items-center gap-2">
-                        <Clock className="w-5 h-5 text-[#2c3149]" />
-                        <span className="text-[#2c3149] font-medium">Training Hours</span>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <button
-                          onClick={decrementHours}
-                          disabled={hours <= 10}
-                          className="w-8 h-8 rounded-lg bg-white flex items-center justify-center text-[#2c3149] hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                        >
-                          <MinusCircle className="w-5 h-5" />
-                        </button>
-                        <span className="text-xl font-bold text-[#2c3149] min-w-[3ch] text-center">
-                          {hours}
-                        </span>
-                        <button
-                          onClick={incrementHours}
-                          disabled={hours >= 50}
-                          className="w-8 h-8 rounded-lg bg-white flex items-center justify-center text-[#2c3149] hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                        >
-                          <PlusCircle className="w-5 h-5" />
-                        </button>
-                      </div>
-                    </div>
-                    <div className="text-sm text-gray-500 flex items-center gap-2">
-                      <AlertCircle className="w-4 h-4" />
-                      <span>Minimum 10 hours required</span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Car Option Selector */}
-                <div className="mb-6">
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Car Option:
-                  </label>
-                  <div className="bg-gray-50 p-1 rounded-xl">
-                    <div className="grid grid-cols-2 gap-1">
-                      <button
-                        onClick={() => setWithCar(true)}
-                        className={`p-3 rounded-lg text-sm font-medium transition-all ${
-                          withCar
-                            ? 'bg-[#2c3149] text-white shadow-md'
-                            : 'text-gray-500 hover:bg-gray-100'
-                        }`}
-                      >
-                        With Car
-                      </button>
-                      <button
-                        onClick={() => setWithCar(false)}
-                        className={`p-3 rounded-lg text-sm font-medium transition-all ${
-                          !withCar
-                            ? 'bg-[#2c3149] text-white shadow-md'
-                            : 'text-gray-500 hover:bg-gray-100'
-                        }`}
-                      >
-                        Without Car
-                      </button>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Price Display */}
-                <div className="mb-6 p-4 bg-gray-50 rounded-xl">
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-gray-600">Price per hour:</span>
-                    <span className="font-bold text-[#2c3149]">${basePrice}</span>
-                  </div>
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="text-gray-500">Total hours:</span>
-                    <span className="text-gray-500">{hours} hours</span>
-                  </div>
-                  <div className="h-px bg-gray-200 my-2" />
-                  <div className="flex items-center justify-between">
-                    <span className="font-medium text-[#2c3149]">Total:</span>
-                    <span className="text-lg font-bold text-yellow-500">
-                      ${hours * basePrice}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Action Button */}
-                <button
-                  onClick={addToCart}
-                  className="w-full py-4 bg-[#2c3149] text-white rounded-xl hover:bg-[#2c3149]/90 transition-colors"
-                >
-                  Add to Cart
-                </button>
-
-                {/* Additional Info */}
-                <div className="mt-4 flex items-start gap-2 text-xs text-gray-500">
-                  <AlertCircle className="w-4 h-4 flex-shrink-0" />
-                  <p>
-                    By booking this course, you agree to our terms and conditions. Flexible payment plans available.
-                  </p>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>

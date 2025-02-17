@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
   Route,
@@ -32,6 +32,21 @@ const GPSRoutes = ({ cart, setCart }: GPSRoutesProps) => {
   const [showLocationMenu, setShowLocationMenu] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
+  const locationMenuRef = useRef<HTMLDivElement>(null);
+
+  // Handle click outside to close location menu
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (locationMenuRef.current && !locationMenuRef.current.contains(event.target as Node)) {
+        setShowLocationMenu(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   const filteredProducts = ROUTE_PRODUCTS.filter(product => {
     const matchesSearch = product.title.toLowerCase().includes(searchQuery.toLowerCase());
@@ -145,84 +160,86 @@ const GPSRoutes = ({ cart, setCart }: GPSRoutesProps) => {
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         {/* Search and Filter Section */}
-        <div className="mb-12">
-          <div className="grid sm:grid-cols-3 gap-4">
-            {/* Search Input */}
-            <div className="relative">
-              <input
-                type="text"
-                placeholder="Search routes..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full px-4 py-3 pl-10 rounded-xl border-2 border-gray-200 focus:border-yellow-500 focus:outline-none transition-colors"
-              />
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
-            </div>
+        <div className="max-w-7xl mx-auto px- sm:px-6 lg:px-8 -mt-8 relative z-10">
+          <div className="bg-white rounded-2xl shadow-sm px-8 py-4 border border-gray-100">
+            <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
+              {/* Search Input */}
+              <div className="relative w-full md:w-96">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
+                <input
+                  type="text"
+                  placeholder="Search routes..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-yellow-500/20 focus:border-yellow-500"
+                />
+              </div>
 
-            {/* Location Filter */}
-            <div className="relative">
-              <button
-                onClick={() => setShowLocationMenu(!showLocationMenu)}
-                className="w-full flex items-center justify-between px-4 py-3 rounded-xl border-2 border-gray-200 hover:border-yellow-500 transition-all"
-              >
-                <div className="flex items-center gap-3">
-                  <MapPin className="w-5 h-5 text-yellow-500" />
-                  <span>{selectedLocation || "Filter by location"}</span>
-                </div>
-                <ChevronDown className={`w-5 h-5 transition-transform duration-200 ${showLocationMenu ? 'rotate-180' : ''}`} />
-              </button>
+              {/* Location Filter */}
+              <div className="relative" ref={locationMenuRef}>
+                <button
+                  onClick={() => setShowLocationMenu(!showLocationMenu)}
+                  className="w-full flex items-center justify-between px-4 py-3 rounded-xl border-2 border-gray-200 hover:border-yellow-500 transition-all"
+                >
+                  <div className="flex items-center gap-3">
+                    <MapPin className="w-5 h-5 text-yellow-500" />
+                    <span>{selectedLocation || "Filter by location"}</span>
+                  </div>
+                  <ChevronDown className={`w-5 h-5 transition-transform duration-200 ${showLocationMenu ? 'rotate-180' : ''}`} />
+                </button>
 
-              {showLocationMenu && (
-                <div className="absolute z-50 w-full mt-2 py-2 bg-white rounded-xl shadow-xl border border-gray-100 max-h-64 overflow-y-auto">
-                  <button
-                    onClick={() => {
-                      setSelectedLocation("");
-                      setShowLocationMenu(false);
-                    }}
-                    className="w-full px-4 py-2 text-left hover:bg-gray-50 text-sm text-gray-600"
-                  >
-                    All Locations
-                  </button>
-                  {LOCATIONS.map((location) => (
+                {showLocationMenu && (
+                  <div className="absolute z-50 w-full mt-2 py-2 bg-white rounded-xl shadow-xl border border-gray-100 max-h-64 overflow-y-auto">
                     <button
-                      key={location}
                       onClick={() => {
-                        setSelectedLocation(location);
+                        setSelectedLocation("");
                         setShowLocationMenu(false);
                       }}
-                      className={`w-full px-4 py-2 text-left hover:bg-gray-50 text-sm ${
-                        selectedLocation === location ? 'text-yellow-500 font-medium' : 'text-gray-600'
-                      }`}
+                      className="w-full px-4 py-2 text-left hover:bg-gray-50 text-sm text-gray-600"
                     >
-                      {location}
+                      All Locations
                     </button>
-                  ))}
-                </div>
-              )}
-            </div>
+                    {LOCATIONS.map((location) => (
+                      <button
+                        key={location}
+                        onClick={() => {
+                          setSelectedLocation(location);
+                          setShowLocationMenu(false);
+                        }}
+                        className={`w-full px-4 py-2 text-left hover:bg-gray-50 text-sm ${
+                          selectedLocation === location ? 'text-yellow-500 font-medium' : 'text-gray-600'
+                        }`}
+                      >
+                        {location}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </div>
 
-            {/* Test Type Filter */}
-            <div className="flex gap-2">
-              <button
-                onClick={() => setSelectedType(selectedType === "G2" ? "" : "G2")}
-                className={`flex-1 py-3 px-4 rounded-xl border-2 transition-all ${
-                  selectedType === "G2"
-                    ? "border-yellow-500 bg-yellow-50 text-yellow-500"
-                    : "border-gray-200 hover:border-yellow-500/50"
-                }`}
-              >
-                G2 Test
-              </button>
-              <button
-                onClick={() => setSelectedType(selectedType === "G" ? "" : "G")}
-                className={`flex-1 py-3 px-4 rounded-xl border-2 transition-all ${
-                  selectedType === "G"
-                    ? "border-yellow-500 bg-yellow-50 text-yellow-500"
-                    : "border-gray-200 hover:border-yellow-500/50"
-                }`}
-              >
-                G Test
-              </button>
+              {/* Test Type Filter */}
+              <div className="flex gap-2">
+                <button
+                  onClick={() => setSelectedType(selectedType === "G2" ? "" : "G2")}
+                  className={`flex-1 py-3 px-4 rounded-xl border-2 transition-all ${
+                    selectedType === "G2"
+                      ? "border-yellow-500 bg-yellow-50 text-yellow-500"
+                      : "border-gray-200 hover:border-yellow-500/50"
+                  }`}
+                >
+                  G2 Test
+                </button>
+                <button
+                  onClick={() => setSelectedType(selectedType === "G" ? "" : "G")}
+                  className={`flex-1 py-3 px-4 rounded-xl border-2 transition-all ${
+                    selectedType === "G"
+                      ? "border-yellow-500 bg-yellow-50 text-yellow-500"
+                      : "border-gray-200 hover:border-yellow-500/50"
+                  }`}
+                >
+                  G Test
+                </button>
+              </div>
             </div>
           </div>
         </div>

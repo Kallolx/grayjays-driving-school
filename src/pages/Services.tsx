@@ -3,6 +3,7 @@ import { GraduationCap, Clock3, CarFront, CheckCircle2, ChevronRight, Car, Minus
 import { useState, useLayoutEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { motion } from "framer-motion";
 
 
 gsap.registerPlugin(ScrollTrigger);
@@ -133,34 +134,66 @@ const Services = () => {
   return (
     <div ref={containerRef} className="font-poppins">
       {/* Title Section */}
-      <div className="relative pb-12 overflow-hidden">
-        {/* Decorative Elements */}
-        <div className="absolute inset-0 -z-10">
-          <div className="absolute inset-0 bg-gradient-to-br from-yellow-50 to-gray-50" />
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-1 bg-gradient-to-r from-transparent via-yellow-500 to-transparent opacity-30" />
-          <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-1 bg-gradient-to-r from-transparent via-[#2c3149] to-transparent opacity-30" />
+      <div className="relative pt-20 pb-16 bg-[#2c3149] overflow-hidden">
+        <div className="absolute inset-0">
+          <div className="absolute inset-0 bg-[url('/patterns/texture-dots.png')] opacity-[0.03]" />
+          <div className="absolute inset-0 bg-gradient-to-br from-[#2c3149] via-[#2c3149] to-[#1a1f33]" />
+          {/* Decorative Elements */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-yellow-500/10 rounded-full blur-3xl" />
+          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-yellow-500/20 to-transparent" />
+          <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-yellow-500/20 to-transparent" />
         </div>
 
-        <div ref={cardsContainerRef} className="relative max-w-7xl mx-auto px-4">
-          <div className="text-center max-w-3xl mx-auto">
-            {/* Title with Visual Elements */}
-            <div className="inline-flex items-center justify-center mb-4">
-              <div className="w-12 h-12 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-xl flex items-center justify-center shadow-lg transform -rotate-6">
-                <GraduationCap className="w-6 h-6 text-white" />
-              </div>
-              <div className="w-12 h-12 bg-gradient-to-br from-[#2c3149] to-[#1a1f33] rounded-xl flex items-center justify-center shadow-lg -ml-4 transform rotate-6">
-                <Car className="w-6 h-6 text-white" />
-              </div>
-            </div>
+        <div className="relative max-w-[800px] mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div 
+            className="text-center"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.2, duration: 0.5 }}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-4"
+            >
+              <Car className="w-4 h-4 text-yellow-500" />
+              <span className="text-white text-sm font-medium">Our Services</span>
+            </motion.div>
 
-            <h1 className="text-4xl lg:text-5xl font-bold text-[#2c3149] mb-4">
-            Our Packages & <span className="text-yellow-500">Services</span>
-            </h1>
-            <p className="text-base text-gray-600 mb-6">
-              Choose from our comprehensive range of driving services tailored to your needs
-            </p>
-          </div>
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.6 }}
+              className="text-3xl sm:text-4xl font-bold text-white mb-3"
+            >
+              Professional <span className="text-yellow-500">Driving Services</span>
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 0.6 }}
+              className="text-base sm:text-lg text-gray-300 max-w-xl mx-auto"
+            >
+              Comprehensive driving education and services tailored to your needs
+            </motion.p>
+          </motion.div>
         </div>
+
+        {/* Decorative Circles */}
+        <motion.div 
+          className="absolute -left-20 -bottom-20 w-40 h-40 bg-yellow-500/5 rounded-full blur-2xl"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5, duration: 1 }}
+        />
+        <motion.div 
+          className="absolute -right-20 -bottom-20 w-40 h-40 bg-yellow-500/5 rounded-full blur-2xl"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.6, duration: 1 }}
+        />
       </div>
 
       {/* Services Grid */}

@@ -10,11 +10,17 @@ import {
   BarChart,
 } from "lucide-react";
 import toast from "react-hot-toast";
-import { CartItem } from '../types/cart';
 
 interface G1PracticeProps {
   cart: CartItem[];
   setCart: (cart: CartItem[]) => void;
+}
+
+interface CartItem {
+  id: string;
+  name: string;
+  price: number;
+  requiresLocation: boolean;
 }
 
 interface PracticePackage {
