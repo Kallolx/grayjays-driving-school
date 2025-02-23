@@ -4,7 +4,6 @@ import ReactCountryFlag from "react-country-flag";
 import { motion } from 'framer-motion';
 import {  
   ChevronDown,
-  UserCircle2,
   GraduationCap,
   Clock3,
   Package,
@@ -12,9 +11,11 @@ import {
   Route,
   FileSpreadsheet,
   Menu,
-  CalendarCheck
+  CalendarCheck,
+  Mail
 } from 'lucide-react';
 import MobileSidebar from './MobileSidebar';
+import { toast } from 'react-hot-toast';
 
 const MENU_ITEMS = {
   learnToDrive: [
@@ -243,17 +244,28 @@ const Navbar = () => {
               animate={{ opacity: 1 }}
               transition={{ delay: 1.9, duration: 0.5 }}
             >
-              <Link
-                to="/login"
-                className="flex items-center space-x-2 px-3 py-[5px] text-sm font-medium text-gray-300 border-[2px] border-white/30 rounded-full hover:text-white transition-colors group"
+              <button
+                onClick={() => {
+                  navigator.clipboard.writeText('info@drivingschool.com');
+                  toast.success('Email copied to clipboard!', {
+                    style: {
+                      background: '#2c3149',
+                      color: '#fff',
+                      borderRadius: '12px',
+                      fontSize: '14px'
+                    },
+                    duration: 2000,
+                  });
+                }}
+                className="flex items-center space-x-2 px-4 py-[5px] text-sm font-medium text-gray-300 border-[2px] border-white/30 rounded-full hover:text-white transition-colors group"
               >
                 <div className="p-1.5 rounded-full bg-white/5 group-hover:bg-white/10 transition-colors">
-                  <UserCircle2 className="w-4 h-4" />
+                  <Mail className="w-4 h-4" />
                 </div>
-                <span>Login</span>
-              </Link>
+                <span>info@drivingschool.com</span>
+              </button>
               <Link
-                to="/book"
+                to="/services"
                 className="group relative flex items-center space-x-2 px-5 py-2 bg-gradient-to-r from-yellow-500 to-yellow-400  rounded-full text-sm font-medium transition-all duration-300 hover:shadow-[0_8px_25px_-8px_rgba(245,158,11,0.5)] transform hover:-translate-y-0.5"
               >
                 <div className=" absolute inset-0 bg-white/20 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />

@@ -3,7 +3,7 @@ import { GraduationCap, Clock3, CarFront, CheckCircle2, ChevronRight, Car, Minus
 import { useState, useLayoutEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { motion } from "framer-motion";
+
 
 
 gsap.registerPlugin(ScrollTrigger);
@@ -133,68 +133,55 @@ const Services = () => {
   };
 
   return (
-    <div ref={containerRef} className="font-poppins">
-      {/* Title Section */}
-      <div className="relative pt-20 pb-16 bg-[#2c3149] overflow-hidden">
-        <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-[url('/patterns/texture-dots.png')] opacity-[0.03]" />
-          <div className="absolute inset-0 bg-gradient-to-br from-[#2c3149] via-[#2c3149] to-[#1a1f33]" />
-          {/* Decorative Elements */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-yellow-500/10 rounded-full blur-3xl" />
-          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-yellow-500/20 to-transparent" />
-          <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-yellow-500/20 to-transparent" />
+    <div className="min-h-screen bg-gray-50">
+      {/* Hero Section */}
+      <div className="relative pt-20 pb-16 overflow-hidden">
+      <div className="absolute inset-0">
+          {/* Background Image */}
+          <img 
+            src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?q=80&w=1800&auto=format&fit=crop"
+            alt="Background"
+            className="absolute inset-0 w-full h-full object-cover object-right opacity-60"
+          />
+          <div className="absolute inset-0 bg-[url('/patterns/texture-dots.png')] opacity-[1] mix-blend-overlay" />
+          {/* Gradient Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#2c3149] via-[#2c3149]/90 to-[#2c3149]/50" />
+          {/* Additional right-side gradient for better text contrast */}
+          <div className="absolute right-0 top-0 bottom-0 w-1/2 bg-gradient-to-l from-[#1a1f33]/80 to-transparent" />
         </div>
 
-        <div className="relative max-w-[800px] mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
-            className="text-center"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-          >
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.2, duration: 0.5 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-4"
-            >
-              <Car className="w-4 h-4 text-yellow-500" />
-              <span className="text-white text-sm font-medium">Our Services</span>
-            </motion.div>
+        <div className="relative max-w-6xl mx-auto px-4 sm:px-6">
+          <div className="text-center max-w-3xl mx-auto">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-4">
+              <span className="text-yellow-500 text-sm font-medium">Our Services</span>
+              <span className="w-1 h-1 rounded-full bg-white/40" />
+              <span className="text-white/80 text-sm">Choose Your Path</span>
+            </div>
 
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.6 }}
-              className="text-3xl sm:text-4xl font-bold text-white mb-3"
-            >
-              Professional <span className="text-yellow-500">Driving Services</span>
-            </motion.h1>
+            <h1 className="text-3xl md:text-4xl font-bold text-white mb-4">
+              Professional Driving Education
+              <span className="block mt-2 text-yellow-500">Tailored to Your Needs</span>
+            </h1>
 
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.6 }}
-              className="text-base sm:text-lg text-gray-300 max-w-xl mx-auto"
-            >
-              Comprehensive driving education and services tailored to your needs
-            </motion.p>
-          </motion.div>
+            <p className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">
+              From beginner courses to advanced training, we offer comprehensive programs designed to make you a confident and skilled driver.
+            </p>
+
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-2xl mx-auto">
+              {[
+                { value: "98%", label: "Pass Rate" },
+                { value: "15+", label: "Years Experience" },
+                { value: "2000+", label: "Students" },
+                { value: "4.9", label: "Rating" }
+              ].map((stat, index) => (
+                <div key={index} className="bg-white/5 backdrop-blur-sm rounded-lg px-4 py-3 border border-white/10">
+                  <div className="text-2xl font-bold text-yellow-500">{stat.value}</div>
+                  <div className="text-xs text-gray-400 mt-1">{stat.label}</div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
-
-        {/* Decorative Circles */}
-        <motion.div 
-          className="absolute -left-20 -bottom-20 w-40 h-40 bg-yellow-500/5 rounded-full blur-2xl"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.5, duration: 1 }}
-        />
-        <motion.div 
-          className="absolute -right-20 -bottom-20 w-40 h-40 bg-yellow-500/5 rounded-full blur-2xl"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.6, duration: 1 }}
-        />
       </div>
 
       {/* Services Grid */}

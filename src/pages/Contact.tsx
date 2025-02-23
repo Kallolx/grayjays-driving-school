@@ -1,149 +1,84 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { MapPin, Phone, Mail, Clock, Send, Facebook, Instagram, Twitter, Linkedin } from 'lucide-react';
+import { 
+  Mail, 
+  Phone, 
+  MapPin, 
+ 
+  Send, 
+  MessageSquare,
+
+  CheckCircle2,
+  ArrowRight,
+  Calendar,
+
+  Building2
+} from 'lucide-react';
 import toast from 'react-hot-toast';
 
-interface ContactFormData {
-  fullName: string;
-  email: string;
-  phone: string;
-  licenseType: string;
-  preferredSchedule: string;
-  courseInterest: string;
-  message: string;
-}
-
-interface ContactFormErrors {
-  fullName: string;
-  email: string;
-  phone: string;
-  licenseType: string;
-  preferredSchedule: string;
-  courseInterest: string;
-  message: string;
-}
-
-const CONTACT_INFO = [
-  {
-    icon: MapPin,
-    title: 'Visit Us',
-    details: ['123 Driving School Ave', 'Toronto, ON M5V 2T6'],
-    color: 'text-blue-600'
-  },
-  {
-    icon: Phone,
-    title: 'Call Us',
-    details: ['+1 (647) 555-0123', '+1 (416) 555-0124'],
-    color: 'text-green-600'
-  },
-  {
-    icon: Mail,
-    title: 'Email Us',
-    details: ['info@drivingschool.com', 'support@drivingschool.com'],
-    color: 'text-purple-600'
-  },
-  {
-    icon: Clock,
-    title: 'Working Hours',
-    details: ['Mon-Fri: 8:00 AM - 8:00 PM', 'Sat-Sun: 9:00 AM - 6:00 PM'],
-    color: 'text-orange-600'
-  }
-];
-
-const SOCIAL_LINKS = [
-  { icon: Facebook, href: '#', color: 'hover:text-blue-600' },
-  { icon: Instagram, href: '#', color: 'hover:text-pink-600' },
-  { icon: Twitter, href: '#', color: 'hover:text-blue-400' },
-  { icon: Linkedin, href: '#', color: 'hover:text-blue-700' }
-];
-
 const Contact = () => {
-  const [formData, setFormData] = useState<ContactFormData>({
-    fullName: '',
+  const [formData, setFormData] = useState({
+    name: '',
     email: '',
     phone: '',
-    licenseType: '',
-    preferredSchedule: '',
-    courseInterest: '',
+    subject: '',
     message: ''
   });
 
-  const [errors, setErrors] = useState<ContactFormErrors>({
-    fullName: '',
-    email: '',
-    phone: '',
-    licenseType: '',
-    preferredSchedule: '',
-    courseInterest: '',
-    message: ''
-  });
-
-  const validateForm = () => {
-    let isValid = true;
-    const newErrors = {
-      fullName: '',
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    toast.success('Message sent successfully!', {
+      style: {
+        background: '#2c3149',
+        color: '#fff',
+        borderRadius: '12px',
+      },
+      duration: 2000,
+    });
+    setFormData({
+      name: '',
       email: '',
       phone: '',
-      licenseType: '',
-      preferredSchedule: '',
-      courseInterest: '',
+      subject: '',
       message: ''
-    };
-
-    if (!formData.fullName.trim()) {
-      newErrors.fullName = 'Full name is required';
-      isValid = false;
-    }
-
-    if (!formData.email.trim()) {
-      newErrors.email = 'Email is required';
-      isValid = false;
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'Invalid email format';
-      isValid = false;
-    }
-
-    if (!formData.phone.trim()) {
-      newErrors.phone = 'Phone number is required';
-      isValid = false;
-    }
-
-    if (!formData.message.trim()) {
-      newErrors.message = 'Message is required';
-      isValid = false;
-    }
-
-    setErrors(newErrors);
-    return isValid;
+    });
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (validateForm()) {
-      // Simulate form submission
-      toast.promise(
-        new Promise((resolve) => setTimeout(resolve, 2000)),
-        {
-          loading: 'Sending your message...',
-          success: 'Message sent successfully! Well get back to you soon.',
-          error: 'Failed to send message. Please try again.',
-        }
-      );
+  const contactMethods = [
+    {
+      icon: <Mail className="w-6 h-6" />,
+      title: "Email Us",
+      value: "info@drivingschool.com",
+      action: () => {
+        navigator.clipboard.writeText('info@drivingschool.com');
+        toast.success('Email copied to clipboard!');
+      },
+      description: "For general inquiries and support",
+      gradient: "from-blue-500 to-blue-400"
+    },
+    {
+      icon: <Phone className="w-6 h-6" />,
+      title: "Call Us",
+      value: "(123) 456-7890",
+      action: () => window.location.href = 'tel:+1234567890',
+      description: "Available Mon-Sat, 9am-6pm",
+      gradient: "from-emerald-500 to-emerald-400"
+    },
+    {
+      icon: <Calendar className="w-6 h-6" />,
+      title: "Book a Visit",
+      value: "Schedule an appointment",
+      action: () => window.location.href = '/book',
+      description: "Visit our training center",
+      gradient: "from-purple-500 to-purple-400"
     }
-  };
+  ];
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-    if (errors[name as keyof ContactFormErrors]) {
-      setErrors(prev => ({
-        ...prev,
-        [name]: ''
-      }));
-    }
+  const location = {
+    city: "Toronto Downtown",
+    address: "123 Queen Street West",
+    phone: "(123) 456-7890",
+    hours: "Mon-Fri: 9AM-6PM"
   };
 
   return (
@@ -154,6 +89,7 @@ const Contact = () => {
           <div className="absolute inset-0 bg-[url('/patterns/texture-dots.png')] opacity-[0.03]" />
           <div className="absolute inset-0 bg-gradient-to-br from-[#2c3149] via-[#2c3149] to-[#1a1f33]" />
         </div>
+
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto">
             <motion.div
@@ -161,8 +97,8 @@ const Contact = () => {
               animate={{ opacity: 1, y: 0 }}
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-6"
             >
-              <Mail className="w-5 h-5 text-yellow-500" />
-              <span className="text-white font-medium">Contact Us</span>
+              <MessageSquare className="w-5 h-5 text-yellow-500" />
+              <span className="text-white font-medium">24/7 Support Available</span>
             </motion.div>
 
             <motion.h1
@@ -180,194 +116,200 @@ const Contact = () => {
               transition={{ delay: 0.2 }}
               className="text-lg sm:text-xl text-gray-300 mb-8"
             >
-              Have questions about our driving courses? We're here to help you become a confident and safe driver.
+              Have questions? We're here to help you start your journey to becoming a confident driver.
             </motion.p>
           </div>
         </div>
       </div>
 
-      {/* Contact Information Cards */}
+      {/* Contact Methods */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-16 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {CONTACT_INFO.map((item, index) => (
+        <div className="grid md:grid-cols-3 gap-6">
+          {contactMethods.map((method, index) => (
             <motion.div
-              key={item.title}
+              key={index}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
-              className="bg-white rounded-2xl shadow-sm p-6 border border-gray-100"
+              onClick={method.action}
+              className="group relative bg-gradient-to-br text-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all cursor-pointer overflow-hidden"
+              style={{
+                background: `linear-gradient(to bottom right, var(--tw-gradient-from), var(--tw-gradient-to))`
+              }}
             >
-              <div className="inline-block p-3 rounded-xl bg-yellow-500/10">
-                <item.icon className="h-6 w-6 text-yellow-500" />
-              </div>
-              <h3 className="mt-4 font-semibold text-[#2c3149]">{item.title}</h3>
-              <div className="mt-2 space-y-1">
-                {item.details.map((detail, i) => (
-                  <p key={i} className="text-gray-600">{detail}</p>
-                ))}
+              <div className={`absolute inset-0 bg-gradient-to-br ${method.gradient} opacity-90`} />
+              <div className="absolute inset-0 bg-[url('/patterns/texture-dots.png')] opacity-[0.1]" />
+              <div className="absolute inset-0 bg-black/10" />
+              <div className="relative flex items-start gap-4">
+                <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center group-hover:scale-110 transition-transform">
+                  <div className="text-white">
+                    {method.icon}
+                  </div>
+                </div>
+                <div>
+                  <h3 className="text-lg font-semibold text-white group-hover:text-white transition-colors">
+                    {method.title}
+                  </h3>
+                  <p className="text-white/90 font-medium">{method.value}</p>
+                  <p className="text-sm text-white/80 mt-1">{method.description}</p>
+                </div>
+                <ArrowRight className="w-5 h-5 text-white/50 group-hover:text-white group-hover:translate-x-1 transition-all ml-auto" />
               </div>
             </motion.div>
           ))}
         </div>
       </div>
 
+      {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+        <div className="grid lg:grid-cols-2 gap-16">
           {/* Contact Form */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="bg-white rounded-2xl shadow-sm p-8 border border-gray-100"
-          >
-            <h2 className="text-2xl font-semibold text-[#2c3149] mb-6">Send us a Message</h2>
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label htmlFor="fullName" className="block text-sm font-medium text-gray-700 mb-1">
-                    Full Name
-                  </label>
-                  <input
-                    type="text"
-                    id="fullName"
-                    name="fullName"
-                    value={formData.fullName}
-                    onChange={handleChange}
-                    className={`w-full px-4 py-3 rounded-xl border ${
-                      errors.fullName ? 'border-red-500' : 'border-gray-200'
-                    } focus:outline-none focus:ring-2 focus:ring-yellow-500/20 focus:border-yellow-500 transition-colors`}
-                    placeholder="John Doe"
-                  />
-                  {errors.fullName && <p className="mt-1 text-sm text-red-500">{errors.fullName}</p>}
+          <div>
+            <div className="bg-white rounded-2xl shadow-lg p-8">
+              <div className="flex items-center gap-3 mb-8">
+                <div className="w-10 h-10 rounded-xl bg-[#2c3149]/10 flex items-center justify-center">
+                  <MessageSquare className="w-5 h-5 text-[#2c3149]" />
                 </div>
-
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                    Email Address
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    className={`w-full px-4 py-3 rounded-xl border ${
-                      errors.email ? 'border-red-500' : 'border-gray-200'
-                    } focus:outline-none focus:ring-2 focus:ring-yellow-500/20 focus:border-yellow-500 transition-colors`}
-                    placeholder="john@example.com"
-                  />
-                  {errors.email && <p className="mt-1 text-sm text-red-500">{errors.email}</p>}
+                  <h2 className="text-2xl font-bold text-[#2c3149]">Send us a Message</h2>
+                  <p className="text-gray-600">We'll get back to you within 24 hours</p>
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="grid grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Name</label>
+                    <input
+                      type="text"
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-[#2c3149] focus:border-transparent transition-all"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                    <input
+                      type="email"
+                      value={formData.email}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-[#2c3149] focus:border-transparent transition-all"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Phone</label>
+                    <input
+                      type="tel"
+                      value={formData.phone}
+                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-[#2c3149] focus:border-transparent transition-all"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Subject</label>
+                    <input
+                      type="text"
+                      value={formData.subject}
+                      onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-[#2c3149] focus:border-transparent transition-all"
+                      required
+                    />
+                  </div>
+                </div>
+
                 <div>
-                  <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
-                    Phone Number
-                  </label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    className={`w-full px-4 py-3 rounded-xl border ${
-                      errors.phone ? 'border-red-500' : 'border-gray-200'
-                    } focus:outline-none focus:ring-2 focus:ring-yellow-500/20 focus:border-yellow-500 transition-colors`}
-                    placeholder="(647) 555-0123"
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Message</label>
+                  <textarea
+                    value={formData.message}
+                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                    rows={4}
+                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-[#2c3149] focus:border-transparent transition-all"
+                    required
                   />
-                  {errors.phone && <p className="mt-1 text-sm text-red-500">{errors.phone}</p>}
                 </div>
 
-                <div>
-                  <label htmlFor="licenseType" className="block text-sm font-medium text-gray-700 mb-1">
-                    License Type
-                  </label>
-                  <select
-                    id="licenseType"
-                    name="licenseType"
-                    value={formData.licenseType}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-yellow-500/20 focus:border-yellow-500 transition-colors"
-                  >
-                    <option value="">Select license type</option>
-                    <option value="G1">G1 License</option>
-                    <option value="G2">G2 License</option>
-                    <option value="G">G License</option>
-                    <option value="International">International License</option>
-                  </select>
-                </div>
+                <button
+                  type="submit"
+                  className="w-full py-4 bg-[#2c3149] text-white rounded-xl hover:bg-[#1a1f33] transition-all flex items-center justify-center gap-2 group"
+                >
+                  <Send className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  Send Message
+                </button>
+              </form>
+            </div>
+          </div>
+
+          {/* Location */}
+          <div>
+            <div className="flex items-center gap-3 mb-8">
+              <div className="w-10 h-10 rounded-xl bg-[#2c3149]/10 flex items-center justify-center">
+                <Building2 className="w-5 h-5 text-[#2c3149]" />
               </div>
-
               <div>
-                <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
-                  Message
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  rows={4}
-                  value={formData.message}
-                  onChange={handleChange}
-                  className={`w-full px-4 py-3 rounded-xl border ${
-                    errors.message ? 'border-red-500' : 'border-gray-200'
-                  } focus:outline-none focus:ring-2 focus:ring-yellow-500/20 focus:border-yellow-500 transition-colors`}
-                  placeholder="How can we help you?"
-                />
-                {errors.message && <p className="mt-1 text-sm text-red-500">{errors.message}</p>}
+                <h2 className="text-2xl font-bold text-[#2c3149]">Our Location</h2>
+                <p className="text-gray-600">Visit our training center</p>
               </div>
-
-              <button
-                type="submit"
-                className="w-full bg-[#2c3149] text-white py-3 px-6 rounded-xl hover:bg-[#2c3149]/90 transition-colors flex items-center justify-center gap-2"
-              >
-                <Send className="h-5 w-5" />
-                Send Message
-              </button>
-            </form>
-          </motion.div>
-
-          {/* Map and Social Links */}
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="space-y-8"
-          >
-            {/* Map */}
-            <div className="bg-white rounded-2xl shadow-sm p-2 border border-gray-100 h-[400px] overflow-hidden">
-              <iframe
-                title="location"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2887.2685163373!2d-79.3871!3d43.6426!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDPCsDM4JzMzLjQiTiA3OcKwMjMnMTMuNiJX!5e0!3m2!1sen!2sca!4v1635787269123!5m2!1sen!2sca"
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                loading="lazy"
-                className="rounded-xl"
-              />
             </div>
 
-            {/* Social Links */}
-            <div className="bg-white rounded-2xl shadow-sm p-8 border border-gray-100">
-              <h3 className="text-xl font-semibold text-[#2c3149] mb-4">Follow Us</h3>
-              <p className="text-gray-600 mb-6">
-                Stay connected with us on social media for the latest updates, driving tips, and special offers.
-              </p>
-              <div className="flex gap-4">
-                {SOCIAL_LINKS.map((social, index) => (
-                  <a
-                    key={index}
-                    href={social.href}
-                    className={`p-3 rounded-xl bg-gray-50 text-gray-600 transition-colors ${social.color} hover:bg-yellow-500/10`}
+            <div className="bg-gradient-to-br from-[#2c3149] to-[#1a1f33] rounded-2xl p-8 shadow-lg text-white relative overflow-hidden">
+              <div className="absolute inset-0 bg-[url('/patterns/texture-dots.png')] opacity-[0.1]" />
+              <div className="relative">
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center flex-shrink-0">
+                    <MapPin className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-semibold text-white mb-2">{location.city}</h3>
+                    <p className="text-white/80 text-lg mb-6">{location.address}</p>
+                    <div className="grid grid-cols-2 gap-6">
+                      <div>
+                        <p className="text-white/60 mb-1">Phone</p>
+                        <p className="text-white font-medium text-lg">{location.phone}</p>
+                      </div>
+                      <div>
+                        <p className="text-white/60 mb-1">Hours</p>
+                        <p className="text-white font-medium text-lg">{location.hours}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* FAQ Preview */}
+            <div className="mt-8 bg-gradient-to-br from-yellow-500 to-yellow-400 rounded-2xl p-6 shadow-lg relative overflow-hidden">
+              <div className="absolute inset-0 bg-[url('/patterns/texture-dots.png')] opacity-[0.1]" />
+              <div className="relative">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center">
+                      <CheckCircle2 className="w-5 h-5 text-white" />
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-semibold text-white">Have Questions?</h3>
+                      <p className="text-white/90">Check our frequently asked questions</p>
+                    </div>
+                  </div>
+                  <button 
+                    onClick={() => window.location.href = '/faq'}
+                    className="px-4 py-2 bg-white text-yellow-500 rounded-lg hover:bg-white/90 transition-all flex items-center gap-2 font-medium"
                   >
-                    <social.icon className="h-6 w-6" />
-                  </a>
-                ))}
+                    View FAQ
+                    <ArrowRight className="w-4 h-4" />
+                  </button>
+                </div>
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </div>
   );
 };
 
-export default Contact; 
+export default Contact;

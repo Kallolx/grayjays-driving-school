@@ -72,9 +72,17 @@ const BDE = ({ cart, setCart }: BDEProps) => {
       {/* Hero Section */}
       <div className="relative pt-28 pb-20 bg-[#2c3149] overflow-hidden">
         <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-[url('/patterns/texture-dots.png')] opacity-[0.03]" />
+          {/* Background Image */}
+          <img 
+            src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?q=80&w=1800&auto=format&fit=crop"
+            alt="Background"
+            className="absolute inset-0 w-full h-full object-cover object-right opacity-60"
+          />
+          <div className="absolute inset-0 bg-[url('/patterns/texture-dots.png')] opacity-[1] mix-blend-overlay" />
           {/* Gradient Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-br from-[#2c3149] via-[#2c3149] to-[#1a1f33]" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#2c3149] via-[#2c3149]/90 to-[#2c3149]/50" />
+          {/* Additional right-side gradient for better text contrast */}
+          <div className="absolute right-0 top-0 bottom-0 w-1/2 bg-gradient-to-l from-[#1a1f33]/80 to-transparent" />
         </div>
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -250,7 +258,7 @@ const BDE = ({ cart, setCart }: BDEProps) => {
                   onClick={addToCart}
                   className="w-full py-4 bg-[#2c3149] text-white text-sm font-bold rounded-xl hover:bg-[#1d2035] transition shadow-md transform hover:scale-[1.02]"
                 >
-                  Add to Cart
+                  Buy Now
                 </button>
 
                 {/* Additional Info */}

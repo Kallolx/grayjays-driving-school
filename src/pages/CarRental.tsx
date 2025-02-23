@@ -231,19 +231,12 @@ const CarRental = ({ cart, setCart }: CarRentalProps) => {
                     : 'bg-white/80 backdrop-blur-sm'
                 }`} />
 
-                {/* Popular Badge */}
-                {pkg.popular && (
-                  <div className="absolute -top-3 -right-3 px-4 py-1 bg-yellow-500 text-[#2c3149] text-sm font-bold rounded-full shadow-lg z-10">
-                    Popular Choice
-                  </div>
-                )}
-
                 {/* Content Container */}
                 <div className="relative h-full p-6 flex flex-col">
                   {/* Icon and Title Section */}
                   <div className="text-center mb-4">
                     <div className="relative w-20 h-20 mx-auto mb-4">
-                      <div className={`absolute inset-0 bg-gradient-to-br ${pkg.color} rounded-2xl blur-xl opacity-20`} />
+                      <div className={`absolute inset-0 bg-gradient-to-br rounded-2xl blur-xl opacity-20`} />
                       <div className={`relative w-full h-full rounded-2xl flex items-center justify-center ${
                         selectedPackage === pkg ? 'bg-white/10' : 'bg-gray-50'
                       }`}>

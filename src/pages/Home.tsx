@@ -354,7 +354,7 @@ const Home = () => {
 
               {/* Benefits List */}
               <motion.div
-                className="space-y-4 sm:space-y-4 text-left"
+                className="space-y-2 sm:space-y-4 text-left"
                 variants={containerVariants}
               >
                 {/* Map through benefits with animation */}
@@ -369,8 +369,8 @@ const Home = () => {
                     variants={itemVariants}
                   >
                     <div className="flex-shrink-0 mt-1">
-                      <div className="w-4 h-4 sm:w-6 sm:h-6 rounded-full bg-[#2c3149]/10 flex items-center justify-center">
-                        <CheckCircle2 className="w-2.5 h-2.5 sm:w-4 sm:h-4 text-[#2c3149] fill-[#2c3149]" />
+                      <div className="w-4 h-4 sm:w-6 sm:h-6 rounded-full flex items-center justify-center">
+                        <CheckCircle2 className="w-2.5 h-2.5 sm:w-4 sm:h-4 text-[#2c3149] fill-yellow-500" />
                       </div>
                     </div>
                     <p className="text-sm sm:text-lg text-gray-700">
@@ -380,41 +380,6 @@ const Home = () => {
                 ))}
               </motion.div>
             </div>
-
-            {/* User Circle Images */}
-            <motion.div
-              className="flex items-center gap-3 justify-center lg:justify-start mt-4 sm:mt-8"
-              variants={itemVariants}
-            >
-              <div className="flex -space-x-2">
-                {TESTIMONIALS.slice(0, 4).map((testimonial, index) => (
-                  <motion.img
-                    key={testimonial.id}
-                    src={testimonial.avatar}
-                    alt={testimonial.name}
-                    className="w-8 h-8 rounded-full border-2 border-white"
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.1 }}
-                  />
-                ))}
-              </div>
-              <motion.div
-                className="text-sm text-gray-600"
-                variants={itemVariants}
-              >
-                Trusted by{" "}
-                <span className="inline-flex items-baseline font-semibold text-gray-900">
-                  <NumberTicker
-                    value={29700}
-                    className="font-semibold"
-                    delay={1}
-                  />
-                  <span>+</span>
-                </span>{" "}
-                students
-              </motion.div>
-            </motion.div>
 
             {/* Search Section */}
             <motion.div
@@ -606,6 +571,41 @@ const Home = () => {
                   </motion.div>
                 )}
               </AnimatePresence>
+              
+            {/* User Circle Images */}
+            <motion.div
+              className="flex items-center gap-3 justify-center lg:justify-start mt-4 sm:mt-8"
+              variants={itemVariants}
+            >
+              <div className="flex -space-x-2">
+                {TESTIMONIALS.slice(0, 4).map((testimonial, index) => (
+                  <motion.img
+                    key={testimonial.id}
+                    src={testimonial.avatar}
+                    alt={testimonial.name}
+                    className="w-8 h-8 rounded-full border-2 border-white"
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                  />
+                ))}
+              </div>
+              <motion.div
+                className="text-sm text-gray-600"
+                variants={itemVariants}
+              >
+                Trusted by{" "}
+                <span className="inline-flex items-baseline font-semibold text-gray-900">
+                  <NumberTicker
+                    value={29700}
+                    className="font-semibold"
+                    delay={1}
+                  />
+                  <span>+</span>
+                </span>{" "}
+                students
+              </motion.div>
+            </motion.div>
             </motion.div>
           </div>
 

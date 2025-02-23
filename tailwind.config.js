@@ -155,6 +155,9 @@ export default {
             "background-position": "calc(100% + var(--shiny-width)) 0",
           },
         },
+        shimmer: {
+          '100%': { transform: 'translateX(100%)' }
+        }
   		},
   		animation: {
   			'accordion-down': 'accordion-down 0.2s ease-out',
@@ -167,6 +170,7 @@ export default {
   			blink: 'blink 1s step-end infinite',
   			gradient: 'gradient 8s linear infinite',
         "shiny-text": "shiny-text 8s infinite",
+        shimmer: 'shimmer 2s infinite'
   		},
   		perspective: {
   			'1000': '1000px'
