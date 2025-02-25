@@ -19,7 +19,6 @@ import GPSRoutes from './pages/GPSRoutes';
 import Blog from './pages/Blog';
 import ScoreSheet from './pages/ScoreSheet';
 import G1Practice from './pages/G1Practice';
-import MouseTrail from './components/ui/mouse-trail';
 
 
 // Add CartItem interface
@@ -60,7 +59,6 @@ function App() {
     <Router>
       <div className="min-h-screen bg-gray-50 font-poppins antialiased text-gray-900 selection:bg-[#FFD7C9] selection:text-gray-900">
         <ScrollToTop />
-        <MouseTrail />
         <Navbar />
         <main>
           <Routes>

@@ -109,7 +109,7 @@ const ServicesGrid = () => {
     return () => ctx.revert();
   }, []);
 
-  const renderCard = (service: typeof SERVICES[0], index: number) => (
+  const renderCard = (service: typeof SERVICES[0]) => (
     <div className="service-card relative h-full">
       <div className={`h-[300px] lg:h-[350px] [perspective:1200px] group ${isMobile ? 'bg-white/50 backdrop-blur-sm rounded-2xl p-3' : ''}`}>
         <div
@@ -129,12 +129,9 @@ const ServicesGrid = () => {
                     className="relative h-20 w-20 lg:h-24 lg:w-24 object-contain drop-shadow-xl mx-auto"
                   />
                 </div>
-                <h3 className="text-xl lg:text-xl font-bold text-[#2c3149] mt-4 lg:mt-6 mb-2 lg:mb-4">
+                <h3 className="text-xl lg:text-xl font-bold text-[#2c3149] mt-4 lg:mt-6">
                   {service.title}
                 </h3>
-                <div className="flex items-center justify-center gap-2 text-sm lg:text-sm text-gray-400">
-                  <span>{isMobile ? 'Tap to flip' : 'Hover to flip'}</span>
-                </div>
               </div>
             </div>
           </div>
@@ -160,12 +157,6 @@ const ServicesGrid = () => {
               </div>
 
               <p className="text-base lg:text-lg leading-relaxed text-white/90">{service.description}</p>
-
-              <div className="absolute bottom-2 right-2 w-8 h-8 lg:w-10 lg:h-10 flex items-center justify-center opacity-20">
-                <span className="text-sm lg:text-base font-bold">
-                  {(index + 1).toString().padStart(2, "0")}
-                </span>
-              </div>
             </div>
           </div>
         </div>
@@ -174,7 +165,10 @@ const ServicesGrid = () => {
   );
 
   return (
-    <div ref={containerRef} className={`relative py-16 lg:py-24 w-full overflow-hidden ${isMobile ? 'bg-gradient-to-b from-gray-50 to-white' : ''}`}>
+    <div 
+      ref={containerRef} 
+      className={`relative py-16 lg:py-24 w-full overflow-hidden ${isMobile ? 'bg-gradient-to-b from-gray-50 to-white' : ''}`}
+    >
       <div className={`text-center ${isMobile ? 'mb-12' : 'mb-32'}`}>
         <h2 className="text-4xl lg:text-5xl font-bold text-[#2c3149] mb-6">
           Whats makes <span className="text-yellow-500">GrayJays</span> different?
@@ -202,7 +196,7 @@ const ServicesGrid = () => {
             >
               {SERVICES.map((service, index) => (
                 <SwiperSlide key={index} className="px-4">
-                  {renderCard(service, index)}
+                  {renderCard(service)}
                 </SwiperSlide>
               ))}
             </Swiper>
@@ -218,7 +212,7 @@ const ServicesGrid = () => {
         ) : (
           <div className="grid grid-cols-4 gap-8">
             {SERVICES.map((service, index) => (
-              <div key={index}>{renderCard(service, index)}</div>
+              <div key={index}>{renderCard(service)}</div>
             ))}
           </div>
         )}
