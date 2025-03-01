@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Search,
   CheckCircle2,
@@ -14,8 +14,6 @@ import ServicesGrid from "../components/ServicesGrid";
 import RoadmapSection from "../components/RoadmapSection";
 import Services from "./Services";
 import Tag from "../components/ui/tag";
-import WordRotate from "../components/ui/word-rotate";
-import { Confetti, type ConfettiRef } from "../components/ui/confetti";
 import { DotPattern } from "../components/ui/dot-pattern";
 import { NumberTicker } from "../components/ui/number";
 import { motion, AnimatePresence } from "framer-motion";
@@ -98,8 +96,6 @@ const TESTIMONIALS = [
   },
 ];
 
-const WORDS = ["Confidence", "Excellence", "Success", "Mastery", "Expertise"];
-
 // Add mock postal code data with additional info
 const MOCK_POSTAL_CODES = [
   {
@@ -169,10 +165,19 @@ const MOCK_POSTAL_CODES = [
 ];
 
 const Home = () => {
-  const confettiRef = useRef<ConfettiRef>(null);
   const [postalCode, setPostalCode] = useState("");
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [suggestions, setSuggestions] = useState<typeof MOCK_POSTAL_CODES>([]);
+  const [hasVisited, setHasVisited] = useState(() => {
+    return localStorage.getItem('hasVisitedBefore') === 'true';
+  });
+
+  useEffect(() => {
+    if (!hasVisited) {
+      localStorage.setItem('hasVisitedBefore', 'true');
+      setHasVisited(true);
+    }
+  }, [hasVisited]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -199,49 +204,6 @@ const Home = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    // Fire confetti from both sides with staggered timing
-    setTimeout(() => {
-      // Left side confetti burst
-      confettiRef.current?.fire({
-        particleCount: 20,
-        spread: 80,
-        origin: { x: 0, y: 0.5 },
-        angle: 60,
-        startVelocity: 45,
-        colors: ["#EAB308", "#2c3149", "#ffffff"],
-      });
-
-      // Right side confetti burst
-      confettiRef.current?.fire({
-        particleCount: 20,
-        spread: 80,
-        origin: { x: 1, y: 0.5 },
-        angle: 100,
-        startVelocity: 45,
-        colors: ["#EAB308", "#2c3149", "#ffffff"],
-      });
-
-      // Add secondary bursts with slight delay
-      setTimeout(() => {
-        confettiRef.current?.fire({
-          particleCount: 20,
-          spread: 60,
-          origin: { x: 0.1, y: 0.5 },
-          angle: 60,
-          startVelocity: 35,
-          colors: ["#EAB308", "#2c3149", "#ffffff"],
-        });
-
-        confettiRef.current?.fire({
-          particleCount: 20,
-          spread: 60,
-          origin: { x: 0.9, y: 0.5 },
-          angle: 120,
-          startVelocity: 35,
-          colors: ["#EAB308", "#2c3149", "#ffffff"],
-        });
-      }, 150);
-    }, 500);
   }, []);
 
   const handlePostalCodeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -300,30 +262,29 @@ const Home = () => {
         />
       </motion.div>
 
-      <Confetti
-        ref={confettiRef}
-        className="fixed left-0 top-0 z-50 size-full pointer-events-none"
-      />
-
       {/* Hero Section */}
-      <div className="relative max-w-7xl mx-auto px-4 pt-[100px] sm:pt-[120px] pb-8 sm:pb-16 lg:min-h-[80vh] lg:flex lg:items-center">
-        {/* Mobile Background Image */}
-        <motion.div
-          className="absolute inset-0 lg:hidden"
-          variants={itemVariants}
-        >
-          <div className="absolute inset-0 bg-gradient-to-b from-white via-white/98 to-white/95"></div>
-          <img
-            src="/icons/hero.png"
-            alt=""
-            className="w-full h-full object-cover opacity-5"
-          />
-        </motion.div>
+      <div className="relative max-w-7xl mx-auto px-4 pt-24 md:pt-28 lg:pt-32 pb-8 sm:pb-16 lg:min-h-[80vh] lg:flex lg:items-center">
+        <div className="grid lg:grid-cols-2 gap-4 sm:gap-8 lg:gap-16 relative">
+          {/* Mobile Image - Visible only on mobile */}
+          <motion.div
+            className="block lg:hidden relative h-[400px] sm:h-[450px] w-full mb-8"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <img
+              src="/icons/hero.png"
+              alt="Driving Lesson"
+              className="w-full h-full object-contain scale-125"
+            />
+            <div className="absolute inset-0 -z-10">
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-gradient-to-r from-yellow-500/10 to-[#2c3149]/10 rounded-full blur-3xl opacity-30"></div>
+            </div>
+          </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-8 sm:gap-8 lg:gap-16 relative">
           {/* Left Column */}
-          <div className="flex flex-col justify-center space-y-8 sm:space-y-8 min-h-[300px] sm:min-h-[400px] pt-4 sm:pt-0">
-            <div className="space-y-8 sm:space-y-8">
+          <div className="flex flex-col justify-center space-y-6 sm:space-y-8 min-h-[300px] sm:min-h-[400px]">
+            <div className="space-y-6 sm:space-y-8">
               {/* Tag */}
               <motion.div
                 className="flex justify-center lg:justify-start"
@@ -342,11 +303,9 @@ const Home = () => {
                 className="text-center lg:text-left"
                 variants={itemVariants}
               >
-                <h1 className="text-[32px] leading-tight sm:text-4xl lg:text-5xl font-bold text-gray-900">
+                <h1 className="text-[28px] sm:text-[16px] leading-tight md:text-4xl lg:text-5xl font-bold text-gray-900">
                   Drive with{" "}
-                  <span className="inline-block min-w-[280px]">
-                    <WordRotate words={WORDS} className="text-yellow-500" />
-                  </span>
+                  <span className="text-yellow-500">Excellence</span> {" "}
                   <br className="hidden sm:block" />
                   Learn with <span className="text-yellow-500">GrayJays</span>
                 </h1>
@@ -381,81 +340,29 @@ const Home = () => {
               </motion.div>
             </div>
 
-            {/* Search Section */}
+            {/* Search Section with Coordinated Animation */}
             <motion.div
               className="w-full max-w-2xl relative"
-              initial="hidden"
-              animate="visible"
-              variants={{
-                hidden: { opacity: 0 },
-                visible: {
-                  opacity: 1,
-                  transition: {
-                    delayChildren: 1.8,
-                    staggerChildren: 0.2,
-                  },
-                },
-              }}
+              variants={itemVariants}
             >
-              <motion.div
-                variants={{
-                  hidden: {
-                    scale: 0.8,
-                    opacity: 0,
-                    y: 20,
-                  },
-                  visible: {
-                    scale: 1,
-                    opacity: 1,
-                    y: 0,
-                    transition: {
-                      type: "spring",
-                      stiffness: 100,
-                      damping: 15,
-                    },
-                  },
-                }}
+              <motion.div 
                 className="flex flex-1 group/search hover:-translate-y-1 hover:scale-[1.02] transition-all duration-300 ease-out 
-              shadow-[0_8px_30px_-4px_rgba(44,49,73,0.2)] hover:shadow-[0_20px_50px_-20px_rgba(44,49,73,0.3)] 
-                rounded-full bg-gradient-to-r from-[#2c3149] via-[#2c3149] to-[#2c3149] backdrop-blur-sm overflow-hidden"
+                  shadow-[0_8px_30px_-4px_rgba(44,49,73,0.2)] hover:shadow-[0_20px_50px_-20px_rgba(44,49,73,0.3)] 
+                  rounded-full bg-gradient-to-r from-[#2c3149] via-[#2c3149] to-[#2c3149] backdrop-blur-sm overflow-hidden"
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.4, ease: "easeOut" }}
               >
                 {/* Find Instructor Text */}
-                <motion.div
-                  className="flex-none relative flex items-center"
-                  variants={{
-                    hidden: { x: -50, opacity: 0 },
-                    visible: {
-                      x: 0,
-                      opacity: 1,
-                      transition: {
-                        type: "spring",
-                        stiffness: 100,
-                        damping: 15,
-                      },
-                    },
-                  }}
-                >
+                <div className="flex-none relative flex items-center">
                   <div className="absolute inset-0 bg-gradient-to-r from-white/5 via-transparent to-white/5 rounded-l-full opacity-50"></div>
                   <div className="px-4 sm:px-6 py-4 sm:py-5 text-base sm:text-lg text-white relative z-10 whitespace-nowrap">
                     Find Instructor
                   </div>
-                </motion.div>
+                </div>
 
                 {/* Input Field */}
-                <motion.div
-                  className="border-l border-white/10 px-2 sm:px-3 relative flex-1"
-                  variants={{
-                    hidden: { width: "0%", opacity: 0 },
-                    visible: {
-                      width: "100%",
-                      opacity: 1,
-                      transition: {
-                        duration: 0.5,
-                        ease: "easeOut",
-                      },
-                    },
-                  }}
-                >
+                <div className="border-l border-white/10 px-2 sm:px-3 relative flex-1">
                   <div className="absolute inset-0 bg-gradient-to-r from-white/5 via-transparent to-white/5 opacity-50"></div>
                   <input
                     type="text"
@@ -464,36 +371,19 @@ const Home = () => {
                     placeholder="Your Postal Code"
                     className="w-full h-full px-3 sm:px-4 py-4 sm:py-5 text-white bg-transparent border-0 focus:outline-none focus:ring-0 rounded-full text-base sm:text-lg placeholder-gray-300 relative z-10"
                   />
-                </motion.div>
+                </div>
 
                 {/* Search Button */}
-                <motion.button
+                <button
                   onClick={handleSearch}
                   className="px-6 sm:px-8 py-4 sm:py-5 bg-gradient-to-r from-yellow-500 to-yellow-500/90 text-gray-900 rounded-full hover:opacity-90 transition-all flex items-center gap-2 text-base sm:text-lg font-medium m-1 hover:shadow-lg"
-                  variants={{
-                    hidden: { x: 50, opacity: 0 },
-                    visible: {
-                      x: 0,
-                      opacity: 1,
-                      transition: {
-                        type: "spring",
-                        stiffness: 100,
-                        damping: 15,
-                      },
-                    },
-                  }}
-                  whileHover={{
-                    scale: 1.05,
-                    transition: { duration: 0.2 },
-                  }}
-                  whileTap={{ scale: 0.95 }}
                 >
                   <Search className="w-5 h-5 sm:w-6 sm:h-6 text-gray-900" />
                   <span className="hidden sm:inline">Search</span>
-                </motion.button>
+                </button>
               </motion.div>
 
-              {/* Suggestions Dropdown with Animation */}
+              {/* Suggestions Dropdown */}
               <AnimatePresence>
                 {showSuggestions && (
                   <motion.div
@@ -571,7 +461,8 @@ const Home = () => {
                   </motion.div>
                 )}
               </AnimatePresence>
-              
+            </motion.div>
+
             {/* User Circle Images */}
             <motion.div
               className="flex items-center gap-3 justify-center lg:justify-start mt-4 sm:mt-8"
@@ -606,12 +497,11 @@ const Home = () => {
                 students
               </motion.div>
             </motion.div>
-            </motion.div>
           </div>
 
-          {/* Right Column - Image */}
+          {/* Desktop Image - Hidden on mobile */}
           <motion.div
-            className="relative h-[400px] sm:h-[500px] lg:h-[600px] items-center lg:flex"
+            className="relative h-[400px] sm:h-[500px] lg:h-[600px] items-center hidden lg:flex"
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.5 }}

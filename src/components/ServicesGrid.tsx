@@ -4,6 +4,17 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Navigation } from 'swiper/modules';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { 
+  Certificate, 
+  GraduationCap, 
+  Users, 
+  CurrencyCircleDollar,
+  SteeringWheel,
+  Trophy,
+  CreditCard,
+  ShieldCheck,
+
+} from "@phosphor-icons/react";
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
@@ -15,57 +26,57 @@ const SERVICES = [
     title: "MTO Approved",
     description:
       "Certified by the Ministry of Transportation, ensuring top-quality driver training.",
-    icon: "/icons/1.png",
-    color: "bg-gradient-to-br from-blue-400 to-indigo-500",
+    icon: Certificate,
+    color: "bg-gradient-to-br from-[#2c3149] to-[#1a1f33]",
   },
   {
     title: "Customized Curriculum",
     description:
       "Only at GrayJays! Our updated syllabus focuses on exactly what examiners look for.",
-    icon: "/icons/2.png",
-    color: "bg-gradient-to-br from-amber-400 to-yellow-500",
+    icon: GraduationCap,
+    color: "bg-gradient-to-br from-yellow-500 to-yellow-600",
   },
   {
     title: "Certified Instructors",
     description:
       "Learn from highly trained professionals who undergo rigorous background checks.",
-    icon: "/icons/3.png",
-    color: "bg-gradient-to-br from-green-400 to-emerald-500",
+    icon: Users,
+    color: "bg-gradient-to-br from-[#2c3149] to-[#1a1f33]",
   },
   {
     title: "Transparent Pricing",
     description:
       "No hidden fees—clear and upfront costs for complete peace of mind.",
-    icon: "/icons/4.png",
-    color: "bg-gradient-to-br from-rose-400 to-red-500",
+    icon: CurrencyCircleDollar,
+    color: "bg-gradient-to-br from-yellow-500 to-yellow-600",
   },
   {
     title: "Defensive Driving Skills",
     description:
       "Master advanced techniques to stay safe and confident on the road.",
-    icon: "/icons/5.png",
+    icon: SteeringWheel,
     color: "bg-gradient-to-br from-[#2c3149] to-[#1a1f33]",
   },
   {
     title: "99% Passing Rate",
     description:
       "Proven methods to help you pass your road test on the first attempt.",
-    icon: "/icons/6.png",
-    color: "bg-gradient-to-br from-yellow-400 to-orange-500",
+    icon: Trophy,
+    color: "bg-gradient-to-br from-yellow-500 to-yellow-600",
   },
   {
     title: "Flexible Payment",
     description:
       "Interest-free financing and affordable payment plans to suit your budget.",
-    icon: "/icons/7.png",
-    color: "bg-gradient-to-br from-teal-400 to-emerald-500",
+    icon: CreditCard,
+    color: "bg-gradient-to-br from-[#2c3149] to-[#1a1f33]",
   },
   {
     title: "Money-Back Guarantee",
     description:
       "Your satisfaction is guaranteed—or your money back, no questions asked.",
-    icon: "/icons/8.png",
-    color: "bg-gradient-to-br from-purple-400 to-indigo-500",
+    icon: ShieldCheck,
+    color: "bg-gradient-to-br from-yellow-500 to-yellow-600",
   },
 ];
 
@@ -123,11 +134,12 @@ const ServicesGrid = () => {
               <div className="text-center px-4 lg:px-6">
                 <div className="relative transform transition-transform duration-300">
                   <div className={`absolute inset-0 ${service.color} rounded-full blur-2xl opacity-10 scale-150`} />
-                  <img
-                    src={service.icon}
-                    alt={service.title}
-                    className="relative h-20 w-20 lg:h-24 lg:w-24 object-contain drop-shadow-xl mx-auto"
-                  />
+                  <div className="relative mx-auto flex items-center justify-center">
+                    <service.icon 
+                      className="w-20 h-20 lg:w-24 lg:h-24 drop-shadow-xl"
+                      style={{ color: getIconColor(service.color) }}
+                    />
+                  </div>
                 </div>
                 <h3 className="text-xl lg:text-xl font-bold text-[#2c3149] mt-4 lg:mt-6">
                   {service.title}
@@ -163,6 +175,12 @@ const ServicesGrid = () => {
       </div>
     </div>
   );
+
+  const getIconColor = (gradientClass: string) => {
+    if (gradientClass.includes("[#2c3149]")) return "#2c3149";
+    if (gradientClass.includes("yellow")) return "#EAB308";
+    return "#2c3149";
+  };
 
   return (
     <div 

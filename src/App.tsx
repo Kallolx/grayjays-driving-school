@@ -5,7 +5,6 @@ import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import Services from './pages/Services';
 import Contact from './pages/Contact';
-import Pricing from './pages/Pricing';
 import Footer from './components/Footer';
 import HourlyLesson from './pages/HourlyLesson';
 import CarRental from './pages/CarRental';
@@ -66,15 +65,14 @@ function App() {
             <Route path="/services" element={<Services />} />
             <Route path="/testimonials" element={<Testimonials />} />
             <Route path="/contact" element={<Contact />} />
-            <Route path="/pricing" element={<Pricing />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/services/hourly-lessons" element={<HourlyLesson cart={cart} setCart={setCart} />} />
-            <Route path="/services/car-rental" element={<CarRental cart={cart} setCart={setCart} />} />
+            <Route path="/services/car-rental" element={<CarRental />} />
             <Route path="/learn-to-drive/special-packages" element={<SpecialPackages cart={cart} setCart={setCart} />} />
-            <Route path="/learn-to-drive/bde" element={<BDE cart={cart} setCart={setCart} />} />
+            <Route path="/learn-to-drive/bde" element={<BDE />} />
             <Route path="/services/gps-routes" element={<GPSRoutes cart={cart} setCart={setCart} />} />
             <Route path="/services/score-sheet" element={<ScoreSheet cart={cart} setCart={setCart} />} />
-            <Route path="/services/g1-practices" element={<G1Practice cart={cart} setCart={setCart} />} />
+            <Route path="/services/g1-practices" element={<G1Practice />} />
           </Routes>
         </main>
         <Footer />

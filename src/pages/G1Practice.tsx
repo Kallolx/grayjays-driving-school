@@ -1,27 +1,13 @@
-import { useState } from "react";
 import { motion } from "framer-motion";
 import {
   BookOpen,
   CheckCircle2,
-  AlertCircle,
   Clock,
   Brain,
   FileText,
   BarChart,
+  ArrowRight,
 } from "lucide-react";
-import toast from "react-hot-toast";
-
-interface G1PracticeProps {
-  cart: CartItem[];
-  setCart: (cart: CartItem[]) => void;
-}
-
-interface CartItem {
-  id: string;
-  name: string;
-  price: number;
-  requiresLocation: boolean;
-}
 
 interface PracticePackage {
   id: string;
@@ -87,32 +73,7 @@ const PRACTICE_PACKAGES: PracticePackage[] = [
   }
 ];
 
-const G1Practice = ({ cart, setCart }: G1PracticeProps) => {
-  const [selectedPackage, setSelectedPackage] = useState<string>("premium");
-
-  const addToCart = () => {
-    const pkg = PRACTICE_PACKAGES.find(p => p.id === selectedPackage);
-    if (!pkg) return;
-
-    const cartItem: CartItem = {
-      id: `g1-practice-${pkg.id}-${Date.now()}`,
-      name: `G1 ${pkg.title} Package`,
-      price: pkg.price,
-      requiresLocation: false,
-    };
-
-    setCart([...cart, cartItem]);
-    toast.success('Practice package added to cart!', {
-      style: {
-        background: '#2c3149',
-        color: '#fff',
-        borderRadius: '12px',
-      },
-      icon: '🛒',
-      position: 'bottom-left',
-      duration: 2000,
-    });
-  };
+const G1Practice = () => {
 
   const features = [
     {
@@ -215,112 +176,133 @@ const G1Practice = ({ cart, setCart }: G1PracticeProps) => {
 
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid lg:grid-cols-2 gap-12">
-          {/* Left Column - Features and Topics */}
-          <div>
-            {/* Features */}
-            <div className="bg-white rounded-2xl p-8 shadow-xl mb-8">
-              <h2 className="text-2xl font-bold text-[#2c3149] mb-6">
-                Why Choose Our G1 Practice Tests?
-              </h2>
-              <div className="grid gap-6">
-                {features.map((feature, index) => (
-                  <div key={index} className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-xl bg-yellow-50 flex items-center justify-center flex-shrink-0">
-                      {feature.icon}
-                    </div>
-                    <div>
-                      <h3 className="font-semibold text-[#2c3149] mb-1">{feature.title}</h3>
-                      <p className="text-gray-600">{feature.description}</p>
-                    </div>
+        {/* Package Cards */}
+        <div className="mb-16">
+          <h2 className="text-2xl sm:text-3xl font-bold text-[#2c3149] text-center mb-8">
+            Choose Your Practice Package
+          </h2>
+          <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+            {PRACTICE_PACKAGES.map((pkg) => (
+              <motion.div
+                key={pkg.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className={`relative bg-white rounded-2xl p-5 ${
+                  pkg.popular ? 'border-2 border-yellow-500 shadow-yellow-100' : 'border border-gray-200'
+                } hover:shadow-xl transition-all duration-300`}
+              >
+                {pkg.popular && (
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-yellow-500 text-white text-sm font-semibold rounded-full">
+                    Most Popular
                   </div>
-                ))}
-              </div>
-            </div>
+                )}
 
-            {/* Topics Covered */}
-            <div className="bg-white rounded-2xl p-8 shadow-xl">
-              <h2 className="text-2xl font-bold text-[#2c3149] mb-6">
-                Topics Covered
-              </h2>
-              <div className="grid gap-3">
-                {topics.map((topic, index) => (
-                  <div key={index} className="flex items-center gap-3 p-3 bg-gray-50 rounded-xl">
-                    <div className="w-6 h-6 rounded-full bg-yellow-500/10 flex items-center justify-center flex-shrink-0">
-                      <CheckCircle2 className="w-4 h-4 text-yellow-500" />
-                    </div>
-                    <span className="text-gray-700">{topic}</span>
+                <div className="text-center mb-4">
+                  <h3 className="text-lg font-bold text-[#2c3149] mb-1">{pkg.title}</h3>
+                  <p className="text-gray-600 text-sm mb-3">{pkg.description}</p>
+                  <div className="flex items-end justify-center gap-1">
+                    <span className="text-3xl font-bold text-[#2c3149]">${pkg.price}</span>
+                    <span className="text-gray-500 mb-1">/one-time</span>
                   </div>
-                ))}
-              </div>
-            </div>
-          </div>
+                </div>
 
-          {/* Right Column - Packages */}
-          <div>
-            <div className="sticky top-24">
-              <div className="bg-white rounded-2xl shadow-xl p-8">
-                <h2 className="text-2xl font-bold text-[#2c3149] mb-6">
-                  Choose Your Practice Package
-                </h2>
-
-                {/* Package Selection */}
-                <div className="grid gap-4 mb-8">
-                  {PRACTICE_PACKAGES.map((pkg) => (
-                    <button
-                      key={pkg.id}
-                      onClick={() => setSelectedPackage(pkg.id)}
-                      className={`relative p-6 rounded-xl border-2 text-left transition-all ${
-                        selectedPackage === pkg.id
-                          ? "border-yellow-500 bg-yellow-50"
-                          : "border-gray-200 hover:border-yellow-500/50"
-                      }`}
-                    >
-                      {pkg.popular && (
-                        <div className="absolute -top-3 -right-3 px-3 py-1 bg-yellow-500 text-white text-xs font-bold rounded-full">
-                          Popular Choice
-                        </div>
-                      )}
-                      <div className="flex justify-between items-center mb-2">
-                        <div>
-                          <h3 className="font-bold text-[#2c3149] text-lg">{pkg.title}</h3>
-                          <p className="text-sm text-gray-600">{pkg.description}</p>
-                        </div>
-                        <div className="text-xl font-bold text-yellow-500">${pkg.price}</div>
-                      </div>
-                      <div className="flex items-center gap-2 text-sm text-gray-600 mb-4">
-                        <Clock className="w-4 h-4" />
-                        <span>{pkg.questions} practice questions</span>
-                      </div>
-                      <div className="grid gap-2">
-                        {pkg.features.map((feature, index) => (
-                          <div key={index} className="flex items-center gap-2 text-sm text-gray-600">
-                            <CheckCircle2 className="w-4 h-4 text-yellow-500" />
-                            <span>{feature}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </button>
+                <div className="space-y-2 mb-4">
+                  <div className="flex items-center gap-2 text-[#2c3149] font-medium border-b border-gray-100 pb-2">
+                    <Brain className="w-4 h-4 text-yellow-500" />
+                    <span className="text-sm">{pkg.questions} Practice Questions</span>
+                  </div>
+                  {pkg.features.slice(0, 5).map((feature, index) => (
+                    <div key={index} className="flex items-start gap-2">
+                      <CheckCircle2 className="w-4 h-4 text-yellow-500 mt-0.5 flex-shrink-0" />
+                      <span className="text-xs text-gray-600">{feature}</span>
+                    </div>
                   ))}
                 </div>
 
-                {/* Add to Cart Button */}
                 <button
-                  onClick={addToCart}
-                  className="w-full py-4 bg-[#2c3149] text-white rounded-xl hover:bg-[#2c3149]/90 transition-colors"
+                  onClick={() => window.location.href = '/contact'}
+                  className={`w-full py-2.5 rounded-xl font-medium flex items-center justify-center gap-2 transition-all ${
+                    pkg.popular
+                      ? 'bg-yellow-500 text-[#2c3149] hover:bg-yellow-400'
+                      : 'bg-[#2c3149] text-white hover:bg-[#1a1f33]'
+                  }`}
                 >
-                  Add to Cart - ${PRACTICE_PACKAGES.find(p => p.id === selectedPackage)?.price.toFixed(2)}
+                  <span>Buy Now</span>
+                  <ArrowRight className="w-4 h-4" />
                 </button>
+              </motion.div>
+            ))}
+          </div>
+        </div>
 
-                {/* Additional Info */}
-                <div className="mt-4 flex items-start gap-2 text-xs text-gray-500">
-                  <AlertCircle className="w-4 h-4 flex-shrink-0" />
-                  <p>
-                    Instant access after purchase. Practice on any device. 
-                    Our practice tests are regularly updated to match the latest G1 test format.
-                  </p>
-                </div>
+        {/* Additional Info Section */}
+        <div className="bg-gradient-to-br from-[#2c3149] to-[#1a1f33] rounded-2xl p-6 sm:p-8 text-white mb-16">
+          <div className="grid sm:grid-cols-3 gap-6">
+            <div className="flex items-start gap-4">
+              <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center">
+                <Clock className="w-6 h-6 text-yellow-500" />
               </div>
+              <div>
+                <h3 className="font-semibold mb-2">Instant Access</h3>
+                <p className="text-sm text-gray-300">Start practicing immediately after purchase</p>
+              </div>
+            </div>
+            <div className="flex items-start gap-4">
+              <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center">
+                <BookOpen className="w-6 h-6 text-yellow-500" />
+              </div>
+              <div>
+                <h3 className="font-semibold mb-2">Updated Content</h3>
+                <p className="text-sm text-gray-300">Latest G1 test format and questions</p>
+              </div>
+            </div>
+            <div className="flex items-start gap-4">
+              <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center">
+                <Brain className="w-6 h-6 text-yellow-500" />
+              </div>
+              <div>
+                <h3 className="font-semibold mb-2">Smart Learning</h3>
+                <p className="text-sm text-gray-300">Adaptive practice based on your performance</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="grid lg:grid-cols-2 gap-12">
+          {/* Features */}
+          <div className="bg-white rounded-2xl p-8 shadow-xl">
+            <h2 className="text-2xl font-bold text-[#2c3149] mb-6">
+              Why Choose Our G1 Practice Tests?
+            </h2>
+            <div className="grid gap-6">
+              {features.map((feature, index) => (
+                <div key={index} className="flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-xl bg-yellow-50 flex items-center justify-center flex-shrink-0">
+                    {feature.icon}
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-[#2c3149] mb-1">{feature.title}</h3>
+                    <p className="text-gray-600">{feature.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Topics Covered */}
+          <div className="bg-white rounded-2xl p-8 shadow-xl">
+            <h2 className="text-2xl font-bold text-[#2c3149] mb-6">
+              Topics Covered
+            </h2>
+            <div className="grid gap-3">
+              {topics.map((topic, index) => (
+                <div key={index} className="flex items-center gap-3 p-3 bg-gray-50 rounded-xl">
+                  <div className="w-6 h-6 rounded-full bg-yellow-500/10 flex items-center justify-center flex-shrink-0">
+                    <CheckCircle2 className="w-4 h-4 text-yellow-500" />
+                  </div>
+                  <span className="text-gray-700">{topic}</span>
+                </div>
+              ))}
             </div>
           </div>
         </div>

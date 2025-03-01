@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ShoppingCart, X, MapPin, Clock3, Package, ArrowRight, CheckCircle2, Calendar, AlertCircle } from "lucide-react";
+import { ShoppingCart, X, MapPin, Clock3, Package, ArrowRight, CheckCircle2, Calendar} from "lucide-react";
 import SpotlightButton from "../components/SpotlightButton";
 import { CartItem } from "../types";
 
@@ -237,19 +237,16 @@ const SpecialPackages = ({
 
   return (
     <div className="relative min-h-screen bg-gray-50">
-      {/* Hero Section */}
-      <div className="relative pt-28 pb-20 bg-[#2c3149] overflow-hidden">
+      {/* Hero Section - Mobile Optimized */}
+      <div className="relative pt-16 sm:pt-28 pb-12 sm:pb-20 bg-[#2c3149] overflow-hidden">
         <div className="absolute inset-0">
-          {/* Background Image */}
           <img 
             src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?q=80&w=1800&auto=format&fit=crop"
             alt="Background"
-            className="absolute inset-0 w-full h-full object-cover object-right opacity-60"
+            className="absolute inset-0 w-full h-full object-cover object-center sm:object-right opacity-60"
           />
           <div className="absolute inset-0 bg-[url('/patterns/texture-dots.png')] opacity-[1] mix-blend-overlay" />
-          {/* Gradient Overlay */}
           <div className="absolute inset-0 bg-gradient-to-r from-[#2c3149] via-[#2c3149]/90 to-[#2c3149]/50" />
-          {/* Additional right-side gradient for better text contrast */}
           <div className="absolute right-0 top-0 bottom-0 w-1/2 bg-gradient-to-l from-[#1a1f33]/80 to-transparent" />
         </div>
 
@@ -258,17 +255,17 @@ const SpecialPackages = ({
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-6"
+              className="inline-flex items-center gap-1.5 sm:gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-4 sm:mb-6"
             >
-              <Package className="w-5 h-5 text-yellow-500" />
-              <span className="text-white font-medium">Special Packages</span>
+              <Package className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-500" />
+              <span className="text-sm sm:text-base text-white font-medium">Special Packages</span>
             </motion.div>
 
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6"
+              className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-3 sm:mb-6"
             >
               Tailored <span className="text-yellow-500">Learning</span> Solutions
             </motion.h1>
@@ -277,7 +274,7 @@ const SpecialPackages = ({
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="text-lg sm:text-xl text-gray-300 mb-8"
+              className="text-sm sm:text-lg text-gray-300 mb-6 sm:mb-8"
             >
               Choose from our specially designed packages to accelerate your learning journey.
               Each package is crafted to meet specific needs and goals.
@@ -286,54 +283,48 @@ const SpecialPackages = ({
         </div>
       </div>
 
-      {/* Packages Grid */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-16 relative z-10 mb-10">
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {/* Packages Grid - Updated Pricing */}
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 -mt-8 sm:-mt-16 relative z-10 mb-6 sm:mb-10">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">
           {packages.map((pkg, index) => (
             <motion.div
               key={pkg.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
-              className="group relative bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300"
+              className="group relative bg-white rounded-xl sm:rounded-2xl p-4 sm:p-8 shadow-lg hover:shadow-xl transition-all duration-300"
               onClick={() => {
                 setSelectedPackage(pkg.id);
                 setShowModal(true);
               }}
             >
-              {/* Background Pattern */}
-              <div className="absolute inset-0 bg-[url('/patterns/texture-dots.png')] opacity-[0.03] rounded-2xl" />
+              <div className="absolute inset-0 bg-[url('/patterns/texture-dots.png')] opacity-[0.03] rounded-xl sm:rounded-2xl" />
+              <div className="absolute inset-0 bg-gradient-to-br from-white/80 to-white/40 backdrop-blur-sm rounded-xl sm:rounded-2xl" />
 
-              {/* Glass Effect Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-br from-white/80 to-white/40 backdrop-blur-sm rounded-2xl" />
-
-              {/* Content Container */}
               <div className="relative">
-                {/* Icon and Title Section */}
-                <div className="flex items-start gap-4 mb-6">
-                  <div className="relative w-16 h-16">
-                    <div className="absolute inset-0 bg-gradient-to-br from-yellow-500 to-yellow-400 rounded-xl blur-lg opacity-20" />
-                    <div className="relative w-full h-full rounded-xl bg-gray-50 flex items-center justify-center group-hover:-rotate-6 transition-transform duration-300">
-                      <img src={pkg.icon} alt={pkg.title} className="w-10 h-10" />
+                <div className="flex items-start gap-3 sm:gap-4 mb-4 sm:mb-6">
+                  <div className="relative w-12 h-12 sm:w-16 sm:h-16">
+                    <div className="absolute inset-0 bg-gradient-to-br from-[#2c3149] to-[#1a1f33] rounded-lg sm:rounded-xl blur-lg opacity-20" />
+                    <div className="relative w-full h-full rounded-lg sm:rounded-xl bg-gray-50 flex items-center justify-center group-hover:-rotate-6 transition-transform duration-300">
+                      <img src={pkg.icon} alt={pkg.title} className="w-8 h-8 sm:w-10 sm:h-10" />
                     </div>
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-[#2c3149] mb-1">{pkg.title}</h3>
-                    <p className="text-gray-600 text-sm">{pkg.description}</p>
+                    <h3 className="text-base sm:text-xl font-bold text-[#2c3149] mb-0.5 sm:mb-1">{pkg.title}</h3>
+                    <p className="text-xs sm:text-sm text-gray-600">{pkg.description}</p>
                   </div>
                 </div>
 
-                {/* Price Tag */}
-                <div className="mb-6">
-                  <div className="inline-flex items-center px-4 py-2 rounded-full bg-[#2c3149]/5 text-[#2c3149]">
-                    <span className="text-sm font-semibold">From ${pkg.price}</span>
+                <div className="flex items-center justify-between mb-4 sm:mb-6">
+                  <div className="bg-[#2c3149] text-white px-3 py-1.5 rounded-lg">
+                    <div className="text-xs font-medium mb-0.5">Starting from</div>
+                    <div className="text-lg sm:text-xl font-bold">${pkg.price}</div>
                   </div>
                 </div>
 
-                {/* Action Button */}
-                <button className="w-full py-4 bg-gradient-to-r from-[#2c3149] to-[#1a1f33] text-white rounded-xl group-hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2">
+                <button className="w-full py-3 sm:py-4 bg-gradient-to-r from-[#2c3149] to-[#1a1f33] text-white rounded-lg sm:rounded-xl group-hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2 text-sm sm:text-base">
                   <span className="font-medium">View Details</span>
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform" />
                 </button>
               </div>
             </motion.div>
@@ -341,297 +332,255 @@ const SpecialPackages = ({
         </div>
       </div>
 
-      {/* Package Details Modal */}
+      {/* Enhanced Modal with More Information */}
       <AnimatePresence>
         {showModal && (
-          <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center">
+          <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-3 sm:p-4">
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="relative w-full max-w-5xl max-h-[90vh] overflow-y-auto bg-gradient-to-b from-white to-gray-50 rounded-2xl shadow-xl mx-4"
+              className="relative w-full max-w-5xl max-h-[85vh] overflow-y-auto bg-gradient-to-b from-white to-gray-50 rounded-xl sm:rounded-2xl shadow-xl"
             >
-              {/* Close Button */}
               <button
                 onClick={() => setShowModal(false)}
-                className="absolute top-6 right-6 p-2 rounded-full bg-white/80 hover:bg-white transition-colors shadow-lg z-10"
+                className="absolute top-3 sm:top-6 right-3 sm:right-6 p-2 rounded-full bg-white/80 hover:bg-white transition-colors shadow-lg z-10"
               >
-                <X className="w-5 h-5 text-gray-600" />
+                <X className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600" />
               </button>
 
-              {/* Modal Content */}
               <div className="relative">
-                {/* Hero Banner */}
                 {getSelectedPackageDetails() && (
-                  <div className="relative h-48 overflow-hidden rounded-t-2xl">
-                    <img 
-                      src={getSelectedPackageDetails()?.image}
-                      alt={getSelectedPackageDetails()?.title}
-                      className="w-full h-full object-cover"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-b from-[#2c3149]/80 to-[#2c3149]" />
-                    <div className="absolute inset-0 bg-[url('/patterns/texture-dots.png')] opacity-[0.1]" />
-                    
-                    <div className="absolute bottom-0 left-0 right-0 p-8 flex items-start gap-6">
-                      <div className="relative w-20 h-20 bg-white rounded-xl p-4 shadow-lg">
-                        <img 
-                          src={getSelectedPackageDetails()?.icon} 
-                          alt={getSelectedPackageDetails()?.title} 
-                          className="w-full h-full object-contain" 
-                        />
-                      </div>
-                      <div className="flex-1">
-                        <h2 className="text-3xl font-bold text-white mb-2">
-                          {getSelectedPackageDetails()?.title}
-                        </h2>
-                        <p className="text-white/90">
-                          {getSelectedPackageDetails()?.description}
-                        </p>
+                  <>
+                    <div className="relative p-4 sm:p-8 border-b">
+                      <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-8">
+                        <div className="w-full sm:w-1/3">
+                          <div className="relative w-full aspect-square rounded-xl overflow-hidden">
+                            <img 
+                              src={getSelectedPackageDetails()?.image}
+                              alt={getSelectedPackageDetails()?.title}
+                              className="w-full h-full object-cover"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-[#2c3149]/80 to-transparent" />
+                          </div>
+                        </div>
+                        
+                        <div className="flex-1">
+                          <div className="flex items-start justify-between gap-4 mb-4">
+                            <h2 className="text-2xl sm:text-3xl font-bold text-[#2c3149]">
+                              {getSelectedPackageDetails()?.title}
+                            </h2>
+                            <div className="bg-[#2c3149] text-white px-4 py-2 rounded-xl">
+                              <div className="text-sm font-medium mb-0.5">Starting from</div>
+                              <div className="text-2xl sm:text-3xl font-bold">
+                                ${getSelectedPackageDetails()?.price}
+                              </div>
+                            </div>
+                          </div>
+                          
+                          <p className="text-gray-600 mb-6">
+                            {getSelectedPackageDetails()?.description}
+                          </p>
+
+                          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                            <div className="bg-white rounded-lg p-3 border border-gray-100">
+                              <div className="flex items-center gap-2">
+                                <Clock3 className="w-5 h-5 text-[#2c3149]" />
+                                <span className="text-sm">Flexible Schedule</span>
+                              </div>
+                            </div>
+                            <div className="bg-white rounded-lg p-3 border border-gray-100">
+                              <div className="flex items-center gap-2">
+                                <MapPin className="w-5 h-5 text-[#2c3149]" />
+                                <span className="text-sm">Pick-up Service</span>
+                              </div>
+                            </div>
+                            <div className="bg-white rounded-lg p-3 border border-gray-100">
+                              <div className="flex items-center gap-2">
+                                <Calendar className="w-5 h-5 text-[#2c3149]" />
+                                <span className="text-sm">Book 24/7</span>
+                              </div>
+                            </div>
+                            <div className="bg-white rounded-lg p-3 border border-gray-100">
+                              <div className="flex items-center gap-2">
+                                <CheckCircle2 className="w-5 h-5 text-[#2c3149]" />
+                                <span className="text-sm">Certified Instructors</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                )}
 
-                <div className="p-8">
-                  {/* Content Grid */}
-                  <div className="grid lg:grid-cols-3 gap-8">
-                    {/* Main Content - Left Side */}
-                    <div className="lg:col-span-2 space-y-8">
-                      {selectedPackage === 'crash-course' ? (
-                        <div className="space-y-6">
-                          <div className="bg-white rounded-xl p-6 shadow-md">
-                            <h3 className="text-xl font-bold text-[#2c3149] mb-4">Choose Your Crash Course Package</h3>
-                            <p className="text-gray-600 mb-6">Select the package that best fits your preparation needs and timeline.</p>
-                            
-                            <div className="grid gap-6">
-                              {getFeatures().map((course: any, index: number) => (
-                                <div 
-                                  key={index}
-                                  className="relative group bg-gradient-to-br from-gray-50 to-white rounded-xl p-6 border border-gray-100 hover:shadow-lg transition-all duration-300"
-                                >
-                                  <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-                                    <div className="flex-1">
-                                      <div className="flex items-center gap-3 mb-2">
-                                        <div className="w-10 h-10 rounded-lg bg-[#2c3149]/5 flex items-center justify-center">
-                                          <Clock3 className="w-5 h-5 text-[#2c3149]" />
+                    {/* Content Section */}
+                    <div className="p-4 sm:p-8">
+                      <div className="grid lg:grid-cols-3 gap-4 sm:gap-8">
+                        <div className="lg:col-span-2 space-y-4 sm:space-y-8">
+                          {selectedPackage === 'crash-course' ? (
+                            <div className="space-y-4 sm:space-y-6">
+                              <div className="bg-white rounded-xl p-6 shadow-md">
+                                <h3 className="text-xl font-bold text-[#2c3149] mb-4">Choose Your Crash Course Package</h3>
+                                <div className="grid gap-4">
+                                  {getFeatures().map((course: any, index: number) => (
+                                    <div 
+                                      key={index}
+                                      className="relative bg-gradient-to-br from-gray-50 to-white rounded-xl p-6 border border-gray-100 hover:shadow-lg transition-all duration-300"
+                                    >
+                                      <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+                                        <div className="flex-1">
+                                          <div className="flex items-center gap-3 mb-3">
+                                            <div className="w-10 h-10 rounded-lg bg-[#2c3149] flex items-center justify-center">
+                                              <Clock3 className="w-5 h-5 text-white" />
+                                            </div>
+                                            <h4 className="text-lg font-bold text-[#2c3149]">{course.title}</h4>
+                                          </div>
+                                          <p className="text-gray-600 mb-4">{course.description}</p>
+                                          
+                                          <div className="flex items-center gap-3 text-[#2c3149]">
+                                            <div className="text-2xl font-bold">${course.price}</div>
+                                            <button 
+                                              onClick={() => {
+                                                addToCart({
+                                                  id: `crash-course-${course.title.toLowerCase().replace(/\s+/g, '-')}`,
+                                                  title: `Crash Course - ${course.title}`,
+                                                  price: course.price,
+                                                  requiresLocation: true
+                                                });
+                                              }}
+                                              className="px-6 py-2 bg-[#2c3149] text-white rounded-lg hover:bg-[#1a1f33] transition-colors flex items-center gap-2"
+                                            >
+                                              <ShoppingCart className="w-4 h-4" />
+                                              <span>Select</span>
+                                            </button>
+                                          </div>
                                         </div>
-                                        <h4 className="text-lg font-bold text-[#2c3149]">{course.title}</h4>
                                       </div>
-                                      <p className="text-gray-600 mb-4">{course.description}</p>
-                                      
-                                      {/* Package Details */}
-                                      {course.title === "Test Day" && (
-                                        <div className="grid grid-cols-2 gap-3 mb-4">
-                                          <div className="flex items-center gap-2 text-sm text-gray-600">
-                                            <CheckCircle2 className="w-4 h-4 text-yellow-500" />
-                                            <span>1-hour session</span>
-                                          </div>
-                                          <div className="flex items-center gap-2 text-sm text-gray-600">
-                                            <CheckCircle2 className="w-4 h-4 text-yellow-500" />
-                                            <span>Test route practice</span>
-                                          </div>
-                                        </div>
-                                      )}
-                                      {course.title === "Brush Up" && (
-                                        <div className="grid grid-cols-2 gap-3 mb-4">
-                                          <div className="flex items-center gap-2 text-sm text-gray-600">
-                                            <CheckCircle2 className="w-4 h-4 text-yellow-500" />
-                                            <span>2-hour session</span>
-                                          </div>
-                                          <div className="flex items-center gap-2 text-sm text-gray-600">
-                                            <CheckCircle2 className="w-4 h-4 text-yellow-500" />
-                                            <span>Skills assessment</span>
-                                          </div>
-                                          <div className="flex items-center gap-2 text-sm text-gray-600">
-                                            <CheckCircle2 className="w-4 h-4 text-yellow-500" />
-                                            <span>Focused practice</span>
-                                          </div>
-                                        </div>
-                                      )}
-                                      {course.title === "Road Test Ready" && (
-                                        <div className="grid grid-cols-2 gap-3 mb-4">
-                                          <div className="flex items-center gap-2 text-sm text-gray-600">
-                                            <CheckCircle2 className="w-4 h-4 text-yellow-500" />
-                                            <span>3-hour session</span>
-                                          </div>
-                                          <div className="flex items-center gap-2 text-sm text-gray-600">
-                                            <CheckCircle2 className="w-4 h-4 text-yellow-500" />
-                                            <span>Mock test included</span>
-                                          </div>
-                                          <div className="flex items-center gap-2 text-sm text-gray-600">
-                                            <CheckCircle2 className="w-4 h-4 text-yellow-500" />
-                                            <span>Detailed feedback</span>
-                                          </div>
-                                          <div className="flex items-center gap-2 text-sm text-gray-600">
-                                            <CheckCircle2 className="w-4 h-4 text-yellow-500" />
-                                            <span>Test tips & tricks</span>
-                                          </div>
-                                        </div>
-                                      )}
-                                      {course.title === "Driving Success" && (
-                                        <div className="grid grid-cols-2 gap-3 mb-4">
-                                          <div className="flex items-center gap-2 text-sm text-gray-600">
-                                            <CheckCircle2 className="w-4 h-4 text-yellow-500" />
-                                            <span>5-hour session</span>
-                                          </div>
-                                          <div className="flex items-center gap-2 text-sm text-gray-600">
-                                            <CheckCircle2 className="w-4 h-4 text-yellow-500" />
-                                            <span>2 mock tests</span>
-                                          </div>
-                                          <div className="flex items-center gap-2 text-sm text-gray-600">
-                                            <CheckCircle2 className="w-4 h-4 text-yellow-500" />
-                                            <span>Complete review</span>
-                                          </div>
-                                          <div className="flex items-center gap-2 text-sm text-gray-600">
-                                            <CheckCircle2 className="w-4 h-4 text-yellow-500" />
-                                            <span>Personalized plan</span>
-                                          </div>
-                                        </div>
-                                      )}
                                     </div>
-                                    
-                                    <div className="flex flex-col items-center md:items-end gap-3 min-w-[140px]">
-                                      <div className="text-2xl font-bold text-yellow-500">${course.price}</div>
-                                      <button 
-                                        onClick={() => {
-                                          addToCart({
-                                            id: `crash-course-${course.title.toLowerCase().replace(/\s+/g, '-')}`,
-                                            title: `Crash Course - ${course.title}`,
-                                            price: course.price,
-                                            requiresLocation: true
-                                          });
-                                        }}
-                                        className="w-full md:w-auto px-6 py-2 bg-[#2c3149] text-white rounded-lg hover:bg-[#1a1f33] transition-colors flex items-center justify-center gap-2"
-                                      >
-                                        <ShoppingCart className="w-4 h-4" />
-                                        <span>Select</span>
-                                      </button>
-                                    </div>
+                                  ))}
+                                </div>
+                              </div>
+                            </div>
+                          ) : selectedPackage === 'refresher' ? (
+                            <div className="space-y-4 sm:space-y-6">
+                              {getFeatures().map((section: any, index: number) => (
+                                <div key={index} className="bg-white rounded-lg sm:rounded-xl p-4 sm:p-6 shadow-md">
+                                  <h3 className="text-lg sm:text-xl font-bold text-[#2c3149] mb-2 sm:mb-3">{section.title}</h3>
+                                  <p className="text-xs sm:text-sm text-gray-600 mb-3 sm:mb-4">{section.description}</p>
+                                  <div className="grid gap-2 sm:gap-3">
+                                    {section.features.map((feature: string, idx: number) => (
+                                      <div key={idx} className="flex items-center gap-2 sm:gap-3 bg-gray-50 p-2 sm:p-3 rounded-lg text-xs sm:text-sm">
+                                        <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-500 flex-shrink-0" />
+                                        <span className="text-gray-700">{feature}</span>
+                                      </div>
+                                    ))}
                                   </div>
                                 </div>
                               ))}
                             </div>
-                          </div>
-                          
-                          {/* Additional Information */}
-                          <div className="bg-yellow-50 rounded-xl p-6">
-                            <div className="flex items-start gap-3">
-                              <AlertCircle className="w-5 h-5 text-yellow-500 flex-shrink-0 mt-1" />
-                              <div>
-                                <h4 className="font-medium text-[#2c3149] mb-1">Important Information</h4>
-                                <p className="text-sm text-gray-600">
-                                  All crash courses include a certified instructor, dual-control vehicle, and pick-up/drop-off service. 
-                                  Please book at least 48 hours in advance to ensure availability.
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      ) : selectedPackage === 'refresher' ? (
-                        <div className="space-y-6">
-                          {getFeatures().map((section: any, index: number) => (
-                            <div key={index} className="bg-white rounded-xl p-6 shadow-md">
-                              <h3 className="text-xl font-bold text-[#2c3149] mb-3">{section.title}</h3>
-                              <p className="text-gray-600 mb-4">{section.description}</p>
-                              <div className="grid gap-3">
-                                {section.features.map((feature: string, idx: number) => (
-                                  <div key={idx} className="flex items-center gap-3 bg-gray-50 p-3 rounded-lg">
-                                    <CheckCircle2 className="w-5 h-5 text-yellow-500 flex-shrink-0" />
-                                    <span className="text-gray-700">{feature}</span>
+                          ) : (
+                            <div className="bg-white rounded-lg sm:rounded-xl p-4 sm:p-6 shadow-md">
+                              <div className="grid gap-2 sm:gap-4">
+                                {getFeatures().map((feature: any, index: number) => (
+                                  <div key={index} className="flex items-center gap-2 sm:gap-3 bg-gray-50 p-3 sm:p-4 rounded-lg text-xs sm:text-sm">
+                                    <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-500 flex-shrink-0" />
+                                    <span className="text-gray-700">{feature.title}</span>
                                   </div>
                                 ))}
                               </div>
                             </div>
-                          ))}
+                          )}
                         </div>
-                      ) : (
-                        <div className="bg-white rounded-xl p-6 shadow-md">
-                          <div className="grid gap-4">
-                            {getFeatures().map((feature: any, index: number) => (
-                              <div key={index} className="flex items-center gap-3 bg-gray-50 p-4 rounded-lg">
-                                <CheckCircle2 className="w-5 h-5 text-yellow-500 flex-shrink-0" />
-                                <span className="text-gray-700">{feature.title}</span>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      )}
-                    </div>
 
-                    {/* Pricing Card - Right Side */}
-                    <div className="lg:col-span-1">
-                      <div className="sticky top-8">
-                        <div className="bg-white rounded-xl shadow-lg overflow-hidden">
-                          <div className="bg-gradient-to-br from-[#2c3149] to-[#1a1f33] p-6">
-                            <h3 className="text-xl font-bold text-white mb-2">Package Summary</h3>
-                            <div className="text-3xl font-bold text-yellow-500">
-                              From ${getSelectedPackageDetails()?.price}
+                        {/* Updated Pricing Card */}
+                        <div className="lg:col-span-1">
+                          <div className="sticky top-4 sm:top-8">
+                            <div className="bg-white rounded-lg sm:rounded-xl shadow-lg overflow-hidden">
+                              <div className="bg-gradient-to-br from-[#2c3149] to-[#1a1f33] p-4 sm:p-6">
+                                <h3 className="text-lg sm:text-xl font-bold text-white mb-1 sm:mb-2">Package Summary</h3>
+                                <div className="text-2xl sm:text-3xl font-bold text-white">
+                                  ${getSelectedPackageDetails()?.price}
+                                  <span className="text-sm font-normal text-white/80 ml-1">starting price</span>
+                                </div>
+                              </div>
+
+                              <div className="p-4 sm:p-6 space-y-4 sm:space-y-6">
+                                {/* Package Benefits */}
+                                <div className="space-y-3">
+                                  <h4 className="font-semibold text-[#2c3149] text-sm sm:text-base">Package Benefits:</h4>
+                                  <div className="space-y-2">
+                                    <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-600">
+                                      <CheckCircle2 className="w-4 h-4 text-green-500" />
+                                      <span>Professional instructors</span>
+                                    </div>
+                                    <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-600">
+                                      <CheckCircle2 className="w-4 h-4 text-green-500" />
+                                      <span>Dual-control vehicle</span>
+                                    </div>
+                                    <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-600">
+                                      <CheckCircle2 className="w-4 h-4 text-green-500" />
+                                      <span>Flexible scheduling</span>
+                                    </div>
+                                    <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-600">
+                                      <CheckCircle2 className="w-4 h-4 text-green-500" />
+                                      <span>Progress tracking</span>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                {/* Booking Information */}
+                                <div className="bg-gray-50 rounded-lg p-3 space-y-2">
+                                  <h4 className="font-semibold text-[#2c3149] text-xs sm:text-sm">Booking Information:</h4>
+                                  <p className="text-xs text-gray-600">
+                                    Book your session at least 48 hours in advance. Cancellation is free up to 24 hours before the scheduled time.
+                                  </p>
+                                </div>
+
+                                {selectedPackage !== 'crash-course' && (
+                                  <button
+                                    onClick={() => addToCart(getSelectedPackageDetails())}
+                                    className="w-full py-3 sm:py-4 bg-[#2c3149] text-white font-semibold rounded-lg sm:rounded-xl hover:bg-[#1a1f33] transition-all duration-300 flex items-center justify-center gap-2 text-sm sm:text-base"
+                                  >
+                                    <ShoppingCart className="w-4 h-4 sm:w-5 sm:h-5" />
+                                    <span>Add to Cart</span>
+                                  </button>
+                                )}
+
+                                <button
+                                  onClick={() => setShowModal(false)}
+                                  className="w-full py-2.5 sm:py-3 border-2 border-[#2c3149] text-[#2c3149] rounded-lg sm:rounded-xl hover:bg-[#2c3149] hover:text-white transition-all duration-300 font-medium text-sm sm:text-base"
+                                >
+                                  Cancel
+                                </button>
+                              </div>
                             </div>
-                          </div>
-                          <div className="p-6 space-y-6">
-                            {/* Quick Info */}
-                            <div className="space-y-4">
-                              <div className="flex items-center gap-3 text-gray-600">
-                                <Clock3 className="w-5 h-5 text-yellow-500" />
-                                <span>Flexible scheduling available</span>
-                              </div>
-                              <div className="flex items-center gap-3 text-gray-600">
-                                <MapPin className="w-5 h-5 text-yellow-500" />
-                                <span>Pick-up & drop-off service</span>
-                              </div>
-                              <div className="flex items-center gap-3 text-gray-600">
-                                <Calendar className="w-5 h-5 text-yellow-500" />
-                                <span>Book anytime 24/7</span>
-                              </div>
-                            </div>
-
-                            {/* Action Button */}
-                            {selectedPackage !== 'crash-course' && (
-                              <button
-                                onClick={() => addToCart(getSelectedPackageDetails())}
-                                className="w-full py-4 bg-gradient-to-r from-yellow-500 to-yellow-400 text-black font-semibold rounded-xl hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2 relative overflow-hidden group"
-                              >
-                                <div className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                                <ShoppingCart className="w-5 h-5" />
-                                <span>Add to Cart</span>
-                              </button>
-                            )}
-
-                            {/* Cancel Button */}
-                            <button
-                              onClick={() => setShowModal(false)}
-                              className="w-full py-3 border-2 border-[#2c3149] text-[#2c3149] rounded-xl hover:bg-[#2c3149] hover:text-white transition-all duration-300 font-medium"
-                            >
-                              Cancel
-                            </button>
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                </div>
+                  </>
+                )}
               </div>
             </motion.div>
           </div>
         )}
       </AnimatePresence>
 
-      {/* Floating Cart */}
+      {/* Floating Cart - Mobile Optimized */}
       <AnimatePresence>
         {showCart && (
           <motion.div
             initial={{ y: -100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: -100, opacity: 0 }}
-            className="fixed top-24 right-4 z-50"
+            className="fixed top-16 sm:top-24 right-2 sm:right-4 z-50"
           >
-            <div className="bg-white rounded-2xl shadow-2xl p-6 w-[90vw] max-w-sm">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-bold text-[#2c3149]">Your Cart</h3>
-                <div className="flex items-center gap-4">
-                  <div className="flex items-center gap-2">
-                    <ShoppingCart className="w-5 h-5 text-yellow-500" />
-                    <span className="text-sm text-gray-600">
+            <div className="bg-white rounded-xl sm:rounded-2xl shadow-2xl p-3 sm:p-6 w-[94vw] sm:w-[90vw] max-w-sm">
+              <div className="flex items-center justify-between mb-3 sm:mb-4">
+                <h3 className="text-base sm:text-lg font-bold text-[#2c3149]">Your Cart</h3>
+                <div className="flex items-center gap-3 sm:gap-4">
+                  <div className="flex items-center gap-1.5 sm:gap-2">
+                    <ShoppingCart className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-500" />
+                    <span className="text-xs sm:text-sm text-gray-600">
                       {cart.length} items
                     </span>
                   </div>
@@ -639,33 +588,33 @@ const SpecialPackages = ({
                     onClick={() => setShowCart(false)}
                     className="p-1 hover:bg-gray-100 rounded-lg transition-colors"
                   >
-                    <X className="w-5 h-5 text-gray-400" />
+                    <X className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400" />
                   </button>
                 </div>
               </div>
 
-              <div className="space-y-3 max-h-[40vh] overflow-y-auto">
+              <div className="space-y-2 sm:space-y-3 max-h-[35vh] sm:max-h-[40vh] overflow-y-auto">
                 {cart.map((item) => (
                   <div
                     key={item.id}
-                    className="flex items-start justify-between gap-4 p-3 bg-gray-50 rounded-xl"
+                    className="flex items-start justify-between gap-3 sm:gap-4 p-2 sm:p-3 bg-gray-50 rounded-lg sm:rounded-xl"
                   >
                     <div>
-                      <div className="font-medium text-[#2c3149]">
+                      <div className="font-medium text-sm sm:text-base text-[#2c3149]">
                         {item.name}
                       </div>
                       {item.location && (
-                        <div className="flex items-center gap-1 text-sm text-gray-500">
+                        <div className="flex items-center gap-1 text-xs sm:text-sm text-gray-500">
                           <MapPin className="w-3 h-3" />
                           {item.location}
                         </div>
                       )}
                       {item.licenseType && (
-                        <div className="text-sm text-gray-500">
+                        <div className="text-xs sm:text-sm text-gray-500">
                           License: {item.licenseType}
                         </div>
                       )}
-                      <div className="text-sm font-medium text-yellow-500">
+                      <div className="text-xs sm:text-sm font-medium text-yellow-500">
                         ${item.price}
                       </div>
                     </div>
@@ -673,17 +622,17 @@ const SpecialPackages = ({
                       onClick={() => removeFromCart(item.id)}
                       className="p-1 hover:bg-white rounded-lg transition-colors text-gray-400 hover:text-red-500"
                     >
-                      <X className="w-4 h-4" />
+                      <X className="w-3 h-3 sm:w-4 sm:h-4" />
                     </button>
                   </div>
                 ))}
               </div>
 
               {cart.length > 0 && (
-                <div className="mt-4 pt-4 border-t border-gray-100">
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="font-medium text-[#2c3149]">Total:</span>
-                    <span className="text-lg font-bold text-[#2c3149]">
+                <div className="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-gray-100">
+                  <div className="flex items-center justify-between mb-3 sm:mb-4">
+                    <span className="font-medium text-sm sm:text-base text-[#2c3149]">Total:</span>
+                    <span className="text-base sm:text-lg font-bold text-[#2c3149]">
                       ${cart.reduce((sum, item) => sum + item.price, 0)}
                     </span>
                   </div>

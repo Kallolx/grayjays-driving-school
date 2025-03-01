@@ -1,18 +1,13 @@
-import { useState } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Mail, 
-  Phone, 
-  MapPin, 
- 
-  Send, 
-  MessageSquare,
+  Phone,
+  MapPin,
 
+  MessageSquare,
   CheckCircle2,
   ArrowRight,
-  Calendar,
-
-  Building2
 } from 'lucide-react';
 import toast from 'react-hot-toast';
 
@@ -25,16 +20,11 @@ const Contact = () => {
     message: ''
   });
 
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    toast.success('Message sent successfully!', {
-      style: {
-        background: '#2c3149',
-        color: '#fff',
-        borderRadius: '12px',
-      },
-      duration: 2000,
-    });
+    setShowSuccessModal(true);
     setFormData({
       name: '',
       email: '',
@@ -46,48 +36,50 @@ const Contact = () => {
 
   const contactMethods = [
     {
+      icon: <Phone className="w-6 h-6" />,
+      title: "Call Us Now",
+      value: "(123) 456-7890",
+      action: () => window.location.href = 'tel:+1234567890',
+      description: "Available Mon-Sat, 9am-6pm"
+    },
+    {
       icon: <Mail className="w-6 h-6" />,
       title: "Email Us",
       value: "info@drivingschool.com",
       action: () => {
         navigator.clipboard.writeText('info@drivingschool.com');
-        toast.success('Email copied to clipboard!');
+        toast.success('Email copied to clipboard!', {
+          style: {
+            background: '#2c3149',
+            color: '#fff',
+            borderRadius: '12px',
+          },
+        });
       },
-      description: "For general inquiries and support",
-      gradient: "from-blue-500 to-blue-400"
+      description: "For general inquiries and support"
     },
     {
-      icon: <Phone className="w-6 h-6" />,
-      title: "Call Us",
-      value: "(123) 456-7890",
-      action: () => window.location.href = 'tel:+1234567890',
-      description: "Available Mon-Sat, 9am-6pm",
-      gradient: "from-emerald-500 to-emerald-400"
-    },
-    {
-      icon: <Calendar className="w-6 h-6" />,
-      title: "Book a Visit",
-      value: "Schedule an appointment",
-      action: () => window.location.href = '/book',
-      description: "Visit our training center",
-      gradient: "from-purple-500 to-purple-400"
+      icon: <MapPin className="w-6 h-6" />,
+      title: "Visit Us",
+      value: "123 Queen Street West",
+      action: () => window.open('https://maps.google.com'),
+      description: "Toronto Downtown"
     }
   ];
-
-  const location = {
-    city: "Toronto Downtown",
-    address: "123 Queen Street West",
-    phone: "(123) 456-7890",
-    hours: "Mon-Fri: 9AM-6PM"
-  };
 
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <div className="relative pt-28 pb-20 bg-[#2c3149] overflow-hidden">
+      <div className="relative pt-16 sm:pt-24 pb-32 sm:pb-40 bg-[#2c3149] overflow-hidden">
         <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-[url('/patterns/texture-dots.png')] opacity-[0.03]" />
-          <div className="absolute inset-0 bg-gradient-to-br from-[#2c3149] via-[#2c3149] to-[#1a1f33]" />
+          <img 
+            src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?q=80&w=1800&auto=format&fit=crop"
+            alt="Background"
+            className="absolute inset-0 w-full h-full object-cover object-right opacity-60"
+          />
+          <div className="absolute inset-0 bg-[url('/patterns/texture-dots.png')] opacity-[1] mix-blend-overlay" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#2c3149] via-[#2c3149]/90 to-[#2c3149]/50" />
+          <div className="absolute right-0 top-0 bottom-0 w-1/2 bg-gradient-to-l from-[#1a1f33]/80 to-transparent" />
         </div>
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -98,33 +90,32 @@ const Contact = () => {
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 mb-6"
             >
               <MessageSquare className="w-5 h-5 text-yellow-500" />
-              <span className="text-white font-medium">24/7 Support Available</span>
+              <span className="text-white font-medium">Get in Touch with Us</span>
             </motion.div>
 
-            <motion.h1
+            <motion.h1 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6"
+            >
+              Contact <span className="text-yellow-500">Us</span>
+            </motion.h1>
+            
+            <motion.p 
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6"
+              className="text-lg sm:text-xl text-gray-300 max-w-2xl mx-auto mb-8"
             >
-              Get in <span className="text-yellow-500">Touch</span>
-            </motion.h1>
-
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="text-lg sm:text-xl text-gray-300 mb-8"
-            >
-              Have questions? We're here to help you start your journey to becoming a confident driver.
+              Have questions about our driving lessons? We're here to help you become a confident driver.
             </motion.p>
           </div>
         </div>
       </div>
 
       {/* Contact Methods */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-16 relative z-10">
-        <div className="grid md:grid-cols-3 gap-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-20 relative z-10">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">
           {contactMethods.map((method, index) => (
             <motion.div
               key={index}
@@ -132,182 +123,170 @@ const Contact = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
               onClick={method.action}
-              className="group relative bg-gradient-to-br text-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all cursor-pointer overflow-hidden"
-              style={{
-                background: `linear-gradient(to bottom right, var(--tw-gradient-from), var(--tw-gradient-to))`
-              }}
+              className="group relative bg-white rounded-xl sm:rounded-2xl p-4 sm:p-8 border border-gray-400 hover:border-gray-700 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 cursor-pointer"
             >
-              <div className={`absolute inset-0 bg-gradient-to-br ${method.gradient} opacity-90`} />
-              <div className="absolute inset-0 bg-[url('/patterns/texture-dots.png')] opacity-[0.1]" />
-              <div className="absolute inset-0 bg-black/10" />
-              <div className="relative flex items-start gap-4">
-                <div className="w-12 h-12 rounded-xl bg-white/20 flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <div className="text-white">
-                    {method.icon}
-                  </div>
+              <div className="flex items-start gap-3 sm:gap-4">
+                <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-lg sm:rounded-xl bg-gray-50 flex items-center justify-center">
+                  {React.cloneElement(method.icon, { className: "w-8 h-8 sm:w-10 sm:h-10 text-[#2c3149]" })}
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold text-white group-hover:text-white transition-colors">
-                    {method.title}
-                  </h3>
-                  <p className="text-white/90 font-medium">{method.value}</p>
-                  <p className="text-sm text-white/80 mt-1">{method.description}</p>
+                  <h3 className="text-base sm:text-xl font-bold text-[#2c3149] mb-0.5">{method.title}</h3>
+                  <p className="text-sm text-gray-600 mb-1">{method.value}</p>
+                  <p className="text-xs sm:text-sm text-gray-500">{method.description}</p>
                 </div>
-                <ArrowRight className="w-5 h-5 text-white/50 group-hover:text-white group-hover:translate-x-1 transition-all ml-auto" />
+                <ArrowRight className="w-4 h-4 text-[#2c3149] group-hover:translate-x-1 transition-transform ml-auto" />
               </div>
             </motion.div>
           ))}
         </div>
       </div>
 
-      {/* Main Content */}
+      {/* Contact Form Section */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid lg:grid-cols-2 gap-16">
-          {/* Contact Form */}
-          <div>
-            <div className="bg-white rounded-2xl shadow-lg p-8">
-              <div className="flex items-center gap-3 mb-8">
-                <div className="w-10 h-10 rounded-xl bg-[#2c3149]/10 flex items-center justify-center">
-                  <MessageSquare className="w-5 h-5 text-[#2c3149]" />
-                </div>
-                <div>
-                  <h2 className="text-2xl font-bold text-[#2c3149]">Send us a Message</h2>
-                  <p className="text-gray-600">We'll get back to you within 24 hours</p>
-                </div>
+        <div className="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-8 border border-gray-400">
+          <div className="grid lg:grid-cols-2 gap-8">
+            {/* Form */}
+            <div>
+              <div className="mb-8">
+                <h2 className="text-2xl sm:text-3xl font-bold text-[#2c3149] mb-2">Send us a Message</h2>
+                <p className="text-gray-600">Fill out the form below and we'll get back to you shortly</p>
               </div>
 
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid grid-cols-2 gap-6">
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div className="grid sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Name</label>
                     <input
                       type="text"
+                      placeholder="Your Name"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-[#2c3149] focus:border-transparent transition-all"
+                      className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-yellow-500/20 focus:border-yellow-500"
                       required
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
                     <input
                       type="email"
+                      placeholder="Email Address"
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-[#2c3149] focus:border-transparent transition-all"
+                      className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-yellow-500/20 focus:border-yellow-500"
                       required
                     />
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-6">
+                <div className="grid sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Phone</label>
                     <input
                       type="tel"
+                      placeholder="Phone Number"
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-[#2c3149] focus:border-transparent transition-all"
+                      className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-yellow-500/20 focus:border-yellow-500"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Subject</label>
                     <input
                       type="text"
+                      placeholder="Subject"
                       value={formData.subject}
                       onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-[#2c3149] focus:border-transparent transition-all"
+                      className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-yellow-500/20 focus:border-yellow-500"
                       required
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Message</label>
                   <textarea
+                    placeholder="Your Message"
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     rows={4}
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-[#2c3149] focus:border-transparent transition-all"
+                    className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-yellow-500/20 focus:border-yellow-500"
                     required
                   />
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full py-4 bg-[#2c3149] text-white rounded-xl hover:bg-[#1a1f33] transition-all flex items-center justify-center gap-2 group"
+                  className="w-full py-3 sm:py-4 bg-[#2c3149] text-white rounded-lg hover:bg-[#1a1f33] hover:shadow-lg transition-all flex items-center justify-center gap-2 text-sm sm:text-base"
                 >
-                  <Send className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                  Send Message
+                  <span className="font-medium">Send Message</span>
+                  <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform" />
                 </button>
               </form>
             </div>
-          </div>
 
-          {/* Location */}
-          <div>
-            <div className="flex items-center gap-3 mb-8">
-              <div className="w-10 h-10 rounded-xl bg-[#2c3149]/10 flex items-center justify-center">
-                <Building2 className="w-5 h-5 text-[#2c3149]" />
-              </div>
-              <div>
-                <h2 className="text-2xl font-bold text-[#2c3149]">Our Location</h2>
-                <p className="text-gray-600">Visit our training center</p>
-              </div>
-            </div>
+            {/* Map & Info */}
+            <div className="bg-gradient-to-b from-[#2c3149] to-[#1a1f33] rounded-xl p-6 sm:p-8 text-white relative overflow-hidden">
+              <div className="absolute inset-0 bg-[url('/patterns/texture-dots.png')] opacity-[0.05] mix-blend-overlay" />
+              
+              <div className="relative space-y-6">
+                <div>
+                  <h3 className="text-xl font-bold mb-2">Our Location</h3>
+                  <p className="text-gray-300">123 Queen Street West, Toronto Downtown</p>
+                </div>
 
-            <div className="bg-gradient-to-br from-[#2c3149] to-[#1a1f33] rounded-2xl p-8 shadow-lg text-white relative overflow-hidden">
-              <div className="absolute inset-0 bg-[url('/patterns/texture-dots.png')] opacity-[0.1]" />
-              <div className="relative">
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center flex-shrink-0">
-                    <MapPin className="w-6 h-6 text-white" />
-                  </div>
-                  <div>
-                    <h3 className="text-2xl font-semibold text-white mb-2">{location.city}</h3>
-                    <p className="text-white/80 text-lg mb-6">{location.address}</p>
-                    <div className="grid grid-cols-2 gap-6">
-                      <div>
-                        <p className="text-white/60 mb-1">Phone</p>
-                        <p className="text-white font-medium text-lg">{location.phone}</p>
-                      </div>
-                      <div>
-                        <p className="text-white/60 mb-1">Hours</p>
-                        <p className="text-white font-medium text-lg">{location.hours}</p>
-                      </div>
-                    </div>
+                <div>
+                  <h3 className="text-xl font-bold mb-2">Business Hours</h3>
+                  <div className="space-y-2 text-gray-300">
+                    <p>Monday - Friday: 9:00 AM - 6:00 PM</p>
+                    <p>Saturday: 10:00 AM - 4:00 PM</p>
+                    <p>Sunday: Closed</p>
                   </div>
                 </div>
-              </div>
-            </div>
 
-            {/* FAQ Preview */}
-            <div className="mt-8 bg-gradient-to-br from-yellow-500 to-yellow-400 rounded-2xl p-6 shadow-lg relative overflow-hidden">
-              <div className="absolute inset-0 bg-[url('/patterns/texture-dots.png')] opacity-[0.1]" />
-              <div className="relative">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-white/20 flex items-center justify-center">
-                      <CheckCircle2 className="w-5 h-5 text-white" />
-                    </div>
-                    <div>
-                      <h3 className="text-lg font-semibold text-white">Have Questions?</h3>
-                      <p className="text-white/90">Check our frequently asked questions</p>
-                    </div>
+                <div>
+                  <h3 className="text-xl font-bold mb-2">Contact Info</h3>
+                  <div className="space-y-2 text-gray-300">
+                    <p>Phone: (123) 456-7890</p>
+                    <p>Email: info@drivingschool.com</p>
                   </div>
-                  <button 
-                    onClick={() => window.location.href = '/faq'}
-                    className="px-4 py-2 bg-white text-yellow-500 rounded-lg hover:bg-white/90 transition-all flex items-center gap-2 font-medium"
-                  >
-                    View FAQ
-                    <ArrowRight className="w-4 h-4" />
-                  </button>
+                </div>
+
+                <div className="pt-4 border-t border-white/10">
+                  <p className="text-sm text-gray-300">
+                    For urgent inquiries outside business hours, please leave a message and we'll get back to you as soon as possible.
+                  </p>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
+
+      {/* Success Modal */}
+      <AnimatePresence>
+        {showSuccessModal && (
+          <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              className="bg-white rounded-xl w-full max-w-md overflow-hidden"
+            >
+              <div className="bg-[#2c3149] p-6 text-center">
+                <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <CheckCircle2 className="w-8 h-8 text-yellow-500" />
+                </div>
+                <h3 className="text-xl font-bold text-white mb-2">Message Sent Successfully!</h3>
+                <p className="text-gray-300">We'll get back to you within 24 hours.</p>
+              </div>
+              
+              <div className="p-6">
+                <button
+                  onClick={() => setShowSuccessModal(false)}
+                  className="w-full py-3 bg-[#2c3149] text-white rounded-lg hover:bg-[#1a1f33] transition-all"
+                >
+                  Close
+                </button>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

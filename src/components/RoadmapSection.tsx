@@ -1,11 +1,52 @@
-import { GraduationCap, Car,Users} from 'lucide-react';
+import { GraduationCap, CheckCircle2, Clock3, Route, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
+const ServicesShowcase = () => {
+  const packages = [
+    {
+      title: "BDE Course Package",
+      price: "$695",
+      icon: <GraduationCap className="w-6 h-6 text-yellow-500" />,
+      features: [
+        "20 hrs in-class lessons",
+        "10 hrs in-car training",
+        "Online practice tests",
+        "Course completion certificate"
+      ],
+      description: "Complete driver education program approved by the Ministry of Transportation of Ontario.",
+      link: "/learn-to-drive/bde",
+      highlight: true
+    },
+    {
+      title: "Hourly Lessons",
+      price: "From $60/hr",
+      icon: <Clock3 className="w-6 h-6 text-[#2c3149]" />,
+      features: [
+        "Flexible scheduling",
+        "Experienced instructors",
+        "Pick-up & drop-off",
+        "Personalized training"
+      ],
+      description: "Perfect for those who want to improve specific driving skills or need additional practice.",
+      link: "/services/hourly-lessons"
+    },
+    {
+      title: "Test Preparation",
+      price: "$299",
+      icon: <Route className="w-6 h-6 text-[#2c3149]" />,
+      features: [
+        "Road test routes practice",
+        "Mock test simulation",
+        "Score sheet review",
+        "Last-minute preparation"
+      ],
+      description: "Comprehensive preparation package designed to help you pass your road test with confidence.",
+      link: "/services/test-prep"
+    }
+  ];
 
-
-const AboutSection = () => {
   return (
-    <section className="py-24 bg-white relative overflow-hidden">
+    <section className="py-10 bg-white relative overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-[0.02]">
         <div className="absolute inset-0" style={{
@@ -15,104 +56,93 @@ const AboutSection = () => {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col lg:flex-row gap-16 items-center">
-          {/* Left Image Section */}
-          <div className="lg:w-1/2 relative">
-            {/* Main Image Container */}
-            <div className="relative h-[600px] rounded-2xl overflow-hidden">
-              <img 
-                src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?q=80&w=1200&auto=format&fit=crop"
-                alt="Driving Training"
-                className="w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#2c3149]/95 via-[#2c3149]/60 to-transparent" />
+        {/* Section Header */}
+        <div className="text-center mb-8">
+          <span className="inline-block px-4 py-1.5 rounded-full bg-yellow-500/10 text-[#2c3149] text-sm font-medium">
+            Our Services
+          </span>
+          <h2 className="mt-3 text-2xl sm:text-3xl font-bold text-[#2c3149]">
+            Choose Your <span className="text-yellow-500">Learning Path</span>
+          </h2>
+          <p className="mt-2 text-gray-600 max-w-2xl mx-auto">
+            Select the package that best fits your needs. All our services include professional instruction and modern vehicles with safety features.
+          </p>
+        </div>
 
-              {/* Minimal Content Overlay */}
-              <div className="absolute bottom-0 left-0 right-0 p-8 bg-gradient-to-t from-[#2c3149] to-transparent">
-                <div className="max-w-md mx-auto">
-                  <div className="w-16 h-0.5 bg-yellow-500 mb-8" />
-                  <div className="grid grid-cols-3 gap-8">
-                    <div className="text-center">
-                      <div className="text-4xl font-bold text-white">98%</div>
-                      <div className="text-sm text-white/80 mt-1 font-medium">Pass Rate</div>
-                    </div>
-                    <div className="text-center">
-                      <div className="text-4xl font-bold text-white">2000+</div>
-                      <div className="text-sm text-white/80 mt-1 font-medium">Students</div>
-                    </div>
-                    <div className="text-center">
-                      <div className="text-4xl font-bold text-white">15+</div>
-                      <div className="text-sm text-white/80 mt-1 font-medium">Years</div>
-                    </div>
+        {/* Packages Grid */}
+        <div className="grid md:grid-cols-3 gap-6">
+          {packages.map((pkg) => (
+            <div 
+              key={pkg.title}
+              className={`relative flex flex-col rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg ${
+                pkg.highlight 
+                  ? 'bg-[#2c3149] text-white' 
+                  : 'bg-white text-[#2c3149] border-2 border-[#2c3149]'
+              }`}
+            >
+              {pkg.highlight && (
+                <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                  <span className="inline-block px-3 py-1 bg-yellow-500 text-[#2c3149] text-xs font-semibold rounded-full whitespace-nowrap">
+                    Most Popular
+                  </span>
+                </div>
+              )}
+              
+              <div className="flex items-start justify-between mb-4">
+                <div>
+                  <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-3 ${
+                    pkg.highlight ? 'bg-white/10' : 'bg-yellow-500/10'
+                  }`}>
+                    {pkg.icon}
                   </div>
+                  <h3 className="text-lg font-semibold">{pkg.title}</h3>
+                  <div className={`text-sm ${pkg.highlight ? 'text-gray-300' : 'text-gray-600'} mt-1`}>
+                    Starting at
+                  </div>
+                  <div className="text-2xl font-bold mt-1">{pkg.price}</div>
                 </div>
               </div>
-            </div>
-          </div>
 
-          {/* Right Content */}
-          <div className="lg:w-1/2 space-y-8">
-            <div>
-              <span className="inline-block px-4 py-1.5 rounded-full bg-yellow-500/10 text-[#2c3149] text-sm font-medium">
-                Welcome to GraysJays
-              </span>
-              <h2 className="mt-6 text-4xl md:text-5xl font-bold text-[#2c3149] leading-tight">
-                Transform into a
-                <span className="block mt-2">
-                  <span className="text-yellow-500">Professional</span> Driver
-                </span>
-              </h2>
-            </div>
+              <p className={`text-sm ${pkg.highlight ? 'text-gray-300' : 'text-gray-600'} mb-4`}>
+                {pkg.description}
+              </p>
 
-            <p className="text-gray-600 text-lg">
-              At GraysJays, we're committed to transforming learners into confident, skilled drivers. 
-              Our comprehensive training combines expert instruction with modern vehicles and flexible scheduling 
-              to ensure your success on the road.
-            </p>
-
-            <div className="space-y-4">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-yellow-500/10 flex items-center justify-center">
-                  <GraduationCap className="w-6 h-6 text-yellow-500" />
-                </div>
-                <div>
-                  <h3 className="font-medium text-[#2c3149]">Professional Training</h3>
-                  <p className="text-sm text-gray-600">MTO-approved curriculum</p>
-                </div>
+              <div className={`space-y-2 mb-6 flex-grow ${pkg.highlight ? 'text-gray-300' : 'text-gray-600'}`}>
+                {pkg.features.map((feature) => (
+                  <div key={feature} className="flex items-center gap-2">
+                    <CheckCircle2 className={`w-4 h-4 flex-shrink-0 ${
+                      pkg.highlight ? 'text-yellow-500' : 'text-yellow-500'
+                    }`} />
+                    <span className="text-sm">{feature}</span>
+                  </div>
+                ))}
               </div>
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-yellow-500/10 flex items-center justify-center">
-                  <Car className="w-6 h-6 text-yellow-500" />
-                </div>
-                <div>
-                  <h3 className="font-medium text-[#2c3149]">Modern Vehicles</h3>
-                  <p className="text-sm text-gray-600">Dual-control cars with safety features</p>
-                </div>
-              </div>
-            </div>
 
-            <div className="flex flex-col sm:flex-row gap-4 relative z-10">
-              <Link 
-                to="/services"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-gradient-to-r from-yellow-500 to-yellow-400 text-black rounded-full hover:shadow-xl hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-200 group text-lg font-medium relative overflow-hidden"
+              <Link
+                to={pkg.link}
+                className={`group flex items-center justify-center gap-2 w-full px-4 py-3 rounded-full font-medium transition-all duration-200 ${
+                  pkg.highlight
+                    ? 'bg-yellow-500 text-[#2c3149] hover:bg-yellow-400'
+                    : 'bg-[#2c3149] text-white hover:bg-[#2c3149]/90'
+                }`}
               >
-                <div className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                Start Learning
-                <Car className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </Link>
-              <Link 
-                to="/contact"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 border-2 border-[#2c3149] text-[#2c3149] rounded-full hover:bg-[#2c3149] hover:text-white active:scale-[0.98] hover:shadow-xl hover:-translate-y-0.5 transition-all duration-200 group text-lg font-medium"
-              >
-                Contact Us
-                <Users className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                <span>Learn More</span>
+                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </Link>
             </div>
-          </div>
+          ))}
+        </div>
+
+        {/* Secondary Content */}
+        <div className="mt-16 text-center">
+          <h3 className="text-xl font-semibold text-[#2c3149] mb-3">Why Choose GraysJays?</h3>
+          <p className="text-gray-600 max-w-3xl mx-auto">
+            With a 98% pass rate and over 2000+ successful students, our driving school combines professional instruction with modern vehicles to ensure you become a confident and skilled driver. Our MTO-approved curriculum and experienced instructors are committed to your success on the road.
+          </p>
         </div>
       </div>
     </section>
   );
 };
 
-export default AboutSection;
+export default ServicesShowcase;
