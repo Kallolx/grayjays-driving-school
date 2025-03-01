@@ -9,7 +9,6 @@ import Footer from './components/Footer';
 import HourlyLesson from './pages/HourlyLesson';
 import CarRental from './pages/CarRental';
 import Testimonials from './pages/Testimonials';
-import ChatButton from "./components/ChatButton";
 import CartButton from "./components/CartButton";
 import FAQSection from './components/FAQSection';
 import SpecialPackages from './pages/SpecialPackages';
@@ -77,7 +76,6 @@ function App() {
         </main>
         <Footer />
         <CartButton cart={cart} setCart={setCart} />
-        <ChatButton />
         <Toaster />
       </div>
     </Router>

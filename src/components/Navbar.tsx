@@ -16,7 +16,6 @@ import {
 } from 'lucide-react';
 import MobileSidebar from './MobileSidebar';
 import { toast } from 'react-hot-toast';
-import ChatButton from './ChatButton';
 
 const MENU_ITEMS = {
   learnToDrive: [
@@ -245,7 +244,6 @@ const Navbar = () => {
               animate={{ opacity: 1 }}
               transition={{ delay: 1.9, duration: 0.5 }}
             >
-              <ChatButton variant="inline" size="sm" className="mr-2" />
               <button
                 onClick={() => {
                   navigator.clipboard.writeText('info@drivingschool.com');
@@ -278,15 +276,15 @@ const Navbar = () => {
 
             {/* Mobile Menu Button */}
             <motion.div 
-              className="lg:hidden flex items-center space-x-3"
+              className="lg:hidden flex items-center"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1.9, duration: 0.5 }}
             >
-              <ChatButton variant="inline" size="sm" className="mr-2" />
               <button
                 onClick={() => setIsMobileMenuOpen(true)}
                 className="p-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors"
+                aria-label="Open menu"
               >
                 <Menu className="w-5 h-5 text-white" />
               </button>
