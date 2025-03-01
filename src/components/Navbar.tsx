@@ -95,7 +95,7 @@ const Navbar = () => {
           ease: [0.1, 0.25, 0.3, 1],
         }}
       >
-        <div className="max-w-[1920px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-auto mx-auto px-4">
           <div className="flex items-center justify-between h-16 sm:h-18 md:h-20">
             {/* Logo and Location - Desktop */}
             <motion.div 

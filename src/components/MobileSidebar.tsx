@@ -89,7 +89,7 @@ const MobileSidebar = ({ isOpen, onClose }: MobileSidebarProps) => {
       </AnimatePresence>
 
       <motion.div
-        className={`fixed top-0 right-0 bottom-0 w-[300px] bg-[#2c3149] z-50 transform transition-transform duration-300 ease-in-out ${
+        className={`fixed top-0 right-0 bottom-0 bg-[#2c3149] z-50 transform transition-transform duration-300 ease-in-out ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >

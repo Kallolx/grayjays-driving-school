@@ -43,6 +43,7 @@ function ScrollToTop() {
 function MainPage() {
   return (
     <>
+      <Navbar />
       <Home />
       <Testimonials />
       <FAQSection />
@@ -55,10 +56,9 @@ function App() {
 
   return (
     <Router>
-      <div className="min-h-screen bg-gray-50 font-poppins antialiased text-gray-900 selection:bg-[#FFD7C9] selection:text-gray-900">
-        <ScrollToTop />
-        <Navbar />
-        <main>
+      <div className="min-h-screen bg-gray-50 font-poppins antialiased text-gray-900 selection:bg-[#FFD7C9] selection:text-gray-900 overflow-x-hidden">
+        <ScrollToTop />        
+        <main className="w-full max-w-[100vw] overflow-x-hidden">
           <Routes>
             <Route path="/" element={<MainPage />} />
             <Route path="/services" element={<Services />} />
@@ -70,7 +70,7 @@ function App() {
             <Route path="/learn-to-drive/special-packages" element={<SpecialPackages cart={cart} setCart={setCart} />} />
             <Route path="/learn-to-drive/bde" element={<BDE />} />
             <Route path="/services/gps-routes" element={<GPSRoutes cart={cart} setCart={setCart} />} />
-            <Route path="/services/score-sheet" element={<ScoreSheet cart={cart} setCart={setCart} />} />
+            <Route path="/services/score-sheet" element={<ScoreSheet/>} />
             <Route path="/services/g1-practices" element={<G1Practice />} />
           </Routes>
         </main>
