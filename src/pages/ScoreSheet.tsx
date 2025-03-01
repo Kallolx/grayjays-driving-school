@@ -1,19 +1,8 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { AlertCircle, FileSpreadsheet, CheckCircle2, ArrowRight } from "lucide-react";
-import { toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
-interface ScoreSheetProps {
-  cart: CartItem[];
-  setCart: (cart: CartItem[]) => void;
-}
-
-interface CartItem {
-  id: string;
-  name: string;
-  price: number;
-  requiresLocation: boolean;
-}
 
 interface ScoreSheetVersion {
   id: string;
@@ -97,33 +86,11 @@ const SCORING_POINTS = [
   "Defensive driving"
 ];
 
-const ScoreSheet = ({ cart, setCart }: ScoreSheetProps) => {
+const ScoreSheet = ({}) => {
   const [selectedVersion, setSelectedVersion] = useState<string>("g2-new");
   const [filterType, setFilterType] = useState<"G" | "G2" | "BOTH" | "ALL">("ALL");
+  const navigate = useNavigate();
 
-  const addToCart = () => {
-    const version = SCORE_SHEET_VERSIONS.find(v => v.id === selectedVersion);
-    if (!version) return;
-
-    const cartItem: CartItem = {
-      id: `score-sheet-${version.id}-${Date.now()}`,
-      name: `${version.title} Score Sheet`,
-      price: version.price,
-      requiresLocation: false,
-    };
-
-    setCart([...cart, cartItem]);
-    toast.success('Score Sheet added to cart!', {
-      style: {
-        background: '#2c3149',
-        color: '#fff',
-        borderRadius: '12px',
-      },
-      icon: '🛒',
-      position: 'bottom-left',
-      duration: 2000,
-    });
-  };
 
   const filteredVersions = SCORE_SHEET_VERSIONS.filter(version => 
     filterType === "ALL" || version.type === filterType
@@ -266,7 +233,12 @@ const ScoreSheet = ({ cart, setCart }: ScoreSheetProps) => {
                 <button
                   onClick={(e) => {
                     e.stopPropagation();
-                    addToCart();
+                    navigate(`/contact?${new URLSearchParams({
+                      package: version.title,
+                      type: version.type,
+                      version: version.version,
+                      price: version.price.toFixed(2)
+                    }).toString()}`);
                   }}
                   className={`w-full py-2.5 rounded-xl font-medium flex items-center justify-center gap-2 transition-all ${
                     selectedVersion === version.id
@@ -274,7 +246,7 @@ const ScoreSheet = ({ cart, setCart }: ScoreSheetProps) => {
                       : 'bg-[#2c3149] text-white hover:bg-[#1a1f33]'
                   }`}
                 >
-                  <span>Add to Cart</span>
+                  <span>Buy Now</span>
                   <ArrowRight className="w-4 h-4" />
                 </button>
               </motion.div>

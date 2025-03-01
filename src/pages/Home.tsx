@@ -267,7 +267,7 @@ const Home = () => {
         <div className="grid lg:grid-cols-2 gap-4 sm:gap-8 lg:gap-16 relative">
           {/* Mobile Image - Visible only on mobile */}
           <motion.div
-            className="block lg:hidden relative h-[400px] sm:h-[450px] w-full mb-8"
+            className="block lg:hidden relative h-[300px] sm:h-[300px] w-full mb-8"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}

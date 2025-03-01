@@ -2,40 +2,49 @@ import { X, MessageCircle } from "lucide-react";
 import { useState } from "react";
 import ChatModal from "./ChatModal";
 
-const ChatButton = () => {
+interface ChatButtonProps {
+  className?: string;
+  variant?: 'fixed' | 'inline';
+  size?: 'sm' | 'md' | 'lg';
+}
+
+const ChatButton = ({ className = "", variant = "fixed", size = "lg" }: ChatButtonProps) => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const sizeClasses = {
+    sm: "w-8 h-8",
+    md: "w-10 h-10",
+    lg: "w-12 h-12 sm:w-14 sm:h-14"
+  };
+
+  const iconSizes = {
+    sm: "w-4 h-4",
+    md: "w-5 h-5",
+    lg: "w-6 h-6 sm:w-7 sm:h-7"
+  };
+
+  // Hide the fixed variant completely
+  const baseButtonClass = variant === "fixed" 
+    ? "hidden"
+    : "group";
 
   return (
     <>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-4 sm:bottom-6 right-4 sm:right-6 z-50 group"
+        className={`${baseButtonClass} ${className}`}
         aria-label="Chat with us"
       >
         <div className="relative">
-          {/* Outer ring animation */}
-          <div className="absolute -inset-2 bg-gradient-to-r from-yellow-500 to-yellow-300 rounded-full blur opacity-30 group-hover:opacity-40 animate-pulse"></div>
-          {/* Ripple effect */}
-          <div className="absolute inset-0 rounded-full bg-yellow-500 animate-ping opacity-25 duration-700"></div>
-          {/* Button background with hover effect */}
-          <div className="relative flex items-center justify-center w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-r from-yellow-500 to-yellow-400 hover:from-yellow-400 hover:to-yellow-500 rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300">
+          <div className={`relative flex items-center justify-center ${sizeClasses[size]} bg-gradient-to-r from-yellow-500 to-yellow-400 hover:from-yellow-400 hover:to-yellow-500 rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300`}>
             <div className="relative">
               {isOpen ? (
-                <X className="w-6 h-6 sm:w-7 sm:h-7 text-[#2c3149]" />
+                <X className={`${iconSizes[size]} text-[#2c3149]`} />
               ) : (
-                <MessageCircle className="w-6 h-6 sm:w-7 sm:h-7 text-[#2c3149]" />
+                <MessageCircle className={`${iconSizes[size]} text-[#2c3149]`} />
               )}
             </div>
           </div>
-          {/* Notification dot with pulse */}
-          {!isOpen && (
-            <div className="absolute -top-1 -right-1 flex">
-              <div className="relative">
-                <div className="w-3 h-3 bg-[#2c3149] rounded-full border-2 border-white"></div>
-                <div className="absolute inset-0 bg-[#2c3149] rounded-full animate-ping opacity-40"></div>
-              </div>
-            </div>
-          )}
         </div>
       </button>
 

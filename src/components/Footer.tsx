@@ -3,275 +3,169 @@ import { Facebook, Instagram, Twitter, Youtube, Phone, Mail, MapPin, ChevronRigh
 
 const Footer = () => {
   return (
-    <footer className="bg-[#2c3149] text-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+    <footer className="bg-gradient-to-br from-[#2c3149] to-[#1a1f33] text-white relative overflow-hidden">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 bg-[url('/patterns/texture-dots.png')] opacity-[0.03]" />
+      
+      {/* Main Content */}
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        {/* Top Section */}
+        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between pb-10 border-b border-white/10">
+          <div className="flex items-center gap-4 mb-6 lg:mb-0">
+            <Link to="/" className="flex items-center gap-3 bg-white/5 p-3 rounded-2xl hover:bg-white/10 transition-all">
+              <img src="/icons/svg-image-1.svg" alt="GrayJays" className="w-12 h-12" />
+              <div>
+                <span className="text-xl font-bold block">GrayJays</span>
+                <span className="text-sm text-gray-400">Opportunity Starts Here</span>
+              </div>
+            </Link>
+          </div>
+          <div className="flex flex-wrap gap-4">
+            <a href="tel:+1234567890" className="flex items-center gap-2 bg-white/5 px-4 py-2 rounded-xl hover:bg-white/10 transition-all">
+              <Phone className="w-5 h-5 text-yellow-500" />
+              <span className="text-sm">Call Us</span>
+            </a>
+            <a href="mailto:info@grayjays.com" className="flex items-center gap-2 bg-white/5 px-4 py-2 rounded-xl hover:bg-white/10 transition-all">
+              <Mail className="w-5 h-5 text-yellow-500" />
+              <span className="text-sm">Email Us</span>
+            </a>
+            <Link to="/contact" className="flex items-center gap-2 bg-white/5 px-4 py-2 rounded-xl hover:bg-white/10 transition-all">
+              <MapPin className="w-5 h-5 text-yellow-500" />
+              <span className="text-sm">Find Us</span>
+            </Link>
+          </div>
+        </div>
+
+        {/* Grid Section */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 py-12">
           {/* Company Info */}
           <div className="space-y-4">
-            <Link to="/" className="flex items-center gap-3">
-              <img src="/icons/svg-image-1.svg" alt="GrayJays" className="w-12 h-12" />
-              <span className="text-xl font-bold">GrayJays</span>
-            </Link>
-            <p className="text-sm text-gray-300">Opportunity Starts Here</p>
-            <div className="text-sm text-gray-300">
-              <p>Toronto Municipal Licensing & Standards</p>
-              <p>Beginner Driver Education Course Provider License</p>
-            </div>
+            <h3 className="text-lg font-semibold text-yellow-500">About Us</h3>
+            <p className="text-sm text-gray-300 leading-relaxed">
+              Toronto Municipal Licensing & Standards<br />
+              Beginner Driver Education Course Provider License
+            </p>
             <Link 
               to="/find-us" 
-              className="text-sm text-yellow-500 hover:text-yellow-400"
+              className="inline-flex items-center gap-2 text-sm text-yellow-500 hover:text-yellow-400 group"
             >
-              Find Us at Government-Approved Driving Schools
+              Find Us at Government-Approved Schools
+              <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
+            <div className="flex gap-4 pt-4">
+              {[
+                { icon: <Facebook className="w-5 h-5" />, url: "https://facebook.com" },
+                { icon: <Twitter className="w-5 h-5" />, url: "https://twitter.com" },
+                { icon: <Instagram className="w-5 h-5" />, url: "https://instagram.com" },
+                { icon: <Youtube className="w-5 h-5" />, url: "https://youtube.com" },
+                { icon: <Linkedin className="w-5 h-5" />, url: "https://linkedin.com" }
+              ].map((social, index) => (
+                <a 
+                  key={index}
+                  href={social.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-white/5 p-2 rounded-lg hover:bg-white/10 transition-all text-gray-400 hover:text-white"
+                >
+                  {social.icon}
+                </a>
+              ))}
+            </div>
           </div>
 
-          {/* Who We Are */}
+          {/* Quick Links */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Who We Are</h3>
-            <ul className="space-y-2">
-              <li>
-                <Link to="/about" className="text-gray-300 hover:text-white transition-colors">
-                  About Us
-                </Link>
-              </li>
-              <li>
-                <Link to="/contact" className="text-gray-300 hover:text-white transition-colors">
-                  Contact Us
-                </Link>
-              </li>
-              <li>
-                <Link to="/terms" className="text-gray-300 hover:text-white transition-colors">
-                  Terms of Service
-                </Link>
-              </li>
-              <li>
-                <Link to="/privacy" className="text-gray-300 hover:text-white transition-colors">
-                  Privacy Policy
-                </Link>
-              </li>
-              <li>
-                <Link to="/affiliates" className="text-gray-300 hover:text-white transition-colors">
-                  Affiliates
-                </Link>
-              </li>
-              <li>
-                <Link to="/career" className="text-gray-300 hover:text-white transition-colors">
-                  Career
-                </Link>
-              </li>
-              <li>
-                <Link to="/login" className="text-gray-300 hover:text-white transition-colors">
-                  Login
-                </Link>
-              </li>
+            <h3 className="text-lg font-semibold text-yellow-500 mb-6">Quick Links</h3>
+            <ul className="grid grid-cols-1 gap-3">
+              {[
+                { text: "About Us", path: "/about" },
+                { text: "Contact Us", path: "/contact" },
+                { text: "Terms of Service", path: "/terms" },
+                { text: "Privacy Policy", path: "/privacy" },
+                { text: "Affiliates", path: "/affiliates" },
+                { text: "Career", path: "/career" },
+                { text: "Login", path: "/login" }
+              ].map((link, index) => (
+                <li key={index}>
+                  <Link 
+                    to={link.path}
+                    className="text-gray-300 hover:text-white transition-colors inline-flex items-center gap-2 group"
+                  >
+                    <ChevronRight className="w-4 h-4 text-yellow-500/50 group-hover:text-yellow-500 transition-colors" />
+                    {link.text}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
-          {/* What We Do */}
+          {/* Services */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">What We Do</h3>
-            <ul className="space-y-2">
-              <li>
-                <Link to="/services/license" className="text-gray-300 hover:text-white transition-colors">
-                  How To Get A License
-                </Link>
-              </li>
-              <li>
-                <Link to="/services/hourly-lessons" className="text-gray-300 hover:text-white transition-colors">
-                  Hourly Lesson Packages
-                </Link>
-              </li>
-              <li>
-                <Link to="/services/special-packages" className="text-gray-300 hover:text-white transition-colors">
-                  Specialty Packages
-                </Link>
-              </li>
-              <li>
-                <Link to="/services/car-rental" className="text-gray-300 hover:text-white transition-colors">
-                  Rental Car For Road Test
-                </Link>
-              </li>
-              <li>
-                <Link to="/services/gps-routes" className="text-gray-300 hover:text-white transition-colors">
-                  GPS Routes
-                </Link>
-              </li>
-              <li>
-                <Link to="/services/score-sheet" className="text-gray-300 hover:text-white transition-colors">
-                  Score Sheet
-                </Link>
-              </li>
-              <li>
-                <Link to="/blog" className="text-gray-300 hover:text-white transition-colors">
-                  Blog
-                </Link>
-              </li>
-              <li>
-                <Link to="/faqs" className="text-gray-300 hover:text-white transition-colors">
-                  FAQs
-                </Link>
-              </li>
+            <h3 className="text-lg font-semibold text-yellow-500 mb-6">Our Services</h3>
+            <ul className="grid grid-cols-1 gap-3">
+              {[
+                { text: "How To Get A License", path: "/services/license" },
+                { text: "Hourly Lesson Packages", path: "/services/hourly-lessons" },
+                { text: "Specialty Packages", path: "/services/special-packages" },
+                { text: "Rental Car For Road Test", path: "/services/car-rental" },
+                { text: "GPS Routes", path: "/services/gps-routes" },
+                { text: "Score Sheet", path: "/services/score-sheet" },
+                { text: "Blog", path: "/blog" },
+                { text: "FAQs", path: "/faqs" }
+              ].map((link, index) => (
+                <li key={index}>
+                  <Link 
+                    to={link.path}
+                    className="text-gray-300 hover:text-white transition-colors inline-flex items-center gap-2 group"
+                  >
+                    <ChevronRight className="w-4 h-4 text-yellow-500/50 group-hover:text-yellow-500 transition-colors" />
+                    {link.text}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
-          {/* Cities Where We Operate */}
+          {/* Locations */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Cities Where We Operate</h3>
-            <div className="grid grid-cols-2 gap-2">
-              <ul className="space-y-2">
-                <li>
-                  <Link to="/locations/toronto" className="text-gray-300 hover:text-white transition-colors">
-                    Toronto
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/locations/scarborough" className="text-gray-300 hover:text-white transition-colors">
-                    Scarborough
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/locations/east-york" className="text-gray-300 hover:text-white transition-colors">
-                    East York
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/locations/north-york" className="text-gray-300 hover:text-white transition-colors">
-                    North York
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/locations/markham" className="text-gray-300 hover:text-white transition-colors">
-                    Markham
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/locations/port-union" className="text-gray-300 hover:text-white transition-colors">
-                    Port Union
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/locations/pickering" className="text-gray-300 hover:text-white transition-colors">
-                    Pickering
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/locations/ajax" className="text-gray-300 hover:text-white transition-colors">
-                    Ajax
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/locations/whitby" className="text-gray-300 hover:text-white transition-colors">
-                    Whitby
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/locations/oshawa" className="text-gray-300 hover:text-white transition-colors">
-                    Oshawa
-                  </Link>
-                </li>
-              </ul>
-              <ul className="space-y-2">
-                <li>
-                  <Link to="/locations/bowmanville" className="text-gray-300 hover:text-white transition-colors">
-                    Bowmanville
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/locations/clarington" className="text-gray-300 hover:text-white transition-colors">
-                    Clarington
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/locations/newcastle" className="text-gray-300 hover:text-white transition-colors">
-                    Newcastle
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/locations/port-perry" className="text-gray-300 hover:text-white transition-colors">
-                    Port Perry
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/locations/richmond-hill" className="text-gray-300 hover:text-white transition-colors">
-                    Richmond Hill
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/locations/st-catherines" className="text-gray-300 hover:text-white transition-colors">
-                    St. Catherine's
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/locations/georgina" className="text-gray-300 hover:text-white transition-colors">
-                    Georgina
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/locations/newmarket" className="text-gray-300 hover:text-white transition-colors">
-                    Newmarket
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/locations/milton" className="text-gray-300 hover:text-white transition-colors">
-                    Milton
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/locations/kitchener" className="text-gray-300 hover:text-white transition-colors">
-                    Kitchener
-                  </Link>
-                </li>
-              </ul>
+            <h3 className="text-lg font-semibold text-yellow-500 mb-6">Service Locations</h3>
+            <div className="grid grid-cols-2 gap-3">
+              {[
+                "Toronto", "Scarborough", "East York", "North York", "Markham",
+                "Richmond Hill", "Pickering", "Ajax", "Whitby", "Oshawa",
+                "Bowmanville", "Clarington", "Newcastle", "Port Perry", "St. Catherine's",
+                "Georgina", "Newmarket", "Milton", "Kitchener"
+              ].map((city, index) => (
+                <Link
+                  key={index}
+                  to={`/locations/${city.toLowerCase().replace(/[.']/g, '').replace(/\s+/g, '-')}`}
+                  className="text-gray-300 hover:text-white transition-colors text-sm"
+                >
+                  {city}
+                </Link>
+              ))}
             </div>
           </div>
         </div>
 
         {/* Bottom Section */}
-        <div className="mt-12 pt-8 border-t border-gray-700">
+        <div className="pt-8 border-t border-white/10">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <div className="text-sm text-gray-400">
-              Copyright © {new Date().getFullYear()} Grayjays Driving School
+            <div className="flex items-center gap-2">
+              <Award className="w-5 h-5 text-yellow-500" />
+              <span className="text-sm text-gray-400">
+                © {new Date().getFullYear()} Grayjays Driving School. All rights reserved.
+              </span>
             </div>
-            <div className="flex items-center gap-4">
+            <div className="text-sm text-gray-400">
+              Made with ❤️ by{" "}
               <a 
-                href="https://facebook.com" 
+                href="https://kallolsfolio.vercel.app" 
                 target="_blank" 
-                rel="noopener noreferrer"
-                className="text-gray-400 hover:text-white transition-colors"
+                rel="noopener noreferrer" 
+                className="text-yellow-500 hover:text-yellow-400 transition-colors"
               >
-                <Facebook className="w-5 h-5" />
-              </a>
-              <a 
-                href="https://twitter.com" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-gray-400 hover:text-white transition-colors"
-              >
-                <Twitter className="w-5 h-5" />
-              </a>
-              <a 
-                href="https://instagram.com" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-gray-400 hover:text-white transition-colors"
-              >
-                <Instagram className="w-5 h-5" />
-              </a>
-              <a 
-                href="https://youtube.com" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-gray-400 hover:text-white transition-colors"
-              >
-                <Youtube className="w-5 h-5" />
-              </a>
-              <a 
-                href="https://linkedin.com" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-gray-400 hover:text-white transition-colors"
-              >
-                <Linkedin className="w-5 h-5" />
+                Kamrul Hasan
               </a>
             </div>
           </div>
