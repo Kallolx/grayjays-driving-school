@@ -43,7 +43,6 @@ function ScrollToTop() {
 function MainPage() {
   return (
     <>
-      <Navbar />
       <Home />
       <Testimonials />
       <FAQSection />
@@ -57,7 +56,8 @@ function App() {
   return (
     <Router>
       <div className="min-h-screen bg-gray-50 font-poppins antialiased text-gray-900 selection:bg-[#FFD7C9] selection:text-gray-900 overflow-x-hidden">
-        <ScrollToTop />        
+        <ScrollToTop />  
+        <Navbar />      
         <main className="w-full max-w-[100vw] overflow-x-hidden">
           <Routes>
             <Route path="/" element={<MainPage />} />
