@@ -107,8 +107,17 @@ const GPSRoutes = ({ cart, setCart }: GPSRoutesProps) => {
       {/* Hero Section */}
       <div className="relative pt-28 pb-20 bg-[#2c3149] overflow-hidden">
         <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-[url('/patterns/texture-dots.png')] opacity-[0.03]" />
-          <div className="absolute inset-0 bg-gradient-to-br from-[#2c3149] via-[#2c3149] to-[#1a1f33]" />
+          {/* Background Image */}
+          <img 
+            src="https://images.pexels.com/photos/1044329/pexels-photo-1044329.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+            alt="Background"
+            className="absolute inset-0 w-full h-full object-cover object-center opacity-60"
+          />
+          <div className="absolute inset-0 bg-[url('/patterns/texture-dots.png')] opacity-[1] mix-blend-overlay" />
+          {/* Gradient Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#2c3149] via-[#2c3149]/90 to-[#2c3149]/50" />
+          {/* Additional right-side gradient for better text contrast */}
+          <div className="absolute right-0 top-0 bottom-0 w-1/2 bg-gradient-to-l from-[#1a1f33]/80 to-transparent" />
         </div>
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -142,18 +151,29 @@ const GPSRoutes = ({ cart, setCart }: GPSRoutesProps) => {
               Master your test route before the big day with our detailed route guides
             </motion.p>
 
-            {/* Quick Info */}
+            {/* Quick Stats */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
-              className="inline-flex items-start gap-2 px-4 py-3 rounded-xl bg-white/10 backdrop-blur-sm text-sm text-gray-300"
+              className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-3xl mx-auto mt-12"
             >
-              <Info className="w-5 h-5 text-yellow-500 flex-shrink-0 mt-0.5" />
-              <p className="text-left">
-                Our route guides include common test routes, key checkpoints, potential challenges,
-                and examiner expectations for each test center. Perfect for practice runs before your test!
-              </p>
+              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4">
+                <div className="text-2xl font-bold text-yellow-500">20+</div>
+                <div className="text-sm text-gray-300">Test Centers</div>
+              </div>
+              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4">
+                <div className="text-2xl font-bold text-yellow-500">100%</div>
+                <div className="text-sm text-gray-300">Accurate</div>
+              </div>
+              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4">
+                <div className="text-2xl font-bold text-yellow-500">HD</div>
+                <div className="text-sm text-gray-300">Map Quality</div>
+              </div>
+              <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4">
+                <div className="text-2xl font-bold text-yellow-500">24/7</div>
+                <div className="text-sm text-gray-300">Access</div>
+              </div>
             </motion.div>
           </div>
         </div>

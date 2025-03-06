@@ -241,7 +241,7 @@ const SpecialPackages = ({
       <div className="relative pt-16 sm:pt-28 pb-12 sm:pb-20 bg-[#2c3149] overflow-hidden">
         <div className="absolute inset-0">
           <img 
-            src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?q=80&w=1800&auto=format&fit=crop"
+            src="https://images.pexels.com/photos/1044329/pexels-photo-1044329.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
             alt="Background"
             className="absolute inset-0 w-full h-full object-cover object-center sm:object-right opacity-60"
           />

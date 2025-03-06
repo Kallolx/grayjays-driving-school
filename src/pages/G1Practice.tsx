@@ -111,8 +111,17 @@ const G1Practice = () => {
       {/* Hero Section */}
       <div className="relative pt-28 pb-20 bg-[#2c3149] overflow-hidden">
         <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-[url('/patterns/texture-dots.png')] opacity-[0.03]" />
-          <div className="absolute inset-0 bg-gradient-to-br from-[#2c3149] via-[#2c3149] to-[#1a1f33]" />
+          {/* Background Image */}
+          <img 
+            src="https://images.pexels.com/photos/1044329/pexels-photo-1044329.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+            alt="Background"
+            className="absolute inset-0 w-full h-full object-cover object-center opacity-60"
+          />
+          <div className="absolute inset-0 bg-[url('/patterns/texture-dots.png')] opacity-[1] mix-blend-overlay" />
+          {/* Gradient Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#2c3149] via-[#2c3149]/90 to-[#2c3149]/50" />
+          {/* Additional right-side gradient for better text contrast */}
+          <div className="absolute right-0 top-0 bottom-0 w-1/2 bg-gradient-to-l from-[#1a1f33]/80 to-transparent" />
         </div>
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -181,13 +190,13 @@ const G1Practice = () => {
           <h2 className="text-2xl sm:text-3xl font-bold text-[#2c3149] text-center mb-8">
             Choose Your Practice Package
           </h2>
-          <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {PRACTICE_PACKAGES.map((pkg) => (
               <motion.div
                 key={pkg.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                className={`relative bg-white rounded-2xl p-5 ${
+                className={`relative bg-white rounded-2xl p-6 ${
                   pkg.popular ? 'border-2 border-yellow-500 shadow-yellow-100' : 'border border-gray-200'
                 } hover:shadow-xl transition-all duration-300`}
               >
@@ -197,38 +206,38 @@ const G1Practice = () => {
                   </div>
                 )}
 
-                <div className="text-center mb-4">
-                  <h3 className="text-lg font-bold text-[#2c3149] mb-1">{pkg.title}</h3>
-                  <p className="text-gray-600 text-sm mb-3">{pkg.description}</p>
+                <div className="text-center mb-6">
+                  <h3 className="text-xl font-bold text-[#2c3149] mb-3">{pkg.title}</h3>
+                  <p className="text-gray-600 text-base mb-4">{pkg.description}</p>
                   <div className="flex items-end justify-center gap-1">
-                    <span className="text-3xl font-bold text-[#2c3149]">${pkg.price}</span>
-                    <span className="text-gray-500 mb-1">/one-time</span>
+                    <span className="text-4xl font-bold text-[#2c3149]">${pkg.price}</span>
+                    <span className="text-gray-500 mb-1 text-base">/one-time</span>
                   </div>
                 </div>
 
-                <div className="space-y-2 mb-4">
-                  <div className="flex items-center gap-2 text-[#2c3149] font-medium border-b border-gray-100 pb-2">
-                    <Brain className="w-4 h-4 text-yellow-500" />
-                    <span className="text-sm">{pkg.questions} Practice Questions</span>
+                <div className="space-y-3 mb-6">
+                  <div className="flex items-center gap-3 text-[#2c3149] font-medium border-b border-gray-100 pb-3">
+                    <Brain className="w-5 h-5 text-yellow-500" />
+                    <span className="text-base">{pkg.questions} Practice Questions</span>
                   </div>
                   {pkg.features.slice(0, 5).map((feature, index) => (
-                    <div key={index} className="flex items-start gap-2">
-                      <CheckCircle2 className="w-4 h-4 text-yellow-500 mt-0.5 flex-shrink-0" />
-                      <span className="text-xs text-gray-600">{feature}</span>
+                    <div key={index} className="flex items-start gap-3 py-1">
+                      <CheckCircle2 className="w-5 h-5 text-yellow-500 mt-0.5 flex-shrink-0" />
+                      <span className="text-sm text-gray-600">{feature}</span>
                     </div>
                   ))}
                 </div>
 
                 <button
                   onClick={() => window.location.href = '/contact'}
-                  className={`w-full py-2.5 rounded-xl font-medium flex items-center justify-center gap-2 transition-all ${
+                  className={`w-full py-3 rounded-xl font-medium text-base flex items-center justify-center gap-2 transition-all ${
                     pkg.popular
                       ? 'bg-yellow-500 text-[#2c3149] hover:bg-yellow-400'
                       : 'bg-[#2c3149] text-white hover:bg-[#1a1f33]'
                   }`}
                 >
                   <span>Buy Now</span>
-                  <ArrowRight className="w-4 h-4" />
+                  <ArrowRight className="w-5 h-5" />
                 </button>
               </motion.div>
             ))}

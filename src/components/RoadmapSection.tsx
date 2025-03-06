@@ -1,148 +1,148 @@
-import { GraduationCap, CheckCircle2, Clock3, Route, ArrowRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { 
+  ComputerTower, 
+  SteeringWheel, 
+  Certificate, 
+  CarProfile,
+  RoadHorizon,
+  MapPin,
+  Clock,
+  CalendarCheck,
+  Gauge
+} from "@phosphor-icons/react";
 
-const ServicesShowcase = () => {
-  const packages = [
+const RoadmapSection = () => {
+  const steps = [
     {
-      title: "BDE Course Package",
-      price: "$695",
-      icon: <GraduationCap className="w-6 h-6 text-yellow-500" />,
+      number: 1,
+      title: "Book Online",
+      description: "Book driving lessons in 30 seconds. Our simple booking system makes scheduling your lessons quick and hassle-free.",
       features: [
-        "20 hrs in-class lessons",
-        "10 hrs in-car training",
-        "Online practice tests",
-        "Course completion certificate"
-      ],
-      description: "Complete driver education program approved by the Ministry of Transportation of Ontario.",
-      link: "/learn-to-drive/bde",
-      highlight: true
+        { icon: <Clock weight="fill" className="h-4 w-4" />, text: "Quick checkout", color: "text-yellow-500" },
+        { icon: <MapPin weight="fill" className="h-4 w-4" />, text: "Choose pickup location", color: "text-yellow-500" }
+      ]
     },
     {
-      title: "Hourly Lessons",
-      price: "From $60/hr",
-      icon: <Clock3 className="w-6 h-6 text-[#2c3149]" />,
+      number: 2,
+      title: "Get behind the wheel",
+      description: "Learn with certified instructors who are experts in driver education. Our modern vehicles ensure a safe learning experience.",
       features: [
-        "Flexible scheduling",
-        "Experienced instructors",
-        "Pick-up & drop-off",
-        "Personalized training"
-      ],
-      description: "Perfect for those who want to improve specific driving skills or need additional practice.",
-      link: "/services/hourly-lessons"
+        { icon: <Certificate weight="fill" className="h-4 w-4" />, text: "Certified instructors", color: "text-yellow-500" },
+        { icon: <CarProfile weight="fill" className="h-4 w-4" />, text: "Modern vehicles", color: "text-yellow-500" }
+      ]
     },
     {
-      title: "Test Preparation",
-      price: "$299",
-      icon: <Route className="w-6 h-6 text-[#2c3149]" />,
+      number: 3,
+      title: "Ace Your Road Test",
+      description: "Feel confident and prepared for your road test. We'll guide you through every step to ensure you're ready to pass with flying colors.",
       features: [
-        "Road test routes practice",
-        "Mock test simulation",
-        "Score sheet review",
-        "Last-minute preparation"
-      ],
-      description: "Comprehensive preparation package designed to help you pass your road test with confidence.",
-      link: "/services/test-prep"
+        { icon: <Gauge weight="fill" className="h-4 w-4" />, text: "Test simulation", color: "text-yellow-500" },
+        { icon: <CalendarCheck weight="fill" className="h-4 w-4" />, text: "Exam preparation", color: "text-yellow-500" }
+      ]
     }
   ];
 
   return (
-    <section className="py-10 bg-white relative overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-[0.02]">
-        <div className="absolute inset-0" style={{
-          backgroundImage: 'radial-gradient(#2c3149 1px, transparent 1px)',
-          backgroundSize: '30px 30px'
-        }} />
-      </div>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-20 bg-white mt-10">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center mb-8">
-          <span className="inline-block px-4 py-1.5 rounded-full bg-yellow-500/10 text-[#2c3149] text-sm font-medium">
-            Our Services
-          </span>
-          <h2 className="mt-3 text-2xl sm:text-3xl font-bold text-[#2c3149]">
-            Choose Your <span className="text-yellow-500">Learning Path</span>
+        <div className="text-center mb-8 md:mb-16">
+          <div className="inline-block px-3 py-1 md:px-4 md:py-1.5 rounded-full bg-yellow-500/10 text-[#2c3149] text-xs md:text-sm font-medium mb-2 md:mb-3">
+            Simple 3-Step Process
+          </div>
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#2c3149]">
+            Your Road to <span className="text-yellow-500">Driving Success</span>
           </h2>
-          <p className="mt-2 text-gray-600 max-w-2xl mx-auto">
-            Select the package that best fits your needs. All our services include professional instruction and modern vehicles with safety features.
+          <p className="mt-3 md:mt-4 text-sm md:text-base text-gray-600 max-w-2xl mx-auto">
+            See why thousands of students are choosing us for their driver's education.
           </p>
         </div>
 
-        {/* Packages Grid */}
-        <div className="grid md:grid-cols-3 gap-6">
-          {packages.map((pkg) => (
-            <div 
-              key={pkg.title}
-              className={`relative flex flex-col rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg ${
-                pkg.highlight 
-                  ? 'bg-[#2c3149] text-white' 
-                  : 'bg-white text-[#2c3149] border-2 border-[#2c3149]'
-              }`}
-            >
-              {pkg.highlight && (
-                <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                  <span className="inline-block px-3 py-1 bg-yellow-500 text-[#2c3149] text-xs font-semibold rounded-full whitespace-nowrap">
-                    Most Popular
-                  </span>
+        {/* Mobile Steps */}
+        <div className="block md:hidden space-y-6">
+          {steps.map((step) => (
+            <div key={step.number} className="p-4 border-2 border-gray-500 rounded-xl shadow-md">
+              <div className="flex gap-4">
+                {/* Left Icon */}
+                <div className="flex-shrink-0">
+                  <div className="w-12 h-12 rounded-full bg-yellow-500 flex items-center justify-center">
+                    {step.number === 1 ? <ComputerTower weight="duotone" className="w-6 h-6 text-black" /> :
+                     step.number === 2 ? <CarProfile weight="duotone" className="w-6 h-6 text-black" /> :
+                     <RoadHorizon weight="duotone" className="w-6 h-6 text-black" />}
+                  </div>
                 </div>
-              )}
-              
-              <div className="flex items-start justify-between mb-4">
-                <div>
-                  <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-3 ${
-                    pkg.highlight ? 'bg-white/10' : 'bg-yellow-500/10'
-                  }`}>
-                    {pkg.icon}
+                
+                {/* Right Content */}
+                <div className="flex-1">
+                  <h3 className="text-lg font-semibold text-[#2c3149] mb-2">
+                    {step.title}
+                  </h3>
+                  <p className="text-sm text-gray-600 mb-3">
+                    {step.description}
+                  </p>
+                  
+                  <div className="space-y-2">
+                    {step.features.map((feature, i) => (
+                      <div key={i} className="flex items-center gap-2">
+                        <div className={`flex-shrink-0 ${feature.color}`}>
+                          {feature.icon}
+                        </div>
+                        <span className="text-sm text-gray-600">{feature.text}</span>
+                      </div>
+                    ))}
                   </div>
-                  <h3 className="text-lg font-semibold">{pkg.title}</h3>
-                  <div className={`text-sm ${pkg.highlight ? 'text-gray-300' : 'text-gray-600'} mt-1`}>
-                    Starting at
-                  </div>
-                  <div className="text-2xl font-bold mt-1">{pkg.price}</div>
                 </div>
               </div>
-
-              <p className={`text-sm ${pkg.highlight ? 'text-gray-300' : 'text-gray-600'} mb-4`}>
-                {pkg.description}
-              </p>
-
-              <div className={`space-y-2 mb-6 flex-grow ${pkg.highlight ? 'text-gray-300' : 'text-gray-600'}`}>
-                {pkg.features.map((feature) => (
-                  <div key={feature} className="flex items-center gap-2">
-                    <CheckCircle2 className={`w-4 h-4 flex-shrink-0 ${
-                      pkg.highlight ? 'text-yellow-500' : 'text-yellow-500'
-                    }`} />
-                    <span className="text-sm">{feature}</span>
-                  </div>
-                ))}
-              </div>
-
-              <Link
-                to={pkg.link}
-                className={`group flex items-center justify-center gap-2 w-full px-4 py-3 rounded-full font-medium transition-all duration-200 ${
-                  pkg.highlight
-                    ? 'bg-yellow-500 text-[#2c3149] hover:bg-yellow-400'
-                    : 'bg-[#2c3149] text-white hover:bg-[#2c3149]/90'
-                }`}
-              >
-                <span>Learn More</span>
-                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-              </Link>
             </div>
           ))}
         </div>
 
-        {/* Secondary Content */}
-        <div className="mt-16 text-center">
-          <h3 className="text-xl font-semibold text-[#2c3149] mb-3">Why Choose GraysJays?</h3>
-          <p className="text-gray-600 max-w-3xl mx-auto">
-            With a 98% pass rate and over 2000+ successful students, our driving school combines professional instruction with modern vehicles to ensure you become a confident and skilled driver. Our MTO-approved curriculum and experienced instructors are committed to your success on the road.
-          </p>
+        {/* Desktop Cards */}
+        <div className="hidden md:grid md:grid-cols-3 gap-8 mb-8">
+          {steps.map((step) => (
+            <div 
+              key={step.number} 
+              className="bg-white p-6 rounded-xl border-2 border-[#2c3149] shadow-md flex flex-col h-full"
+            >
+              {/* Icon */}
+              <div className="w-16 h-16 rounded-full bg-yellow-500 text-black flex items-center justify-center mb-6 mx-auto">
+                {step.number === 1 ? <ComputerTower weight="duotone" className="w-8 h-8" /> :
+                 step.number === 2 ? <CarProfile weight="duotone" className="w-8 h-8" /> :
+                 <RoadHorizon weight="duotone" className="w-8 h-8" />}
+              </div>
+              
+              {/* Content */}
+              <h3 className="text-xl font-semibold text-[#2c3149] mb-2 text-center">
+                {step.title}
+              </h3>
+              <p className="text-gray-600 mb-4 text-center">
+                {step.description}
+              </p>
+              
+              {/* Features */}
+              <div className="mt-auto pt-4 border-t border-gray-100">
+                {step.features.map((feature, i) => (
+                  <div key={i} className="flex items-center gap-2 mb-2">
+                    <div className={`flex-shrink-0 ${feature.color}`}>
+                      {feature.icon}
+                    </div>
+                    <span className="text-sm text-gray-600">{feature.text}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+        
+        {/* Call to Action */}
+        <div className="mt-8 md:mt-16 text-center">
+          <button className="w-full sm:w-auto px-6 md:px-8 py-3 bg-[#2c3149] text-white font-semibold rounded-full hover:bg-[#1a1f33] transition-colors inline-flex items-center justify-center gap-2">
+            <SteeringWheel weight="fill" className="w-5 h-5" />
+            <span>Start Your Journey Today</span>
+          </button>
         </div>
       </div>
     </section>
   );
 };
 
-export default ServicesShowcase;
+export default RoadmapSection;
