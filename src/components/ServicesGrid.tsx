@@ -1,9 +1,6 @@
 import { useLayoutEffect, useRef, useState, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Pagination, Navigation } from 'swiper/modules';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { 
   Certificate, 
   GraduationCap, 
@@ -13,11 +10,8 @@ import {
   Trophy,
   CreditCard,
   ShieldCheck,
-
+  X
 } from "@phosphor-icons/react";
-import 'swiper/css';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -72,7 +66,7 @@ const SERVICES = [
     color: "bg-gradient-to-br from-[#2c3149] to-[#1a1f33]",
   },
   {
-    title: "Money-Back Guarantee",
+    title: "Moneyback Guarantee",
     description:
       "Your satisfaction is guaranteed—or your money back, no questions asked.",
     icon: ShieldCheck,
@@ -83,6 +77,7 @@ const SERVICES = [
 const ServicesGrid = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isMobile, setIsMobile] = useState(false);
+  const [selectedService, setSelectedService] = useState<typeof SERVICES[0] | null>(null);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -122,7 +117,7 @@ const ServicesGrid = () => {
 
   const renderCard = (service: typeof SERVICES[0]) => (
     <div className="service-card relative h-full">
-      <div className={`h-[300px] lg:h-[350px] [perspective:1200px] group ${isMobile ? 'bg-white/50 backdrop-blur-sm rounded-2xl p-3' : ''}`}>
+      <div className={`h-[300px] lg:h-[350px] [perspective:1200px] group`}>
         <div
           className="relative h-full w-full transition-all duration-500 [transform-style:preserve-3d] group-hover:[transform:rotateY(180deg)] cursor-pointer"
           style={{ transformOrigin: "center center" }}
@@ -176,6 +171,56 @@ const ServicesGrid = () => {
     </div>
   );
 
+  const renderMobileCard = (service: typeof SERVICES[0]) => (
+    <div className="service-card relative">
+      <div 
+        className="flex flex-col items-center p-6 rounded-xl hover:bg-gray-50/80 transition-colors cursor-pointer"
+        onClick={() => setSelectedService(service)}
+      >
+        {/* Icon */}
+        <div className="mb-3">
+          <service.icon weight="regular" className="w-12 h-12 text-black" />
+        </div>
+        
+        {/* Title */}
+        <h3 className="text-lg font-medium text-black text-center">
+          {service.title}
+        </h3>
+      </div>
+    </div>
+  );
+
+  const renderMobileModal = () => {
+    if (!selectedService) return null;
+
+    return (
+      <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
+        <div className="relative w-full max-w-lg bg-white rounded-2xl p-6 max-h-[90vh] overflow-y-auto">
+          {/* Close Button */}
+          <button 
+            onClick={() => setSelectedService(null)}
+            className="absolute top-4 right-4 p-2 rounded-full hover:bg-gray-100 transition-colors"
+          >
+            <X weight="bold" className="w-6 h-6 text-gray-500" />
+          </button>
+
+          {/* Content */}
+          <div className="flex flex-col items-center mb-6">
+            <selectedService.icon weight="regular" className="w-16 h-16 text-black mb-4" />
+            <h3 className="text-2xl font-bold text-black text-center mb-2">
+              {selectedService.title}
+            </h3>
+            <div className="w-12 h-0.5 bg-gray-200 rounded-full"></div>
+          </div>
+
+          <p className="text-base text-gray-600 leading-relaxed">
+            {selectedService.description}
+          </p>
+        </div>
+      </div>
+    );
+  };
+
   const getIconColor = (gradientClass: string) => {
     if (gradientClass.includes("[#2c3149]")) return "#2c3149";
     if (gradientClass.includes("yellow")) return "#EAB308";
@@ -185,47 +230,19 @@ const ServicesGrid = () => {
   return (
     <div 
       ref={containerRef} 
-      className={`relative py-16 lg:py-24 w-full overflow-hidden ${isMobile ? 'bg-gradient-to-b from-gray-50 to-white' : ''}`}
+      className="relative py-16 lg:py-24 w-full overflow-hidden"
     >
-      <div className={`text-center ${isMobile ? 'mb-12' : 'mb-32'}`}>
+      <div className="text-center mb-12 lg:mb-32">
         <h2 className="text-4xl lg:text-5xl font-bold text-[#2c3149] mb-6">
           Whats makes <span className="text-yellow-500">GrayJays</span> different?
         </h2>
-        <p className="text-gray-600 max-w-2xl mx-auto text-lg">
-          We are a team of experienced instructors who are dedicated to providing the best possible driving experience for our students.
-        </p>
       </div>
       <div className="max-w-7xl mx-auto px-4">
         {isMobile ? (
-          <div className="relative [&_.swiper-pagination-bullet]:w-2.5 [&_.swiper-pagination-bullet]:h-2.5 [&_.swiper-pagination-bullet]:bg-[#2c3149] [&_.swiper-pagination-bullet]:opacity-30 [&_.swiper-pagination-bullet-active]:opacity-100">
-            <Swiper
-              modules={[Pagination, Navigation]}
-              spaceBetween={20}
-              slidesPerView={1}
-              pagination={{ 
-                clickable: true,
-                el: '.swiper-pagination'
-              }}
-              navigation={{
-                prevEl: '.swiper-button-prev',
-                nextEl: '.swiper-button-next',
-              }}
-              className="pb-20"
-            >
-              {SERVICES.map((service, index) => (
-                <SwiperSlide key={index} className="px-4">
-                  {renderCard(service)}
-                </SwiperSlide>
-              ))}
-            </Swiper>
-            <div className="absolute bottom-0 left-0 right-0 flex items-center justify-center gap-3">
-              <button className="swiper-button-prev !static !w-8 !h-8 !mt-0 !text-[#2c3149] after:!hidden rounded-full border border-gray-200 hover:border-gray-300 transition-colors flex items-center justify-center">
-                <ChevronLeft className="w-4 h-4" />
-              </button>
-              <button className="swiper-button-next !static !w-8 !h-8 !mt-0 !text-[#2c3149] after:!hidden rounded-full border border-gray-200 hover:border-gray-300 transition-colors flex items-center justify-center">
-                <ChevronRight className="w-4 h-4" />
-              </button>
-            </div>
+          <div className="grid grid-cols-2 gap-2">
+            {SERVICES.map((service, index) => (
+              <div key={index}>{renderMobileCard(service)}</div>
+            ))}
           </div>
         ) : (
           <div className="grid grid-cols-4 gap-8">
@@ -235,6 +252,7 @@ const ServicesGrid = () => {
           </div>
         )}
       </div>
+      {renderMobileModal()}
     </div>
   );
 };

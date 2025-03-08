@@ -5,7 +5,6 @@ import {
   MapPin,
   ChevronDown,
   Search,
-  Info,
   ChevronLeft,
   ChevronRight,
   Car,
